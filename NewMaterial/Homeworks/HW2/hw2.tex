@@ -1,0 +1,112 @@
+\documentclass[12pt]{article}
+
+\usepackage{amsmath, amssymb}
+\usepackage{geometry}
+\geometry{margin=1in}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\usepackage{minted}
+
+\title{ENGR 1050 \\ Homework 2}
+\author{Due: September 26, 2025 by 11:59 PM}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{Instructions}
+The purpose of these homework assignments are to assess your ability to apply the concepts introduced during the in-class exercises without assistance. The current assignment will be completed in Thonny as a '.py' file; we are confirming that you understand how to do this so that you are prepared to complete the lab exercises after the exam next week, as well as make sure you can independently use dictionaries and classes - these are the final basic building blocks you'll need to perform scientific computation in the remainder of the course.
+
+As a reminder, create a file called 'main.py' in Thonny and write your code there. You can run your code by clicking the green "Run" button or pressing F5. Make sure to save your work frequently by clicking the floppy disk icon or pressing Ctrl+S. Because this is a '.py' file and not a Jupyter notebook, you will not be able to include markdown cells. Instead, use comments in your code to explain what each part of your code is doing. As always, there will be a point deduction if your code is not well-commented enough for us to follow your logic. At a minimum you should have a comment at the top of the file with your name, the date, and a brief description of what the program does. You should also have comments before each major section of your code explaining what that section does.
+
+\begin{itemize}
+    \item Code without explanations in comments will receive a 20 point deduction.
+    \item Submit your solutions as an uploaded Python file (.py) to the appropriate assignment on Canvas, along with a screenshot of your output in Thonny.
+    \item To comply with UPenn's academic integrity policy, you must include a comment in the code stating all references you used to complete the assignment, including any help you received from classmates, and whether you used AI (we suggest in the strongest possible terms that you don't). 
+    \item Late submissions will not be accepted without documentation. The lowest homework score will be dropped.
+\end{itemize}
+
+\section*{Generate a simple database application (100 points)}
+We are going to create a simple database of students and their grades. Students will be associated with a name, unique ID number, and a list of grades. For example, a student named Ben Franklin with ID number 12345 and grades 90, 85, and 88 can be represented with a dictionary as follows:
+\begin{minted}{python}
+student = {'name': 'Benjamin Franklin', 'id': 12345123, 'grades': [90, 85, 88]}
+\end{minted}
+You will make a class called \texttt{Gradebook} that will contain a list of students and have the following methods:
+\begin{itemize}
+    \item \texttt{add\_student(name, id)}: This method will add a new student to the gradebook with the given name and ID number. The new student should have an empty list of grades.
+    \item \texttt{add\_grade(id, grade)}: This method will add a grade to the list of grades for the student with the given ID number. If no student with that ID exists, print an error message.
+    \item \texttt{get\_average(id)}: This method will return the average grade for the student with the given ID number. If no student with that ID exists, print an error message and return None. If the student has no grades, return None.
+    \item \texttt{get\_class\_average()}: This method will return the average grade for all students in the gradebook. If there are no students or if no students have grades, return None.
+    \item \texttt{get\_student(id)}: This method will return the student dictionary for the student with the given ID number. If no student with that ID exists, print an error message and return None.
+\end{itemize}
+
+You can copy and paste the following code into Thonny so that you have a list of students to work with. Use a for loop to add each student into your gradebook one at a time, and then use the methods to calculate the class average grade. Confirm that your average works by calculating a few student averages by hand and reproducing them with your code.
+
+\textbf{Note:} For us to see the output of your program, upload both the .py file and a screenshot of the output in Thonny to Canvas. To receive full credit, your screenshot should capture the output of print statements showing the results of:
+\begin{enumerate}
+\item The average grade for three students, along with your hand calculated values for comparison
+\item The class average grade
+\end{enumerate}
+
+\begin{minted}{python}
+students = [
+    {'name': 'John Adams', 'id': '2001', 'grades': [90, 92, 88, 91, 89]},
+    {'name': 'Samuel Adams', 'id': '2002', 'grades': [85, 87, 86, 88, 89]},
+    {'name': 'Josiah Bartlett', 'id': '2003', 'grades': [88, 90, 87, 89, 91]},
+    {'name': 'Carter Braxton', 'id': '2004', 'grades': [93, 92, 94, 95, 91]},
+    {'name': 'Charles Carroll', 'id': '2005', 'grades': [85, 86, 88, 87, 89]},
+    {'name': 'Samuel Chase', 'id': '2006', 'grades': [90, 91, 89, 92, 90]},
+    {'name': 'Abraham Clark', 'id': '2007', 'grades': [87, 89, 88, 86, 90]},
+    {'name': 'George Clymer', 'id': '2008', 'grades': [92, 94, 93, 91, 90]},
+    {'name': 'William Ellery', 'id': '2009', 'grades': [89, 88, 90, 87, 91]},
+    {'name': 'William Floyd', 'id': '2010', 'grades': [86, 88, 87, 89, 85]},
+    {'name': 'Benjamin Franklin', 'id': '2011', 'grades': [88, 90, 87, 89, 91]},
+    {'name': 'Elbridge Gerry', 'id': '2012', 'grades': [91, 93, 92, 90, 89]},
+    {'name': 'Button Gwinnett', 'id': '2013', 'grades': [85, 87, 86, 88, 89]},
+    {'name': 'Lyman Hall', 'id': '2014', 'grades': [90, 92, 91, 89, 88]},
+    {'name': 'John Hancock', 'id': '2015', 'grades': [93, 92, 94, 95, 91]},
+    {'name': 'Benjamin Harrison', 'id': '2016', 'grades': [88, 90, 89, 87, 91]},
+    {'name': 'John Hart', 'id': '2017', 'grades': [86, 88, 87, 89, 85]},
+    {'name': 'Joseph Hewes', 'id': '2018', 'grades': [90, 91, 89, 92, 90]},
+    {'name': 'Thomas Heyward Jr.', 'id': '2019', 'grades': [87, 89, 88, 86, 90]},
+    {'name': 'William Hooper', 'id': '2020', 'grades': [92, 94, 93, 91, 90]},
+    {'name': 'Stephen Hopkins', 'id': '2021', 'grades': [89, 88, 90, 87, 91]},
+    {'name': 'Francis Hopkinson', 'id': '2022', 'grades': [86, 88, 87, 89, 85]},
+    {'name': 'Samuel Huntington', 'id': '2023', 'grades': [90, 92, 91, 89, 88]},
+    {'name': 'Thomas Jefferson', 'id': '2024', 'grades': [95, 94, 96, 93, 97]},
+    {'name': 'Francis Lightfoot Lee', 'id': '2025', 'grades': [88, 90, 89, 87, 91]},
+    {'name': 'Richard Henry Lee', 'id': '2026', 'grades': [91, 93, 92, 90, 89]},
+    {'name': 'Francis Lewis', 'id': '2027', 'grades': [85, 87, 86, 88, 89]},
+    {'name': 'Philip Livingston', 'id': '2028', 'grades': [90, 92, 91, 89, 88]},
+    {'name': 'Thomas Lynch Jr.', 'id': '2029', 'grades': [93, 92, 94, 95, 91]},
+    {'name': 'Thomas McKean', 'id': '2030', 'grades': [88, 90, 89, 87, 91]},
+    {'name': 'Arthur Middleton', 'id': '2031', 'grades': [86, 88, 87, 89, 85]},
+    {'name': 'Lewis Morris', 'id': '2032', 'grades': [90, 91, 89, 92, 90]},
+    {'name': 'Robert Morris', 'id': '2033', 'grades': [87, 89, 88, 86, 90]},
+    {'name': 'John Morton', 'id': '2034', 'grades': [92, 94, 93, 91, 90]},
+    {'name': 'Thomas Nelson Jr.', 'id': '2035', 'grades': [89, 88, 90, 87, 91]},
+    {'name': 'William Paca', 'id': '2036', 'grades': [86, 88, 87, 89, 85]},
+    {'name': 'John Penn', 'id': '2037', 'grades': [90, 92, 91, 89, 88]},
+    {'name': 'George Read', 'id': '2038', 'grades': [95, 94, 96, 93, 97]},
+    {'name': 'Caesar Rodney', 'id': '2039', 'grades': [88, 90, 89, 87, 91]},
+    {'name': 'George Ross', 'id': '2040', 'grades': [91, 93, 92, 90, 89]},
+    {'name': 'Benjamin Rush', 'id': '2041', 'grades': [85, 87, 86, 88, 89]},
+    {'name': 'Edward Rutledge', 'id': '2042', 'grades': [90, 92, 91, 89, 88]},
+    {'name': 'Roger Sherman', 'id': '2043', 'grades': [93, 92, 94, 95, 91]},
+    {'name': 'James Smith', 'id': '2044', 'grades': [88, 90, 89, 87, 91]},
+    {'name': 'Richard Stockton', 'id': '2045', 'grades': [86, 88, 87, 89, 85]},
+    {'name': 'Thomas Stone', 'id': '2046', 'grades': [90, 91, 89, 92, 90]},
+    {'name': 'George Taylor', 'id': '2047', 'grades': [87, 89, 88, 86, 90]},
+    {'name': 'Matthew Thornton', 'id': '2048', 'grades': [92, 94, 93, 91, 90]},
+    {'name': 'George Walton', 'id': '2049', 'grades': [89, 88, 90, 87, 91]},
+    {'name': 'William Whipple', 'id': '2050', 'grades': [86, 88, 87, 89, 85]},
+    {'name': 'William Williams', 'id': '2051', 'grades': [90, 92, 91, 89, 88]},
+    {'name': 'James Wilson', 'id': '2052', 'grades': [95, 94, 96, 93, 97]},
+    {'name': 'John Witherspoon', 'id': '2053', 'grades': [88, 90, 89, 87, 91]},
+    {'name': 'Oliver Wolcott', 'id': '2054', 'grades': [91, 93, 92, 90, 89]}
+]
+\end{minted}
+
+
+\end{document}

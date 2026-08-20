@@ -1,0 +1,1 @@
+This folder holds the latex source for generating the homework assignments as pdfs.

@@ -1,0 +1,56 @@
+\documentclass[12pt]{article}
+
+\usepackage{amsmath, amssymb}
+\usepackage{geometry}
+\geometry{margin=1in}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\usepackage{minted}
+
+\title{ENGR 1050 \\ Homework 1}
+\author{Due: September 15, 2025 by 11:59 PM}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{Instructions}
+The purpose of these homework assignments are to assess your ability to apply the concepts introduced during the in-class exercises without assistance. With that in mind, you will build a jupyter notebook on your own and submit it for grading. We encourage you to make judicious use of markdown cells to explain your reasoning and approach. You must include a description in markdown of all code, and what it is meant to do before introducing a code cell. You may discuss assignments with your classmates, but for these assignments in particular you are advised in the strongest terms not to use AI and to submit only your own work to ensure you have a strong grasp of the material.
+
+\begin{itemize}
+    \item Jupyter notebooks without explanations in markdown will receive a 20 point deduction.
+    \item Submit your solutions as an uploaded Jupyter notebook file (.ipynb) to the appropriate assignment on Canvas.
+    \item To comply with UPenn's academic integrity policy, you must include a markdown block stating all references you used to complete the assignment, including any help you received from classmates.
+    \item Late submissions will not be accepted without documentation. The lowest homework score will be dropped.
+\end{itemize}
+
+\section*{Problem 1: Print statements (33 points)}
+Write code that takes the following lists of Phillies players:
+\begin{minted}[fontsize=\small]{python}
+firstNames = [
+    "Kyle", "Trea", "Bryce", "Alec", "J.T.",
+    "Nick", "Bryson", "Johan", "Cristian"
+]
+lastNames = [
+    "Schwarber", "Turner", "Harper", "Bohm", "Realmuto",
+    "Castellanos", "Stott", "Rojas", "Pache"
+]
+\end{minted}
+Write code to print out a numbered list of players in the format:
+\begin{enumerate}
+\item Kyle Schwarber
+\item Trea Turner
+\item ...
+\end{enumerate}
+
+\section*{Problem 2: For loops and conditionals (33 points)}
+Generate a list of numbers ranging from 5 to 49 using the \texttt{range} command in Python. Write a \texttt{for} loop which loops over the list and adds up the even numbers only. Your code cell should print out the final sum, and it should be clear from your comments and markdown how to interpret the output of your code cell.
+
+\section*{Problem 3: Generating plots (34 points)}
+For a baseball hit with an initial velocity \(v_0\) at an angle \(\theta\) from the horizontal, the height \(y\) of the ball as a function of time is given by:
+\[y(t) = v_0 \sin(\theta) t - \frac{1}{2} g t^2\]
+where \(g = 9.81 \, m/s^2\) is the acceleration due to gravity. Generate lists corresponding to three different solution of \(y(t)\), for \(v_0 = 50 \, m/s\) and the \textit{three different choices of } \(\theta = 15^\circ, 45^\circ, 75^\circ\) over the time interval \(t = 0\) to \(t = 10\) seconds. Generate a single plot overlaying the three solutions. Make sure to label your axes and include a title for your plot.
+
+
+\end{document}

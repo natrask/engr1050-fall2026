@@ -1,0 +1,413 @@
+\documentclass{beamer}
+\usetheme{Madrid}
+% Use a neutral colortheme so we can fully override colors
+\usecolortheme{default}
+\usepackage{minted}
+\usepackage{amsmath}
+
+% use tikz for generating diagrams
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc,angles,quotes,positioning}
+
+% for links
+\usepackage{hyperref}
+
+% UPenn color palette
+\definecolor{PennBlue}{RGB}{1,31,91}   % #011F5B
+\definecolor{PennRed}{RGB}{153,0,0}    % #990000
+
+% Apply colors to beamer elements
+\setbeamercolor{structure}{fg=PennBlue}
+% Make title slide text white for contrast on dark background
+\setbeamercolor{title}{fg=white}
+\setbeamercolor{subtitle}{fg=black}
+\setbeamercolor{author}{fg=black}
+\setbeamercolor{date}{fg=black}
+% Ensure the title page itself uses our dark background and white foreground
+\setbeamercolor{title page}{bg=PennBlue,fg=black}
+\setbeamercolor{frametitle}{fg=white,bg=PennBlue}
+\setbeamercolor{normal text}{fg=black,bg=white}
+
+% Headline/footline palettes (Madrid uses these)
+\setbeamercolor{palette primary}{bg=PennBlue, fg=white}
+\setbeamercolor{palette secondary}{bg=PennRed,  fg=white}
+\setbeamercolor{palette tertiary}{bg=PennBlue!80!black, fg=white}
+\setbeamercolor{palette quaternary}{bg=PennRed!80!black,  fg=white}
+
+% Blocks and emphasis
+\setbeamercolor{block title}{fg=white,bg=PennBlue}
+\setbeamercolor{block body}{bg=PennBlue!5}
+\setbeamercolor{alerted text}{fg=PennRed}
+\setbeamercolor{example text}{fg=PennBlue}
+\setbeamercolor{itemize item}{fg=PennBlue}
+\setbeamercolor{itemize subitem}{fg=PennRed}
+
+% Footer styling colors
+\setbeamercolor{author in head/foot}{bg=PennBlue,fg=white}
+\setbeamercolor{title in head/foot}{bg=PennRed,fg=white}
+\setbeamercolor{date in head/foot}{bg=PennBlue,fg=white}
+
+% Custom footline with course and term centered
+\setbeamertemplate{footline}{
+  \leavevmode
+  \hbox{%%
+    \begin{beamercolorbox}[wd=.33\paperwidth,ht=2.5ex,dp=1ex,left]{author in head/foot}
+      \hspace{1em}\insertshortauthor
+    \end{beamercolorbox}%%
+    \begin{beamercolorbox}[wd=.34\paperwidth,ht=2.5ex,dp=1ex,center]{title in head/foot}
+      Lecture 18
+    \end{beamercolorbox}%%
+    \begin{beamercolorbox}[wd=.33\paperwidth,ht=2.5ex,dp=1ex,right]{date in head/foot}
+      \insertframenumber{} / \inserttotalframenumber\hspace{1em}
+    \end{beamercolorbox}%%
+  }
+  \vskip0pt
+}
+
+% Remove navigation symbols
+\setbeamertemplate{navigation symbols}{}
+
+
+\title{Lecture 18}
+\author{ENGR1050 Fall 2025}
+\date{\today}
+
+\begin{document}
+
+% Title frame with UPenn logo
+
+\begin{frame}
+  \vfill
+  \begin{center}
+
+    % Title and course info
+    {\Large\textbf{ENGR1050: Lecture 18}}
+    \vskip1em
+    {\large Review to prepare for Exam 2}
+    \vskip0.5em
+    {\insertdate}
+    \vskip2em
+    % UPenn logo at bottom
+    \includegraphics[height=2.5cm]{upennlogo.png}
+
+  \end{center}
+  \vfill
+\end{frame}
+
+\begin{frame}{Agenda}
+  Today we will prepare for the exam by reviewing the material since Exam 1, including:
+  \begin{itemize}
+    \item Numpy basics
+    \item Definition of ODEs and initial value problems
+    \item Numerical solution of ODEs using Explicit Euler
+    \item Usage of the ODE\_solver class and inheritance to create new ODE solvers
+    \item Programming the Pico to read a potentiometer and wire buttons/LEDs
+    \item Reasoning about numerical solutions: refinement and steady state behavior
+  \end{itemize}
+  I'll run through the material you should be comfortable with in these slides, and then we will work through some examples in the Jupyter notebook.
+  \end{frame}
+
+  \begin{frame}{Exam 2 format}
+    \begin{itemize}
+      \item The exam will be \textbf{in person} during our normal class time this Wed 10/29/2025.
+      \item All necessary code and syntax will be provided (no need to memorize).
+      \item You may use a single 8.5x11 sheet of notes (both sides) during the exam, to be attached to your exam.
+      \item You'll need to show your Penn ID.
+      \item Similar format to last Exam. You should anticipate:
+      \begin{itemize}
+        \item Reading some code and explaining what it does
+        \item Writing some simple code that makes it clear you understand code from HWs and labs
+        \item \textbf{New:} Perform some mathematical calculations related to ODEs
+      \end{itemize}
+    \end{itemize}
+You can count on having access to the ODE\_solver, button, and LED classes during the exam.
+  \end{frame}
+
+\begin{frame}{Review: Ordinary Differential Equations (ODEs)}
+To check that you understand what it means to solve an ODE, you should be comfortable with the following:
+\begin{itemize}
+\item Definition of a $k^{th}$ order ODE: An equation involving an unknown function $y(t)$ and its derivatives up to order $k$.
+\item Definition of a initial value problem: \textbf{A $k^{th}$-order ODE requires $k$ initial conditions} to specify a unique solution along with satisfying the ODE itself.
+\item Check that a given function is a solution by (1) substituting it into the ODE and (2) verifying the initial conditions.
+\item Rewrite a $k^{th}$-order ODE as a system of $k$ first-order ODEs by introducing new variables for each derivative,
+\[
+\dot{y_1} = y_2, \quad \dot{y_2} = y_3, \quad \ldots, \quad \dot{y_k} = f(t,y_1,y_2,\ldots,y_k).
+\]
+\item Analyze steady state behavior of simple ODEs by setting derivatives to zero and solving for equilibrium values for variables.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Example: Damped harmonic oscillator}
+The damped harmonic oscillator is governed by the second-order ODE
+\[
+  m y''(t) + c y'(t) + k y(t) = 0,
+\]
+where $m$ is mass, $c$ is damping coefficient, and $k$ is spring constant.
+\begin{itemize}
+  \item To check if \(y(t) = e^{-\frac{c}{2m}t} \cos\left(\sqrt{\frac{k}{m} - \frac{c^2}{4m^2}} t\right)\) is a solution, we would compute \(y'(t)\) and \(y''(t)\), substitute into the ODE, and verify that it satisfies \textbf{two} initial conditions.
+  \item To rewrite as a system of first-order ODEs, define \(v(t) = y'(t)\):
+  \[
+    \begin{cases}
+      y' = v, \\
+      v' = -\frac{c}{m} v - \frac{k}{m} y.
+    \end{cases}
+  \]
+  \item To find steady state behavior, set \(y' = 0\) and \(v' = 0\):
+  \[
+    \begin{cases}
+      0 = v_{ss}, \\
+      0 = -\frac{c}{m} v_{ss} - \frac{k}{m} y_{ss}.
+    \end{cases}
+  \]
+  This implies \(v_{ss} = 0\) and \(y_{ss} = 0\) at steady state.
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Remember!}
+\begin{itemize}
+\item In general, ODEs are challenging to solve analytically.
+\item You will learn how to solve ODEs by hand in a later class.
+\item We solve ODEs numerically in this class using Explicit Euler.
+\item That's why we \textit{confirm} that a given solution satisfies the ODE and ICs, and then confirm that our code works by reproducing a known solution.
+\end{itemize}
+\end{frame}
+\begin{frame}{Review: Explicit Euler method}
+  Remember that our main tool for numerically solving ODEs is the Explicit Euler method.
+
+  \begin{definition}
+    For the IVP \(y'(t)=f(t,y)\) with \(y(t_0)=y_0\) and step size \(h>0\), starting from $(t_0,y_0)$, the Explicit Euler scheme updates via
+    \[
+      t_{n+1}=t_n+h, \qquad
+      y_{n+1}=y_n + h\,f(t_n,y_n).
+    \]
+  \end{definition}
+\textbf{You should be comfortable using explicit Euler in two ways:}
+\begin{enumerate}
+  \item Writing a for loop that will implement the method for a simple ODE. (e.g., \(y'=-2y\) with \(y(0)=1\).)
+  \item Using our ODE\_solver class to implement the method using class inheritance
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]{You may be given the following ODE\_solver class}
+    \begin{minted}[fontsize=\tiny,breaklines=true]{python}
+class ODE_solver:
+    def __init__(self, t0, tf, y0, N):
+        self.y0 = y0  # initial condition as numpy array
+        self.t0 = t0  # initial time as float
+        self.tf = tf  # final time as float
+        self.N = N    # number of steps as integer
+        self.h = (tf - t0) / float(N) # timestep size
+
+        # We need to check what size y0 is and store that information
+        self.dim = len(y0) #assumes that y0 is a list or array
+
+        # Create a place to store the solution
+        self.t_values = np.array([t0 + i*self.h for i in range(N+1)])  # time values
+        self.solution = np.zeros((N+1, self.dim))  # solution array
+        self.solution[0, :] = y0  # set initial condition
+        
+    def f(self,t,y):
+        # Define the right-hand side of the ODE here, assuming a scalar t and a numpy array y
+        # Example: dy/dt = -2y (for scalar y),
+        # this function should return a numpy array of the same shape as y
+        f = np.zeros_like(y)
+        f[0] = -2 * y[0]  # Example for the first component
+        return f
+    
+    def solve(self):
+        # Implement explicit euler: y_n+1 = y_n + h*f(t_n, y_n)
+        for n in range(self.N):
+            t_n = self.t_values[n]
+            y_n = self.solution[n, :]
+            f_n = self.f(t_n, y_n)
+            self.solution[n+1, :] = y_n + self.h * f_n
+        return self.solution
+    \end{minted}
+\end{frame}
+
+\begin{frame}[fragile]{You must be able to use inheritance to solve new ODEs}
+  You will be provided with an example like this:
+    \begin{minted}[fontsize=\tiny,breaklines=true]{python}
+class childODE_solver(ODE_solver):
+      def __init__(self, t0, tf, y0, N, newParameter):
+        super().__init__(t0, tf, y0, N)
+        self.newParameter = newParameter
+    def f(self,t,y):
+        # Override the f method to define a new ODE
+        f = np.zeros_like(y)
+        f[0] = -self.newParameter * y[0]  # Example for the first component
+        return f
+# Example usage:
+t0 = 0.0
+tf = 1.0
+y0 = np.array([1.0])
+N = 100
+solver = childODE_solver(t0, tf, y0, N, newParameter=3.0)
+solution = solver.solve()
+\end{minted}
+  You should be comfortable: 
+  \begin{itemize}
+  \item Modifying the \texttt{f} method to implement different ODEs.
+  \item Changing the initial conditions when creating an instance of the child class.
+  \item Understand the shape of \texttt{y0} and how it relates to the order of the ODE being solved.
+  \end{itemize}
+  \end{frame}
+
+  \begin{frame}{Trusting your simulation}
+    To make sure our code is properly configured, we always verify that our numerical solution is reasonable. Understand the logic behind these techniques:
+    \begin{itemize}
+      \item \textbf{Compare to analytical solutions:} Whenever possible, compare your numerical results to known analytical solutions for simple cases.
+      \item \textbf{Refinement study:} Run simulations with decreasing step sizes \(h\) and observe if the solution converges.
+      \item \textbf{Steady state analysis:} Check if the numerical solution approaches the expected steady state as \(t\) increases.
+    \end{itemize}
+  \end{frame}
+
+\begin{frame}{Understanding the labs/Pico programming}
+  Finally, make sure you understand the key concepts from the labs involving the Raspberry Pi Pico:
+  \begin{itemize}
+    \item How the initialization of pins maps onto the wiring of the actual device.
+    \item The inputs and outputs of LEDs, buttons, and potentiometers.
+    \item How to use the simple classes we provided for buttons and LEDs.
+    \item The logic behind setting up the potentiometer: what is ADC, what pins do what, and how to calibrate readings to meaningful angle measurements.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{You may be given the following LED class}
+    \begin{minted}[fontsize=\tiny,breaklines=true]{python}
+from machine import Pin
+import time
+
+class LEDClass:
+    def __init__(self, pin_number, initial_state=False):
+        """
+        Initialize LED class
+        pin_number: GPIO pin number for the LED
+        initial_state: True for on, False for off (default: False)
+        """
+        self.led = Pin(pin_number, Pin.OUT)
+        self.state = initial_state
+        
+        # Set initial state
+        if self.state:
+            self.led.on()
+        else:
+            self.led.off()
+    
+    def toggle(self):
+        """Toggle the LED state (on->off or off->on)"""
+        if self.state:
+            self.led.off()
+            self.state = False
+        else:
+            self.led.on()
+            self.state = True
+    \end{minted}
+\end{frame}
+
+\begin{frame}[fragile]{Example: Wiring up a button/LED}
+  Given a diagram, you should be able to:
+  \begin{center}
+    \includegraphics[width=0.3\textwidth]{breadboardWhite.png}
+  \end{center}
+\begin{itemize}
+\item Given a wiring diagram, write a constructor for a button/LED class that correctly matches the wiring.
+\item Given an initialization, sketch on the diagram what pins need to be connected to which components.
+\end{itemize}
+\textit{Example:} Initialize an LED on pin 2 initially on.
+\begin{minted}[fontsize=\small,breaklines=true]{python}
+led = LEDClass(pin_number=2, initial_state=True)
+\end{minted}
+\end{frame}
+
+\begin{frame}
+  \begin{center}
+    \Huge Any more questions for the exam?
+  \end{center}
+\end{frame}
+
+\begin{frame}[fragile]{Closing note: Using scipy.integrate.odeint}
+  While we've focused on our custom ODE\_solver class, Python's \texttt{scipy} library provides a powerful built-in function called \texttt{odeint}.
+  
+  \begin{minted}[fontsize=\small,breaklines=true]{python}
+from scipy.integrate import odeint
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Define the ODE: dy/dt = f(y, t)
+def f(y, t):
+    return -2 * y  # Example: dy/dt = -2y
+
+# Initial condition and time points
+y0 = 1.0
+t = np.linspace(0, 2, 100)
+
+# Solve the ODE
+solution = odeint(f, y0, t)
+
+# Plot results
+plt.plot(t, solution)
+  \end{minted}
+
+\end{frame}
+
+\begin{frame}{Advanced ODE Solvers: Beyond Explicit Euler}
+  While Explicit Euler is simple enough for us to implement and understand, in the real world we use more advanced methods.
+  
+  \vspace{0.5em}
+  \textbf{Higher-Order Methods (Better Accuracy):}
+  \begin{itemize}
+    \item \textbf{Runge-Kutta 4th order (RK4):} Uses 4 function evaluations per step for much better accuracy
+    \item \textbf{Implicit methods:} Better stability for "stiff" ODEs (fast and slow dynamics)
+    \item \textbf{Multistep methods:} Use information from previous steps to improve accuracy
+  \end{itemize}
+  
+  \vspace{0.5em}
+  \textbf{Adaptive Methods (Smart Step Size):}
+  \begin{itemize}
+    \item \textbf{Error estimation:} Compare solutions with different step sizes to estimate error
+    \item \textbf{Automatic step control:} Increase $h$ in smooth regions, decrease $h$ near rapid changes
+    \item \textbf{Tolerance-based:} User specifies desired accuracy, solver adjusts $h$ automatically
+  \end{itemize}
+
+\end{frame}
+
+\begin{frame}{Today's exercise: Simplified pandemic modeling}
+  In today's exercise, we will apply what we've learned to model the spread of a pandemic using a system of ODEs.
+  
+  \vspace{0.5em}
+  \textbf{SIR Model:}
+  \begin{itemize}
+    \item \textbf{S:} Susceptible individuals
+    \item \textbf{I:} Infected individuals
+    \item \textbf{R:} Recovered individuals
+  \end{itemize}
+  
+  \vspace{0.5em}
+  The SIR model is governed by the following ODEs:
+  \[
+    \begin{aligned}
+      \frac{dS}{dt} &= -\frac{\beta}{N} S I, \\
+      \frac{dI}{dt} &= \frac{\beta}{N} S I - \gamma I, \\
+      \frac{dR}{dt} &= \gamma I,
+    \end{aligned}
+  \]
+  where $\beta$ is the transmission rate and $\gamma$ is the recovery rate, and \(N = S + I + R\) is the total population.
+
+\end{frame}
+
+\begin{frame}{Representative solution}
+\begin{figure}
+  \centering
+  \includegraphics[width=0.5\textwidth]{SIRmodel.png}
+\end{figure}
+  \[
+    \begin{aligned}
+      \frac{dS}{dt} &= -\beta S I, \\
+      \frac{dI}{dt} &= \beta S I - \gamma I, \\
+      \frac{dR}{dt} &= \gamma I,
+    \end{aligned}
+  \]
+\end{frame}
+
+\end{document}

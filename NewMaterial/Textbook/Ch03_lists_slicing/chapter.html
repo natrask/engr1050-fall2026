@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 3: Lists, tuples, slicing - ENGR 1050</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<style>
+ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        line-height: 1.6; color: #333; max-width: 900px; margin: 0 auto; padding: 20px; }
+ h1 { color: #011F5B; border-bottom: 3px solid #990000; padding-bottom: 10px; margin-top: 30px; }
+ h2 { color: #011F5B; margin-top: 30px; border-bottom: 2px solid #e0e0e0; padding-bottom: 5px; }
+ h3 { color: #011F5B; margin-top: 20px; }
+ p { text-align: left; margin-bottom: 15px; }
+ code { background: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-family: ui-monospace, Menlo, Consolas, monospace; }
+ pre { background: #f4f4f4; padding: 12px; border-radius: 6px; overflow-x: auto; }
+ blockquote { border-left: 4px solid #82AFD3; padding: 4px 12px; background: #f8f9fa; margin: 12px 0; }
+ a { color: #4a90e2; } a:hover { color: #990000; }
+ .nav { font-size: 0.9rem; margin-bottom: 1rem; }
+</style>
+</head>
+<body>
+<p class="nav"><a href="../../../index.html#extras">&larr; Back to Extras</a></p>
+<h1>Chapter 3: Lists, tuples, slicing</h1>
+<p>Lists are how you store a bunch of values under one name. Tuples are like lists but you cannot change them. Slicing is a one-line way to grab a piece of a list. After this chapter you can build, index, slice, and modify lists confidently. That is enough to get through Lecture 3 on data cleanup.</p>
+<p>Prerequisite: Chapter 2 on control flow. **How to use this chapter.** Open a Colab notebook, paste each code block into its own cell, and run with Shift-Enter. The companion `chapter.ipynb` already has every example as a cell if you want to skip the typing.</p>
+<h2>What you should be able to do after this chapter</h2>
+<ul>
+<li>Build a list with the `[a, b, c]` literal and with `.append`.</li>
+<li>Read an element by index, including negative indices.</li>
+<li>Slice with `[start:stop]` and `[start:stop:step]` and know which end is exclusive.</li>
+<li>Sort a list two ways (`sort` mutates, `sorted` returns a new list).</li>
+<li>Tell when to use a tuple instead of a list.</li>
+<li>Read a simple list comprehension without panicking.</li>
+</ul>
+<h2>The minimum you need to know</h2>
+<p>A list is written with square brackets, items separated by commas.</p>
+<pre><code>players = [&quot;Schwarber&quot;, &quot;Turner&quot;, &quot;Harper&quot;]
+rbis = [119, 66, 64]
+empty = []</code></pre>
+<p>Index from 0 with `[i]`. Negative indices count from the end: `[-1]` is the last item, `[-2]` is the second to last. Going past the end raises `IndexError`.</p>
+<p>Slicing uses `[start:stop]`. The `start` is included, the `stop` is not. Either can be omitted: `[:3]` is the first three, `[3:]` is everything from index 3 onward, `[:]` is a copy of the whole list. A third number `[start:stop:step]` gives you every `step`-th item. `[::-1]` is the list reversed.</p>
+<p>Lists are **mutable**. You can change items in place with `players[0] = &quot;Stott&quot;`, add to the end with `.append`, insert at an index with `.insert`, remove with `.pop` or `.remove`.</p>
+<p>Tuples look like lists but use parentheses and cannot be changed.</p>
+<pre><code>point = (3, 4)
+x, y = point
+print(x, y)</code></pre>
+<p>Use a tuple when the size is fixed and the meaning of each slot is part of the data, like an `(x, y)` coordinate or an `(r, g, b)` color.</p>
+<p>A **list comprehension** is a one-line `for` loop that builds a list. It is just syntactic sugar, the long form is the same.</p>
+<pre><code>squares = [n * n for n in range(10)]
+evens   = [n for n in range(20) if n % 2 == 0]</code></pre>
+<h2>Worked examples</h2>
+<h3>Example 1: Building and printing a list</h3>
+<pre><code>players = [&quot;Schwarber&quot;, &quot;Turner&quot;, &quot;Harper&quot;, &quot;Bohm&quot;]
+print(players)
+print(len(players))</code></pre>
+<p>`len` gives you the number of items. Works on strings, tuples, dicts, and most other containers too.</p>
+<h3>Example 2: Indexing forward and backward</h3>
+<pre><code>players = [&quot;Schwarber&quot;, &quot;Turner&quot;, &quot;Harper&quot;, &quot;Bohm&quot;]
+print(players[0])    # Schwarber, the first
+print(players[2])    # Harper
+print(players[-1])   # Bohm, the last
+print(players[-2])   # Harper</code></pre>
+<p>If you write `players[10]` you get `IndexError: list index out of range`. Slicing does not raise on out-of-range, see the next example.</p>
+<h3>Example 3: Slicing the basics</h3>
+<pre><code>nums = [10, 20, 30, 40, 50, 60]
+print(nums[1:4])      # [20, 30, 40], stop is exclusive
+print(nums[:3])       # [10, 20, 30]
+print(nums[3:])       # [40, 50, 60]
+print(nums[:])        # full copy
+print(nums[100:])     # [], slicing past the end is fine</code></pre>
+<p>The fact that the stop is exclusive feels weird at first. The payoff is that `a[:k] + a[k:]` is always `a`, and `len(a[i:j])` is always `j - i` (when both are in range). That property comes up surprisingly often.</p>
+<h3>Example 4: Slicing with a step</h3>
+<pre><code>nums = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+print(nums[::2])      # every other, [10, 30, 50, 70, 90]
+print(nums[1::2])     # odd indices,  [20, 40, 60, 80, 100]
+print(nums[::-1])     # reversed,     [100, 90, ..., 10]</code></pre>
+<p>`[::-1]` is the most readable way to reverse a sequence. It works on strings too.</p>
+<h3>Example 5: Modifying in place</h3>
+<pre><code>players = [&quot;Schwarber&quot;, &quot;Turner&quot;, &quot;Harper&quot;, &quot;Bohm&quot;]
+players[0] = &quot;Stott&quot;
+print(players)         # [&#x27;Stott&#x27;, &#x27;Turner&#x27;, &#x27;Harper&#x27;, &#x27;Bohm&#x27;]
+
+players.append(&quot;Realmuto&quot;)
+print(players)         # [&#x27;Stott&#x27;, &#x27;Turner&#x27;, &#x27;Harper&#x27;, &#x27;Bohm&#x27;, &#x27;Realmuto&#x27;]
+
+players.insert(0, &quot;Castellanos&quot;)
+print(players)         # Castellanos now at front
+
+removed = players.pop()    # remove and return last
+print(removed)             # Realmuto
+
+players.remove(&quot;Bohm&quot;)
+print(players)</code></pre>
+<p>`.pop(i)` removes the item at index `i`. `.pop()` with no argument removes the last one.</p>
+<h3>Example 6: sort vs sorted</h3>
+<p>`sort` mutates the list. `sorted` returns a new list and leaves the original alone. They have the same `reverse=True` and `key=...` options.</p>
+<pre><code>nums = [3, 1, 4, 1, 5, 9, 2, 6]
+print(sorted(nums))         # [1, 1, 2, 3, 4, 5, 6, 9], nums unchanged
+print(nums)                 # [3, 1, 4, 1, 5, 9, 2, 6]
+
+nums.sort()
+print(nums)                 # [1, 1, 2, 3, 4, 5, 6, 9], nums mutated</code></pre>
+<p>The `key` argument is a function that takes an item and returns the value to sort by. `sorted(players, key=len)` sorts strings by length.</p>
+<h3>Example 7: List comprehensions</h3>
+<p>The pattern is `[expression for variable in iterable]`. Optionally add `if condition` at the end.</p>
+<pre><code>squares = [n * n for n in range(10)]
+print(squares)
+
+evens = [n for n in range(20) if n % 2 == 0]
+print(evens)
+
+names_upper = [name.upper() for name in [&quot;schwarber&quot;, &quot;turner&quot;, &quot;harper&quot;]]
+print(names_upper)</code></pre>
+<p>A list comprehension is shorter, sometimes faster, and easier to read once you are used to it. If it gets longer than one line of source, use a regular `for` loop.</p>
+<h3>Example 8: Nested lists (list of lists)</h3>
+<p>A list of lists is how you store a table. Outer index picks the row, inner index picks the column.</p>
+<pre><code>grid = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9],
+]
+print(grid[1])       # [4, 5, 6], the middle row
+print(grid[1][2])    # 6, row 1 column 2</code></pre>
+<p>If you find yourself doing a lot of this, Chapter 8 on numpy is going to feel like a luxury.</p>
+<h3>Example 9: Tuples and unpacking</h3>
+<pre><code>point = (3, 4)
+x, y = point
+print(x, y)
+
+# Tuples are immutable
+# point[0] = 99   # TypeError: &#x27;tuple&#x27; object does not support item assignment
+
+# Returning multiple values from a function is just returning a tuple
+def stats(values):
+    return min(values), max(values), sum(values) / len(values)
+
+low, high, avg = stats([3, 5, 7, 9])
+print(low, high, avg)</code></pre>
+<p>You can unpack any sequence, not just tuples. `a, b, c = &quot;abc&quot;` works.</p>
+<h3>Example 10: Copying a list (and the aliasing trap)</h3>
+<p>Assignment does not copy a list, it makes two names point at the same list.</p>
+<pre><code>a = [1, 2, 3]
+b = a
+b.append(4)
+print(a)   # [1, 2, 3, 4], surprised?</code></pre>
+<p>To make an independent copy, use a slice or the `.copy` method.</p>
+<pre><code>a = [1, 2, 3]
+b = a[:]        # or a.copy()
+b.append(4)
+print(a)        # [1, 2, 3]
+print(b)        # [1, 2, 3, 4]</code></pre>
+<p>This trap shows up the first time you write a function that takes a list and modifies it. The caller&#x27;s list also changes, because you have the same list.</p>
+<h3>Example 11: Checking membership</h3>
+<p>`in` is the keyword for &quot;is this value somewhere in this sequence&quot;. `not in` is the negation.</p>
+<pre><code>players = [&quot;Schwarber&quot;, &quot;Turner&quot;, &quot;Harper&quot;]
+print(&quot;Harper&quot; in players)     # True
+print(&quot;Bohm&quot; not in players)   # True</code></pre>
+<p>Useful inside `if` and `while`. For large lists, this is slow (linear scan). Chapter 5 covers sets, which give you fast membership.</p>
+<h3>Example 12: Iterating with index and value</h3>
+<p>If you only need the value, just loop. If you need both index and value, use `enumerate` (Chapter 2 Example 10).</p>
+<pre><code>for i, name in enumerate([&quot;Schwarber&quot;, &quot;Turner&quot;, &quot;Harper&quot;]):
+    print(i, name)</code></pre>
+<h2>Common mistakes</h2>
+<ul>
+<li>Assuming the stop in a slice is inclusive. It is not. `nums[0:3]` gives you three items at indices 0, 1, 2.</li>
+<li>Modifying a list while looping over it by index. Items slide around as you delete, and the loop misses some. Loop over a copy or build a new list.</li>
+<li>Assigning a list to a new name and expecting an independent copy. Use `[:]`, `.copy()`, or `list(other)`.</li>
+<li>Using `.append(...)` and assigning the result. `.append` returns `None`, it modifies in place. So `players = players.append(&quot;X&quot;)` leaves `players` equal to `None`.</li>
+<li>Confusing `sort` and `sorted`. The first mutates, the second returns. Both, not one or the other.</li>
+<li>Forgetting that strings are also sequences. `&quot;hello&quot;[1:4]` is `&quot;ell&quot;`. This sometimes surprises people coming from C.</li>
+<li>Writing `nums.append(1, 2, 3)`. Append takes one argument. Use `.extend([1, 2, 3])` or three calls.</li>
+</ul>
+<h2>Practice problems</h2>
+<ol>
+<li>Given `nums = [10, 20, 30, 40, 50]`, write a one-liner using slicing that prints the list reversed.</li>
+<li>Use a list comprehension to build the list `[1, 4, 9, 16, 25, 36, 49, 64, 81, 100]`.</li>
+<li>The snippet below should print the largest score, but it prints `None` instead. Find the bug.</li>
+<p>   ```python    scores = [88, 92, 67, 100, 73]    biggest = scores.sort()    print(biggest)    ```</p>
+<li>Predict the output:</li>
+<p>   ```python    a = [1, 2, 3]    b = a    c = a[:]    a.append(4)    print(a, b, c)    ```</p>
+<li>Write a function `chunks(lst, n)` that returns a list of n-item chunks from `lst`. So `chunks([1,2,3,4,5,6,7], 3)` should give `[[1,2,3], [4,5,6], [7]]`. Hint: slicing with a step variable.</li>
+</ol>
+<h2>What to read next</h2>
+<p>Chapter 4 on functions. Once you can build and slice lists, functions are how you stop copying-and-pasting nine lines of list-manipulation code into every cell. After that, Chapter 5 on dictionaries and Chapter 8 on numpy are both natural follow-ons depending on where you are headed.</p>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  if (window.renderMathInElement) {
+    renderMathInElement(document.body, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "$", right: "$", display: false},
+      ],
+    });
+  }
+});
+</script>
+</body>
+</html>

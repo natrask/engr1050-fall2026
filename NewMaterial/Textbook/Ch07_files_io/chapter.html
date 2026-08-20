@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 7: Files and I/O - ENGR 1050</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<style>
+ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        line-height: 1.6; color: #333; max-width: 900px; margin: 0 auto; padding: 20px; }
+ h1 { color: #011F5B; border-bottom: 3px solid #990000; padding-bottom: 10px; margin-top: 30px; }
+ h2 { color: #011F5B; margin-top: 30px; border-bottom: 2px solid #e0e0e0; padding-bottom: 5px; }
+ h3 { color: #011F5B; margin-top: 20px; }
+ p { text-align: left; margin-bottom: 15px; }
+ code { background: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-family: ui-monospace, Menlo, Consolas, monospace; }
+ pre { background: #f4f4f4; padding: 12px; border-radius: 6px; overflow-x: auto; }
+ blockquote { border-left: 4px solid #82AFD3; padding: 4px 12px; background: #f8f9fa; margin: 12px 0; }
+ a { color: #4a90e2; } a:hover { color: #990000; }
+ .nav { font-size: 0.9rem; margin-bottom: 1rem; }
+</style>
+</head>
+<body>
+<p class="nav"><a href="../../../index.html#extras">&larr; Back to Extras</a></p>
+<h1>Chapter 7: Files and I/O</h1>
+<p>A program that cannot read or write files cannot do much science. This chapter is about opening text files, reading CSV data, writing your own output, and catching the errors that always come with talking to the file system. Read this when Lecture 4 throws data at you and you want to remember how to load it without thinking hard.</p>
+<p>Prerequisite: Chapter 5 on dicts, Chapter 4 on functions. **How to use this chapter.** Open a Colab notebook, paste each code block into its own cell, and run with Shift-Enter. The companion `chapter.ipynb` already has every example as a cell if you want to skip the typing.</p>
+<h2>What you should be able to do after this chapter</h2>
+<ul>
+<li>Open a file safely with a `with` statement and read its contents.</li>
+<li>Write text to a file without clobbering everything you wanted to keep.</li>
+<li>Parse a CSV file using the standard `csv` module, or with `pandas` for the heavy lifting.</li>
+<li>Catch the common file errors and recover gracefully.</li>
+<li>Save a matplotlib figure to disk so you can put it in a lab report.</li>
+</ul>
+<h2>The minimum you need to know</h2>
+<p>The standard way to open a file in Python is the `with` statement. The file is automatically closed at the end of the block, even if an exception happens inside.</p>
+<pre><code>with open(&quot;data.txt&quot;, &quot;r&quot;) as f:
+    contents = f.read()
+print(contents)</code></pre>
+<p>The mode string is the second argument. The common ones are `&quot;r&quot;` (read text), `&quot;w&quot;` (write text, truncates first), `&quot;a&quot;` (append text), `&quot;rb&quot;` and `&quot;wb&quot;` (the binary versions). Default is `&quot;r&quot;` if you omit it.</p>
+<p>To read line by line, loop over the file object. Each iteration gives you one line, including its trailing newline.</p>
+<pre><code>with open(&quot;data.txt&quot;) as f:
+    for line in f:
+        print(line.rstrip())   # rstrip drops the trailing newline</code></pre>
+<p>To write, open with `&quot;w&quot;` and call `f.write`. Remember to add `&quot;\n&quot;` yourself; `write` does not add it.</p>
+<p>CSV files are common enough to deserve their own module. `csv.reader` gives you a row at a time as a list of strings. `csv.DictReader` uses the first row as headers and gives you a dict for each subsequent row.</p>
+<p>`pandas.read_csv` is the heavyweight option: one call, a DataFrame back. Use it for anything bigger than a handful of rows.</p>
+<h2>Worked examples</h2>
+<p>For the examples below, assume the working directory has a file `players.csv` with this content:</p>
+<pre><code>name,position,rbi
+Schwarber,DH,119
+Turner,SS,66
+Harper,1B,64</code></pre>
+<p>Several examples create this file on the fly so you can run them straight through.</p>
+<h3>Example 1: Write a file</h3>
+<pre><code>with open(&quot;hello.txt&quot;, &quot;w&quot;) as f:
+    f.write(&quot;Hello, ENGR 1050!\n&quot;)
+    f.write(&quot;Welcome to file I/O.\n&quot;)</code></pre>
+<p>The file is created if it does not exist, overwritten if it does. Mode `&quot;w&quot;` is destructive; do not run this in a folder you care about with a precious filename.</p>
+<h3>Example 2: Read a whole file</h3>
+<pre><code>with open(&quot;hello.txt&quot;) as f:
+    text = f.read()
+print(text)
+print(len(text), &quot;characters&quot;)</code></pre>
+<p>`read()` with no argument slurps the whole file into a single string. Fine for small files. For multi-gigabyte files, stream line by line instead.</p>
+<h3>Example 3: Read line by line</h3>
+<pre><code>with open(&quot;hello.txt&quot;) as f:
+    for line in f:
+        print(line.rstrip())</code></pre>
+<p>Each `line` includes the newline at the end. `rstrip` removes it (and any trailing whitespace). Use `line.strip()` if you also want to drop leading spaces.</p>
+<h3>Example 4: Append to a file</h3>
+<pre><code>with open(&quot;hello.txt&quot;, &quot;a&quot;) as f:
+    f.write(&quot;A new line at the end.\n&quot;)</code></pre>
+<p>Mode `&quot;a&quot;` keeps the existing contents and writes after them. Useful for log files.</p>
+<h3>Example 5: Create a CSV from scratch</h3>
+<pre><code>import csv
+
+rows = [
+    [&quot;name&quot;, &quot;position&quot;, &quot;rbi&quot;],
+    [&quot;Schwarber&quot;, &quot;DH&quot;, 119],
+    [&quot;Turner&quot;, &quot;SS&quot;, 66],
+    [&quot;Harper&quot;, &quot;1B&quot;, 64],
+]
+
+with open(&quot;players.csv&quot;, &quot;w&quot;, newline=&quot;&quot;) as f:
+    writer = csv.writer(f)
+    writer.writerows(rows)</code></pre>
+<p>`newline=&quot;&quot;` is important on Windows; without it, you get blank lines between rows. The `csv.writer` handles quoting for you if a field contains a comma.</p>
+<h3>Example 6: Read a CSV with csv.reader</h3>
+<pre><code>import csv
+
+with open(&quot;players.csv&quot;) as f:
+    reader = csv.reader(f)
+    header = next(reader)
+    for row in reader:
+        print(row)</code></pre>
+<p>`next(reader)` pulls one row. The rest of the loop runs over the remaining rows. Every field is a string; you have to convert numbers yourself with `int(...)` or `float(...)`.</p>
+<h3>Example 7: Read a CSV with DictReader</h3>
+<pre><code>import csv
+
+with open(&quot;players.csv&quot;) as f:
+    reader = csv.DictReader(f)
+    for row in reader:
+        name = row[&quot;name&quot;]
+        rbi = int(row[&quot;rbi&quot;])
+        print(f&quot;{name:12s} {rbi}&quot;)</code></pre>
+<p>`DictReader` reads the first row as keys. Each subsequent row is a dict mapping header name to value. This is the most pleasant way to read tabular data without pulling in pandas.</p>
+<h3>Example 8: Read a CSV with pandas</h3>
+<pre><code>import pandas as pd
+
+df = pd.read_csv(&quot;players.csv&quot;)
+print(df)
+print(df[&quot;rbi&quot;].sum())
+print(df[df[&quot;rbi&quot;] &gt; 100])</code></pre>
+<p>Pandas does the column-typing for you. `df` is a DataFrame; you can filter, group, and aggregate without writing loops. Worth learning if you do data analysis. Chapter 10 uses it lightly.</p>
+<h3>Example 9: Write a CSV from a list of dicts</h3>
+<pre><code>import csv
+
+players = [
+    {&quot;name&quot;: &quot;Schwarber&quot;, &quot;rbi&quot;: 119},
+    {&quot;name&quot;: &quot;Turner&quot;,    &quot;rbi&quot;: 66},
+    {&quot;name&quot;: &quot;Harper&quot;,    &quot;rbi&quot;: 64},
+]
+
+with open(&quot;players_out.csv&quot;, &quot;w&quot;, newline=&quot;&quot;) as f:
+    writer = csv.DictWriter(f, fieldnames=[&quot;name&quot;, &quot;rbi&quot;])
+    writer.writeheader()
+    writer.writerows(players)</code></pre>
+<p>`fieldnames` tells `DictWriter` which keys to include and in what order.</p>
+<h3>Example 10: Handling file-not-found</h3>
+<p>The naive way:</p>
+<pre><code>try:
+    with open(&quot;not_there.txt&quot;) as f:
+        text = f.read()
+except FileNotFoundError:
+    print(&quot;file is missing, using a default&quot;)
+    text = &quot;&quot;
+print(text)</code></pre>
+<p>You probably want this every time you open a user-supplied path. `FileNotFoundError` is a subclass of `OSError` so catching `OSError` also catches permission errors and disk-full errors. Choose the level of generality that matches what you can actually recover from.</p>
+<h3>Example 11: Saving a matplotlib figure</h3>
+<pre><code>import matplotlib.pyplot as plt
+
+xs = list(range(11))
+ys = [x*x for x in xs]
+
+plt.figure(figsize=(6, 4))
+plt.plot(xs, ys, &quot;o-&quot;)
+plt.xlabel(&quot;x&quot;)
+plt.ylabel(&quot;x squared&quot;)
+plt.title(&quot;Quadratic&quot;)
+plt.savefig(&quot;quadratic.png&quot;, dpi=150, bbox_inches=&quot;tight&quot;)
+plt.close()</code></pre>
+<p>`dpi=150` gives a crisp image for a lab report. `bbox_inches=&quot;tight&quot;` trims the surrounding whitespace. Always call `plt.close()` after saving if you are not also calling `plt.show()`, to avoid a memory leak in long loops.</p>
+<h3>Example 12: Reading a NIST stress-strain CSV (Lecture 4 callback)</h3>
+<p>This is the actual format the course uses for the uniaxial-tension lab.</p>
+<pre><code>import csv
+
+url = &quot;https://data.nist.gov/.../U15Al6XXX-T81_...csv&quot;   # see Lecture 4
+local = &quot;U15Al6XXX-T81.csv&quot;
+
+import urllib.request
+urllib.request.urlretrieve(url, local)
+
+with open(local) as f:
+    reader = csv.DictReader(f)
+    points = []
+    for row in reader:
+        d = float(row[&quot;Displacement_(mm)&quot;])
+        F = float(row[&quot;Force_(kN)&quot;])
+        points.append((d, F))
+
+print(len(points), &quot;points&quot;)
+print(points[:5])</code></pre>
+<p>The full URL is in the lecture notebook. The columns are `Displacement_(mm)` and `Force_(kN)`. The data is hundreds of rows; do not paste it into a code cell, load it from the file.</p>
+<h2>Common mistakes</h2>
+<ul>
+<li>Forgetting `with`. If you call `open` without `with`, the file stays open until garbage collection runs. Eventually you run out of file handles. Just use `with` every time.</li>
+<li>Opening in `&quot;w&quot;` mode and clobbering data you wanted to keep. Mode `&quot;w&quot;` is destructive. Use `&quot;a&quot;` to append, or read first, modify in memory, then write.</li>
+<li>Reading a file twice without `seek(0)` or reopening. After you read to the end, the file pointer is at the end. Another read returns an empty string. The `with` block bounds the file to one scope, so this is less of a trap than it used to be.</li>
+<li>Forgetting that CSV fields are strings. `int(&quot;66&quot;) + 1` works. `&quot;66&quot; + 1` does not. Convert numbers explicitly.</li>
+<li>Forgetting `newline=&quot;&quot;` when writing CSV on Windows. Blank lines appear between rows.</li>
+<li>Hard-coding absolute paths. `C:\Users\me\stuff\data.csv` breaks the moment you share the notebook. Use relative paths like `data/players.csv`, or `Path(__file__).parent / &quot;data&quot; / &quot;players.csv&quot;`.</li>
+<li>Closing matplotlib figures only sometimes. In a loop, an open figure per iteration eats memory fast.</li>
+</ul>
+<h2>Practice problems</h2>
+<ol>
+<li>Write a file named `numbers.txt` with the numbers 1 to 20, one per line. Then write a function that reads the file and returns the sum.</li>
+<li>Given `players.csv` from Example 5, write a function that returns the name with the highest RBI. Use `csv.DictReader`.</li>
+<li>The snippet below is supposed to print each line. It does not, it prints nothing. Find the bug.</li>
+<p>   ```python    f = open(&quot;hello.txt&quot;)    text = f.read()    for line in f:        print(line)    f.close()    ```</p>
+<li>Write a function `safe_open(path)` that returns the file contents if the file exists, or the empty string if it does not. No traceback should reach the caller.</li>
+<li>Make a plot of the function `y = sin(x)` for `x in [0, 2*pi]` with 100 points, save it to `sine.png` at 150 dpi, then verify the file exists with `os.path.exists`.</li>
+</ol>
+<h2>What to read next</h2>
+<p>Chapter 8 on numpy, which is what you reach for once your CSV has a column of numbers and you want to do arithmetic on it without writing a loop. Chapter 10 on matplotlib expands the figure-saving idea from Example 11.</p>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  if (window.renderMathInElement) {
+    renderMathInElement(document.body, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "$", right: "$", display: false},
+      ],
+    });
+  }
+});
+</script>
+</body>
+</html>

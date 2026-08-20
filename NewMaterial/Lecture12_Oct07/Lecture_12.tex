@@ -1,0 +1,260 @@
+\documentclass{beamer}
+\usetheme{Madrid}
+% Use a neutral colortheme so we can fully override colors
+\usecolortheme{default}
+\usepackage{minted}
+
+% use tikz for generating diagrams
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc,angles,quotes,positioning}
+
+% for links
+\usepackage{hyperref}
+
+% UPenn color palette
+\definecolor{PennBlue}{RGB}{1,31,91}   % #011F5B
+\definecolor{PennRed}{RGB}{153,0,0}    % #990000
+
+% Apply colors to beamer elements
+\setbeamercolor{structure}{fg=PennBlue}
+% Make title slide text white for contrast on dark background
+\setbeamercolor{title}{fg=white}
+\setbeamercolor{subtitle}{fg=black}
+\setbeamercolor{author}{fg=black}
+\setbeamercolor{date}{fg=black}
+% Ensure the title page itself uses our dark background and white foreground
+\setbeamercolor{title page}{bg=PennBlue,fg=black}
+\setbeamercolor{frametitle}{fg=white,bg=PennBlue}
+\setbeamercolor{normal text}{fg=black,bg=white}
+
+% Headline/footline palettes (Madrid uses these)
+\setbeamercolor{palette primary}{bg=PennBlue, fg=white}
+\setbeamercolor{palette secondary}{bg=PennRed,  fg=white}
+\setbeamercolor{palette tertiary}{bg=PennBlue!80!black, fg=white}
+\setbeamercolor{palette quaternary}{bg=PennRed!80!black,  fg=white}
+
+% Blocks and emphasis
+\setbeamercolor{block title}{fg=white,bg=PennBlue}
+\setbeamercolor{block body}{bg=PennBlue!5}
+\setbeamercolor{alerted text}{fg=PennRed}
+\setbeamercolor{example text}{fg=PennBlue}
+\setbeamercolor{itemize item}{fg=PennBlue}
+\setbeamercolor{itemize subitem}{fg=PennRed}
+
+% Footer styling colors
+\setbeamercolor{author in head/foot}{bg=PennBlue,fg=white}
+\setbeamercolor{title in head/foot}{bg=PennRed,fg=white}
+\setbeamercolor{date in head/foot}{bg=PennBlue,fg=white}
+
+% Custom footline with course and term centered
+\setbeamertemplate{footline}{
+  \leavevmode
+  \hbox{%%
+    \begin{beamercolorbox}[wd=.33\paperwidth,ht=2.5ex,dp=1ex,left]{author in head/foot}
+      \hspace{1em}\insertshortauthor
+    \end{beamercolorbox}%%
+    \begin{beamercolorbox}[wd=.34\paperwidth,ht=2.5ex,dp=1ex,center]{title in head/foot}
+      Lecture 12
+    \end{beamercolorbox}%%
+    \begin{beamercolorbox}[wd=.33\paperwidth,ht=2.5ex,dp=1ex,right]{date in head/foot}
+      \insertframenumber{} / \inserttotalframenumber\hspace{1em}
+    \end{beamercolorbox}%%
+  }
+  \vskip0pt
+}
+
+% Remove navigation symbols
+\setbeamertemplate{navigation symbols}{}
+
+
+\title{Lecture 13}
+\author{ENGR1050 Fall 2025}
+\date{\today}
+
+\begin{document}
+
+% Title frame with UPenn logo
+
+\begin{frame}
+  \vfill
+  \begin{center}
+
+    % Title and course info
+    {\Large\textbf{ENGR1050: Lecture 13}}
+    \vskip1em
+    {\large Differential equations and numerical methods}
+    \vskip0.5em
+    {\insertdate}
+    \vskip2em
+    % UPenn logo at bottom
+    \includegraphics[height=2.5cm]{upennlogo.png}
+
+  \end{center}
+  \vfill
+\end{frame}
+
+\begin{frame}{Agenda}
+  \begin{itemize}
+    \item 5 minute crash course on differential equations
+    \item Together: build up a class to solve ODEs using Euler's methods
+    \item Independent practice: use your class to solve a few ODEs
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}{Types of Equations}
+  \begin{itemize}
+    \item \textbf{Nonlinear equations:}
+      \begin{itemize}
+        \item Systems of equations that must be equal.
+        \item $F(x_1,x_2,...) = 0$
+        \item Example: \(x_1^2 + x_2^2 - 1 = 0\) (circle equation).
+      \end{itemize}
+    \item \textbf{Ordinary Differential Equations (ODEs):}
+      \begin{itemize}
+        \item Involve derivatives with respect to a single variable (e.g., time).
+        \item $F(t, y, y', y'', \ldots) = 0$
+        \item Example: \(\frac{dy}{dt} = -ky\) (exponential decay).
+        \item Example: \(m\ddot{x} = F(x)\) (Newton's second law).
+      \end{itemize}
+    \item \textbf{Partial Differential Equations (PDEs):}
+      \begin{itemize}
+        \item Involve derivatives with respect to multiple variables, typically mixing space and time
+        \item Example: \(\frac{\partial u}{\partial t} = D \frac{\partial^2 u}{\partial x^2}\). (heat equation).
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{What is an ODE?}
+  \begin{definition}
+    An n\textsuperscript{th}-order ordinary differential equation involves an unknown function \(y(t)\) and its derivatives up to order \(n\), where \(n\) is the highest derivative present:
+    \[
+      F\!\bigl(t, y, y', \ldots, y^{(n)}\bigr)=0.
+    \]
+    Equivalently, in explicit form:
+    \[
+      y^{(n)} = f\!\bigl(t, y, y', \ldots, y^{(n-1)}\bigr).
+    \]  \end{definition}
+\textbf{Example:} A ball dropped from height \(h\) with air resistance proportional to velocity:
+\[ m\frac{d^2y}{dt^2} = -mg - k\frac{dy}{dt} \quad \Rightarrow \quad \frac{d^2y}{dt^2} = -g - \frac{k}{m}\frac{dy}{dt} \]
+is a \textit{second-order} ODE since the highest derivative is the second derivative of position \(y\) with respect to time \(t\).
+  \end{frame}
+
+  \begin{frame}{Initial value problems}
+      \begin{definition}
+    An initial value problem specifies an ODE together with values of the unknown at an initial time \(t_0\).
+    For an \(n^\text{th}\)-order ODE:
+    \[
+      y^{(n)} = f\!\bigl(t, y, y', \ldots, y^{(n-1)}\bigr).
+    \] with initial conditions
+    \[
+      y(t_0) = y_0, \quad y'(t_0) = y_1, \quad \ldots, \quad y^{(n-1)}(t_0) = y_{n-1}.
+    \]
+  \end{definition}
+  \textbf{Example:} For the falling ball ODE above, to fully specify the trajectory of the ball we must specify the initial height and velocity through the \textit{initial conditions}:
+  \[
+    y(0) = h, \quad y'(0) = 0.
+  \]
+\end{frame}
+
+\begin{frame}{Why do we need initial conditions?}
+  \begin{itemize}
+    \item Lets think about exponential decay:
+      \[
+        \frac{dy}{dt} = -ky \quad \text{\textcolor{PennRed}{(rate proportional to magnitude of population)}}
+      \]
+      \item If we integrate both sides we obtain:
+      \[
+        \int \frac{1}{y} dy = -k \int dt \quad \Rightarrow \quad \ln|y| = -kt + C.
+      \]
+      \item Exponentiating both sides gives:
+      \[
+        |y| = e^{-kt + C} = e^C e^{-kt}.
+      \]
+      \item Letting \(C' = e^C\) (a positive constant), we have:
+      \[
+        |y| = C'e^{-kt}.
+      \]
+      \item Thus, the general solution is:
+      \[
+        y(t) = Ce^{-kt},
+      \]
+      where \(C\) is specified by the initial conditions \(C = y(t_0)\).
+
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{How we'll think about ODEs in ENGR1050}
+  You'll take a full course on differential equations later in your studies, but for this class we will either:
+  \begin{itemize}
+    \item Guess and check solutions to simple ODEs
+    \item Use numerical methods to approximate solutions to more complex ODEs
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Example of how to guess and check}
+  \textbf{Example:} Verify that \(y(t) = e^{-2t}\) is a solution to the ODE:
+  \[
+    \frac{dy}{dt} = -2y.
+  \]
+  \begin{itemize}
+    \item Compute the derivative of \(y(t)\):
+      \[
+        \frac{dy}{dt} = -2e^{-2t}.
+      \]
+    \item Substitute \(y(t)\) into the right side of the ODE:
+      \[
+        -2y = -2e^{-2t}.
+      \]
+    \item Since both sides are equal, \(y(t) = e^{-2t}\) is indeed a solution to the ODE.
+  \end{itemize}
+\end{frame}
+
+  \begin{frame}{Numerical solution of ODEs}
+    Many ODEs cannot be solved analytically, so we use numerical methods to approximate solutions. The simplest is the Explicit Euler method.
+  \begin{definition}
+    For the IVP \(y'(t)=f(t,y)\) with \(y(t_0)=y_0\) and step size \(h>0\), the Starting from $t_0,y_0$, Explicit Euler scheme updates via
+    \[
+      t_{n+1}=t_n+h, \qquad
+      y_{n+1}=y_n + h\,f(t_n,y_n),
+    \]
+  \end{definition}
+  \begin{figure}
+    \centering
+    \includegraphics[width=0.4\textwidth]{expliciteuler.jpg}
+    \caption{Graphical representation of the Explicit Euler method. The tangent line at each point is used to estimate the next point.}
+  \end{figure}
+\end{frame}
+
+  \begin{frame}{How will we check that a solution is reasonable?}
+    In the next homework we will use the code we built today to solve a pile of ODEs. The art of this is to cook up some qualitative feature we know our solution has to have and check that the numerical solution matches it. 
+
+    \textbf{Example:} For the falling ball with air resistance, we know that:
+    \begin{itemize}
+      \item The ball should never go below ground level (i.e., \(y(t) \geq 0\) for all \(t\)).
+      \item The velocity should approach a terminal velocity as time goes on.
+    \end{itemize}
+    $$ \ddot{y} = -g - \frac{k}{m}\dot{y} $$
+    At steady state:
+    $$ 0 = -g - \frac{k}{m}v_{term} \implies v_{term} = -\frac{mg}{k} $$
+    In the homework I'll guide you through some of these checks.
+\end{frame}
+
+\begin{frame}{Today's exercise}
+  \begin{itemize}
+    \item Together, we will build a Python class to solve ODEs using the Explicit Euler method.
+    \item The class will take as input:
+      \begin{itemize}
+        \item Initial conditions \(t_0\) and \(y_0\)
+        \item Final time \(t_f\) to solve to and number of steps \(N\)
+      \end{itemize}
+      \item The class will have two functions:
+      \item \begin{itemize}
+          \item \texttt{f(t,y)} to define the ODE \(y' = f(t,y)\)
+          \item \texttt{solve()} to perform \(N\) steps and return the solution as a numpy array
+      \end{itemize}
+    \item   You will use this class to solve a few example ODEs on your own.
+  \end{itemize}
+\end{frame}
+
+\end{document}

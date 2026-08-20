@@ -1,0 +1,428 @@
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #011F5B;
+    --secondary-color: #990000;
+    --accent-color: #4a90e2;
+    --text-color: #333;
+    --light-bg: #f8f9fa;
+    --border-color: #dee2e6;
+    --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    --shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: #fff;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header */
+header {
+    background: linear-gradient(135deg, var(--primary-color) 0%, #003366 100%);
+    color: white;
+    padding: 3rem 0 2rem 0;
+    text-align: center;
+    box-shadow: var(--shadow);
+}
+
+header h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    letter-spacing: -1px;
+}
+
+header .subtitle {
+    font-size: 1.5rem;
+    font-weight: 300;
+    margin-bottom: 0.25rem;
+}
+
+header .term {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+/* Navigation */
+nav {
+    background-color: var(--light-bg);
+    border-bottom: 2px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 0;
+}
+
+nav li {
+    margin: 0;
+}
+
+nav a {
+    display: block;
+    padding: 1rem 1.5rem;
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border-bottom: 3px solid transparent;
+}
+
+nav a:hover {
+    background-color: white;
+    border-bottom-color: var(--secondary-color);
+    color: var(--secondary-color);
+}
+
+/* Main Content */
+main {
+    padding: 2rem 20px 4rem 20px;
+}
+
+section {
+    margin-bottom: 4rem;
+    scroll-margin-top: 80px;
+}
+
+h2 {
+    color: var(--primary-color);
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 3px solid var(--secondary-color);
+}
+
+h3 {
+    color: var(--primary-color);
+    font-size: 1.3rem;
+    margin-bottom: 0.75rem;
+    margin-top: 1rem;
+}
+
+h4 {
+    color: var(--primary-color);
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    margin-top: 1rem;
+}
+
+p {
+    margin-bottom: 1rem;
+    text-align: justify;
+}
+
+a {
+    color: var(--accent-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--secondary-color);
+    text-decoration: underline;
+}
+
+/* Course Info Box */
+.course-info {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 10px;
+    padding: 2rem;
+    margin-bottom: 3rem;
+    box-shadow: var(--shadow);
+    border-left: 5px solid var(--secondary-color);
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.info-item {
+    font-size: 1rem;
+}
+
+.info-item strong {
+    color: var(--primary-color);
+    display: block;
+    margin-bottom: 0.25rem;
+}
+
+/* Schedule Section */
+.schedule {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.lecture-item {
+    background: white;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+    transition: all 0.3s ease;
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 1.5rem;
+}
+
+.lecture-item:hover {
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-2px);
+}
+
+.lecture-date {
+    font-weight: 700;
+    color: white;
+    background: var(--primary-color);
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    text-align: center;
+    height: fit-content;
+    font-size: 0.95rem;
+}
+
+.lecture-content h3 {
+    margin-top: 0;
+    color: var(--primary-color);
+    font-size: 1.2rem;
+}
+
+.lecture-content p {
+    margin-bottom: 0.75rem;
+    color: #666;
+    text-align: left;
+}
+
+.resources {
+    list-style: none;
+    padding: 0;
+    margin-top: 0.75rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.resources li {
+    background: none;
+    padding: 0;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    border: none;
+}
+
+.resources a {
+    display: inline-block;
+    background: #6c757d;
+    color: #fff;
+    padding: 0.3rem 0.8rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.resources a:hover {
+    background: var(--secondary-color);
+    color: #fff;
+}
+
+/* Objectives List */
+.objectives-list {
+    list-style: none;
+    padding: 0;
+}
+
+.objectives-list li {
+    padding: 1rem;
+    margin-bottom: 0.75rem;
+    background: var(--light-bg);
+    border-left: 4px solid var(--accent-color);
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.objectives-list li:hover {
+    background: #e9ecef;
+    border-left-color: var(--secondary-color);
+    transform: translateX(5px);
+}
+
+/* Staff Section */
+.staff-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.staff-member {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow);
+}
+
+.staff-member h3 {
+    margin-top: 0;
+    color: var(--primary-color);
+}
+
+.staff-member p {
+    margin-bottom: 0.5rem;
+    text-align: left;
+}
+
+.note {
+    background: #fff3cd;
+    border: 1px solid #ffc107;
+    padding: 1rem;
+    border-radius: 6px;
+    margin-top: 1rem;
+    text-align: left;
+}
+
+/* Grading Section */
+.grading-breakdown {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.grade-item {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 1.5rem;
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow);
+    transition: all 0.3s ease;
+}
+
+.grade-item:hover {
+    box-shadow: var(--shadow-hover);
+}
+
+.grade-percent {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: white;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    height: 100px;
+}
+
+.grade-desc h3 {
+    margin-top: 0;
+}
+
+.grade-desc p {
+    color: #666;
+    text-align: left;
+}
+
+/* Footer */
+footer {
+    background: var(--primary-color);
+    color: white;
+    text-align: center;
+    padding: 2rem 0;
+    margin-top: 4rem;
+}
+
+footer p {
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2rem;
+    }
+
+    header .subtitle {
+        font-size: 1.2rem;
+    }
+
+    nav ul {
+        flex-direction: column;
+    }
+
+    nav a {
+        border-bottom: 1px solid var(--border-color);
+        border-left: 3px solid transparent;
+    }
+
+    nav a:hover {
+        border-left-color: var(--secondary-color);
+        border-bottom-color: var(--border-color);
+    }
+
+    .lecture-item {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .lecture-date {
+        width: 100%;
+    }
+
+    .grade-item {
+        grid-template-columns: 1fr;
+    }
+
+    .grade-percent {
+        height: 80px;
+    }
+
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .staff-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Print Styles */
+@media print {
+    nav {
+        display: none;
+    }
+
+    section {
+        page-break-inside: avoid;
+    }
+
+    .lecture-item {
+        box-shadow: none;
+        border: 1px solid #ccc;
+    }
+}

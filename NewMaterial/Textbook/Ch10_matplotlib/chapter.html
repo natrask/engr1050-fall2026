@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 10: Plotting with matplotlib - ENGR 1050</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<style>
+ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        line-height: 1.6; color: #333; max-width: 900px; margin: 0 auto; padding: 20px; }
+ h1 { color: #011F5B; border-bottom: 3px solid #990000; padding-bottom: 10px; margin-top: 30px; }
+ h2 { color: #011F5B; margin-top: 30px; border-bottom: 2px solid #e0e0e0; padding-bottom: 5px; }
+ h3 { color: #011F5B; margin-top: 20px; }
+ p { text-align: left; margin-bottom: 15px; }
+ code { background: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-family: ui-monospace, Menlo, Consolas, monospace; }
+ pre { background: #f4f4f4; padding: 12px; border-radius: 6px; overflow-x: auto; }
+ blockquote { border-left: 4px solid #82AFD3; padding: 4px 12px; background: #f8f9fa; margin: 12px 0; }
+ a { color: #4a90e2; } a:hover { color: #990000; }
+ .nav { font-size: 0.9rem; margin-bottom: 1rem; }
+</style>
+</head>
+<body>
+<p class="nav"><a href="../../../index.html#extras">&larr; Back to Extras</a></p>
+<h1>Chapter 10: Plotting with matplotlib</h1>
+<p>Matplotlib is the standard plotting library for Python. After this chapter you can plot data, label your axes, make multi-panel figures, and save your output to a file that looks acceptable in a lab report. Read this when Lecture 4 introduces plots and you want a tidy reference, or any time you find yourself reaching for Excel.</p>
+<p>Prerequisite: Chapter 8 on numpy. **How to use this chapter.** Open a Colab notebook, paste each code block into its own cell, and run with Shift-Enter. The companion `chapter.ipynb` already has every example as a cell if you want to skip the typing.</p>
+<h2>What you should be able to do after this chapter</h2>
+<ul>
+<li>Make a basic line plot and a scatter plot.</li>
+<li>Label the axes, add a title, add a legend.</li>
+<li>Make multi-panel figures with `plt.subplots`.</li>
+<li>Use log scales when the data spans many orders of magnitude.</li>
+<li>Save a figure to a file at a sensible resolution.</li>
+</ul>
+<h2>The minimum you need to know</h2>
+<p>Import the pyplot module under the standard alias.</p>
+<pre><code>import matplotlib.pyplot as plt</code></pre>
+<p>There are two common styles. The **state-based** style uses `plt.plot`, `plt.xlabel`, etc, with an implicit current figure. Quick to type. The **object-oriented** style uses `fig, ax = plt.subplots()` and calls methods on `ax`. More verbose, easier to scale to multi-panel figures.</p>
+<pre><code># State-based
+plt.plot(x, y)
+plt.xlabel(&quot;x&quot;)
+plt.ylabel(&quot;y&quot;)
+plt.show()
+
+# Object-oriented
+fig, ax = plt.subplots()
+ax.plot(x, y)
+ax.set_xlabel(&quot;x&quot;)
+ax.set_ylabel(&quot;y&quot;)
+plt.show()</code></pre>
+<p>For a one-off in a notebook, state-based is fine. For a figure with multiple panels, OO is cleaner.</p>
+<p>`plt.show()` displays the figure. In a Jupyter notebook this is automatic; you can usually omit it. In a script you need it or nothing appears.</p>
+<p>`plt.savefig(filename, dpi=150, bbox_inches=&quot;tight&quot;)` writes the figure to a file. The extension determines the format: `.png`, `.pdf`, `.svg` all work.</p>
+<h2>Worked examples</h2>
+<h3>Example 1: A basic line plot</h3>
+<pre><code>import numpy as np
+import matplotlib.pyplot as plt
+
+x = np.linspace(0, 2 * np.pi, 100)
+y = np.sin(x)
+
+plt.figure(figsize=(6, 4))
+plt.plot(x, y)
+plt.xlabel(&quot;x&quot;)
+plt.ylabel(&quot;sin(x)&quot;)
+plt.title(&quot;Sine over one period&quot;)
+plt.grid(True, alpha=0.3)
+plt.show()</code></pre>
+<p>`figsize` is in inches. `alpha` on the grid makes it faint so the data stands out.</p>
+<h3>Example 2: Markers and line styles</h3>
+<pre><code>import numpy as np
+import matplotlib.pyplot as plt
+
+x = np.linspace(0, 10, 11)
+y1 = x
+y2 = x ** 0.5 * 3
+y3 = np.log(x + 1) * 3
+
+plt.figure(figsize=(7, 4))
+plt.plot(x, y1, &quot;o-&quot;, label=&quot;linear&quot;)
+plt.plot(x, y2, &quot;s--&quot;, label=&quot;sqrt&quot;)
+plt.plot(x, y3, &quot;^:&quot;, label=&quot;log&quot;)
+plt.xlabel(&quot;x&quot;)
+plt.ylabel(&quot;y&quot;)
+plt.legend()
+plt.show()</code></pre>
+<p>The format string is `marker + line_style + color` (the color is optional). `&quot;o-&quot;` is circle markers with a solid line. `&quot;s--&quot;` is square markers with dashed. Browse the matplotlib docs for the full menu.</p>
+<h3>Example 3: Scatter plot</h3>
+<pre><code>import numpy as np
+import matplotlib.pyplot as plt
+
+rng = np.random.default_rng(seed=0)
+x = rng.standard_normal(200)
+y = 0.5 * x + rng.standard_normal(200) * 0.5
+
+plt.figure(figsize=(5, 5))
+plt.scatter(x, y, s=20, alpha=0.6)
+plt.xlabel(&quot;x&quot;)
+plt.ylabel(&quot;y&quot;)
+plt.title(&quot;Noisy linear relationship&quot;)
+plt.show()</code></pre>
+<p>`s` is the marker size in points squared. `alpha` makes overlapping points darker, which is a quick way to see density.</p>
+<h3>Example 4: A histogram</h3>
+<pre><code>import numpy as np
+import matplotlib.pyplot as plt
+
+rng = np.random.default_rng(seed=1)
+data = rng.standard_normal(1000)
+
+plt.figure(figsize=(7, 4))
+plt.hist(data, bins=30, edgecolor=&quot;black&quot;)
+plt.xlabel(&quot;value&quot;)
+plt.ylabel(&quot;count&quot;)
+plt.title(&quot;Standard normal samples&quot;)
+plt.show()</code></pre>
+<p>`bins` is the number of bins, or a list of bin edges if you want control. `edgecolor=&quot;black&quot;` outlines the bars so adjacent ones do not blur into each other.</p>
+<h3>Example 5: Error bars</h3>
+<pre><code>import numpy as np
+import matplotlib.pyplot as plt
+
+x = np.arange(1, 6)
+y = np.array([2.1, 3.9, 6.2, 8.0, 9.9])
+err = np.array([0.2, 0.3, 0.4, 0.3, 0.5])
+
+plt.figure(figsize=(6, 4))
+plt.errorbar(x, y, yerr=err, fmt=&quot;o&quot;, capsize=4)
+plt.xlabel(&quot;x&quot;)
+plt.ylabel(&quot;y&quot;)
+plt.title(&quot;Data with measurement uncertainty&quot;)
+plt.show()</code></pre>
+<p>`yerr` is the y-direction uncertainty. `fmt=&quot;o&quot;` says markers only, no connecting line. `capsize` puts horizontal caps at the ends of the error bars.</p>
+<h3>Example 6: Log-scale axes</h3>
+<p>When data spans many orders of magnitude, a linear scale crowds everything against one edge. Log helps.</p>
+<pre><code>import numpy as np
+import matplotlib.pyplot as plt
+
+n = np.array([10, 100, 1000, 10000, 100000])
+err = 1.0 / np.sqrt(n)         # error decays like 1/sqrt(n)
+
+plt.figure(figsize=(6, 4))
+plt.loglog(n, err, &quot;o-&quot;)
+plt.xlabel(&quot;N&quot;)
+plt.ylabel(&quot;error&quot;)
+plt.title(&quot;Monte Carlo convergence (looks like a line on a log-log plot)&quot;)
+plt.grid(True, which=&quot;both&quot;, alpha=0.3)
+plt.show()</code></pre>
+<p>A line on a log-log plot means a power-law relationship: `err = C * n^p`. The slope is `p`. This is the standard way to read off convergence rates.</p>
+<h3>Example 7: Multiple panels with subplots</h3>
+<pre><code>import numpy as np
+import matplotlib.pyplot as plt
+
+x = np.linspace(0, 2*np.pi, 200)
+
+fig, axes = plt.subplots(2, 2, figsize=(10, 6))
+axes[0, 0].plot(x, np.sin(x));      axes[0, 0].set_title(&quot;sin&quot;)
+axes[0, 1].plot(x, np.cos(x));      axes[0, 1].set_title(&quot;cos&quot;)
+axes[1, 0].plot(x, np.tan(x));      axes[1, 0].set_title(&quot;tan&quot;)
+axes[1, 0].set_ylim(-5, 5)
+axes[1, 1].plot(x, np.sin(x)**2);   axes[1, 1].set_title(&quot;sin squared&quot;)
+fig.tight_layout()
+plt.show()</code></pre>
+<p>`plt.subplots(rows, cols)` returns the figure and a 2D array of axes. Address each panel with `axes[i, j]`. `fig.tight_layout()` keeps the labels from overlapping the next panel.</p>
+<h3>Example 8: Two y-axes on one plot</h3>
+<p>When two quantities have different units, use a twin axis.</p>
+<pre><code>import numpy as np
+import matplotlib.pyplot as plt
+
+t = np.linspace(0, 10, 100)
+temperature = 20 + 5 * np.sin(t)
+pressure    = 100 + 10 * np.cos(t)
+
+fig, ax1 = plt.subplots(figsize=(7, 4))
+ax1.plot(t, temperature, &quot;r-&quot;)
+ax1.set_xlabel(&quot;time&quot;)
+ax1.set_ylabel(&quot;temperature (C)&quot;, color=&quot;r&quot;)
+ax1.tick_params(axis=&quot;y&quot;, labelcolor=&quot;r&quot;)
+
+ax2 = ax1.twinx()
+ax2.plot(t, pressure, &quot;b-&quot;)
+ax2.set_ylabel(&quot;pressure (kPa)&quot;, color=&quot;b&quot;)
+ax2.tick_params(axis=&quot;y&quot;, labelcolor=&quot;b&quot;)
+
+plt.show()</code></pre>
+<p>Use sparingly. Two y-axes are easy to misread; people compare the lines on the plot and miss that the scales are different.</p>
+<h3>Example 9: Annotating a point</h3>
+<pre><code>import numpy as np
+import matplotlib.pyplot as plt
+
+x = np.linspace(0, 6, 100)
+y = np.sin(x)
+peak_x = np.pi / 2
+peak_y = 1.0
+
+plt.figure(figsize=(6, 4))
+plt.plot(x, y)
+plt.plot(peak_x, peak_y, &quot;ro&quot;)
+plt.annotate(&quot;peak&quot;,
+             xy=(peak_x, peak_y),
+             xytext=(peak_x + 1, peak_y + 0.1),
+             arrowprops=dict(arrowstyle=&quot;-&gt;&quot;))
+plt.xlabel(&quot;x&quot;); plt.ylabel(&quot;sin(x)&quot;)
+plt.show()</code></pre>
+<p>`xy` is the point you are pointing at. `xytext` is where the label goes. `arrowprops` is the arrow style. Useful for the one or two points in a figure that need callouts.</p>
+<h3>Example 10: Reproducing a lab-report figure</h3>
+<p>A lab-quality figure has labels, units, a legend, a title, and a reasonable aspect ratio. This is the format Lecture 3 expects.</p>
+<pre><code>import numpy as np
+import matplotlib.pyplot as plt
+
+# Pretend stress-strain data
+strain = np.linspace(0, 0.05, 50)
+stress = 70000 * strain                          # elastic, MPa
+stress[20:] = stress[19] + 100 * (strain[20:] - strain[19])    # then plastic
+
+plt.figure(figsize=(7, 5))
+plt.plot(strain, stress, &quot;k-&quot;, lw=2, label=&quot;Al6XXX-T81&quot;)
+plt.xlabel(&quot;strain&quot;)
+plt.ylabel(&quot;stress (MPa)&quot;)
+plt.title(&quot;Uniaxial tension of Al6XXX-T81 sheet (NIST data)&quot;)
+plt.legend(loc=&quot;lower right&quot;)
+plt.grid(True, alpha=0.3)
+plt.tight_layout()
+plt.savefig(&quot;stress_strain.png&quot;, dpi=150, bbox_inches=&quot;tight&quot;)
+plt.show()</code></pre>
+<p>`lw=2` is line width. `loc=&quot;lower right&quot;` puts the legend out of the way of the data. Save to PNG for embedding in markdown, PDF for vector-quality printing.</p>
+<h3>Example 11: Saving a figure (cleanly, in a loop)</h3>
+<pre><code>import numpy as np
+import matplotlib.pyplot as plt
+
+x = np.linspace(0, 2*np.pi, 200)
+for k in range(1, 4):
+    fig, ax = plt.subplots(figsize=(6, 3))
+    ax.plot(x, np.sin(k * x))
+    ax.set_title(f&quot;sin({k} x)&quot;)
+    fig.savefig(f&quot;sine_{k}.png&quot;, dpi=120, bbox_inches=&quot;tight&quot;)
+    plt.close(fig)</code></pre>
+<p>The `plt.close(fig)` is important. Without it, matplotlib keeps every figure in memory and your kernel slows down.</p>
+<h3>Example 12: Plotting a numpy 2D array as an image</h3>
+<pre><code>import numpy as np
+import matplotlib.pyplot as plt
+
+x = np.linspace(-2, 2, 200)
+y = np.linspace(-2, 2, 200)
+X, Y = np.meshgrid(x, y)
+Z = np.sin(X * X + Y * Y)
+
+plt.figure(figsize=(5, 5))
+plt.imshow(Z, extent=[x.min(), x.max(), y.min(), y.max()], origin=&quot;lower&quot;, cmap=&quot;viridis&quot;)
+plt.colorbar(label=&quot;Z&quot;)
+plt.xlabel(&quot;x&quot;); plt.ylabel(&quot;y&quot;)
+plt.title(&quot;sin(x^2 + y^2)&quot;)
+plt.show()</code></pre>
+<p>`meshgrid` builds the X, Y coordinate arrays. `imshow` paints the values as pixels. `origin=&quot;lower&quot;` puts (0, 0) at the bottom left, the convention for math.</p>
+<h2>Common mistakes</h2>
+<ul>
+<li>Forgetting to label the axes. Half a point off in the lab report and worth fixing.</li>
+<li>Putting your data on a linear axis when log makes it readable. Convergence and exponential growth are both easier to see on log.</li>
+<li>Not closing figures in loops, leaking memory.</li>
+<li>Calling `plt.savefig` after `plt.show()`. On some backends, `show` clears the figure. Save first, then show, or use `fig.savefig` on the figure object.</li>
+<li>Mixing the state-based and object-oriented APIs. Pick one per figure. If you call `plt.title(&quot;X&quot;)` after working with an `ax`, you might be titling a different figure.</li>
+<li>Tiny `figsize`. Default is 6 by 4 inches. If you make it 3 by 2, the labels overlap. If you make it 12 by 12, everything looks shrunken in the notebook.</li>
+<li>Hardcoding colors that fight with each other. The default color cycle is designed to be readable. Use it unless you have a reason not to.</li>
+</ul>
+<h2>Practice problems</h2>
+<ol>
+<li>Plot `y = x^2` for `x` from -3 to 3 with 100 points. Add axis labels and a title.</li>
+<li>Make a 1x2 figure where the left panel shows `y = exp(x)` on a linear y-axis and the right panel shows the same data on a log y-axis. Add titles to each panel.</li>
+<li>The snippet below should overlay three curves with three different line styles. They all look the same. Fix it.</li>
+<p>   ```python    import numpy as np, matplotlib.pyplot as plt    x = np.linspace(0, 5, 100)    plt.plot(x, x)    plt.plot(x, x**2)    plt.plot(x, x**3)    plt.show()    ```</p>
+<li>Plot a histogram of 1000 samples from `np.random.default_rng().standard_normal()`, with 50 bins, axis labels, and a title.</li>
+<li>Generate `x = np.linspace(0, 10, 11)` and `y = 2 * x + 1 + rng.standard_normal(11)`. Plot the noisy points as a scatter and overlay the line `y = 2x + 1`. Add a legend.</li>
+</ol>
+<h2>What to read next</h2>
+<p>Chapter 11 on ODEs uses matplotlib to visualize trajectories. Chapter 9 on linear algebra and this chapter together cover the typical &quot;load data, do math, plot result&quot; pipeline.</p>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  if (window.renderMathInElement) {
+    renderMathInElement(document.body, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "$", right: "$", display: false},
+      ],
+    });
+  }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+\documentclass[12pt]{article}
+
+\usepackage{amsmath, amssymb}
+\usepackage{geometry}
+\geometry{margin=1in}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\usepackage{minted}
+
+\title{ENGR 1050 \\ Homework 5: Data Collection using the Google API}
+\author{Due: November 17th, 2025 by 11:59 PM}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{Instructions}
+In the last class we vibe coded a way to:
+\begin{enumerate}
+    \item Make a Google form to collect data
+    \item Push that data into a Google sheet
+    \item Use the Google Sheets API to read that data into a Python script
+    \item Plot that data in Python
+\end{enumerate}
+
+The following is a very short homework - its purpose is to crowdsource some data that we will use for machine learning in the next couple weeks.
+
+\section*{Problem 1: Collecting Data via Google Forms (50 points)}
+Generate a Google Form that collects the following data from each respondent:
+\begin{itemize}
+    \item State of residence prior to attending Penn
+    \item Preferred fast food, selected from a list of the following options:
+    \begin{itemize}
+        \item McDonald's
+        \item Burger King
+        \item Wendy's
+        \item Chick-fil-A
+        \item Taco Bell
+        \item In-N-Out
+        \item Culver's
+    \end{itemize}
+\end{itemize}
+Ask 5 different people from outside this class to fill out your form. Prioritize asking people from different states to get a more diverse dataset. Take a screenshot of your Google Form once you have created it.
+
+\section*{Problem 2: Data Analysis (50 points)}
+Using the code in class, extract the data into a CSV file with two columns: State and Preferred Fast Food. Then, create a bar chart showing the number of respondents for each fast food option.
+
+\section*{Submission}
+Submit to Canvas:
+\begin{itemize}
+    \item A screenshot of your Google Form
+    \item The CSV file containing the collected data, which Prof. Trask will aggregate and share with the class 
+\end{itemize}
+\end{document}

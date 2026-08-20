@@ -1,0 +1,296 @@
+# Single source of truth for ENGR 1050 Fall 2026.
+# Edited by hand once per semester.
+# Read by scripts/update_schedule.py to regenerate the schedule block in index.html.
+
+semester:
+  name: Fall 2026
+  course_code: ENGR 1050
+  course_title: Introduction to Scientific Computing
+  pages_url: https://natrask.github.io/engr1050-fall2026/
+  github_repo: natrask/engr1050-fall2026
+
+meeting:
+  days: MW
+  time: TBD
+  location: TBD
+
+instructor:
+  name: Prof. Nat Trask
+  email: ntrask@seas.upenn.edu
+  office: Amy Gutmann Hall 519
+  office_hours: TBD
+
+tas:
+  - name: TBD
+    email: TBD
+    office_hours: TBD
+    location: TBD
+
+links:
+  canvas: TBD
+  ed_discussion: TBD
+
+grading:
+  homework: 33
+  in_class_exercises: 33
+  exams_and_final: 34
+  drops:
+    - lowest homework
+    - lowest exam
+    - lowest two in-class exercises
+  final_project: mandatory
+
+key_dates:
+  first_day_of_classes: 2026-08-25
+  labor_day: 2026-09-07
+  fall_break: [2026-10-01, 2026-10-04]
+  indigenous_peoples_day: 2026-10-12
+  friday_schedule_wednesday: 2026-11-25
+  thanksgiving_break: [2026-11-26, 2026-11-29]
+  last_day_of_classes: 2026-12-07
+  reading_days: [2026-12-08, 2026-12-09]
+  finals: [2026-12-10, 2026-12-17]
+
+schedule:
+  - num: 1
+    date: 2026-08-26
+    section: 1
+    topic: Introduction to Scientific Computing
+    folder: Lecture01_Aug26
+    slides: Lecture_01.pptx
+    notebook: lec01.ipynb
+  - num: 2
+    date: 2026-08-31
+    section: 1
+    topic: Variables, lists, if/for loops, and baseball
+    folder: Lecture02_Aug31
+    notebook: lec02.ipynb
+  - num: 3
+    date: 2026-09-02
+    section: 1
+    topic: Plotting, data cleanup, uniaxial extension data
+    folder: Lecture03_Sep02
+    notebook: lec03.ipynb
+  - num: 4
+    date: 2026-09-09
+    section: 1
+    topic: Functions, while loops, widgets, lab reports
+    folder: Lecture04_Sep09
+    notebook: lec04.ipynb
+  - num: 5
+    date: 2026-09-14
+    section: 1
+    topic: Microcontrollers and the Thonny IDE
+    folder: Lecture05_Sep14
+    slides: Lecture_05.pdf
+  - num: 6
+    date: 2026-09-16
+    section: 1
+    topic: Classes, dictionaries, refactoring
+    folder: Lecture06_Sep16
+    slides: Lecture_06.pdf
+    notebook: lec06.ipynb
+  - num: 7
+    date: 2026-09-21
+    section: 1
+    topic: More classes, prep for lab
+    folder: Lecture07_Sep21
+    slides: Lecture_07.pptx
+    notebook: lec07.ipynb
+  - num: 8
+    date: 2026-09-23
+    section: 1
+    topic: Lab - whack-a-mole on the Pico
+    folder: Lecture08_Sep23
+    notebook: lec08.ipynb
+    kind: lab
+  - num: 9
+    date: 2026-09-28
+    section: 1
+    topic: Lab makeup and exam 1 review
+    folder: Lecture09_Sep28
+  - num: 10
+    date: 2026-09-30
+    section: 1
+    topic: Exam 1
+    kind: exam
+  - num: 11
+    date: 2026-10-05
+    section: 2
+    topic: Exam postmortem, numpy, linear systems
+    folder: Lecture11_Oct05
+    slides: Lecture_11.pdf
+    notebook: lec11.ipynb
+  - num: 12
+    date: 2026-10-07
+    section: 2
+    topic: Intro to ODEs, finite differences, simulators
+    folder: Lecture12_Oct07
+    slides: Lecture_12.pdf
+    notebook: lec12.ipynb
+  - num: 13
+    date: 2026-10-12
+    section: 2
+    topic: Numerical integration continued
+    folder: Lecture13_Oct12
+    slides: Lecture_13.pdf
+    notebook: lec13.ipynb
+  - num: 14
+    date: 2026-10-14
+    section: 2
+    topic: Lab - dynamical systems from sensors
+    folder: Lecture14_Oct14
+    notebook: lec14.ipynb
+    kind: lab
+  - num: 15
+    date: 2026-10-19
+    section: 2
+    topic: More ODEs, controlling the helicopter
+    folder: Lecture15_Oct19
+    slides: Lecture_15.pdf
+    notebook: lec15.ipynb
+  - num: 16
+    date: 2026-10-21
+    section: 2
+    topic: Lab - helicopter UI and HW help
+    folder: Lecture16_Oct21
+    notebook: lec16.ipynb
+    kind: lab
+  - num: 17
+    date: 2026-10-26
+    section: 2
+    topic: Review for exam 2
+    folder: Lecture17_Oct26
+    slides: Lecture_17.pdf
+    notebook: lec17.ipynb
+  - num: 18
+    date: 2026-10-28
+    section: 2
+    topic: Exam 2
+    kind: exam
+  - num: 19
+    date: 2026-11-02
+    section: 2
+    topic: Lab - helicopters
+    folder: Lecture19_Nov02
+    notebook: lec19.ipynb
+    kind: lab
+  - num: 20
+    date: 2026-11-04
+    section: 3
+    topic: AI-assisted coding
+    folder: Lecture20_Nov04
+    slides: Lecture_20.pdf
+    notebook: lec20.ipynb
+  - num: 21
+    date: 2026-11-09
+    section: 3
+    topic: Final projects, optimization
+    folder: Lecture21_Nov09
+    slides: Lecture_21.pdf
+    notebook: lec21.ipynb
+  - num: 22
+    date: 2026-11-11
+    section: 3
+    topic: Automatic differentiation and gradient descent
+    folder: Lecture22_Nov11
+    slides: Lecture_22.pdf
+    notebook: lec22.ipynb
+  - num: 23
+    date: 2026-11-16
+    section: 3
+    topic: Deep learning and concrete manufacturing
+    folder: Lecture23_Nov16
+    slides: Lecture_23.pdf
+    notebook: lec23.ipynb
+  - num: 24
+    date: 2026-11-18
+    section: 3
+    topic: Binary classification and predictive maintenance
+    folder: Lecture24_Nov18
+    slides: Lecture_24.pdf
+    notebook: lec24.ipynb
+  - num: 25
+    date: 2026-11-23
+    section: 3
+    topic: Review for exam 3
+    folder: Lecture25_Nov23
+    notebook: lec25.ipynb
+  - num: 26
+    date: 2026-11-30
+    section: 4
+    topic: Final projects
+    folder: Lecture26_Nov30
+    kind: workday
+  - num: 27
+    date: 2026-12-02
+    section: 4
+    topic: Exam 3
+    kind: exam
+  - num: 28
+    date: 2026-12-07
+    section: 4
+    topic: Final project presentations
+    folder: Lecture28_Dec07
+    kind: workday
+
+homeworks:
+  - num: 1
+    due: 2026-09-14
+    title: Print statements, loops, conditionals, plotting
+    pdf: NewMaterial/Homeworks/HW1/hw1.pdf
+  - num: 2
+    due: 2026-09-28
+    title: Gradebook database in Thonny
+    pdf: NewMaterial/Homeworks/HW2/hw2.pdf
+  - num: 3
+    due: 2026-10-12
+    title: ODE problems with the solver class
+    pdf: NewMaterial/Homeworks/HW3/hw3.pdf
+  - num: 4
+    due: 2026-10-28
+    title: Helicopter control analysis
+    pdf: NewMaterial/Homeworks/HW4/hw4.pdf
+  - num: 5
+    due: 2026-11-16
+    title: Data collection via Google API
+    pdf: NewMaterial/Homeworks/HW5/hw5.pdf
+
+textbook:
+  chapters:
+    - num: 1
+      slug: variables
+      title: Variables, types, expressions
+    - num: 2
+      slug: control_flow
+      title: Control flow
+    - num: 3
+      slug: lists_slicing
+      title: Lists, tuples, slicing
+    - num: 4
+      slug: functions
+      title: Functions
+    - num: 5
+      slug: dicts_sets
+      title: Dictionaries and sets
+    - num: 6
+      slug: classes
+      title: Classes and objects
+    - num: 7
+      slug: files_io
+      title: Files and I/O
+    - num: 8
+      slug: numpy
+      title: Numpy fundamentals
+    - num: 9
+      slug: linalg
+      title: Linear algebra with numpy
+    - num: 10
+      slug: matplotlib
+      title: Plotting with matplotlib
+    - num: 11
+      slug: odes
+      title: ODE workflow
+    - num: 12
+      slug: ai_tools
+      title: Working with AI tools

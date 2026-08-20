@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.pyc
+
+# LaTeX auxiliary files
+*.aux
+*.log
+*.nav
+*.out
+*.snm
+*.toc
+*.vrb
+*.fdb_latexmk
+*.fls
+
+# minted cache
+_minted*/
+**/_minted*/
+
+# Large media
+*.mp4
+*.m4a
+
+# Exam materials (private)
+exams/
+
+# Grade data (private)
+grades/
+
+# OS junk
+.DS_Store
+Thumbs.db

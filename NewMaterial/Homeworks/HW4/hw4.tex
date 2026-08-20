@@ -1,0 +1,51 @@
+\documentclass[12pt]{article}
+
+\usepackage{amsmath, amssymb}
+\usepackage{geometry}
+\geometry{margin=1in}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\usepackage{minted}
+
+\title{ENGR 1050 \\ Homework 4}
+\author{Due: October 29th, 2025 by 11:59 PM}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{Instructions}
+We've now been using our ODE solver for a variety of problems for a couple weeks. Also in lab we've been building up toward designing a helicopter that can hover in place. In this homework, we'll help you fine-tune the control policy for the helicopter, which we saw in the class doesn't do a perfect job.
+
+This week's assignment will be primarily \textit{mathematical}. Submit photos/scans of your derivation along with a Jupyter notebook for any code that you write. Assignments must be submitted individually.
+
+Recall that our proportional control policy is given by:
+\[ \dot{\theta} = \omega \]
+\[ \dot{\omega} = - b \omega - K \sin(\theta) + T \]
+where $b$ is a damping coefficient, $K$ is a constant related to gravity and the length of the helicopter arm, and $T$ is the torque applied by the helicopter's fan. The control policy we are using for $T$ is:
+\[T = K_p (\theta_{\text{target}} - \theta) \]
+where $T$ is the torque applied by the helicopter's fan, $K_p$ is a proportional gain that we can tune, $\theta_{\text{target}}$ is the desired angle of the helicopter, and $\theta$ is the current angle of the helicopter.
+
+\section*{Problems}
+\subsection*{Problem 1: Steady state behavior of policy (50 points)}
+We will analyze the steady state behavior of our policy. To make the math simpler, replace $\sin(\theta)$ with $\theta$ (this is a reasonable approximation for small angles).
+
+Make the following assumptions about steady state behavior:
+\begin{itemize}
+\item $\dot{\theta} = 0$ (the helicopter is not moving)
+\item $\dot{\omega} = 0$ (the angular velocity is not changing)
+\item $\theta = \theta_{\text{ss}}$ (the helicopter is at some steady state angle)
+\item $\omega = 0$ (the angular velocity is zero)
+\end{itemize}
+
+Derive an equation for the steady state angle $\theta_{\text{ss}}$ as a function of $K_p$, $K$, $b$, and $\theta_{\text{target}}$. Show all work.
+
+\subsection*{Problem 2: Stability analysis (50 points)}
+
+Use your analysis to consider two scenarios:
+\begin{itemize}
+\item \textbf{Scenario 1.} You set $\theta_{\text{target}} = \pi/4$ (45 degrees), and use your calibrated values for $K$ and $b$ from the in-class exercise. Use the formula you derived in Problem 1 to explain whether it is possible to achieve $\theta_{\text{ss}} = \pi/4$ for any value of $K_p$. Confirm your analysis by running the code from Class Monday (10/20/25).
+\item \textbf{Scenario 2.} You are free to set $\theta_{\text{target}}$ to any value of your choice (potentially different from $\pi/4$). Provide choices of $K_p$ and $\theta_{\text{target}}$ that give the desired steady state $\theta_{\text{ss}} = \pi/4$. Confirm your analysis by running the code from Class Monday (10/20/25).
+\end{itemize}
+\end{document}

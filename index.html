@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ENGR 1050 - Introduction to Scientific Computing - Fall 2026</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header style="position: relative;">
+        <img src="qrcode.png" alt="QR Code for Course Website" style="position: absolute; top: 15px; right: 20px; width: 200px; height: 200px; border: 2px solid white; border-radius: 5px;">
+        <div class="container" style="text-align: left; padding-right: 220px;">
+            <h1 style="text-align: left;">ENGR 1050</h1>
+            <p class="subtitle" style="text-align: left;">Introduction to Scientific Computing</p>
+            <p class="term" style="text-align: left;">Fall 2026</p>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#schedule">Schedule</a></li>
+                <li><a href="#homeworks">Homeworks</a></li>
+                <li><a href="#extras">Extras</a></li>
+                <li><a href="#grading">Grading</a></li>
+                <li><a href="#staff">Staff</a></li>
+                <li><a href="#policies">Policies</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <!-- Course Info Box -->
+        <section class="course-info">
+            <div class="info-grid">
+                <div class="info-item">
+                    <strong>Meeting Days:</strong> Monday / Wednesday
+                </div>
+                <div class="info-item">
+                    <strong>Meeting Time:</strong> TBD
+                </div>
+                <div class="info-item">
+                    <strong>Location:</strong> TBD
+                </div>
+                <div class="info-item">
+                    <strong>Dates:</strong> August 26 - December 7, 2026
+                </div>
+                <div class="info-item">
+                    <strong>Office Hours:</strong> TBD (Amy Gutmann Hall 519)
+                </div>
+                <div class="info-item">
+                    <strong>TA Office Hours:</strong> TBD
+                </div>
+                <div class="info-item">
+                    <strong>Canvas:</strong> TBD
+                </div>
+                <div class="info-item">
+                    <strong>Discussion Board:</strong> TBD (Ed Discussion)
+                </div>
+            </div>
+        </section>
+
+        <!-- Description -->
+        <section id="overview">
+            <h2>Course Description</h2>
+            <p>ENGR 1050 is a first-year introduction to scientific computing for engineers. The course assumes no prior programming background. We start from Python fundamentals (variables, control flow, functions, classes), move to numerical methods and microcontroller labs built around a Raspberry Pi Pico and a small helicopter testbed, and end with a unit on data science and AI for engineering. The semester is organized in three units, each capped by an in-class pencil-and-paper exam, and concludes with a final project.</p>
+
+            <p>The course meets twice per week. Most meetings combine a short lecture with live coding in a Jupyter notebook. Several meetings are dedicated lab sessions in the GM lab in the basement of Towne.</p>
+        </section>
+
+        <!-- Schedule -->
+        <section id="schedule">
+            <h2>Course Schedule</h2>
+            <div class="schedule">
+        <!-- SCHEDULE:START -->
+        <div class="lecture-item">
+          <div class="lecture-date">Aug 26</div>
+          <div class="lecture-content">
+            <h3>Lecture 1: Introduction to Scientific Computing</h3>
+            <ul class="resources">
+                <li><a href="NewMaterial/Lecture01_Aug26/Lecture_01.pptx">Slides (PowerPoint)</a></li>
+                <li><a href="NewMaterial/Lecture01_Aug26/lec01.ipynb">Notebook</a></li>
+                <li><a href="https://colab.research.google.com/github/natrask/engr1050-fall2026/blob/main/NewMaterial/Lecture01_Aug26/lec01.ipynb" target="_blank">Open in Colab</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="lecture-item">
+          <div class="lecture-date">Aug 31</div>
+          <div class="lecture-content">
+            <h3>Lecture 2: Variables, lists, if/for loops, and baseball</h3>
+            <ul class="resources">
+                <li><a href="NewMaterial/Lecture02_Aug31/lec02.ipynb">Notebook</a></li>
+                <li><a href="https://colab.research.google.com/github/natrask/engr1050-fall2026/blob/main/NewMaterial/Lecture02_Aug31/lec02.ipynb" target="_blank">Open in Colab</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="lecture-item">
+          <div class="lecture-date">Sep 2</div>
+          <div class="lecture-content">
+            <h3>Lecture 3: Plotting, data cleanup, uniaxial extension data</h3>
+            <ul class="resources">
+                <li><a href="NewMaterial/Lecture03_Sep02/lec03.ipynb">Notebook</a></li>
+                <li><a href="https://colab.research.google.com/github/natrask/engr1050-fall2026/blob/main/NewMaterial/Lecture03_Sep02/lec03.ipynb" target="_blank">Open in Colab</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="lecture-item">
+          <div class="lecture-date">Sep 9</div>
+          <div class="lecture-content">
+            <h3>Lecture 4: Functions, while loops, widgets, lab reports</h3>
+            <ul class="resources">
+                <li><a href="NewMaterial/Lecture04_Sep09/lec04.ipynb">Notebook</a></li>
+                <li><a href="https://colab.research.google.com/github/natrask/engr1050-fall2026/blob/main/NewMaterial/Lecture04_Sep09/lec04.ipynb" target="_blank">Open in Colab</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="lecture-item">
+          <div class="lecture-date">Sep 14</div>
+          <div class="lecture-content">
+            <h3>Lecture 5: Microcontrollers and the Thonny IDE</h3>
+            <ul class="resources">
+                <li><a href="NewMaterial/Lecture05_Sep14/Lecture_05.pdf">Slides</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="lecture-item">
+          <div class="lecture-date">Sep 16</div>
+          <div class="lecture-content">
+            <h3>Lecture 6: Classes, dictionaries, refactoring</h3>
+            <ul class="resources">
+                <li><a href="NewMaterial/Lecture06_Sep16/Lecture_06.pdf">Slides</a></li>
+                <li><a href="NewMaterial/Lecture06_Sep16/lec06.ipynb">Notebook</a></li>
+                <li><a href="https://colab.research.google.com/github/natrask/engr1050-fall2026/blob/main/NewMaterial/Lecture06_Sep16/lec06.ipynb" target="_blank">Open in Colab</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="lecture-item">
+          <div class="lecture-date">Sep 21</div>
+          <div class="lecture-content">
+            <h3>Lecture 7: More classes, prep for lab</h3>
+            <ul class="resources">
+                <li><a href="NewMaterial/Lecture07_Sep21/Lecture_07.pptx">Slides (PowerPoint)</a></li>
+                <li><a href="NewMaterial/Lecture07_Sep21/lec07.ipynb">Notebook</a></li>
+                <li><a href="https://colab.research.google.com/github/natrask/engr1050-fall2026/blob/main/NewMaterial/Lecture07_Sep21/lec07.ipynb" target="_blank">Open in Colab</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="lecture-item">
+          <div class="lecture-date">Sep 23</div>
+          <div class="lecture-content">
+            <h3>Lecture 8: Lab - whack-a-mole on the Pico</h3>
+            <ul class="resources">
+                <li><a href="NewMaterial/Lecture08_Sep23/lec08.ipynb">Notebook</a></li>
+                <li><a href="https://colab.research.google.com/github/natrask/engr1050-fall2026/blob/main/NewMaterial/Lecture08_Sep23/lec08.ipynb" target="_blank">Open in Colab</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="lecture-item">
+          <div class="lecture-date">Sep 28</div>
+          <div class="lecture-content">
+            <h3>Lecture 9: Lab makeup and exam 1 review</h3>
+          </div>
+        </div>
+        <div class="lecture-item">
+          <div class="lecture-date">Sep 30</div>
+          <div class="lecture-content">
+            <h3>Exam 1</h3>
+          </div>
+        </div>
+        <div class="lecture-item">
+          <div class="lecture-date">Oct 5</div>
+          <div class="lecture-content">
+            <h3>Lecture 11: Exam postmortem, numpy, linear systems</h3>
+            <ul class="resources">
+                <li><a href="NewMaterial/Lecture11_Oct05/Lecture_11.pdf">Slides</a></li>
+                <li><a href="NewMaterial/Lecture11_Oct05/lec11.ipynb">Notebook</a></li>
+                <li><a href="https://colab.research.google.com/github/natrask/engr1050-fall2026/blob/main/NewMaterial/Lecture11_Oct05/lec11.ipynb" target="_blank">Open in Colab</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="lecture-item">
+          <div class="lecture-date">Oct 7</div>
+          <div class="lecture-content">
+            <h3>Lecture 12: Intro to ODEs, finite differences, simulators</h3>
+            <ul class="resources">
+                <li><a href="NewMaterial/Lecture12_Oct07/Lecture_12.pdf">Slides</a></li>
+                <li><a href="NewMaterial/Lecture12_Oct07/lec12.ipynb">Notebook</a></li>
+                <li><a href="https://colab.research.google.com/github/natrask/engr1050-fall2026/blob/main/NewMaterial/Lecture12_Oct07/lec12.ipynb" target="_blank">Open in Colab</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="lecture-item">
+          <div class="lecture-date">Oct 12</div>
+          <div class="lecture-content">
+            <h3>Lecture 13: Numerical integration continued</h3>
+            <ul class="resources">
+                <li><a href="NewMaterial/Lecture13_Oct12/Lecture_13.pdf">Slides</a></li>
+                <li><a href="NewMaterial/Lecture13_Oct12/lec13.ipynb">Notebook</a></li>
+                <li><a href="https://colab.research.google.com/github/natrask/engr1050-fall2026/blob/main/NewMaterial/Lecture13_Oct12/lec13.ipynb" target="_blank">Open in Colab</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="lecture-item">
+          <div class="lecture-date">Oct 14</div>
+          <div class="lecture-content">
+            <h3>Lecture 14: Lab - dynamical systems from sensors</h3>
+            <ul class="resources">
+                <li><a href="NewMaterial/Lecture14_Oct14/lec14.ipynb">Notebook</a></li>
+                <li><a href="https://colab.research.google.com/github/natrask/engr1050-fall2026/blob/main/NewMaterial/Lecture14_Oct14/lec14.ipynb" target="_blank">Open in Colab</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="lecture-item">
+          <div class="lecture-date">Oct 19</div>
+          <div class="lecture-content">
+            <h3>Lecture 15: More ODEs, controlling the helicopter</h3>
+            <ul class="resources">
+                <li><a href="NewMaterial/Lecture15_Oct19/Lecture_15.pdf">Slides</a></li>
+                <li><a href="NewMaterial/Lecture15_Oct19/lec15.ipynb">Notebook</a></li>
+                <li><a href="https://colab.research.google.com/github/natrask/engr1050-fall2026/blob/main/NewMaterial/Lecture15_Oct19/lec15.ipynb" target="_blank">Open in Colab</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="lecture-item">
+          <div class="lecture-date">Oct 21</div>
+          <div class="lecture-content">
+            <h3>Lecture 16: Lab - helicopter UI and HW help</h3>
+            <ul class="resources">
+                <li><a href="NewMaterial/Lecture16_Oct21/lec16.ipynb">Notebook</a></li>
+                <li><a href="https://colab.research.google.com/github/natrask/engr1050-fall2026/blob/main/NewMaterial/Lecture16_Oct21/lec16.ipynb" target="_blank">Open in Colab</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="lecture-item">
+          <div class="lecture-date">Oct 26</div>
+          <div class="lecture-content">
+            <h3>Lecture 17: Review for exam 2</h3>
+            <ul class="resources">
+                <li><a href="NewMaterial/Lecture17_Oct26/Lecture_17.pdf">Slides</a></li>
+                <li><a href="NewMaterial/Lecture17_Oct26/lec17.ipynb">Notebook</a></li>
+                <li><a href="https://colab.research.google.com/github/natrask/engr1050-fall2026/blob/main/NewMaterial/Lecture17_Oct26/lec17.ipynb" target="_blank">Open in Colab</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="lecture-item">
+          <div class="lecture-date">Oct 28</div>
+          <div class="lecture-content">
+            <h3>Exam 2</h3>
+          </div>
+        </div>
+        <div class="lecture-item">
+          <div class="lecture-date">Nov 2</div>
+          <div class="lecture-content">
+            <h3>Lecture 19: Lab - helicopters</h3>
+            <ul class="resources">
+                <li><a href="NewMaterial/Lecture19_Nov02/lec19.ipynb">Notebook</a></li>
+                <li><a href="https://colab.research.google.com/github/natrask/engr1050-fall2026/blob/main/NewMaterial/Lecture19_Nov02/lec19.ipynb" target="_blank">Open in Colab</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="lecture-item">
+          <div class="lecture-date">Nov 4</div>
+          <div class="lecture-content">
+            <h3>Lecture 20: AI-assisted coding</h3>
+            <ul class="resources">
+                <li><a href="NewMaterial/Lecture20_Nov04/Lecture_20.pdf">Slides</a></li>
+                <li><a href="NewMaterial/Lecture20_Nov04/lec20.ipynb">Notebook</a></li>
+                <li><a href="https://colab.research.google.com/github/natrask/engr1050-fall2026/blob/main/NewMaterial/Lecture20_Nov04/lec20.ipynb" target="_blank">Open in Colab</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="lecture-item">
+          <div class="lecture-date">Nov 9</div>
+          <div class="lecture-content">
+            <h3>Lecture 21: Final projects, optimization</h3>
+            <ul class="resources">
+                <li><a href="NewMaterial/Lecture21_Nov09/Lecture_21.pdf">Slides</a></li>
+                <li><a href="NewMaterial/Lecture21_Nov09/lec21.ipynb">Notebook</a></li>
+                <li><a href="https://colab.research.google.com/github/natrask/engr1050-fall2026/blob/main/NewMaterial/Lecture21_Nov09/lec21.ipynb" target="_blank">Open in Colab</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="lecture-item">
+          <div class="lecture-date">Nov 11</div>
+          <div class="lecture-content">
+            <h3>Lecture 22: Automatic differentiation and gradient descent</h3>
+            <ul class="resources">
+                <li><a href="NewMaterial/Lecture22_Nov11/Lecture_22.pdf">Slides</a></li>
+                <li><a href="NewMaterial/Lecture22_Nov11/lec22.ipynb">Notebook</a></li>
+                <li><a href="https://colab.research.google.com/github/natrask/engr1050-fall2026/blob/main/NewMaterial/Lecture22_Nov11/lec22.ipynb" target="_blank">Open in Colab</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="lecture-item">
+          <div class="lecture-date">Nov 16</div>
+          <div class="lecture-content">
+            <h3>Lecture 23: Deep learning and concrete manufacturing</h3>
+            <ul class="resources">
+                <li><a href="NewMaterial/Lecture23_Nov16/Lecture_23.pdf">Slides</a></li>
+                <li><a href="NewMaterial/Lecture23_Nov16/lec23.ipynb">Notebook</a></li>
+                <li><a href="https://colab.research.google.com/github/natrask/engr1050-fall2026/blob/main/NewMaterial/Lecture23_Nov16/lec23.ipynb" target="_blank">Open in Colab</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="lecture-item">
+          <div class="lecture-date">Nov 18</div>
+          <div class="lecture-content">
+            <h3>Lecture 24: Binary classification and predictive maintenance</h3>
+            <ul class="resources">
+                <li><a href="NewMaterial/Lecture24_Nov18/Lecture_24.pdf">Slides</a></li>
+                <li><a href="NewMaterial/Lecture24_Nov18/lec24.ipynb">Notebook</a></li>
+                <li><a href="https://colab.research.google.com/github/natrask/engr1050-fall2026/blob/main/NewMaterial/Lecture24_Nov18/lec24.ipynb" target="_blank">Open in Colab</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="lecture-item">
+          <div class="lecture-date">Nov 23</div>
+          <div class="lecture-content">
+            <h3>Lecture 25: Review for exam 3</h3>
+            <ul class="resources">
+                <li><a href="NewMaterial/Lecture25_Nov23/lec25.ipynb">Notebook</a></li>
+                <li><a href="https://colab.research.google.com/github/natrask/engr1050-fall2026/blob/main/NewMaterial/Lecture25_Nov23/lec25.ipynb" target="_blank">Open in Colab</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="lecture-item">
+          <div class="lecture-date">Nov 30</div>
+          <div class="lecture-content">
+            <h3>Lecture 26: Final projects</h3>
+          </div>
+        </div>
+        <div class="lecture-item">
+          <div class="lecture-date">Dec 2</div>
+          <div class="lecture-content">
+            <h3>Exam 3</h3>
+          </div>
+        </div>
+        <div class="lecture-item">
+          <div class="lecture-date">Dec 7</div>
+          <div class="lecture-content">
+            <h3>Lecture 28: Final project presentations</h3>
+          </div>
+        </div>
+        <!-- SCHEDULE:END -->
+            </div>
+        </section>
+
+        <!-- Homeworks -->
+        <section id="homeworks">
+            <h2>Homework Assignments</h2>
+            <p>Five homework assignments are distributed across the semester. Each is a PDF generated from the LaTeX source in <code>NewMaterial/Homeworks/</code>. Solutions are submitted on Canvas. The lowest homework grade is dropped at the end of the term.</p>
+        <!-- HOMEWORKS:START -->
+        <div class="lecture-item">
+          <div class="lecture-date">Due Sep 14</div>
+          <div class="lecture-content">
+            <h3>HW 1: Print statements, loops, conditionals, plotting</h3>
+            <ul class="resources">
+                <li><a href="NewMaterial/Homeworks/HW1/hw1.pdf">PDF</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="lecture-item">
+          <div class="lecture-date">Due Sep 28</div>
+          <div class="lecture-content">
+            <h3>HW 2: Gradebook database in Thonny</h3>
+            <ul class="resources">
+                <li><a href="NewMaterial/Homeworks/HW2/hw2.pdf">PDF</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="lecture-item">
+          <div class="lecture-date">Due Oct 12</div>
+          <div class="lecture-content">
+            <h3>HW 3: ODE problems with the solver class</h3>
+            <ul class="resources">
+                <li><a href="NewMaterial/Homeworks/HW3/hw3.pdf">PDF</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="lecture-item">
+          <div class="lecture-date">Due Oct 28</div>
+          <div class="lecture-content">
+            <h3>HW 4: Helicopter control analysis</h3>
+            <ul class="resources">
+                <li><a href="NewMaterial/Homeworks/HW4/hw4.pdf">PDF</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="lecture-item">
+          <div class="lecture-date">Due Nov 16</div>
+          <div class="lecture-content">
+            <h3>HW 5: Data collection via Google API</h3>
+            <ul class="resources">
+                <li><a href="NewMaterial/Homeworks/HW5/hw5.pdf">PDF</a></li>
+            </ul>
+          </div>
+        </div>
+        <!-- HOMEWORKS:END -->
+        </section>
+
+        <!-- Extras (mini-textbook) -->
+        <section id="extras">
+            <h2>Extras: practice mini-textbook</h2>
+            <p>Optional. A short companion textbook that walks through Python and numpy syntax with worked examples. Use it for extra practice if a lecture moved too fast, or to review before an exam. Each chapter has a written page and a runnable Colab notebook with every example as a live cell.</p>
+        <!-- EXTRAS:START -->
+        <div class="lecture-item">
+          <div class="lecture-date">Ch 1</div>
+          <div class="lecture-content">
+            <h3>Variables, types, expressions</h3>
+            <ul class="resources">
+                <li><a href="NewMaterial/Textbook/Ch01_variables/chapter.html">Chapter</a></li>
+                <li><a href="https://colab.research.google.com/github/natrask/engr1050-fall2026/blob/main/NewMaterial/Textbook/Ch01_variables/chapter.ipynb" target="_blank">Open in Colab</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="lecture-item">
+          <div class="lecture-date">Ch 2</div>
+          <div class="lecture-content">
+            <h3>Control flow</h3>
+            <ul class="resources">
+                <li><a href="NewMaterial/Textbook/Ch02_control_flow/chapter.html">Chapter</a></li>
+                <li><a href="https://colab.research.google.com/github/natrask/engr1050-fall2026/blob/main/NewMaterial/Textbook/Ch02_control_flow/chapter.ipynb" target="_blank">Open in Colab</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="lecture-item">
+          <div class="lecture-date">Ch 3</div>
+          <div class="lecture-content">
+            <h3>Lists, tuples, slicing</h3>
+            <ul class="resources">
+                <li><a href="NewMaterial/Textbook/Ch03_lists_slicing/chapter.html">Chapter</a></li>
+                <li><a href="https://colab.research.google.com/github/natrask/engr1050-fall2026/blob/main/NewMaterial/Textbook/Ch03_lists_slicing/chapter.ipynb" target="_blank">Open in Colab</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="lecture-item">
+          <div class="lecture-date">Ch 4</div>
+          <div class="lecture-content">
+            <h3>Functions</h3>
+            <ul class="resources">
+                <li><a href="NewMaterial/Textbook/Ch04_functions/chapter.html">Chapter</a></li>
+                <li><a href="https://colab.research.google.com/github/natrask/engr1050-fall2026/blob/main/NewMaterial/Textbook/Ch04_functions/chapter.ipynb" target="_blank">Open in Colab</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="lecture-item">
+          <div class="lecture-date">Ch 5</div>
+          <div class="lecture-content">
+            <h3>Dictionaries and sets</h3>
+            <ul class="resources">
+                <li><a href="NewMaterial/Textbook/Ch05_dicts_sets/chapter.html">Chapter</a></li>
+                <li><a href="https://colab.research.google.com/github/natrask/engr1050-fall2026/blob/main/NewMaterial/Textbook/Ch05_dicts_sets/chapter.ipynb" target="_blank">Open in Colab</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="lecture-item">
+          <div class="lecture-date">Ch 6</div>
+          <div class="lecture-content">
+            <h3>Classes and objects</h3>
+            <ul class="resources">
+                <li><a href="NewMaterial/Textbook/Ch06_classes/chapter.html">Chapter</a></li>
+                <li><a href="https://colab.research.google.com/github/natrask/engr1050-fall2026/blob/main/NewMaterial/Textbook/Ch06_classes/chapter.ipynb" target="_blank">Open in Colab</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="lecture-item">
+          <div class="lecture-date">Ch 7</div>
+          <div class="lecture-content">
+            <h3>Files and I/O</h3>
+            <ul class="resources">
+                <li><a href="NewMaterial/Textbook/Ch07_files_io/chapter.html">Chapter</a></li>
+                <li><a href="https://colab.research.google.com/github/natrask/engr1050-fall2026/blob/main/NewMaterial/Textbook/Ch07_files_io/chapter.ipynb" target="_blank">Open in Colab</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="lecture-item">
+          <div class="lecture-date">Ch 8</div>
+          <div class="lecture-content">
+            <h3>Numpy fundamentals</h3>
+            <ul class="resources">
+                <li><a href="NewMaterial/Textbook/Ch08_numpy/chapter.html">Chapter</a></li>
+                <li><a href="https://colab.research.google.com/github/natrask/engr1050-fall2026/blob/main/NewMaterial/Textbook/Ch08_numpy/chapter.ipynb" target="_blank">Open in Colab</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="lecture-item">
+          <div class="lecture-date">Ch 9</div>
+          <div class="lecture-content">
+            <h3>Linear algebra with numpy</h3>
+            <ul class="resources">
+                <li><a href="NewMaterial/Textbook/Ch09_linalg/chapter.html">Chapter</a></li>
+                <li><a href="https://colab.research.google.com/github/natrask/engr1050-fall2026/blob/main/NewMaterial/Textbook/Ch09_linalg/chapter.ipynb" target="_blank">Open in Colab</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="lecture-item">
+          <div class="lecture-date">Ch 10</div>
+          <div class="lecture-content">
+            <h3>Plotting with matplotlib</h3>
+            <ul class="resources">
+                <li><a href="NewMaterial/Textbook/Ch10_matplotlib/chapter.html">Chapter</a></li>
+                <li><a href="https://colab.research.google.com/github/natrask/engr1050-fall2026/blob/main/NewMaterial/Textbook/Ch10_matplotlib/chapter.ipynb" target="_blank">Open in Colab</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="lecture-item">
+          <div class="lecture-date">Ch 11</div>
+          <div class="lecture-content">
+            <h3>ODE workflow</h3>
+            <ul class="resources">
+                <li><a href="NewMaterial/Textbook/Ch11_odes/chapter.html">Chapter</a></li>
+                <li><a href="https://colab.research.google.com/github/natrask/engr1050-fall2026/blob/main/NewMaterial/Textbook/Ch11_odes/chapter.ipynb" target="_blank">Open in Colab</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="lecture-item">
+          <div class="lecture-date">Ch 12</div>
+          <div class="lecture-content">
+            <h3>Working with AI tools</h3>
+            <ul class="resources">
+                <li><a href="NewMaterial/Textbook/Ch12_ai_tools/chapter.html">Chapter</a></li>
+                <li><a href="https://colab.research.google.com/github/natrask/engr1050-fall2026/blob/main/NewMaterial/Textbook/Ch12_ai_tools/chapter.ipynb" target="_blank">Open in Colab</a></li>
+            </ul>
+          </div>
+        </div>
+        <!-- EXTRAS:END -->
+        </section>
+
+        <!-- Grading -->
+        <section id="grading">
+            <h2>Course Requirements and Evaluation</h2>
+            <div class="grading-breakdown">
+                <div class="grade-item">
+                    <div class="grade-percent">33%</div>
+                    <div class="grade-desc">
+                        <h3>Homework Assignments</h3>
+                        <p>Five homework assignments combining short analytical problems with coding. The lowest homework grade is dropped.</p>
+                    </div>
+                </div>
+                <div class="grade-item">
+                    <div class="grade-percent">33%</div>
+                    <div class="grade-desc">
+                        <h3>In-class Exercises</h3>
+                        <p>Short exercises completed during class and submitted on Canvas. The lowest two in-class exercise grades are dropped.</p>
+                    </div>
+                </div>
+                <div class="grade-item">
+                    <div class="grade-percent">34%</div>
+                    <div class="grade-desc">
+                        <h3>Exams and Final Project</h3>
+                        <p>Three pencil-and-paper exams (one per unit) plus a mandatory final project. The lowest exam grade is dropped. The final project cannot be dropped.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Teaching Staff -->
+        <section id="staff">
+            <h2>Teaching Staff and Office Hours</h2>
+            <div class="staff-grid">
+                <div class="staff-member">
+                    <h3>Instructor: Prof. Nat Trask</h3>
+                    <p><strong>Email:</strong> ntrask@seas.upenn.edu</p>
+                    <p><strong>Office Hours:</strong> TBD</p>
+                    <p><strong>Location:</strong> Amy Gutmann Hall 519 (34th and Chestnut)</p>
+                </div>
+                <div class="staff-member">
+                    <h3>Graduate TA: TBD</h3>
+                    <p><strong>Email:</strong> TBD</p>
+                    <p><strong>Office Hours:</strong> TBD</p>
+                </div>
+                <div class="staff-member">
+                    <h3>Undergraduate TAs: TBD</h3>
+                    <p><strong>Office Hours:</strong> TBD</p>
+                </div>
+            </div>
+            <p class="note"><strong>Reminder:</strong> Most course questions should go to Ed Discussion. Use email for sensitive topics.</p>
+        </section>
+
+        <!-- Policies -->
+        <section id="policies">
+            <h2>Course Policies</h2>
+
+            <h3>Late Policy</h3>
+            <p>Late submissions are not accepted without documentation. The lowest homework, lowest exam, and lowest two in-class exercise grades are dropped to absorb missed work. The final project cannot be dropped.</p>
+
+            <h3>AI Use</h3>
+            <p>This course teaches AI-assisted coding as part of the curriculum (Section 3). Use of tools like ChatGPT and GitHub Copilot is encouraged for learning and exploration outside of exams. There are two requirements:</p>
+            <ul>
+                <li>All submitted work must be your own. If you used an AI tool, cite which tool and describe what you used it for.</li>
+                <li>Be vigilant about overestimating your command of the material. The pencil-and-paper exams are designed to make sure you can solve problems without an LLM. If your homework performance does not match your exam performance, that is a signal that you are leaning too heavily on AI.</li>
+            </ul>
+            <p>Direct copying of solutions from AI or the internet without understanding is considered academic dishonesty. If we ask you to explain why you wrote code a particular way and you cannot, that is a problem.</p>
+
+            <h3>Collaboration</h3>
+            <p>You are encouraged to discuss the material with classmates. The final product must be your own work and you must acknowledge any collaboration.</p>
+
+            <h3>University Policies and Resources</h3>
+            <p>This course is conducted in accordance with all university policies. Penn and SEAS offer numerous resources to students that may be useful.</p>
+
+            <h4>Code of Academic Integrity</h4>
+            <p>All work turned in by students should be an accurate reflection of their knowledge. See the University's <a href="https://catalog.upenn.edu/pennbook/code-of-academic-integrity/" target="_blank">Code of Academic Integrity</a>.</p>
+
+            <h4>Students with Disabilities and Learning Differences</h4>
+            <p>Students with disabilities are encouraged to contact Weingarten Learning Resource Center's Office for Student Disabilities Services. <a href="http://www.vpul.upenn.edu/lrc/sds/" target="_blank">Resources</a>.</p>
+
+            <h4>Counseling and Psychological Services (CAPS)</h4>
+            <p>CAPS is the counseling center for Penn. Free and confidential services to all Penn students. <a href="http://www.vpul.upenn.edu/caps/" target="_blank">Resources</a>.</p>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 ENGR 1050 - University of Pennsylvania</p>
+            <p>Instructor: Prof. Nat Trask</p>
+        </div>
+    </footer>
+</body>
+</html>
