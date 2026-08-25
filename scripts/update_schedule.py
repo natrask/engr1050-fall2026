@@ -29,6 +29,13 @@ def colab_url(repo, path):
     return f"https://colab.research.google.com/github/{repo}/blob/main/{path}"
 
 
+SLIDE_LABELS = {".pdf": "Slides (PDF)", ".pptx": "Slides (PPT)", ".ppt": "Slides (PPT)"}
+
+
+def slide_label(filename):
+    return SLIDE_LABELS.get(Path(filename).suffix.lower(), "Slides")
+
+
 def render_entry(entry, repo):
     date_str = fmt_date(entry["date"])
     topic = entry["topic"]
@@ -41,8 +48,8 @@ def render_entry(entry, repo):
         base = f"NewMaterial/{folder}"
         slides = entry.get("slides")
         if slides:
-            label = "Slides" if slides.lower().endswith(".pdf") else "Slides (PowerPoint)"
-            resources.append(f'<li><a href="{base}/{slides}">{label}</a></li>')
+            for fn in ([slides] if isinstance(slides, str) else slides):
+                resources.append(f'<li><a href="{base}/{fn}">{slide_label(fn)}</a></li>')
         notebook = entry.get("notebook")
         if notebook:
             resources.append(f'<li><a href="{base}/{notebook}">Notebook</a></li>')
