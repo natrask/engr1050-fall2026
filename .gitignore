@@ -21,6 +21,9 @@ _minted*/
 *.mp4
 *.m4a
 
+# Previous semester's content archive (kept local; copied forward into NewMaterial/)
+OldMaterial/
+
 # Exam materials (private)
 exams/
 

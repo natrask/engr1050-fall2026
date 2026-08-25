@@ -11,23 +11,30 @@ semester:
 
 meeting:
   days: MW
-  time: TBD
-  location: TBD
+  time: "1:45 PM - 3:14 PM"
+  location: Meyerson Hall B3
 
 instructor:
   name: Prof. Nat Trask
   email: ntrask@seas.upenn.edu
   office: Amy Gutmann Hall 519
-  office_hours: TBD
+  office_hours: "Tuesdays 9:15 - 11:30 AM"
+  office_hours_location: Amy Gutmann Hall 515
 
 tas:
-  - name: TBD
+  - name: Helen Nguyen
+    role: Graduate TA
     email: TBD
-    office_hours: TBD
-    location: TBD
+    office_hours: "Thursdays 9:00 - 11:00 AM"
+    location: Hallway outside Amy Gutmann Hall 515 (across from Prof. Trask's office)
+  - name: Nevan Sujit
+    role: Undergraduate TA
+    email: TBD
+    office_hours: "Fridays 1:45 - 3:15 PM"
+    location: Hallway outside Amy Gutmann Hall 515 (across from Prof. Trask's office)
 
 links:
-  canvas: TBD
+  canvas: https://canvas.upenn.edu/courses/1950130/assignments/syllabus
   ed_discussion: TBD
 
 grading:
@@ -56,8 +63,8 @@ schedule:
     date: 2026-08-26
     section: 1
     topic: Introduction to Scientific Computing
+    visible: true
     folder: Lecture01_Aug26
-    slides: Lecture_01.pptx
     notebook: lec01.ipynb
   - num: 2
     date: 2026-08-31
@@ -95,7 +102,6 @@ schedule:
     section: 1
     topic: More classes, prep for lab
     folder: Lecture07_Sep21
-    slides: Lecture_07.pptx
     notebook: lec07.ipynb
   - num: 8
     date: 2026-09-23

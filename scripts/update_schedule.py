@@ -53,6 +53,8 @@ def render_entry(entry, repo):
     rb = ""
     if resources:
         rb = '            <ul class="resources">\n' + "\n".join(f"                {r}" for r in resources) + "\n            </ul>"
+        if not entry.get("visible", False):
+            rb = "            <!-- resources hidden until lecture is released; uncomment to release\n" + rb + "\n            -->"
     parts = ['        <div class="lecture-item">',
              f'          <div class="lecture-date">{date_str}</div>',
              '          <div class="lecture-content">',
