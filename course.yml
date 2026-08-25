@@ -24,26 +24,25 @@ instructor:
 tas:
   - name: Helen Nguyen
     role: Graduate TA
-    email: TBD
+    email: helenvn@seas.upenn.edu
     office_hours: "Thursdays 9:00 - 11:00 AM"
     location: Hallway outside Amy Gutmann Hall 515 (across from Prof. Trask's office)
   - name: Nevan Sujit
     role: Undergraduate TA
-    email: TBD
+    email: tsnevan@seas.upenn.edu
     office_hours: "Fridays 1:45 - 3:15 PM"
     location: Hallway outside Amy Gutmann Hall 515 (across from Prof. Trask's office)
 
 links:
   canvas: https://canvas.upenn.edu/courses/1950130/assignments/syllabus
-  ed_discussion: TBD
+  ed_discussion: https://edstem.org/us/courses/103861/discussion
 
 grading:
-  homework: 33
-  in_class_exercises: 33
-  exams_and_final: 34
+  homework: 30
+  in_class_exercises: 30
+  exams_and_final: 40
   drops:
     - lowest homework
-    - lowest exam
     - lowest two in-class exercises
   final_project: mandatory
 
