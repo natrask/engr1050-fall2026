@@ -50,6 +50,9 @@ def render_entry(entry, repo):
         notes = entry.get("notes")
         if notes:
             resources.append(f'<li><a href="{base}/{notes}">Lecture notes</a></li>')
+    exercise = entry.get("exercise")
+    if exercise:
+        resources.append(f'<li><a href="{exercise}" target="_blank">Exercise submission</a></li>')
     rb = ""
     if resources:
         rb = '            <ul class="resources">\n' + "\n".join(f"                {r}" for r in resources) + "\n            </ul>"

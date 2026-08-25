@@ -64,7 +64,9 @@ schedule:
     topic: Introduction to Scientific Computing
     visible: true
     folder: Lecture01_Aug26
+    slides: Lecture_01.pptx
     notebook: lec01.ipynb
+    exercise: https://canvas.upenn.edu/courses/1950130/assignments/15071799
   - num: 2
     date: 2026-08-31
     section: 1
