@@ -18,7 +18,9 @@ Instructor: Prof. Nat Trask
   - `pptx_to_pdf.ps1` - exports every `.pptx` under `NewMaterial/` to a sibling `.pdf`
   - `convert_lectures.py`, `convert_md.py` - render lecture notes markdown into HTML (KaTeX template)
 - `NewMaterial/` - the live content stream. **Everything `index.html` links to lives here.**
-  - `LectureNN_MmmDD/` - per-lecture folder with slides, notebook, notes
+  - `LectureNN/` - per-lecture folder with slides, notebook, notes. Named by
+    lecture sequence only - dates live in `course.yml`, so the same folder
+    carries forward to next semester without renaming.
   - `_shared/` - images, data, Thonny scripts shared by notebooks
   - `Homeworks/HWN/` - homework LaTeX source and PDF
   - `Textbook/ChNN_slug/` - optional mini-textbook chapters

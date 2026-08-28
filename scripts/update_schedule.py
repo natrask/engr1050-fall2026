@@ -41,8 +41,9 @@ def render_entry(entry, repo):
     topic = entry["topic"]
     kind = entry.get("kind")
     folder = entry.get("folder")
-    num = entry["num"]
-    title_html = f"<h3>{topic}</h3>" if kind == "exam" else f"<h3>Lecture {num}: {topic}</h3>"
+    num = entry.get("num")
+    # exams and no-class days carry no lecture number
+    title_html = f"<h3>{topic}</h3>" if num is None or kind == "exam" else f"<h3>Lecture {num}: {topic}</h3>"
     resources = []
     if folder:
         base = f"NewMaterial/{folder}"

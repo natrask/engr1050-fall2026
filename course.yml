@@ -63,7 +63,7 @@ schedule:
     section: 1
     topic: Introduction to Scientific Computing
     visible: true
-    folder: Lecture01_Aug26
+    folder: Lecture01
     slides:
       - Lecture_01.pptx
       - Lecture_01.pdf
@@ -73,51 +73,57 @@ schedule:
     date: 2026-08-31
     section: 1
     topic: Variables, lists, if/for loops, and baseball
-    folder: Lecture02_Aug31
+    visible: true
+    folder: Lecture02
     notebook: lec02.ipynb
   - num: 3
     date: 2026-09-02
     section: 1
     topic: Plotting, data cleanup, uniaxial extension data
-    folder: Lecture03_Sep02
+    visible: true
+    folder: Lecture03
     notebook: lec03.ipynb
+  - date: 2026-09-07
+    section: 1
+    topic: Labor Day - no class
+    kind: noclass
   - num: 4
     date: 2026-09-09
     section: 1
     topic: Functions, while loops, widgets, lab reports
-    folder: Lecture04_Sep09
+    folder: Lecture04
     notebook: lec04.ipynb
   - num: 5
     date: 2026-09-14
     section: 1
     topic: Microcontrollers and the Thonny IDE
-    folder: Lecture05_Sep14
+    folder: Lecture05
     slides: Lecture_05.pdf
   - num: 6
     date: 2026-09-16
     section: 1
     topic: Classes, dictionaries, refactoring
-    folder: Lecture06_Sep16
+    folder: Lecture06
     slides: Lecture_06.pdf
     notebook: lec06.ipynb
   - num: 7
     date: 2026-09-21
     section: 1
     topic: More classes, prep for lab
-    folder: Lecture07_Sep21
+    folder: Lecture07
     notebook: lec07.ipynb
   - num: 8
     date: 2026-09-23
     section: 1
     topic: Lab - whack-a-mole on the Pico
-    folder: Lecture08_Sep23
+    folder: Lecture08
     notebook: lec08.ipynb
     kind: lab
   - num: 9
     date: 2026-09-28
     section: 1
     topic: Lab makeup and exam 1 review
-    folder: Lecture09_Sep28
+    folder: Lecture09
   - num: 10
     date: 2026-09-30
     section: 1
@@ -127,49 +133,49 @@ schedule:
     date: 2026-10-05
     section: 2
     topic: Exam postmortem, numpy, linear systems
-    folder: Lecture11_Oct05
+    folder: Lecture11
     slides: Lecture_11.pdf
     notebook: lec11.ipynb
   - num: 12
     date: 2026-10-07
     section: 2
     topic: Intro to ODEs, finite differences, simulators
-    folder: Lecture12_Oct07
+    folder: Lecture12
     slides: Lecture_12.pdf
     notebook: lec12.ipynb
   - num: 13
     date: 2026-10-12
     section: 2
     topic: Numerical integration continued
-    folder: Lecture13_Oct12
+    folder: Lecture13
     slides: Lecture_13.pdf
     notebook: lec13.ipynb
   - num: 14
     date: 2026-10-14
     section: 2
     topic: Lab - dynamical systems from sensors
-    folder: Lecture14_Oct14
+    folder: Lecture14
     notebook: lec14.ipynb
     kind: lab
   - num: 15
     date: 2026-10-19
     section: 2
     topic: More ODEs, controlling the helicopter
-    folder: Lecture15_Oct19
+    folder: Lecture15
     slides: Lecture_15.pdf
     notebook: lec15.ipynb
   - num: 16
     date: 2026-10-21
     section: 2
     topic: Lab - helicopter UI and HW help
-    folder: Lecture16_Oct21
+    folder: Lecture16
     notebook: lec16.ipynb
     kind: lab
   - num: 17
     date: 2026-10-26
     section: 2
     topic: Review for exam 2
-    folder: Lecture17_Oct26
+    folder: Lecture17
     slides: Lecture_17.pdf
     notebook: lec17.ipynb
   - num: 18
@@ -181,55 +187,55 @@ schedule:
     date: 2026-11-02
     section: 2
     topic: Lab - helicopters
-    folder: Lecture19_Nov02
+    folder: Lecture19
     notebook: lec19.ipynb
     kind: lab
   - num: 20
     date: 2026-11-04
     section: 3
     topic: AI-assisted coding
-    folder: Lecture20_Nov04
+    folder: Lecture20
     slides: Lecture_20.pdf
     notebook: lec20.ipynb
   - num: 21
     date: 2026-11-09
     section: 3
     topic: Final projects, optimization
-    folder: Lecture21_Nov09
+    folder: Lecture21
     slides: Lecture_21.pdf
     notebook: lec21.ipynb
   - num: 22
     date: 2026-11-11
     section: 3
     topic: Automatic differentiation and gradient descent
-    folder: Lecture22_Nov11
+    folder: Lecture22
     slides: Lecture_22.pdf
     notebook: lec22.ipynb
   - num: 23
     date: 2026-11-16
     section: 3
     topic: Deep learning and concrete manufacturing
-    folder: Lecture23_Nov16
+    folder: Lecture23
     slides: Lecture_23.pdf
     notebook: lec23.ipynb
   - num: 24
     date: 2026-11-18
     section: 3
     topic: Binary classification and predictive maintenance
-    folder: Lecture24_Nov18
+    folder: Lecture24
     slides: Lecture_24.pdf
     notebook: lec24.ipynb
   - num: 25
     date: 2026-11-23
     section: 3
     topic: Review for exam 3
-    folder: Lecture25_Nov23
+    folder: Lecture25
     notebook: lec25.ipynb
   - num: 26
     date: 2026-11-30
     section: 4
     topic: Final projects
-    folder: Lecture26_Nov30
+    folder: Lecture26
     kind: workday
   - num: 27
     date: 2026-12-02
@@ -240,7 +246,7 @@ schedule:
     date: 2026-12-07
     section: 4
     topic: Final project presentations
-    folder: Lecture28_Dec07
+    folder: Lecture28
     kind: workday
 
 homeworks:

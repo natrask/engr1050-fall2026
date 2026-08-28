@@ -22,7 +22,7 @@ Generated during the bulk move and renumber pass. Items below need Nat's review.
 
 The session sandbox did not have on-disk copies of the following OneDrive-virtualized files. Before publishing, open Windows Explorer to `C:\Users\nattr\OneDrive\Desktop\GitRepos\ENGR1050`, right-click the folder, choose "Always keep on this device", then run the copy block in `NewMaterial/_shared/README.md`.
 
-- Slide PPTX originals for Lectures 1 and 7 (only the PDFs would not download as binary): currently the new repo has `Lecture01_Aug26/Lecture_01.pdf` was not produced because no PDF existed in 2025. Same for the in-class exercise lecture (was Lec 8). Nat will need to export PPTX → PDF and drop those PDFs into the respective lecture folders.
+- Slide PPTX originals for Lectures 1 and 7 (only the PDFs would not download as binary): currently the new repo has `Lecture01/Lecture_01.pdf` was not produced because no PDF existed in 2025. Same for the in-class exercise lecture (was Lec 8). Nat will need to export PPTX → PDF and drop those PDFs into the respective lecture folders.
 - All image files under `_shared/Images/` (lab PNGs, breadboard, ball bearing, NIST figures).
 - All data files under `_shared/Data/` (NIST CSVs, anonymized exam grades, pickled student datasets, `.mat` bearing data). Many notebooks also pull these over HTTP, so this is convenience caching.
 - All Thonny scripts under `_shared/ThonnyScripts/`.
@@ -35,42 +35,42 @@ The schedule renumbering shifted lectures back by one in several places. The PDF
 
 | New file (in new repo)                            | PDF cover currently says   | Should say        |
 |---------------------------------------------------|----------------------------|-------------------|
-| `Lecture05_Sep14/Lecture_05.{pdf,pptx}`           | Lecture 6                  | Lecture 5         |
-| `Lecture06_Sep16/Lecture_06.{pdf,pptx}`           | Lecture 7                  | Lecture 6         |
-| `Lecture07_Sep21/Lecture_07.pptx`                 | Lecture 8                  | Lecture 7         |
-| `Lecture11_Oct05/Lecture_11.{pdf,tex}`            | Lecture 12                 | Lecture 11        |
-| `Lecture12_Oct07/Lecture_12.{pdf,tex}` (footer says Lecture 12) | Lecture 13 title, Lecture 12 footer | Lecture 12 throughout |
-| `Lecture13_Oct12/Lecture_13.{pdf,tex}` (footer says Lecture 12) | Lecture 13 title, Lecture 12 footer | Lecture 13 throughout |
-| `Lecture15_Oct19/Lecture_15.{pdf,tex}`            | Lecture 16                 | Lecture 15        |
-| `Lecture17_Oct26/Lecture_17.{pdf,tex}`            | Lecture 18                 | Lecture 17        |
-| `Lecture20_Nov04/Lecture_20.{pdf,pptx}`           | Lecture 20 (originally for old Lec 21 slot, content matches "AI-assisted coding") | Lecture 20 — content matches, title is fine |
-| `Lecture21_Nov09/Lecture_21.{pdf,pptx}`           | Lecture 21 (was Lecture_22 in 2025) | Lecture 21 — content matches; cover title says "Lecture 21" already since the 2025 file said "Lecture 21" on its cover |
-| `Lecture22_Nov11/Lecture_22.{pdf,pptx}`           | Lecture 23                 | Lecture 22        |
-| `Lecture23_Nov16/Lecture_23.{pdf,pptx}`           | Lecture 24                 | Lecture 23        |
-| `Lecture24_Nov18/Lecture_24.{pdf,pptx}`           | Lecture 25                 | Lecture 24        |
+| `Lecture05/Lecture_05.{pdf,pptx}`           | Lecture 6                  | Lecture 5         |
+| `Lecture06/Lecture_06.{pdf,pptx}`           | Lecture 7                  | Lecture 6         |
+| `Lecture07/Lecture_07.pptx`                 | Lecture 8                  | Lecture 7         |
+| `Lecture11/Lecture_11.{pdf,tex}`            | Lecture 12                 | Lecture 11        |
+| `Lecture12/Lecture_12.{pdf,tex}` (footer says Lecture 12) | Lecture 13 title, Lecture 12 footer | Lecture 12 throughout |
+| `Lecture13/Lecture_13.{pdf,tex}` (footer says Lecture 12) | Lecture 13 title, Lecture 12 footer | Lecture 13 throughout |
+| `Lecture15/Lecture_15.{pdf,tex}`            | Lecture 16                 | Lecture 15        |
+| `Lecture17/Lecture_17.{pdf,tex}`            | Lecture 18                 | Lecture 17        |
+| `Lecture20/Lecture_20.{pdf,pptx}`           | Lecture 20 (originally for old Lec 21 slot, content matches "AI-assisted coding") | Lecture 20 — content matches, title is fine |
+| `Lecture21/Lecture_21.{pdf,pptx}`           | Lecture 21 (was Lecture_22 in 2025) | Lecture 21 — content matches; cover title says "Lecture 21" already since the 2025 file said "Lecture 21" on its cover |
+| `Lecture22/Lecture_22.{pdf,pptx}`           | Lecture 23                 | Lecture 22        |
+| `Lecture23/Lecture_23.{pdf,pptx}`           | Lecture 24                 | Lecture 23        |
+| `Lecture24/Lecture_24.{pdf,pptx}`           | Lecture 25                 | Lecture 24        |
 
 ## Notebook prose self-references that may need scrubbing
 
 The H1 title at the top of each `notes.md` file was rewritten safely to match the new lecture number. The notebook H1 titles ("# Lecture N: Title") and any prose self-references like "in Lecture 4 we showed..." were left alone, since some of them are real cross-references that need their target updated (Lecture 4 in 2025 -> Lecture 3 in 2026, etc.). The full list of unique self-references that the renumbering disturbed is:
 
-- `Lecture02_Aug31/lec02.ipynb` H1 still says "Lecture 3"
-- `Lecture03_Sep02/lec03.ipynb` H1 still says "Lecture 4"
-- `Lecture04_Sep09/lec04.ipynb` H1 still says "Lecture 5"
-- `Lecture06_Sep16/lec06.ipynb` H1 still says "Lecture 7"; prose has "Lecture 3" and "Lecture 4" references that map to new Lectures 2 and 3
-- `Lecture07_Sep21/lec07.ipynb` H1 still says "Lecture 8"
-- `Lecture08_Sep23/lec08.ipynb` H1 still says "Lecture 9"
-- `Lecture11_Oct05/lec11.ipynb` H1 still says "Lecture 12"
-- `Lecture12_Oct07/lec12.ipynb` H1 still says "Lecture 13"
-- `Lecture13_Oct12/lec13.ipynb` H1 still says "Lecture 14"
-- `Lecture14_Oct14/lec14.ipynb` H1 still says "Lecture 15"
-- `Lecture15_Oct19/lec15.ipynb` H1 still says "Lecture 16"
-- `Lecture16_Oct21/lec16.ipynb` H1 still says "Lecture 17"
-- `Lecture17_Oct26/lec17.ipynb` H1 still says "Lecture 18"
-- `Lecture21_Nov09/lec21.ipynb` H1 still says "Lecture 22"; prose references "Lecture 4" (NIST stress-strain) that maps to new Lecture 3
-- `Lecture22_Nov11/lec22.ipynb` H1 still says "Lecture 23"
-- `Lecture23_Nov16/lec23.ipynb` H1 still says "Lecture 24"
-- `Lecture24_Nov18/lec24.ipynb` H1 still says "Lecture 25"
-- `Lecture25_Nov23/lec25.ipynb` H1 still says "Lecture 26"; the review-lecture body cross-references Lectures 20, 21, 22, 23, 24 from the 2025 numbering, all of which need a mechanical -1 shift
+- `Lecture02/lec02.ipynb` H1 still says "Lecture 3"
+- `Lecture03/lec03.ipynb` H1 still says "Lecture 4"
+- `Lecture04/lec04.ipynb` H1 still says "Lecture 5"
+- `Lecture06/lec06.ipynb` H1 still says "Lecture 7"; prose has "Lecture 3" and "Lecture 4" references that map to new Lectures 2 and 3
+- `Lecture07/lec07.ipynb` H1 still says "Lecture 8"
+- `Lecture08/lec08.ipynb` H1 still says "Lecture 9"
+- `Lecture11/lec11.ipynb` H1 still says "Lecture 12"
+- `Lecture12/lec12.ipynb` H1 still says "Lecture 13"
+- `Lecture13/lec13.ipynb` H1 still says "Lecture 14"
+- `Lecture14/lec14.ipynb` H1 still says "Lecture 15"
+- `Lecture15/lec15.ipynb` H1 still says "Lecture 16"
+- `Lecture16/lec16.ipynb` H1 still says "Lecture 17"
+- `Lecture17/lec17.ipynb` H1 still says "Lecture 18"
+- `Lecture21/lec21.ipynb` H1 still says "Lecture 22"; prose references "Lecture 4" (NIST stress-strain) that maps to new Lecture 3
+- `Lecture22/lec22.ipynb` H1 still says "Lecture 23"
+- `Lecture23/lec23.ipynb` H1 still says "Lecture 24"
+- `Lecture24/lec24.ipynb` H1 still says "Lecture 25"
+- `Lecture25/lec25.ipynb` H1 still says "Lecture 26"; the review-lecture body cross-references Lectures 20, 21, 22, 23, 24 from the 2025 numbering, all of which need a mechanical -1 shift
 
 A safe scrub for the notebook H1 lines is a one-line sed; the prose cross-references inside the review notebook (Lecture 25) deserve a careful read.
 
