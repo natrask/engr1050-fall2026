@@ -16,6 +16,7 @@ Instructor: Prof. Nat Trask
   - `update_schedule.py` - regenerates the schedule block in `index.html` from `course.yml`
   - `build_newmaterial.py` - populates `NewMaterial/` from `OldMaterial/`, driven by `course.yml`
   - `pptx_to_pdf.ps1` - exports every `.pptx` under `NewMaterial/` to a sibling `.pdf`
+  - `check_consistency.py` - pre-push vetting for numbering / indexing errors
   - `convert_lectures.py`, `convert_md.py` - render lecture notes markdown into HTML (KaTeX template)
 - `NewMaterial/` - the live content stream. **Everything `index.html` links to lives here.**
   - `LectureNN/` - per-lecture folder with slides, notebook, notes. Named by
@@ -36,6 +37,7 @@ python scripts/build_newmaterial.py      # copy OldMaterial -> NewMaterial for e
 powershell -File scripts/pptx_to_pdf.ps1 # export .pptx decks to sibling .pdf files
 python scripts/update_schedule.py        # rewrite schedule block in index.html from course.yml
 python scripts/convert_lectures.py       # rebuild lecture notes HTML from markdown sources
+python scripts/check_consistency.py      # ALWAYS run before pushing; see CLAUDE.md
 ```
 
 ### Slides convention
