@@ -9,4 +9,4 @@ Today we introduced the basics of Python variables, how to create and use lists,
 
 Refer to the Jupyter notebook ([View on GitHub](https://github.com/natrask/engr1050-fall2026/blob/main/NewMaterial/Lecture02/lec02.ipynb) or open in Colab: [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/natrask/engr1050-fall2026/blob/main/NewMaterial/Lecture02/lec02.ipynb)) for details.
 
-The in-class assignment for the day is to be submited on [Canvas](https://canvas.upenn.edu/courses/1881448/assignments/13942478) by Friday 9/5.
+The in-class assignment for the day is to be submited on [Canvas](https://canvas.upenn.edu/courses/1950130/assignments/15100198) by Friday 9/4.

@@ -89,7 +89,8 @@ def render_homeworks(course):
         title = hw.get("title", f"Homework {num}")
         pdf = hw.get("pdf")
         due_str = fmt_date(hw["due"]) if hw.get("due") else "TBD"
-        link = f'<a href="{pdf}">PDF</a>' if pdf else "(coming)"
+        # an unpublished homework shows as "(coming)" even when its PDF exists
+        link = f'<a href="{pdf}">PDF</a>' if pdf and hw.get("visible") else "(coming)"
         cards.append("\n".join([
             '        <div class="lecture-item">',
             f'          <div class="lecture-date">Due {due_str}</div>',

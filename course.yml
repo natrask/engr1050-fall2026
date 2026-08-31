@@ -11,8 +11,14 @@ semester:
 
 meeting:
   days: MW
-  time: "1:45 PM - 3:14 PM"
+  time: "1:45 PM - 3:15 PM"
   location: Meyerson Hall B3
+
+recitation:
+  optional: true
+  time: "Fridays 1:45 - 3:15 PM"
+  location: Amy Gutmann Hall 315
+  led_by: Nevan Sujit
 
 instructor:
   name: Prof. Nat Trask
@@ -30,8 +36,9 @@ tas:
   - name: Nevan Sujit
     role: Undergraduate TA
     email: tsnevan@seas.upenn.edu
-    office_hours: "Fridays 1:45 - 3:15 PM"
-    location: Hallway outside Amy Gutmann Hall 515 (across from Prof. Trask's office)
+    # Nevan's hours are the optional recitation, not separate office hours
+    office_hours: "Fridays 1:45 - 3:15 PM (optional recitation)"
+    location: Amy Gutmann Hall 315
 
 links:
   canvas: https://canvas.upenn.edu/courses/1950130/assignments/syllabus
@@ -76,6 +83,7 @@ schedule:
     visible: true
     folder: Lecture02
     notebook: lec02.ipynb
+    exercise: https://canvas.upenn.edu/courses/1950130/assignments/15100198
   - num: 3
     date: 2026-09-02
     section: 1
@@ -250,7 +258,10 @@ schedule:
     kind: workday
 
 homeworks:
+  # `visible: true` publishes the PDF link; without it the card shows "(coming)".
+  # HW2-5 PDFs still carry Fall 2025 due dates on their title page.
   - num: 1
+    visible: true
     due: 2026-09-14
     title: Print statements, loops, conditionals, plotting
     pdf: NewMaterial/Homeworks/HW1/hw1.pdf
