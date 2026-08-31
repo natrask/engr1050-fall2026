@@ -282,6 +282,41 @@ homeworks:
     title: Data collection via Google API
     pdf: NewMaterial/Homeworks/HW5/hw5.pdf
 
+external_practice:
+  - name: FutureCoder
+    url: https://futurecoder.io
+    label: futurecoder.io
+    description: >-
+      Fully interactive, step-by-step lessons with debugging tools, error
+      explanations, and exercises. Excellent for complete beginners; focuses on
+      learning by doing.
+  - name: LearnPython.org
+    url: https://www.learnpython.org
+    label: learnpython.org
+    description: >-
+      Interactive tutorials covering Python basics (variables, loops, functions,
+      data structures). More comprehensive, including more features than we cover
+      in class.
+  - name: Python Tutor
+    url: https://pythontutor.com
+    label: pythontutor.com
+    description: >-
+      Steps through code one line at a time and draws your variables, lists, and
+      references as they change. Paste in your own code when you cannot work out
+      what a loop is actually doing.
+  - name: NumPy for absolute beginners
+    url: https://numpy.org/doc/stable/user/absolute_beginners.html
+    label: numpy.org
+    description: >-
+      The official introduction to arrays, indexing, and broadcasting. Useful
+      from Lecture 11 onward, once we leave plain Python lists behind.
+  - name: Matplotlib cheatsheets
+    url: https://matplotlib.org/cheatsheets/
+    label: matplotlib.org
+    description: >-
+      One-page references for plot types, styling, and axes. Worth printing and
+      keeping next to your laptop while you work on lab reports.
+
 textbook:
   chapters:
     - num: 1

@@ -108,6 +108,19 @@ def render_homeworks(course):
 def render_extras(course):
     repo = course["semester"].get("github_repo", "")
     cards = []
+    for site in course.get("external_practice", []):
+        cards.append("\n".join([
+            '        <div class="lecture-item">',
+            '          <div class="lecture-date">Practice</div>',
+            '          <div class="lecture-content">',
+            f'            <h3>{site["name"]}</h3>',
+            f'            <p>{site["description"].strip()}</p>',
+            '            <ul class="resources">',
+            f'                <li><a href="{site["url"]}" target="_blank">{site.get("label", site["url"])}</a></li>',
+            '            </ul>',
+            '          </div>',
+            '        </div>',
+        ]))
     for ch in course.get("textbook", {}).get("chapters", []):
         num, slug, title = ch["num"], ch["slug"], ch["title"]
         base = f"NewMaterial/Textbook/Ch{num:02d}_{slug}"
