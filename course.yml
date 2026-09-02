@@ -91,6 +91,10 @@ schedule:
     visible: true
     folder: Lecture03
     notebook: lec03.ipynb
+    exercise: https://canvas.upenn.edu/courses/1950130/assignments/15108131
+    links:
+      - label: Homework 1 (due 9/15)
+        url: https://canvas.upenn.edu/courses/1950130/assignments/15108159
   - date: 2026-09-07
     section: 1
     topic: Labor Day - no class
@@ -262,7 +266,7 @@ homeworks:
   # HW2-5 PDFs still carry Fall 2025 due dates on their title page.
   - num: 1
     visible: true
-    due: 2026-09-14
+    due: 2026-09-15
     title: Print statements, loops, conditionals, plotting
     pdf: NewMaterial/Homeworks/HW1/hw1.pdf
   - num: 2

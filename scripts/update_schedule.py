@@ -61,6 +61,8 @@ def render_entry(entry, repo):
     exercise = entry.get("exercise")
     if exercise:
         resources.append(f'<li><a href="{exercise}" target="_blank">Exercise submission</a></li>')
+    for link in entry.get("links", []):
+        resources.append(f'<li><a href="{link["url"]}" target="_blank">{link["label"]}</a></li>')
     rb = ""
     if resources:
         rb = '            <ul class="resources">\n' + "\n".join(f"                {r}" for r in resources) + "\n            </ul>"
