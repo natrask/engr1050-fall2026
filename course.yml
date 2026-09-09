@@ -103,12 +103,14 @@ schedule:
     date: 2026-09-09
     section: 1
     topic: Functions, while loops, widgets, lab reports
+    visible: true
     folder: Lecture04
     notebook: lec04.ipynb
   - num: 5
     date: 2026-09-14
     section: 1
     topic: Microcontrollers and the Thonny IDE
+    visible: true
     folder: Lecture05
     slides: Lecture_05.pdf
   - num: 6
