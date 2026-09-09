@@ -106,6 +106,7 @@ schedule:
     visible: true
     folder: Lecture04
     notebook: lec04.ipynb
+    exercise: https://canvas.upenn.edu/courses/1950130/assignments/15120120
   - num: 5
     date: 2026-09-14
     section: 1
