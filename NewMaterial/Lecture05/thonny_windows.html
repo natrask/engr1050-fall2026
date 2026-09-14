@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Installing Thonny on Windows - ENGR 1050</title>
+<style>
+ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        line-height: 1.6; color: #333; max-width: 900px; margin: 0 auto; padding: 20px; }
+ h1 { color: #011F5B; border-bottom: 3px solid #990000; padding-bottom: 10px; margin-top: 30px; }
+ h2 { color: #011F5B; margin-top: 30px; border-bottom: 2px solid #e0e0e0; padding-bottom: 5px; }
+ h3 { color: #011F5B; margin-top: 20px; }
+ p { text-align: left; margin-bottom: 15px; }
+ code { background: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-family: ui-monospace, Menlo, Consolas, monospace; }
+ pre { background: #f4f4f4; padding: 12px; border-radius: 6px; overflow-x: auto; }
+ pre code { background: none; padding: 0; }
+ blockquote { border-left: 4px solid #82AFD3; padding: 4px 12px; background: #f8f9fa; margin: 12px 0; }
+ a { color: #4a90e2; } a:hover { color: #990000; }
+ .nav { font-size: 0.9rem; margin-bottom: 1rem; }
+ ol.steps > li { margin-bottom: 14px; }
+ ol.steps ul { margin-top: 6px; }
+ .ok { border-left: 4px solid #2e7d32; background: #f1f8f1; padding: 8px 12px; margin: 12px 0; }
+ kbd { border: 1px solid #bbb; border-bottom-width: 2px; border-radius: 4px; padding: 1px 6px; background: #fafafa; font-family: inherit; font-size: 0.9em; }
+ .ui { font-weight: 600; color: #011F5B; }
+</style>
+</head>
+<body>
+<p class="nav"><a href="../../index.html#schedule">&larr; Back to the schedule</a></p>
+<h1>Installing Thonny on Windows</h1>
+
+<p>Up to now, every line of Python you have written ran in Colab, which means it ran on a computer in a Google data center. To drive a circuit or a robot, the program has to run on <em>your</em> laptop, because your laptop is the thing with a USB cable plugged into the microcontroller. Thonny is a small, free program that runs Python on your own computer. It is the only tool you need for the hardware part of this course.</p>
+
+<p>These directions assume you have never installed a program from the internet before. Nothing here is hard, but there are several steps where the computer will ask you a question, and the directions tell you what to answer. Follow them in order and do not skip any. The whole thing takes about ten minutes.</p>
+
+<blockquote><p><strong>Using a Mac?</strong> Stop here and use the <a href="thonny_mac.html">Mac instructions</a> instead. The steps are different.</p></blockquote>
+
+<h2>What you need before you start</h2>
+<ul>
+<li>A Windows laptop (Windows 10 or Windows 11) that you can install programs on. If it is a school-managed laptop that blocks installs, come to office hours.</li>
+<li>An internet connection.</li>
+<li>About 200 MB of free disk space.</li>
+</ul>
+
+<h2>Part 1: Download the installer</h2>
+<ol class="steps">
+<li>Open a web browser. Any of Edge, Chrome, or Firefox is fine.</li>
+<li>Click in the address bar at the top of the browser, type <code>thonny.org</code>, and press <kbd>Enter</kbd>.</li>
+<li>Near the top right of the page is a box with a Windows logo that says something like <span class="ui">Download version 4.x.x for Windows</span>. Move your mouse over that box. A small menu drops down with a few choices.</li>
+<li>Click the first choice, which says <span class="ui">Installer with 64-bit Python</span>. Do not pick the "portable" or "32-bit" variants.</li>
+<li>Your browser will download a file whose name starts with <code>thonny-</code> and ends in <code>.exe</code>. Depending on the browser, you may see a small download panel appear in the top right, or a bar along the bottom. Wait for it to finish. The file is about 25 MB, so this takes a few seconds to a minute.
+  <ul>
+  <li>If the browser asks "Do you want to keep this file?" or says the file "isn't commonly downloaded", click <span class="ui">Keep</span>. Thonny is safe; the browser says this about any small program it has not seen many times.</li>
+  </ul>
+</li>
+</ol>
+
+<h2>Part 2: Run the installer</h2>
+<ol class="steps">
+<li>Open the file you just downloaded. The easiest way is to click on it in the browser's download panel. If you cannot find that, open <span class="ui">File Explorer</span> (the yellow folder icon on the taskbar), click <span class="ui">Downloads</span> on the left, and double-click the file that starts with <code>thonny-</code>.</li>
+<li>You will very likely see a blue box that says <span class="ui">Windows protected your PC</span>, with only a <span class="ui">Don't run</span> button. This is Windows being cautious about a program it does not recognize. To get past it:
+  <ul>
+  <li>Click the small text link that says <span class="ui">More info</span>.</li>
+  <li>A new button appears that says <span class="ui">Run anyway</span>. Click it.</li>
+  </ul>
+</li>
+<li>If a window asks <span class="ui">Do you want to allow this app to make changes to your device?</span>, click <span class="ui">Yes</span>.</li>
+<li>The Thonny setup wizard opens. If it asks whether to install for <span class="ui">just me</span> or <span class="ui">all users</span>, pick <span class="ui">Install for me only</span>. Click <span class="ui">Next</span>.</li>
+<li>A license agreement appears. Click the circle next to <span class="ui">I accept the agreement</span>, then <span class="ui">Next</span>.</li>
+<li>It asks where to install. Leave the suggested folder alone and click <span class="ui">Next</span>.</li>
+<li>It asks about a desktop icon. Check the box for <span class="ui">Create desktop icon</span> so Thonny is easy to find later, then click <span class="ui">Next</span>.</li>
+<li>Click <span class="ui">Install</span>. A progress bar runs for about a minute.</li>
+<li>When it says the setup is complete, click <span class="ui">Finish</span>.</li>
+</ol>
+
+<h2>Part 3: Open Thonny for the first time</h2>
+<ol class="steps">
+<li>Double-click the new <span class="ui">Thonny</span> icon on your desktop. If there is no icon, click the Windows <span class="ui">Start</span> button, type <code>thonny</code>, and click the Thonny app that appears at the top of the results.</li>
+<li>The first time it opens, a small window asks you to choose a <span class="ui">Language</span> and an <span class="ui">Initial settings</span> mode. Leave the language as English and the settings as <span class="ui">Standard</span>, then click <span class="ui">Let's go!</span></li>
+<li>The main Thonny window appears. It has two important areas:
+  <ul>
+  <li>The big white area on top, labelled <span class="ui">&lt;untitled&gt;</span>, is the <strong>editor</strong>. This is where you type your program.</li>
+  <li>The area at the bottom labelled <span class="ui">Shell</span> is where your program's output shows up. It has a <code>&gt;&gt;&gt;</code> prompt in it.</li>
+  </ul>
+  If you do not see the Shell, click the <span class="ui">View</span> menu at the top and click <span class="ui">Shell</span> so it has a check mark.
+</li>
+</ol>
+
+<h2>Part 4: Hello, world</h2>
+<p>Now you will write and run a one-line program. This proves the install worked and shows you the routine you will use for every program from here on: type, save, run.</p>
+<ol class="steps">
+<li>Click inside the editor (the big white area on top) and type exactly this, including the parentheses and the quotation marks:
+<pre><code>print("Hello from my laptop!")</code></pre>
+</li>
+<li>Run the program. Either click the green circle with a white triangle in the toolbar (it is labelled <span class="ui">Run current script</span> if you hover over it), or press the <kbd>F5</kbd> key at the top of your keyboard.</li>
+<li>Because the file has never been saved, Thonny pops up a <span class="ui">Save as</span> window before it runs. Do this:
+  <ul>
+  <li>On the left side of the window, click <span class="ui">Desktop</span> (or <span class="ui">Documents</span>, either is fine, just remember which).</li>
+  <li>In the <span class="ui">File name</span> box at the bottom, type <code>hello.py</code>. The <code>.py</code> ending is what marks it as a Python file, so do not leave it off.</li>
+  <li>Click <span class="ui">Save</span>.</li>
+  </ul>
+</li>
+<li>The program runs right away. Look at the Shell area at the bottom. You should see:
+<pre><code>&gt;&gt;&gt; %Run hello.py
+Hello from my laptop!
+&gt;&gt;&gt; </code></pre>
+</li>
+</ol>
+
+<div class="ok"><p><strong>If you see <code>Hello from my laptop!</code> in the Shell, you are done.</strong> Take a screenshot of the whole Thonny window showing your code and the output, and submit it on Canvas for today's in-class exercise. To take a screenshot on Windows, press <kbd>Windows</kbd> + <kbd>Shift</kbd> + <kbd>S</kbd>, drag a box around the Thonny window, and the picture is copied to your clipboard. Paste it into the Canvas submission box with <kbd>Ctrl</kbd> + <kbd>V</kbd>, or open the <span class="ui">Snipping Tool</span> app to save it as a file.</p></div>
+
+<h2>Part 5: Try one more thing</h2>
+<p>Change the program so it does something Colab could not. Replace the contents of the editor with this:</p>
+<pre><code>import platform
+print("This program is running on", platform.node())
+for i in range(3):
+    print("count", i)</code></pre>
+<p>Press <kbd>F5</kbd> again. This time it will not ask where to save, because the file already has a name. The first line prints the name of your own laptop, which is a nice reminder that the code is running right here and not in Google's basement.</p>
+
+<h2>Things that go wrong, and what to do</h2>
+<h3>"Windows protected your PC" and there is no "Run anyway" button</h3>
+<p>Click the <span class="ui">More info</span> link first. The <span class="ui">Run anyway</span> button only appears after that.</p>
+
+<h3>The download is a file ending in <code>.zip</code>, not <code>.exe</code></h3>
+<p>You picked the portable variant. Go back to <code>thonny.org</code> and choose <span class="ui">Installer with 64-bit Python</span>.</p>
+
+<h3>I typed the program but nothing happens when I press F5</h3>
+<p>On some laptops the F-keys do volume and brightness unless you also hold the <kbd>Fn</kbd> key. Try <kbd>Fn</kbd> + <kbd>F5</kbd>, or just click the green run button in the toolbar.</p>
+
+<h3>The Shell shows red text ending in <code>SyntaxError</code></h3>
+<p>Something was typed slightly wrong. Check that you have both parentheses, both quotation marks, and that the word is <code>print</code> in all lowercase. Fix it and press <kbd>F5</kbd> again.</p>
+
+<h3>The Shell says <code>NameError: name 'Print' is not defined</code></h3>
+<p>Python is case-sensitive. <code>Print</code> and <code>print</code> are different words. Use lowercase.</p>
+
+<h3>I saved the file but can't find it again</h3>
+<p>In Thonny, click <span class="ui">File</span> then <span class="ui">Open</span>, and click <span class="ui">Desktop</span> or <span class="ui">Documents</span> on the left, wherever you saved it. Thonny also lists recent files under <span class="ui">File &rarr; Recent files</span>.</p>
+
+<h3>The installer says I don't have permission</h3>
+<p>Your laptop is probably managed by an organization. Bring it to office hours and we will sort it out together. In the meantime you can still do this exercise on a lab computer.</p>
+
+<blockquote><p>If you are stuck on anything not listed here, do not spend an hour on it. Ask the person next to you, ask on Ed Discussion with a screenshot of what you see, or bring the laptop to office hours.</p></blockquote>
+
+<p>Next: once Thonny works, the <a href="pico_blink.html">Pico blink tutorial</a> walks you through running your first program on the microcontroller.</p>
+
+<p class="nav"><a href="../../index.html#schedule">&larr; Back to the schedule</a></p>
+</body>
+</html>

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pico tutorial: blink an LED - ENGR 1050</title>
+<style>
+ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        line-height: 1.6; color: #333; max-width: 900px; margin: 0 auto; padding: 20px; }
+ h1 { color: #011F5B; border-bottom: 3px solid #990000; padding-bottom: 10px; margin-top: 30px; }
+ h2 { color: #011F5B; margin-top: 30px; border-bottom: 2px solid #e0e0e0; padding-bottom: 5px; }
+ h3 { color: #011F5B; margin-top: 20px; }
+ p { text-align: left; margin-bottom: 15px; }
+ code { background: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-family: ui-monospace, Menlo, Consolas, monospace; }
+ pre { background: #f4f4f4; padding: 12px; border-radius: 6px; overflow-x: auto; }
+ pre code { background: none; padding: 0; }
+ blockquote { border-left: 4px solid #82AFD3; padding: 4px 12px; background: #f8f9fa; margin: 12px 0; }
+ a { color: #4a90e2; } a:hover { color: #990000; }
+ .nav { font-size: 0.9rem; margin-bottom: 1rem; }
+ ol.steps > li { margin-bottom: 14px; }
+ ol.steps ul { margin-top: 6px; }
+ .ok { border-left: 4px solid #2e7d32; background: #f1f8f1; padding: 8px 12px; margin: 12px 0; }
+ .warn { border-left: 4px solid #c77700; background: #fff8ec; padding: 8px 12px; margin: 12px 0; }
+ kbd { border: 1px solid #bbb; border-bottom-width: 2px; border-radius: 4px; padding: 1px 6px; background: #fafafa; font-family: inherit; font-size: 0.9em; }
+ .ui { font-weight: 600; color: #011F5B; }
+ table { border-collapse: collapse; margin: 12px 0; }
+ th, td { border: 1px solid #ddd; padding: 6px 12px; text-align: left; }
+ th { background: #f4f4f4; }
+</style>
+</head>
+<body>
+<p class="nav"><a href="../../index.html#schedule">&larr; Back to the schedule</a></p>
+<h1>Pico tutorial: blink an LED</h1>
+
+<p>This is the "hello, world" of hardware. You will plug a Raspberry Pi Pico into your laptop, put a tiny version of Python on it, and write a five-line program that turns a light on and off. Once you can do this, every robot and sensor project in the rest of the course is the same routine with more lines.</p>
+
+<p>You do not need to do this today. Today's only goal is to get Thonny installed and running on your laptop. This page is here so you can try the Pico when you get one in lab, or on your own if you are curious. It is written so that you can follow it with no help, but you are welcome to bring your Pico to office hours and do it with us.</p>
+
+<h2>What you need</h2>
+<ul>
+<li>Thonny installed and working on your laptop. If not, do the <a href="thonny_windows.html">Windows</a> or <a href="thonny_mac.html">Mac</a> install first.</li>
+<li>A Raspberry Pi Pico. The one in your kit is mounted on a carrier board with a small breadboard, buttons, and LEDs already attached.</li>
+<li>A micro-USB cable that carries data. Some cheap cables only carry power; if your laptop never notices the Pico, the cable is the first suspect. The cable in your kit is fine.</li>
+<li>For the second half of the tutorial only: one LED, one resistor (anything from 220 to 1000 ohms), and two jumper wires.</li>
+</ul>
+
+<h2>Part 1: What the Pico is, in three sentences</h2>
+<p>The Pico is a microcontroller: a very small, very cheap computer with no screen, no keyboard, and no operating system. It has a row of metal pins along each edge labelled <code>GP0</code>, <code>GP1</code>, and so on, and a program running on it can set any of those pins to 3.3 volts ("high" or on) or 0 volts ("low" or off). Your laptop's job is to write the program and send it over the USB cable; the Pico's job is to run it and flip the pins.</p>
+
+<p>The Pico runs <strong>MicroPython</strong>, a slimmed-down Python made for tiny chips. Everything you know about variables, loops, if statements, and functions works unchanged. What changes is that instead of printing to a screen, your program can also turn things on and off in the real world.</p>
+
+<h2>Part 2: Put MicroPython on the Pico (one time only)</h2>
+<p>A brand-new Pico does not know Python yet. You have to copy MicroPython onto it once. Thonny does this for you.</p>
+<ol class="steps">
+<li>Open Thonny on your laptop. Do not plug in the Pico yet.</li>
+<li>Find the small white button on the Pico board labelled <span class="ui">BOOTSEL</span>. It is on the Pico itself, near the USB connector, not on the carrier board.</li>
+<li><strong>Hold the BOOTSEL button down</strong> and, while still holding it, plug the USB cable into the Pico and then into your laptop. Now let go of the button. The Pico shows up on your laptop as a tiny USB drive called <span class="ui">RPI-RP2</span>. On Windows a File Explorer window may pop open; on a Mac a drive icon may appear on the desktop. Either way, just leave it.</li>
+<li>In Thonny, click the <span class="ui">Run</span> menu at the top and choose <span class="ui">Configure interpreter...</span>. A window titled <span class="ui">Thonny options</span> opens on the <span class="ui">Interpreter</span> tab.</li>
+<li>At the top of that tab is a dropdown that says <span class="ui">Local Python 3</span>. Click it and choose <span class="ui">MicroPython (Raspberry Pi Pico)</span>.</li>
+<li>In the bottom right corner of the same window there is a link that says <span class="ui">Install or update MicroPython</span>. Click it.</li>
+<li>A new window opens. It should already have found your Pico and filled in <span class="ui">Target volume: RPI-RP2</span>. Set the other fields like this:
+  <ul>
+  <li><span class="ui">MicroPython family</span>: <span class="ui">RP2</span></li>
+  <li><span class="ui">variant</span>: <span class="ui">Raspberry Pi &bull; Pico / Pico H</span>. Look at the white lettering on the Pico board itself: if it says <span class="ui">Pico W</span>, choose the <span class="ui">Pico W</span> variant instead; if it says <span class="ui">Pico 2</span>, choose <span class="ui">Pico 2</span>.</li>
+  <li><span class="ui">version</span>: leave whatever it suggests (the newest stable one).</li>
+  </ul>
+</li>
+<li>Click <span class="ui">Install</span>. A progress bar runs for about half a minute. When it says <span class="ui">Done!</span>, click <span class="ui">Close</span>.</li>
+<li>Back in the Thonny options window, click <span class="ui">OK</span>.</li>
+<li>Look at the Shell at the bottom of Thonny. Within a couple of seconds it should print something like:
+<pre><code>MicroPython v1.24.1 on 2024-11-29; Raspberry Pi Pico with RP2040
+Type "help()" for more information.
+&gt;&gt;&gt; </code></pre>
+That message means your laptop is now talking to the Pico. From here on, whatever you run in Thonny runs <em>on the Pico</em>, not on your laptop.</li>
+</ol>
+
+<blockquote><p>You only do Part 2 once per Pico. Next time, just plug it in (no BOOTSEL), open Thonny, and check that the Shell shows the MicroPython message. If it shows a normal Python prompt instead, click the text in the very bottom right corner of the Thonny window (it says <span class="ui">Local Python 3</span>) and pick <span class="ui">MicroPython (Raspberry Pi Pico)</span> from the list.</p></blockquote>
+
+<h2>Part 3: Blink the LED that is already on the board</h2>
+<p>The Pico has a tiny green LED soldered right onto it, next to the USB connector. It is wired to pin 25 internally, so you can blink it without touching a single wire.</p>
+<ol class="steps">
+<li>In the editor (the big area at the top of Thonny), type this:
+<pre><code>from machine import Pin
+import time
+
+led = Pin(25, Pin.OUT)
+
+while True:
+    led.value(1)      # 3.3 volts on the pin: LED on
+    time.sleep(0.5)   # wait half a second
+    led.value(0)      # 0 volts: LED off
+    time.sleep(0.5)</code></pre>
+</li>
+<li>Click the green <span class="ui">Run</span> button or press <kbd>F5</kbd> (<kbd>fn</kbd> + <kbd>F5</kbd> on a Mac).</li>
+<li>Thonny asks <span class="ui">Where to save to?</span> with two buttons: <span class="ui">This computer</span> and <span class="ui">Raspberry Pi Pico</span>. Click <span class="ui">Raspberry Pi Pico</span>, name the file <code>blink.py</code>, and click <span class="ui">OK</span>.</li>
+<li>Look at the Pico. The little green LED should be blinking once a second.</li>
+<li>To stop it, click the red <span class="ui">Stop</span> button in the toolbar (the square icon, next to Run). The Shell prints <code>KeyboardInterrupt</code> and returns to the <code>&gt;&gt;&gt;</code> prompt. That is normal; it is how you interrupt a program that was written to run forever.</li>
+</ol>
+
+<div class="ok"><p><strong>If the LED blinks, you have run a program on a microcontroller.</strong> Everything in the labs builds on exactly this.</p></div>
+
+<h3>What each line does</h3>
+<table>
+<tr><th>Line</th><th>Meaning</th></tr>
+<tr><td><code>from machine import Pin</code></td><td><code>machine</code> is the MicroPython module that talks to the hardware. <code>Pin</code> is the class that represents one physical pin.</td></tr>
+<tr><td><code>import time</code></td><td>Gives you <code>time.sleep()</code>, which pauses the program for a number of seconds.</td></tr>
+<tr><td><code>led = Pin(25, Pin.OUT)</code></td><td>Make a Pin object for pin 25 and tell the Pico we will be <em>writing</em> a voltage to it. <code>Pin.OUT</code> means output. Later we will use <code>Pin.IN</code> to read buttons.</td></tr>
+<tr><td><code>led.value(1)</code> / <code>led.value(0)</code></td><td>Set the pin high (3.3 V) or low (0 V). You can also write <code>led.on()</code> and <code>led.off()</code>, or <code>led.toggle()</code> to flip it.</td></tr>
+<tr><td><code>while True:</code></td><td>Loop forever. There is no natural end to "keep blinking", so you stop it from Thonny.</td></tr>
+</table>
+
+<p>Try changing the two <code>0.5</code> values to <code>0.1</code> and running again. Then try <code>0.1</code> on and <code>0.9</code> off. You are now writing programs whose output is a pattern of light rather than text.</p>
+
+<blockquote><p><strong>Pico W owners:</strong> on the Pico W the onboard LED is not on pin 25, so the code above will run without error but nothing will blink. Change the one line to <code>led = Pin("LED", Pin.OUT)</code>. That spelling works on every Pico model, so you can use it on a plain Pico too.</p></blockquote>
+
+<h2>Part 4: Blink an LED on a real pin</h2>
+<p>The onboard LED is convenient, but the whole point is to control things you wire up yourself. Now you will move the LED to one of the general-purpose pins. If your carrier board already has LEDs attached to labelled pins, you can skip the wiring, note which <code>GP</code> number the LED is on, and use that number in the code below.</p>
+
+<h3>Wiring</h3>
+<p>Unplug the USB cable first. It is a good habit to never change wiring while the board is powered.</p>
+<p>An LED has two legs. The <strong>longer leg</strong> is the positive side (the anode); the <strong>shorter leg</strong>, next to the flat edge of the plastic, is the negative side (the cathode). Current only flows one way, so if you put it in backwards it simply will not light. No harm done, just flip it.</p>
+<p>The resistor limits how much current flows through the LED. Without it the LED will be very bright for a very short time. Resistors have no direction; either way round is fine.</p>
+<ol class="steps">
+<li>Push the LED into the breadboard so its two legs are in two <em>different</em> rows. On a breadboard, the five holes in a single row (on one side of the center gutter) are connected together; two different rows are not.</li>
+<li>Put one leg of the resistor in the same row as the LED's <strong>long</strong> leg, and the other leg of the resistor in a fresh empty row.</li>
+<li>Run a jumper wire from that fresh row (the free end of the resistor) to the pin labelled <span class="ui">GP0</span>. On a bare Pico, GP0 is the first pin at the corner nearest the USB connector, on the left edge when the USB is at the top.</li>
+<li>Run a second jumper wire from the row with the LED's <strong>short</strong> leg to any pin labelled <span class="ui">GND</span>. On a bare Pico the closest one is two pins below GP0 (physical pin 3). GND pins have a square solder pad instead of a round one, which is a handy way to spot them.</li>
+</ol>
+<p>The path electricity takes is: <code>GP0</code> &rarr; resistor &rarr; LED long leg &rarr; LED short leg &rarr; <code>GND</code>. When the program sets GP0 high, current flows around that loop and the LED lights. When it sets GP0 low, there is no voltage difference, so nothing flows.</p>
+
+<h3>Code</h3>
+<ol class="steps">
+<li>Plug the USB cable back in. Check that the Shell still shows the MicroPython prompt.</li>
+<li>Change one line in your program: <code>25</code> becomes <code>0</code>. That is the whole change.
+<pre><code>from machine import Pin
+import time
+
+led = Pin(0, Pin.OUT)   # GP0 instead of the onboard LED
+
+while True:
+    led.value(1)
+    time.sleep(0.5)
+    led.value(0)
+    time.sleep(0.5)</code></pre>
+</li>
+<li>Run it. Your LED on the breadboard should blink. If it does not, see the troubleshooting list below; nine times out of ten the LED is in backwards.</li>
+</ol>
+
+<p>The complete script, with both versions and comments, is in <a href="blink.py">blink.py</a>. You can open it in Thonny with <span class="ui">File &rarr; Open</span> instead of typing it.</p>
+
+<h2>Part 5: Make it run without your laptop</h2>
+<p>Right now the program only runs while Thonny is connected. The Pico will run a file called <code>main.py</code> all by itself every time it gets power.</p>
+<ol class="steps">
+<li>With your blink program open, choose <span class="ui">File &rarr; Save as...</span>, click <span class="ui">Raspberry Pi Pico</span>, and name it exactly <code>main.py</code>.</li>
+<li>Unplug the USB cable, wait a second, and plug it into a phone charger or back into the laptop. The LED starts blinking on its own.</li>
+</ol>
+<div class="warn"><p>When a Pico is busy running <code>main.py</code>, Thonny sometimes cannot get its attention. If the Shell says the device is busy, click the red <span class="ui">Stop</span> button once or twice. If that does not work, hold <kbd>Ctrl</kbd> + <kbd>C</kbd> with the Shell selected. To make the Pico forget the program, delete <code>main.py</code> through <span class="ui">View &rarr; Files</span>, where you can right-click files on the Pico and choose <span class="ui">Delete</span>.</p></div>
+
+<h2>Things that go wrong, and what to do</h2>
+<h3>The RPI-RP2 drive never appears</h3>
+<p>You have to be holding BOOTSEL <em>at the moment</em> the USB cable connects, and keep holding it for a second afterwards. Unplug, hold the button, plug in while holding, then release. If it still does not appear, try a different USB cable; charge-only cables are common.</p>
+
+<h3>The Shell says <code>Couldn't find the device automatically</code> or <code>Unable to connect</code></h3>
+<p>Unplug the Pico, wait two seconds, plug it back in (no BOOTSEL this time), then click the red Stop button in Thonny. If that fails, open <span class="ui">Run &rarr; Configure interpreter...</span> and check that <span class="ui">MicroPython (Raspberry Pi Pico)</span> is selected and the port is set to detect automatically.</p>
+
+<h3>The Shell shows a normal Python prompt and <code>from machine import Pin</code> gives <code>ModuleNotFoundError</code></h3>
+<p>Thonny is running the code on your laptop instead of the Pico. Click the text in the very bottom right corner of the Thonny window and pick <span class="ui">MicroPython (Raspberry Pi Pico)</span>.</p>
+
+<h3>The program runs but the onboard LED does not blink</h3>
+<p>You probably have a Pico W. Use <code>Pin("LED", Pin.OUT)</code> as explained above.</p>
+
+<h3>The program runs but my breadboard LED does not blink</h3>
+<ul>
+<li>Flip the LED around. The long leg must be on the resistor side, toward GP0.</li>
+<li>Check that the resistor and the LED's long leg are actually in the same breadboard row, and that the LED's two legs are in different rows.</li>
+<li>Check that the wire really goes to GP0 and not GP1 next to it. Pin labels on the carrier board are tiny.</li>
+<li>Check that the ground wire goes to a pin labelled GND, not to a numbered GP pin.</li>
+</ul>
+
+<h3>The Shell says <code>OSError: [Errno 5] EIO</code> or fills with garbage</h3>
+<p>The USB connection hiccupped. Unplug, plug back in, click Stop. If it keeps happening, try a different USB port on the laptop.</p>
+
+<h3>Thonny says "Device is busy or does not respond"</h3>
+<p>The Pico is probably running a <code>main.py</code> in a loop. Click Stop a couple of times. See Part 5 above.</p>
+
+<blockquote><p>Bring your Pico and laptop to office hours or the Friday recitation if any of this does not work. Ten minutes with someone looking over your shoulder is usually all it takes.</p></blockquote>
+
+<p class="nav"><a href="../../index.html#schedule">&larr; Back to the schedule</a></p>
+</body>
+</html>

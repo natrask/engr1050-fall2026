@@ -114,6 +114,13 @@ schedule:
     visible: true
     folder: Lecture05
     slides: Lecture_05.pdf
+    links:
+      - label: Thonny installation (Windows)
+        url: NewMaterial/Lecture05/thonny_windows.html
+      - label: Thonny installation (Mac)
+        url: NewMaterial/Lecture05/thonny_mac.html
+      - label: Pico tutorial code
+        url: NewMaterial/Lecture05/pico_blink.html
   - num: 6
     date: 2026-09-16
     section: 1

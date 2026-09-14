@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Installing Thonny on a Mac - ENGR 1050</title>
+<style>
+ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        line-height: 1.6; color: #333; max-width: 900px; margin: 0 auto; padding: 20px; }
+ h1 { color: #011F5B; border-bottom: 3px solid #990000; padding-bottom: 10px; margin-top: 30px; }
+ h2 { color: #011F5B; margin-top: 30px; border-bottom: 2px solid #e0e0e0; padding-bottom: 5px; }
+ h3 { color: #011F5B; margin-top: 20px; }
+ p { text-align: left; margin-bottom: 15px; }
+ code { background: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-family: ui-monospace, Menlo, Consolas, monospace; }
+ pre { background: #f4f4f4; padding: 12px; border-radius: 6px; overflow-x: auto; }
+ pre code { background: none; padding: 0; }
+ blockquote { border-left: 4px solid #82AFD3; padding: 4px 12px; background: #f8f9fa; margin: 12px 0; }
+ a { color: #4a90e2; } a:hover { color: #990000; }
+ .nav { font-size: 0.9rem; margin-bottom: 1rem; }
+ ol.steps > li { margin-bottom: 14px; }
+ ol.steps ul { margin-top: 6px; }
+ .ok { border-left: 4px solid #2e7d32; background: #f1f8f1; padding: 8px 12px; margin: 12px 0; }
+ kbd { border: 1px solid #bbb; border-bottom-width: 2px; border-radius: 4px; padding: 1px 6px; background: #fafafa; font-family: inherit; font-size: 0.9em; }
+ .ui { font-weight: 600; color: #011F5B; }
+</style>
+</head>
+<body>
+<p class="nav"><a href="../../index.html#schedule">&larr; Back to the schedule</a></p>
+<h1>Installing Thonny on a Mac</h1>
+
+<p>Up to now, every line of Python you have written ran in Colab, which means it ran on a computer in a Google data center. To drive a circuit or a robot, the program has to run on <em>your</em> laptop, because your laptop is the thing with a USB cable plugged into the microcontroller. Thonny is a small, free program that runs Python on your own computer. It is the only tool you need for the hardware part of this course.</p>
+
+<p>These directions assume you have never installed a program from the internet before. Nothing here is hard, but there are several steps where the computer will ask you a question, and the directions tell you what to answer. Follow them in order and do not skip any. The whole thing takes about ten minutes.</p>
+
+<blockquote><p><strong>Using Windows?</strong> Stop here and use the <a href="thonny_windows.html">Windows instructions</a> instead. The steps are different.</p></blockquote>
+
+<h2>What you need before you start</h2>
+<ul>
+<li>A Mac running macOS 10.15 (Catalina) or newer. Anything bought in the last several years qualifies.</li>
+<li>The password you use to log in to the Mac. The installer will ask for it.</li>
+<li>An internet connection.</li>
+</ul>
+
+<h2>Part 1: Download the installer</h2>
+<ol class="steps">
+<li>Open a web browser. Safari, Chrome, or Firefox all work.</li>
+<li>Click in the address bar at the top, type <code>thonny.org</code>, and press <kbd>Return</kbd>.</li>
+<li>Near the top right of the page is a box with an Apple logo that says something like <span class="ui">Download version 4.x.x for macOS</span>. Move your mouse over that box. A small menu drops down.</li>
+<li>Click the choice that says <span class="ui">Installer for macOS 10.15+</span>. There is only one installer and it works on every Mac, whether it has an Intel chip or an Apple chip (M1, M2, M3, and so on). You do not need to check which one you have.</li>
+<li>Your browser downloads a file whose name starts with <code>thonny-</code> and ends in <code>.pkg</code>. In Safari, a small downloads arrow in the top right fills in as it downloads. Wait for it to finish, which takes a few seconds to a minute.
+  <ul>
+  <li>If Safari asks <span class="ui">Do you want to allow downloads on "thonny.org"?</span>, click <span class="ui">Allow</span>.</li>
+  </ul>
+</li>
+</ol>
+
+<h2>Part 2: Run the installer</h2>
+<ol class="steps">
+<li>Open the file you downloaded. In Safari, click the downloads arrow at the top right and click the file. Otherwise, open <span class="ui">Finder</span> (the blue and white smiling face at the left end of the Dock), click <span class="ui">Downloads</span> in the sidebar, and double-click the file that starts with <code>thonny-</code>.</li>
+<li>An installer window titled <span class="ui">Install Thonny</span> opens. Click <span class="ui">Continue</span>.</li>
+<li>The license appears. Click <span class="ui">Continue</span>, and when it asks you to agree, click <span class="ui">Agree</span>.</li>
+<li>Click <span class="ui">Install</span>. Do not change the destination.</li>
+<li>A window pops up asking for your password. This is the same password you use to log in to the Mac. Type it and click <span class="ui">Install Software</span>. If the Mac has Touch ID, you may be able to use your fingerprint instead.</li>
+<li>A progress bar runs for less than a minute. When it says <span class="ui">The installation was successful</span>, click <span class="ui">Close</span>.</li>
+<li>The Mac may ask whether to move the installer to the Trash. Click <span class="ui">Move to Trash</span>. You do not need it any more.</li>
+</ol>
+
+<h2>Part 3: Open Thonny for the first time</h2>
+<ol class="steps">
+<li>Open <span class="ui">Finder</span>, click <span class="ui">Applications</span> in the sidebar, and scroll until you find <span class="ui">Thonny</span>. Double-click it. A faster way is to press <kbd>&#8984; Command</kbd> + <kbd>Space</kbd>, type <code>thonny</code>, and press <kbd>Return</kbd>.</li>
+<li>If the Mac says something like <span class="ui">"Thonny" is an app downloaded from the Internet. Are you sure you want to open it?</span>, click <span class="ui">Open</span>.</li>
+<li>The first time it opens, a small window asks you to choose a <span class="ui">Language</span> and an <span class="ui">Initial settings</span> mode. Leave the language as English and the settings as <span class="ui">Standard</span>, then click <span class="ui">Let's go!</span></li>
+<li>The main Thonny window appears. It has two important areas:
+  <ul>
+  <li>The big white area on top, labelled <span class="ui">&lt;untitled&gt;</span>, is the <strong>editor</strong>. This is where you type your program.</li>
+  <li>The area at the bottom labelled <span class="ui">Shell</span> is where your program's output shows up. It has a <code>&gt;&gt;&gt;</code> prompt in it.</li>
+  </ul>
+  If you do not see the Shell, click the <span class="ui">View</span> menu at the top of the screen and click <span class="ui">Shell</span> so it has a check mark.
+</li>
+<li>Optional but handy: right-click (or two-finger click) the Thonny icon in the Dock, choose <span class="ui">Options</span>, then <span class="ui">Keep in Dock</span>. Now you can open it with one click next time.</li>
+</ol>
+
+<h2>Part 4: Hello, world</h2>
+<p>Now you will write and run a one-line program. This proves the install worked and shows you the routine you will use for every program from here on: type, save, run.</p>
+<ol class="steps">
+<li>Click inside the editor (the big white area on top) and type exactly this, including the parentheses and the quotation marks:
+<pre><code>print("Hello from my laptop!")</code></pre>
+</li>
+<li>Run the program by clicking the green circle with a white triangle in the toolbar (hover over it and it says <span class="ui">Run current script</span>). You can also use the keyboard: on most Mac keyboards the top row of keys does brightness and volume, so press <kbd>fn</kbd> + <kbd>F5</kbd> together, or use <kbd>&#8984; Command</kbd> + <kbd>R</kbd>.</li>
+<li>Because the file has never been saved, Thonny pops up a <span class="ui">Save</span> window before it runs. Do this:
+  <ul>
+  <li>In the <span class="ui">Save As</span> box at the top, type <code>hello.py</code>. The <code>.py</code> ending is what marks it as a Python file, so do not leave it off.</li>
+  <li>In the <span class="ui">Where</span> menu, choose <span class="ui">Desktop</span> or <span class="ui">Documents</span>. Either is fine, just remember which. If the window is small and you do not see a sidebar, click the little down-arrow next to the file name to expand it.</li>
+  <li>Click <span class="ui">Save</span>.</li>
+  </ul>
+</li>
+<li>The program runs right away. Look at the Shell area at the bottom. You should see:
+<pre><code>&gt;&gt;&gt; %Run hello.py
+Hello from my laptop!
+&gt;&gt;&gt; </code></pre>
+</li>
+</ol>
+
+<div class="ok"><p><strong>If you see <code>Hello from my laptop!</code> in the Shell, you are done.</strong> Take a screenshot of the whole Thonny window showing your code and the output, and submit it on Canvas for today's in-class exercise. To take a screenshot on a Mac, press <kbd>&#8984; Command</kbd> + <kbd>Shift</kbd> + <kbd>4</kbd>, then drag a box around the Thonny window. The picture is saved to your Desktop as a file called <code>Screenshot ...png</code>. Upload that file to Canvas.</p></div>
+
+<h2>Part 5: Try one more thing</h2>
+<p>Change the program so it does something Colab could not. Replace the contents of the editor with this:</p>
+<pre><code>import platform
+print("This program is running on", platform.node())
+for i in range(3):
+    print("count", i)</code></pre>
+<p>Run it again. This time it will not ask where to save, because the file already has a name. The first line prints the name of your own laptop, which is a nice reminder that the code is running right here and not in Google's basement.</p>
+
+<h2>Things that go wrong, and what to do</h2>
+<h3>The Mac says the app "cannot be opened because Apple cannot check it for malicious software"</h3>
+<p>Click <span class="ui">OK</span> or <span class="ui">Done</span> to dismiss the message. Then open <span class="ui">System Settings</span> (the gear icon in the Dock, or Apple menu &rarr; System Settings), click <span class="ui">Privacy &amp; Security</span> in the sidebar, and scroll down to the <span class="ui">Security</span> section. There will be a line about Thonny being blocked, with an <span class="ui">Open Anyway</span> button next to it. Click it, enter your password, and Thonny opens. You only have to do this once. On older Macs the same setting lives in <span class="ui">System Preferences &rarr; Security &amp; Privacy &rarr; General</span>.</p>
+
+<h3>The download is a <code>.zip</code> file, or I cannot find a <code>.pkg</code></h3>
+<p>Go back to <code>thonny.org</code> and hover over the macOS download box. Click the choice that says <span class="ui">Installer for macOS</span>. Do not use the "portable" variant.</p>
+
+<h3>Pressing F5 changes my keyboard brightness instead of running the program</h3>
+<p>That is normal on a Mac. Hold <kbd>fn</kbd> while pressing <kbd>F5</kbd>, or just click the green run button in the toolbar.</p>
+
+<h3>The Shell shows red text ending in <code>SyntaxError</code></h3>
+<p>Something was typed slightly wrong. Check that you have both parentheses, both quotation marks, and that the word is <code>print</code> in all lowercase. Also make sure the quotation marks are plain straight quotes; if you typed the line in Notes or Pages first and pasted it, the Mac may have replaced them with curly quotes, which Python does not accept. Retype the quotes inside Thonny.</p>
+
+<h3>The Shell says <code>NameError: name 'Print' is not defined</code></h3>
+<p>Python is case-sensitive. <code>Print</code> and <code>print</code> are different words. Use lowercase.</p>
+
+<h3>I saved the file but can't find it again</h3>
+<p>In Thonny, click <span class="ui">File</span> then <span class="ui">Open</span>, and pick <span class="ui">Desktop</span> or <span class="ui">Documents</span> in the sidebar, wherever you saved it. Thonny also lists recent files under <span class="ui">File &rarr; Recent files</span>.</p>
+
+<blockquote><p>If you are stuck on anything not listed here, do not spend an hour on it. Ask the person next to you, ask on Ed Discussion with a screenshot of what you see, or bring the laptop to office hours.</p></blockquote>
+
+<p>Next: once Thonny works, the <a href="pico_blink.html">Pico blink tutorial</a> walks you through running your first program on the microcontroller.</p>
+
+<p class="nav"><a href="../../index.html#schedule">&larr; Back to the schedule</a></p>
+</body>
+</html>
