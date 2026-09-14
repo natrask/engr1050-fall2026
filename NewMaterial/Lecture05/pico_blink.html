@@ -34,7 +34,7 @@
 
 <p>This is the "hello, world" of hardware. You will plug a Raspberry Pi Pico into your laptop, put a tiny version of Python on it, and write a five-line program that turns a light on and off. Once you can do this, every robot and sensor project in the rest of the course is the same routine with more lines.</p>
 
-<p>You do not need to do this today. Today's only goal is to get Thonny installed and running on your laptop. This page is here so you can try the Pico when you get one in lab, or on your own if you are curious. It is written so that you can follow it with no help, but you are welcome to bring your Pico to office hours and do it with us.</p>
+<p>Today's in-class exercise has two parts: get Thonny running on your laptop (the Windows or Mac install page), then use it to blink an LED on the Pico. Parts 2 and 3 of this page are all you need for that. Part 4, wiring your own LED on the breadboard, is an extra challenge if you finish early. The page is written so that you can follow it with no help, but you are welcome to bring your Pico to office hours or the Friday recitation and do it with us.</p>
 
 <h2>What you need</h2>
 <ul>
@@ -54,14 +54,15 @@
 <ol class="steps">
 <li>Open Thonny on your laptop. Do not plug in the Pico yet.</li>
 <li>Find the small white button on the Pico board labelled <span class="ui">BOOTSEL</span>. It is on the Pico itself, near the USB connector, not on the carrier board.</li>
+<li>If your Pico is on the carrier board from your kit, run a female-to-female jumper cable from the <span class="ui">BEEP</span> button to a <span class="ui">GND</span> pin before you plug anything in. If you skip this, the board makes a piercing screech as soon as it gets power.</li>
 <li><strong>Hold the BOOTSEL button down</strong> and, while still holding it, plug the USB cable into the Pico and then into your laptop. Now let go of the button. The Pico shows up on your laptop as a tiny USB drive called <span class="ui">RPI-RP2</span>. On Windows a File Explorer window may pop open; on a Mac a drive icon may appear on the desktop. Either way, just leave it.</li>
 <li>In Thonny, click the <span class="ui">Run</span> menu at the top and choose <span class="ui">Configure interpreter...</span>. A window titled <span class="ui">Thonny options</span> opens on the <span class="ui">Interpreter</span> tab.</li>
 <li>At the top of that tab is a dropdown that says <span class="ui">Local Python 3</span>. Click it and choose <span class="ui">MicroPython (Raspberry Pi Pico)</span>.</li>
 <li>In the bottom right corner of the same window there is a link that says <span class="ui">Install or update MicroPython</span>. Click it.</li>
 <li>A new window opens. It should already have found your Pico and filled in <span class="ui">Target volume: RPI-RP2</span>. Set the other fields like this:
   <ul>
-  <li><span class="ui">MicroPython family</span>: <span class="ui">RP2</span></li>
-  <li><span class="ui">variant</span>: <span class="ui">Raspberry Pi &bull; Pico / Pico H</span>. Look at the white lettering on the Pico board itself: if it says <span class="ui">Pico W</span>, choose the <span class="ui">Pico W</span> variant instead; if it says <span class="ui">Pico 2</span>, choose <span class="ui">Pico 2</span>.</li>
+  <li><span class="ui">MicroPython family</span>: <span class="ui">RP2</span>. The family list only has chip names, not board names, so do not look for "Pico" here.</li>
+  <li><span class="ui">variant</span>: <span class="ui">Raspberry Pi &bull; Pico / Pico H</span>. This is the right choice for the plain Pico in most kits. Look at the white lettering on the Pico board itself to be sure: if it says <span class="ui">Pico W</span>, choose <span class="ui">Raspberry Pi &bull; Pico W</span> instead; if it says <span class="ui">Pico 2</span>, choose <span class="ui">Pico 2</span>. If the variant list is empty, Thonny could not reach the internet to fetch it; connect and reopen the window.</li>
   <li><span class="ui">version</span>: leave whatever it suggests (the newest stable one).</li>
   </ul>
 </li>
@@ -114,7 +115,7 @@ while True:
 <blockquote><p><strong>Pico W owners:</strong> on the Pico W the onboard LED is not on pin 25, so the code above will run without error but nothing will blink. Change the one line to <code>led = Pin("LED", Pin.OUT)</code>. That spelling works on every Pico model, so you can use it on a plain Pico too.</p></blockquote>
 
 <h2>Part 4: Blink an LED on a real pin</h2>
-<p>The onboard LED is convenient, but the whole point is to control things you wire up yourself. Now you will move the LED to one of the general-purpose pins. If your carrier board already has LEDs attached to labelled pins, you can skip the wiring, note which <code>GP</code> number the LED is on, and use that number in the code below.</p>
+<p>The onboard LED is convenient, but the whole point is to control things you wire up yourself. Now you will move the LED to one of the general-purpose pins. The quick version, on the carrier board from your kit: run a female-to-female jumper cable from <span class="ui">GP0</span> to <span class="ui">LED1</span> at the bottom right of the board, skip the wiring section, and go straight to the code. Wiring your own LED on the breadboard is the extra challenge.</p>
 
 <h3>Wiring</h3>
 <p>Unplug the USB cable first. It is a good habit to never change wiring while the board is powered.</p>

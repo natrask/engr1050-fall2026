@@ -113,7 +113,9 @@ schedule:
     topic: Microcontrollers and the Thonny IDE
     visible: true
     folder: Lecture05
-    slides: Lecture_05.pdf
+    slides:
+      - Lecture_05.pptx
+      - Lecture_05.pdf
     exercise: https://canvas.upenn.edu/courses/1950130/assignments/15127150
     links:
       - label: Thonny installation (Windows)
