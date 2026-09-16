@@ -3,7 +3,8 @@
 The three CSVs here are extracts from the NIST Public Data Repository record
 **mds2-2202**, "Data for Numisheet 2020 uniaxial tensile and tension/compression
 tests" (DOI [10.18434/M32202](https://doi.org/10.18434/M32202)), used by
-`Lecture03/lec03.ipynb`.
+`Lecture03/lec03.ipynb`, `Lecture06/lec06.ipynb`, `Lecture22/lec22.ipynb`,
+and textbook chapter 7 (`Textbook/Ch07_files_io`).
 
 Cite as: Rust, E., Luecke, W. E., & Iadicola, M. A. (2020). *2020 Numisheet
 benchmark study uniaxial tensile tests summary.* DOI: 10.18434/M32202.

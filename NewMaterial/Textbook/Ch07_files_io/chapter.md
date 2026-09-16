@@ -1,6 +1,6 @@
 # Chapter 7: Files and I/O
 
-A program that cannot read or write files cannot do much science. This chapter is about opening text files, reading CSV data, writing your own output, and catching the errors that always come with talking to the file system. Read this when Lecture 4 throws data at you and you want to remember how to load it without thinking hard.
+A program that cannot read or write files cannot do much science. This chapter is about opening text files, reading CSV data, writing your own output, and catching the errors that always come with talking to the file system. Read this when Lecture 3 throws data at you and you want to remember how to load it without thinking hard.
 
 Prerequisite: Chapter 5 on dicts, Chapter 4 on functions.
 **How to use this chapter.** Open a Colab notebook, paste each code block into its own cell, and run with Shift-Enter. The companion `chapter.ipynb` already has every example as a cell if you want to skip the typing.
@@ -208,14 +208,15 @@ plt.close()
 
 `dpi=150` gives a crisp image for a lab report. `bbox_inches="tight"` trims the surrounding whitespace. Always call `plt.close()` after saving if you are not also calling `plt.show()`, to avoid a memory leak in long loops.
 
-### Example 12: Reading a NIST stress-strain CSV (Lecture 4 callback)
+### Example 12: Reading a NIST stress-strain CSV (Lecture 3 callback)
 
 This is the actual format the course uses for the uniaxial-tension lab.
 
 ```python
 import csv
 
-url = "https://data.nist.gov/.../U15Al6XXX-T81_...csv"   # see Lecture 4
+# NIST no longer hosts this file, so the course repo keeps a copy
+url = "https://raw.githubusercontent.com/natrask/engr1050-fall2026/main/NewMaterial/_shared/Data/U15Al6XXX-T81_BatchB13R01T2.6921W12.71.csv"
 local = "U15Al6XXX-T81.csv"
 
 import urllib.request
@@ -233,7 +234,7 @@ print(len(points), "points")
 print(points[:5])
 ```
 
-The full URL is in the lecture notebook. The columns are `Displacement_(mm)` and `Force_(kN)`. The data is hundreds of rows; do not paste it into a code cell, load it from the file.
+The other two experiments sit next to it in `NewMaterial/_shared/Data/`. The columns are `Displacement_(mm)` and `Force_(kN)`. The data is hundreds of rows; do not paste it into a code cell, load it from the file.
 
 ## Common mistakes
 
