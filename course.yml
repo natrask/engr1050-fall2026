@@ -128,9 +128,11 @@ schedule:
     date: 2026-09-16
     section: 1
     topic: Classes, dictionaries, refactoring
+    visible: true
     folder: Lecture06
     slides: Lecture_06.pdf
     notebook: lec06.ipynb
+    exercise: https://canvas.upenn.edu/courses/1950130/assignments/15133255
   - num: 7
     date: 2026-09-21
     section: 1
