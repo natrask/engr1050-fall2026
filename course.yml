@@ -133,6 +133,9 @@ schedule:
     slides: Lecture_06.pdf
     notebook: lec06.ipynb
     exercise: https://canvas.upenn.edu/courses/1950130/assignments/15133255
+    links:
+      - label: AI policy survey
+        url: https://forms.gle/yab4BqFY5Db8VtDb9
   - num: 7
     date: 2026-09-21
     section: 1
