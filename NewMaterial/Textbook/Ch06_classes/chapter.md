@@ -368,4 +368,4 @@ The `!r` in the f-string gives you the repr of the value, which is `'Franklin'` 
 
 ## What to read next
 
-Chapter 11 takes the solver pattern from Example 11 to a real ODE workflow. If you are heading into Lecture 8 or the helicopter labs, this chapter is the prerequisite for everything that comes next. Chapter 12 covers AI-assisted coding, which lands at the end of the semester and uses classes for nontrivial things.
+Chapter 11 takes the solver pattern from Example 11 to a real ODE workflow. If you are heading into Lecture 9 or the helicopter labs, this chapter is the prerequisite for everything that comes next. Chapter 12 covers AI-assisted coding, which lands at the end of the semester and uses classes for nontrivial things.

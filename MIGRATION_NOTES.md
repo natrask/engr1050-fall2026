@@ -58,7 +58,7 @@ The H1 title at the top of each `notes.md` file was rewritten safely to match th
 - `Lecture04/lec04.ipynb` H1 still says "Lecture 5"
 - `Lecture06/lec06.ipynb` H1 still says "Lecture 7"; prose has "Lecture 3" and "Lecture 4" references that map to new Lectures 2 and 3
 - `Lecture07/lec07.ipynb` H1 still says "Lecture 8"
-- `Lecture08/lec08.ipynb` H1 still says "Lecture 9"
+- `Lecture09/lec09.ipynb` (the whack-a-mole lab, moved from the 9/23 slot to 9/28) H1 now says "Lecture 9"
 - `Lecture11/lec11.ipynb` H1 still says "Lecture 12"
 - `Lecture12/lec12.ipynb` H1 still says "Lecture 13"
 - `Lecture13/lec13.ipynb` H1 still says "Lecture 14"

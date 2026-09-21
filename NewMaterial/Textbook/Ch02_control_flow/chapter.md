@@ -268,4 +268,4 @@ print(f"accepted {n}")
 
 ## What to read next
 
-Chapter 3 covers lists and slicing, which is the natural next step once you can loop. If you are heading toward Lecture 4 on plotting and data cleanup, jump from Chapter 3 to Chapter 10. The whack-a-mole lab in Lecture 8 uses everything in this chapter plus classes from Chapter 6.
+Chapter 3 covers lists and slicing, which is the natural next step once you can loop. If you are heading toward Lecture 4 on plotting and data cleanup, jump from Chapter 3 to Chapter 10. The whack-a-mole lab in Lecture 9 uses everything in this chapter plus classes from Chapter 6.
