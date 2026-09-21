@@ -142,8 +142,14 @@ schedule:
     topic: More classes, prep for lab
     visible: true
     folder: Lecture07
+    slides:
+      - Lecture_07.pptx
+      - Lecture_07.pdf
     notebook: lec07.ipynb
     exercise: https://canvas.upenn.edu/courses/1950130/assignments/15139538
+    links:
+      - label: Homework 2 (due 9/30)
+        url: https://canvas.upenn.edu/courses/1950130/assignments/15139922
   - num: 8
     date: 2026-09-23
     section: 1
@@ -285,14 +291,15 @@ schedule:
 
 homeworks:
   # `visible: true` publishes the PDF link; without it the card shows "(coming)".
-  # HW2-5 PDFs still carry Fall 2025 due dates on their title page.
+  # HW3-5 PDFs still carry Fall 2025 due dates on their title page.
   - num: 1
     visible: true
     due: 2026-09-15
     title: Print statements, loops, conditionals, plotting
     pdf: NewMaterial/Homeworks/HW1/hw1.pdf
   - num: 2
-    due: 2026-09-28
+    visible: true
+    due: 2026-09-30
     title: Gradebook database in Thonny
     pdf: NewMaterial/Homeworks/HW2/hw2.pdf
   - num: 3
