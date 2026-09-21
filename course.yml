@@ -156,6 +156,21 @@ schedule:
     topic: Extra classes practice and exam 1 review
     visible: true
     folder: Lecture08
+    links:
+      - label: HW2 getting-started hint (Colab)
+        url: https://colab.research.google.com/github/natrask/engr1050-fall2026/blob/main/NewMaterial/Lecture08/homeworkHint.ipynb
+      - label: "Extra Ch. 1: Variables, types, expressions"
+        url: NewMaterial/Textbook/Ch01_variables/chapter.html
+      - label: "Extra Ch. 2: Control flow"
+        url: NewMaterial/Textbook/Ch02_control_flow/chapter.html
+      - label: "Extra Ch. 3: Lists, tuples, slicing"
+        url: NewMaterial/Textbook/Ch03_lists_slicing/chapter.html
+      - label: "Extra Ch. 4: Functions"
+        url: NewMaterial/Textbook/Ch04_functions/chapter.html
+      - label: "Extra Ch. 5: Dictionaries and sets"
+        url: NewMaterial/Textbook/Ch05_dicts_sets/chapter.html
+      - label: "Extra Ch. 6: Classes and objects"
+        url: NewMaterial/Textbook/Ch06_classes/chapter.html
   - num: 9
     date: 2026-09-28
     section: 1
