@@ -18,25 +18,33 @@
  pre { background: #f4f4f4; padding: 12px; border-radius: 6px; overflow-x: auto; }
  blockquote { border-left: 4px solid #82AFD3; padding: 4px 12px; background: #f8f9fa; margin: 12px 0; }
  a { color: #4a90e2; } a:hover { color: #990000; }
- .nav { font-size: 0.9rem; margin-bottom: 1rem; }
+ pre code { background: none; padding: 0; }
+ li { margin-bottom: 6px; }
+ li p { margin: 6px 0; }
+ li pre { margin: 8px 0; }
+ .nav { font-size: 0.9rem; margin-bottom: 1rem; display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; }
+ .nav a.button { background: #6c757d; color: #fff; padding: 0.3rem 0.8rem; border-radius: 4px; text-decoration: none; font-weight: 600; }
+ .nav a.button:hover { background: #990000; color: #fff; }
 </style>
 </head>
 <body>
-<p class="nav"><a href="../../../index.html#extras">&larr; Back to Extras</a></p>
+<p class="nav"><a href="../../../index.html#extras">&larr; Back to Extras</a>
+<a class="button" href="https://colab.research.google.com/github/natrask/engr1050-fall2026/blob/main/NewMaterial/Textbook/Ch02_control_flow/chapter.ipynb" target="_blank">Open in Colab</a></p>
 <h1>Chapter 2: Control flow</h1>
-<p>This is where Python stops being a calculator and starts being a program. You learn how to make decisions with `if`, repeat things with `for` and `while`, and bail out of a loop early when you have the answer. Read this if Lecture 2 felt fast, or if you keep typing code that runs once and then quits before you wanted it to.</p>
-<p>Prerequisite: Chapter 1 on variables and types. **How to use this chapter.** Open a Colab notebook, paste each code block into its own cell, and run with Shift-Enter. The companion `chapter.ipynb` already has every example as a cell if you want to skip the typing.</p>
+<p>This is where Python stops being a calculator and starts being a program. You learn how to make decisions with <code>if</code>, repeat things with <code>for</code> and <code>while</code>, and bail out of a loop early when you have the answer. Read this if Lecture 2 felt fast, or if you keep typing code that runs once and then quits before you wanted it to.</p>
+<p>Prerequisite: Chapter 1 on variables and types.</p>
+<p><strong>How to use this chapter.</strong> Open a Colab notebook, paste each code block into its own cell, and run with Shift-Enter. The Open in Colab button at the top of this page loads a companion notebook that already has every example as a cell, if you want to skip the typing. Every example prints its results with <code>print</code>, so the same code also runs as a <code>.py</code> file in Thonny.</p>
 <h2>What you should be able to do after this chapter</h2>
 <ul>
-<li>Write an `if / elif / else` that picks one of several branches.</li>
+<li>Write an <code>if / elif / else</code> that picks one of several branches.</li>
 <li>Loop over a list, a string, or a range of integers without writing your own counter.</li>
-<li>Use `while` when you do not know in advance how many iterations you need.</li>
-<li>Use `break` to exit a loop early and `continue` to skip the current iteration.</li>
-<li>Read other people&#x27;s loops without getting confused by `enumerate` and `zip`.</li>
+<li>Use <code>while</code> when you do not know in advance how many iterations you need.</li>
+<li>Use <code>break</code> to exit a loop early and <code>continue</code> to skip the current iteration.</li>
+<li>Read other people&#x27;s loops without getting confused by <code>enumerate</code> and <code>zip</code>.</li>
 </ul>
 <h2>The minimum you need to know</h2>
-<p>**Indentation is syntax.** Python decides which statements belong to a loop or an `if` by looking at the leading spaces. Four spaces is the convention. Tabs work, but mixing tabs and spaces is the fastest way to a `IndentationError`. Pick one and stick to it.</p>
-<p>`if` checks a condition, runs the block if true. `elif` is &quot;else if&quot;, you can have as many as you want. `else` is the catch-all at the bottom. Conditions are anything that evaluates to a boolean: a comparison like `x &gt; 0`, a function call that returns True or False, or just a value that Python treats as truthy or falsy.</p>
+<p><strong>Indentation is syntax.</strong> Python decides which statements belong to a loop or an <code>if</code> by looking at the leading spaces. Four spaces is the convention. Tabs work, but mixing tabs and spaces is the fastest way to a <code>IndentationError</code>. Pick one and stick to it.</p>
+<p><code>if</code> checks a condition, runs the block if true. <code>elif</code> is &quot;else if&quot;, you can have as many as you want. <code>else</code> is the catch-all at the bottom. Conditions are anything that evaluates to a boolean: a comparison like <code>x &gt; 0</code>, a function call that returns True or False, or just a value that Python treats as truthy or falsy.</p>
 <pre><code>score = 87
 if score &gt;= 90:
     grade = &quot;A&quot;
@@ -47,15 +55,15 @@ elif score &gt;= 70:
 else:
     grade = &quot;F&quot;
 print(grade)</code></pre>
-<p>`for` runs a block once for each item in a sequence. The most common sequences are lists, strings, and `range(n)`, which produces the integers 0 through n-1.</p>
+<p><code>for</code> runs a block once for each item in a sequence. The most common sequences are lists, strings, and <code>range(n)</code>, which produces the integers 0 through n-1.</p>
 <pre><code>for i in range(5):
     print(i)</code></pre>
-<p>`while` runs a block as long as a condition stays true. You need to make sure the condition eventually becomes false, or you have an infinite loop. Hit the stop button if you wrote one.</p>
+<p><code>while</code> runs a block as long as a condition stays true. You need to make sure the condition eventually becomes false, or you have an infinite loop. Hit the stop button if you wrote one.</p>
 <pre><code>n = 1
 while n &lt; 1000:
     n *= 2
 print(n)   # 1024</code></pre>
-<p>`break` exits the nearest loop immediately. `continue` skips to the next iteration. Both are useful, do not feel bad for using them.</p>
+<p><code>break</code> exits the nearest loop immediately. <code>continue</code> skips to the next iteration. Both are useful, do not feel bad for using them.</p>
 <h2>Worked examples</h2>
 <h3>Example 1: Simple if/else</h3>
 <p>The condition can be any boolean expression. The colon is required. The block must be indented.</p>
@@ -75,14 +83,14 @@ elif hour &lt; 21:
     print(&quot;evening&quot;)
 else:
     print(&quot;night&quot;)</code></pre>
-<p>A common bug: writing `elif hour &gt; 12 and hour &lt; 17:` instead of just `elif hour &lt; 17:`. Once you are in the elif, you already know the first `if` was false, so `hour &gt;= 12` is implied. Less code is less to read.</p>
+<p>A common bug: writing <code>elif hour &gt; 12 and hour &lt; 17:</code> instead of just <code>elif hour &lt; 17:</code>. Once you are in the elif, you already know the first <code>if</code> was false, so <code>hour &gt;= 12</code> is implied. Less code is less to read.</p>
 <h3>Example 3: For loop over a list</h3>
-<p>The variable on the left of `in` takes each item in turn. The name is yours to choose. `name` is more readable than `x` when the list contains names.</p>
+<p>The variable on the left of <code>in</code> takes each item in turn. The name is yours to choose. <code>name</code> is more readable than <code>x</code> when the list contains names.</p>
 <pre><code>players = [&quot;Schwarber&quot;, &quot;Turner&quot;, &quot;Harper&quot;, &quot;Bohm&quot;]
 for name in players:
     print(f&quot;now batting: {name}&quot;)</code></pre>
 <h3>Example 4: For loop over range</h3>
-<p>`range(5)` is `0, 1, 2, 3, 4`. `range(1, 6)` is `1, 2, 3, 4, 5`. `range(0, 10, 2)` is `0, 2, 4, 6, 8`. The third argument is the step.</p>
+<p><code>range(5)</code> is <code>0, 1, 2, 3, 4</code>. <code>range(1, 6)</code> is <code>1, 2, 3, 4, 5</code>. <code>range(0, 10, 2)</code> is <code>0, 2, 4, 6, 8</code>. The third argument is the step.</p>
 <pre><code>for i in range(1, 11):
     print(i, i * i)</code></pre>
 <h3>Example 5: Looping over a string</h3>
@@ -95,7 +103,7 @@ for name in players:
 for n in range(1, 101):
     total += n
 print(total)   # 5050</code></pre>
-<p>If you want only the even ones, add an `if` inside.</p>
+<p>If you want only the even ones, add an <code>if</code> inside.</p>
 <pre><code>total = 0
 for n in range(1, 101):
     if n % 2 == 0:
@@ -122,7 +130,7 @@ for name in players:
         break
 else:
     print(&quot;not found&quot;)</code></pre>
-<p>That `else` clause on a `for` loop is a Python oddity worth knowing. It runs if the loop finished without hitting `break`. Useful for &quot;if we searched the whole list and did not find it&quot; cases.</p>
+<p>That <code>else</code> clause on a <code>for</code> loop is a Python oddity worth knowing. It runs if the loop finished without hitting <code>break</code>. Useful for &quot;if we searched the whole list and did not find it&quot; cases.</p>
 <h3>Example 9: Continue to skip a value</h3>
 <p>You want to do something to every item except the ones that match a condition.</p>
 <pre><code>for n in range(1, 11):
@@ -131,27 +139,27 @@ else:
     print(n)
 # 1 2 4 5 7 8 10</code></pre>
 <h3>Example 10: enumerate when you need the index</h3>
-<p>If you need both the position and the value, use `enumerate` instead of writing your own counter.</p>
+<p>If you need both the position and the value, use <code>enumerate</code> instead of writing your own counter.</p>
 <pre><code>players = [&quot;Schwarber&quot;, &quot;Turner&quot;, &quot;Harper&quot;]
 for i, name in enumerate(players):
     print(f&quot;batter {i+1}: {name}&quot;)</code></pre>
-<p>The `i+1` is because lineups are 1-indexed but Python is 0-indexed. Welcome to programming.</p>
+<p>The <code>i+1</code> is because lineups are 1-indexed but Python is 0-indexed. Welcome to programming.</p>
 <h3>Example 11: zip to walk two lists together</h3>
-<p>When two lists are parallel, `zip` glues them up so you can loop once instead of twice.</p>
+<p>When two lists are parallel, <code>zip</code> glues them up so you can loop once instead of twice.</p>
 <pre><code>players = [&quot;Schwarber&quot;, &quot;Turner&quot;, &quot;Harper&quot;]
 rbis    = [119, 66, 64]
 for name, rbi in zip(players, rbis):
     print(f&quot;{name}: {rbi} RBI&quot;)</code></pre>
-<p>If the lists are different lengths, `zip` stops at the shorter one. That is usually what you want.</p>
+<p>If the lists are different lengths, <code>zip</code> stops at the shorter one. That is usually what you want.</p>
 <h3>Example 12: Nested loops</h3>
 <p>You can put a loop inside a loop. The classic example is printing a multiplication table.</p>
 <pre><code>for i in range(1, 6):
     for j in range(1, 6):
         print(f&quot;{i*j:4d}&quot;, end=&quot;&quot;)
     print()</code></pre>
-<p>The `end=&quot;&quot;` tells `print` not to add a newline. The bare `print()` at the end of the outer loop adds one row break.</p>
+<p>The <code>end=&quot;&quot;</code> tells <code>print</code> not to add a newline. The bare <code>print()</code> at the end of the outer loop adds one row break.</p>
 <h3>Example 13: Validating a value with while</h3>
-<p>A common pattern: loop over a list of candidates until you find one that satisfies your criterion. The `while True:` / `break` idiom is the cleanest way to write it.</p>
+<p>A common pattern: loop over a list of candidates until you find one that satisfies your criterion. The <code>while True:</code> / <code>break</code> idiom is the cleanest way to write it.</p>
 <pre><code>candidates = [&quot;abc&quot;, &quot;-3&quot;, &quot;0&quot;, &quot;42&quot;]
 i = 0
 while True:
@@ -162,26 +170,34 @@ while True:
     print(f&quot;rejected {raw!r}&quot;)
     i += 1
 print(f&quot;accepted {n}&quot;)</code></pre>
-<p>`while True:` is the standard idiom for &quot;loop forever&quot;. You exit with `break` once you have what you want.</p>
+<p><code>while True:</code> is the standard idiom for &quot;loop forever&quot;. You exit with <code>break</code> once you have what you want.</p>
 <h2>Common mistakes</h2>
 <ul>
-<li>Forgetting the colon at the end of `if`, `for`, or `while`. Python tells you with a `SyntaxError` pointing at the next line, which is confusing the first time.</li>
-<li>Using `=` instead of `==` in an `if` condition. `if x = 3:` is a syntax error in Python (this is actually a feature, other languages would silently assign and then test truthiness).</li>
-<li>Off-by-one in `range`. `range(10)` gives `0..9`, not `0..10`. If you want 1 through 10, write `range(1, 11)`.</li>
+<li>Forgetting the colon at the end of <code>if</code>, <code>for</code>, or <code>while</code>. Python tells you with a <code>SyntaxError</code> pointing at the next line, which is confusing the first time.</li>
+<li>Using <code>=</code> instead of <code>==</code> in an <code>if</code> condition. <code>if x = 3:</code> is a syntax error in Python (this is actually a feature, other languages would silently assign and then test truthiness).</li>
+<li>Off-by-one in <code>range</code>. <code>range(10)</code> gives <code>0..9</code>, not <code>0..10</code>. If you want 1 through 10, write <code>range(1, 11)</code>.</li>
 <li>Modifying a list while looping over it. The iteration index gets confused, items get skipped. Loop over a copy or build a new list instead.</li>
-<li>Infinite loop because the condition variable never updates. Almost always: forgetting to increment a counter inside `while`.</li>
-<li>Confusing `break` and `continue`. `break` leaves the loop, `continue` jumps to the next iteration.</li>
+<li>Infinite loop because the condition variable never updates. Almost always: forgetting to increment a counter inside <code>while</code>.</li>
+<li>Confusing <code>break</code> and <code>continue</code>. <code>break</code> leaves the loop, <code>continue</code> jumps to the next iteration.</li>
 <li>Indentation errors from mixing tabs and spaces. Set your editor to insert spaces.</li>
 </ul>
 <h2>Practice problems</h2>
 <ol>
-<li>Write a loop that prints the first ten powers of 2, one per line, in the form `2^N = ...`.</li>
-<li>Given the list `scores = [88, 92, 67, 100, 73, 81, 55]`, count how many are passing (score &gt;= 70). Use a `for` loop and an accumulator.</li>
-<li>The snippet below is supposed to print the first even number greater than 100 in a list. It does not. Fix it.</li>
-<p>   ```python    nums = [3, 17, 50, 75, 102, 200]    for n in nums:        if n % 2 == 0 and n &gt; 100:            print(n)    ```    (Hint: it prints both `102` and `200`. You want only the first.)</p>
-<li>Predict the output. Then run it.</li>
-<p>   ```python    for i in range(1, 5):        for j in range(1, 5):            if i == j:                continue            print(i, j)    ```</p>
-<li>Use `zip` to compute the dot product of `a = [1, 2, 3]` and `b = [4, 5, 6]`. The answer is `1*4 + 2*5 + 3*6 = 32`.</li>
+<li>Write a loop that prints the first ten powers of 2, one per line, in the form <code>2^N = ...</code>.</li>
+<li>Given the list <code>scores = [88, 92, 67, 100, 73, 81, 55]</code>, count how many are passing (score &gt;= 70). Use a <code>for</code> loop and an accumulator.</li>
+<li><p>The snippet below is supposed to print the first even number greater than 100 in a list. It does not. Fix it.</p>
+<pre><code>nums = [3, 17, 50, 75, 102, 200]
+for n in nums:
+    if n % 2 == 0 and n &gt; 100:
+        print(n)</code></pre>
+<p>(Hint: it prints both <code>102</code> and <code>200</code>. You want only the first.)</p></li>
+<li><p>Predict the output. Then run it.</p>
+<pre><code>for i in range(1, 5):
+    for j in range(1, 5):
+        if i == j:
+            continue
+        print(i, j)</code></pre></li>
+<li>Use <code>zip</code> to compute the dot product of <code>a = [1, 2, 3]</code> and <code>b = [4, 5, 6]</code>. The answer is <code>1*4 + 2*5 + 3*6 = 32</code>.</li>
 </ol>
 <h2>What to read next</h2>
 <p>Chapter 3 covers lists and slicing, which is the natural next step once you can loop. If you are heading toward Lecture 4 on plotting and data cleanup, jump from Chapter 3 to Chapter 10. The whack-a-mole lab in Lecture 9 uses everything in this chapter plus classes from Chapter 6.</p>

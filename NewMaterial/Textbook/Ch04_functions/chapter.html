@@ -18,17 +18,25 @@
  pre { background: #f4f4f4; padding: 12px; border-radius: 6px; overflow-x: auto; }
  blockquote { border-left: 4px solid #82AFD3; padding: 4px 12px; background: #f8f9fa; margin: 12px 0; }
  a { color: #4a90e2; } a:hover { color: #990000; }
- .nav { font-size: 0.9rem; margin-bottom: 1rem; }
+ pre code { background: none; padding: 0; }
+ li { margin-bottom: 6px; }
+ li p { margin: 6px 0; }
+ li pre { margin: 8px 0; }
+ .nav { font-size: 0.9rem; margin-bottom: 1rem; display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; }
+ .nav a.button { background: #6c757d; color: #fff; padding: 0.3rem 0.8rem; border-radius: 4px; text-decoration: none; font-weight: 600; }
+ .nav a.button:hover { background: #990000; color: #fff; }
 </style>
 </head>
 <body>
-<p class="nav"><a href="../../../index.html#extras">&larr; Back to Extras</a></p>
+<p class="nav"><a href="../../../index.html#extras">&larr; Back to Extras</a>
+<a class="button" href="https://colab.research.google.com/github/natrask/engr1050-fall2026/blob/main/NewMaterial/Textbook/Ch04_functions/chapter.ipynb" target="_blank">Open in Colab</a></p>
 <h1>Chapter 4: Functions</h1>
 <p>Functions are how you stop copy-pasting six lines of code into every cell of your notebook. You write the steps once, give the recipe a name, and then call the recipe whenever you need it. Read this chapter when your notebook is starting to feel like a wall of text, or when Lecture 5 introduces functions and you want a second pass.</p>
-<p>Prerequisite: Chapter 2 on control flow. **How to use this chapter.** Open a Colab notebook, paste each code block into its own cell, and run with Shift-Enter. The companion `chapter.ipynb` already has every example as a cell if you want to skip the typing.</p>
+<p>Prerequisite: Chapter 2 on control flow.</p>
+<p><strong>How to use this chapter.</strong> Open a Colab notebook, paste each code block into its own cell, and run with Shift-Enter. The Open in Colab button at the top of this page loads a companion notebook that already has every example as a cell, if you want to skip the typing. Every example prints its results with <code>print</code>, so the same code also runs as a <code>.py</code> file in Thonny.</p>
 <h2>What you should be able to do after this chapter</h2>
 <ul>
-<li>Define a function with `def`, parameters, and `return`.</li>
+<li>Define a function with <code>def</code>, parameters, and <code>return</code>.</li>
 <li>Tell the difference between a parameter and an argument.</li>
 <li>Use default values for arguments.</li>
 <li>Return multiple values without packing them by hand.</li>
@@ -36,20 +44,20 @@
 <li>Decide when to break a big function into smaller helpers.</li>
 </ul>
 <h2>The minimum you need to know</h2>
-<p>A function definition has four parts: the keyword `def`, a name, a list of parameters in parentheses, and an indented block of code.</p>
+<p>A function definition has four parts: the keyword <code>def</code>, a name, a list of parameters in parentheses, and an indented block of code.</p>
 <pre><code>def area_of_circle(r):
     return 3.14159 * r * r</code></pre>
 <p>You call the function by name with a value in the parens.</p>
 <pre><code>print(area_of_circle(5))   # 78.53975</code></pre>
-<p>Inside the function, `r` is a **parameter**, a name local to the function. When you call `area_of_circle(5)`, `5` is the **argument**, the actual value passed in. The distinction matters less than you would think, but it makes the docs and error messages easier to read.</p>
-<p>`return` sends a value back out. A function with no `return` (or just `return` with nothing after it) returns `None`. `None` is the official &quot;no value&quot; value in Python.</p>
+<p>Inside the function, <code>r</code> is a <strong>parameter</strong>, a name local to the function. When you call <code>area_of_circle(5)</code>, <code>5</code> is the <strong>argument</strong>, the actual value passed in. The distinction matters less than you would think, but it makes the docs and error messages easier to read.</p>
+<p><code>return</code> sends a value back out. A function with no <code>return</code> (or just <code>return</code> with nothing after it) returns <code>None</code>. <code>None</code> is the official &quot;no value&quot; value in Python.</p>
 <p>Default arguments let you call a function with fewer args. Stick them at the end of the parameter list.</p>
 <pre><code>def greet(name, greeting=&quot;Hello&quot;):
     print(f&quot;{greeting}, {name}!&quot;)
 
 greet(&quot;Trea&quot;)               # Hello, Trea!
 greet(&quot;Bryce&quot;, &quot;Hey&quot;)       # Hey, Bryce!</code></pre>
-<p>Return multiple values by listing them separated by commas. Python packs them into a tuple. The caller can unpack with multiple names on the left of `=`.</p>
+<p>Return multiple values by listing them separated by commas. Python packs them into a tuple. The caller can unpack with multiple names on the left of <code>=</code>.</p>
 <pre><code>def min_max(values):
     return min(values), max(values)
 
@@ -62,7 +70,7 @@ print(lo, hi)</code></pre>
 
 greet(&quot;Schwarber&quot;)
 greet(&quot;Turner&quot;)</code></pre>
-<p>The function prints. It does not return anything, so you cannot use it in an expression. Calling `greet(&quot;Bohm&quot;)` evaluates to `None`.</p>
+<p>The function prints. It does not return anything, so you cannot use it in an expression. Calling <code>greet(&quot;Bohm&quot;)</code> evaluates to <code>None</code>.</p>
 <h3>Example 2: Return a value</h3>
 <p>If you want to use the result later, return it.</p>
 <pre><code>def square(x):
@@ -72,14 +80,14 @@ a = square(7)
 print(a)        # 49
 print(square(square(2)))   # 16, you can chain calls</code></pre>
 <h3>Example 3: Multiple parameters</h3>
-<p>Order matters when you pass arguments positionally. Pass them by name with `parameter=value` and order does not matter.</p>
+<p>Order matters when you pass arguments positionally. Pass them by name with <code>parameter=value</code> and order does not matter.</p>
 <pre><code>def rectangle_area(width, height):
     return width * height
 
 print(rectangle_area(4, 5))                  # 20, positional
 print(rectangle_area(width=4, height=5))     # 20, keyword
 print(rectangle_area(height=5, width=4))     # 20, keyword in any order</code></pre>
-<p>Keyword arguments are great for functions with several parameters. `matplotlib.plot(x, y, color=&quot;red&quot;, linestyle=&quot;--&quot;, linewidth=2)` is much easier to read than `plot(x, y, &quot;red&quot;, &quot;--&quot;, 2)`.</p>
+<p>Keyword arguments are great for functions with several parameters. <code>matplotlib.plot(x, y, color=&quot;red&quot;, linestyle=&quot;--&quot;, linewidth=2)</code> is much easier to read than <code>plot(x, y, &quot;red&quot;, &quot;--&quot;, 2)</code>.</p>
 <h3>Example 4: Default arguments</h3>
 <p>Defaults let you write a function that has a reasonable behavior with minimum input, but is still configurable.</p>
 <pre><code>def temperature_label(t, unit=&quot;F&quot;):
@@ -102,9 +110,9 @@ print(temperature_label(295, unit=&quot;K&quot;))</code></pre>
 
 n, mean, spread = descriptive_stats([3, 5, 7, 9, 11])
 print(n, mean, spread)</code></pre>
-<p>Behind the scenes, Python packed the three values into a tuple. The line `n, mean, spread = ...` unpacked them. If you want the tuple as one object, you can write `result = descriptive_stats(...)` and access `result[0]` and so on.</p>
+<p>Behind the scenes, Python packed the three values into a tuple. The line <code>n, mean, spread = ...</code> unpacked them. If you want the tuple as one object, you can write <code>result = descriptive_stats(...)</code> and access <code>result[0]</code> and so on.</p>
 <h3>Example 6: Docstrings</h3>
-<p>A string literal as the first statement of a function is the **docstring**. Tools like `help`, IDEs, and Jupyter use it to show what the function does.</p>
+<p>A string literal as the first statement of a function is the <strong>docstring</strong>. The built-in <code>help</code> function, Colab, and Thonny all use it to show what the function does.</p>
 <pre><code>def f_to_c(f):
     &quot;&quot;&quot;Convert Fahrenheit to Celsius.&quot;&quot;&quot;
     return (f - 32) * 5 / 9
@@ -119,7 +127,7 @@ help(f_to_c)</code></pre>
 
 f()
 # print(inside)   # NameError, inside does not exist out here</code></pre>
-<p>You can read a variable defined outside the function, but you cannot assign to it without the `global` keyword. Use `global` only when you have to. Almost always there is a cleaner option, like returning the value instead.</p>
+<p>You can read a variable defined outside the function, but you cannot assign to it without the <code>global</code> keyword. Use <code>global</code> only when you have to. Almost always there is a cleaner option, like returning the value instead.</p>
 <h3>Example 8: Pure functions are easier to test</h3>
 <p>A function that only reads its arguments and only returns a value is easier to reason about. No surprise side effects, no mutating something the caller did not expect to be mutated.</p>
 <pre><code># pure
@@ -150,7 +158,7 @@ print(append_one())   # [1, 1, 1]</code></pre>
         lst = []
     lst.append(1)
     return lst</code></pre>
-<p>`None` as a sentinel is the idiomatic Python fix.</p>
+<p><code>None</code> as a sentinel is the idiomatic Python fix.</p>
 <h3>Example 10: Decomposing an ugly script</h3>
 <p>A common refactor pattern: take a tangled script, identify the pieces, give each piece a name.</p>
 <pre><code># Ugly version
@@ -199,33 +207,37 @@ def negate(x):
 print(apply(double, 5))    # 10
 print(apply(negate, 5))    # -5</code></pre>
 <h3>Example 12: Anonymous functions with lambda</h3>
-<p>A `lambda` is a one-line function literal. Use it when you need to pass a tiny function inline and giving it a name would be silly.</p>
+<p>A <code>lambda</code> is a one-line function literal. Use it when you need to pass a tiny function inline and giving it a name would be silly.</p>
 <pre><code>nums = [3, 1, 4, 1, 5, 9, 2, 6]
 print(sorted(nums, key=lambda x: -x))   # sort descending without writing a helper</code></pre>
-<p>If the lambda would span more than one expression, just use `def` and give it a name. Lambdas in Python are deliberately limited to one expression to discourage abuse.</p>
+<p>If the lambda would span more than one expression, just use <code>def</code> and give it a name. Lambdas in Python are deliberately limited to one expression to discourage abuse.</p>
 <h2>Common mistakes</h2>
 <ul>
-<li>Forgetting `return`, then wondering why the caller gets `None`. Especially common when you `print(result)` inside the function and assume that returns it. It does not.</li>
-<li>Mutable default arguments. Do not write `def f(x=[])`. Use `None` as a sentinel.</li>
-<li>Confusing parameters with arguments. Same thing in casual talk, but the error messages call them `positional argument` and `keyword argument` explicitly.</li>
-<li>Naming a function the same as a builtin. `sum`, `list`, `max`, `min`, `input`, `id`. You shadow the builtin and confusing errors follow.</li>
+<li>Forgetting <code>return</code>, then wondering why the caller gets <code>None</code>. Especially common when you <code>print(result)</code> inside the function and assume that returns it. It does not.</li>
+<li>Mutable default arguments. Do not write <code>def f(x=[])</code>. Use <code>None</code> as a sentinel.</li>
+<li>Confusing parameters with arguments. Same thing in casual talk, but the error messages call them <code>positional argument</code> and <code>keyword argument</code> explicitly.</li>
+<li>Naming a function the same as a builtin. <code>sum</code>, <code>list</code>, <code>max</code>, <code>min</code>, <code>input</code>, <code>id</code>. You shadow the builtin and confusing errors follow.</li>
 <li>Modifying a list passed in and not telling the caller. Either return a new list or document the mutation. If a function mutates its argument and also returns something, the caller has to read the source to know what happened.</li>
 <li>Putting too much in one function. Rule of thumb: if the docstring needs the word &quot;and&quot; twice, the function should be split.</li>
 </ul>
 <h2>Practice problems</h2>
 <ol>
-<li>Write a function `is_even(n)` that returns `True` if `n` is even, `False` otherwise. Use modulo. Then use it inside a list comprehension to extract the even numbers from `range(20)`.</li>
-<li>Write a function `clamp(x, lo, hi)` that returns `x` if it is between `lo` and `hi`, `lo` if it is below, `hi` if it is above. So `clamp(150, 0, 100)` is `100`, `clamp(-3, 0, 100)` is `0`, `clamp(42, 0, 100)` is `42`.</li>
-<li>The snippet below is supposed to track a running total across calls. It does not. Find the bug. (Hint: read the mutable-default-argument example again.)</li>
-<p>   ```python    def accumulate(value, history=[]):        history.append(value)        return sum(history)</p>
-</ol>
-<p>   print(accumulate(1))   # 1    print(accumulate(2))   # 3    print(accumulate(3))   # 6, looks fine?    ```    Now write a version that does not have this trap, by making the caller pass in their own history list.</p>
-<ol>
-<li>Write a function `stats(values)` that returns the count, mean, and max of a list, all in one call. Use it like `n, m, big = stats([3,5,7])`.</li>
-<li>Given the function `def apply_twice(f, x): return f(f(x))`, what does `apply_twice(lambda y: y + 3, 10)` return? Predict, then run.</li>
+<li>Write a function <code>is_even(n)</code> that returns <code>True</code> if <code>n</code> is even, <code>False</code> otherwise. Use modulo. Then use it inside a list comprehension to extract the even numbers from <code>range(20)</code>.</li>
+<li>Write a function <code>clamp(x, lo, hi)</code> that returns <code>x</code> if it is between <code>lo</code> and <code>hi</code>, <code>lo</code> if it is below, <code>hi</code> if it is above. So <code>clamp(150, 0, 100)</code> is <code>100</code>, <code>clamp(-3, 0, 100)</code> is <code>0</code>, <code>clamp(42, 0, 100)</code> is <code>42</code>.</li>
+<li><p>The snippet below is supposed to track a running total across calls. It does not. Find the bug. (Hint: read the mutable-default-argument example again.)</p>
+<pre><code>def accumulate(value, history=[]):
+    history.append(value)
+    return sum(history)
+
+print(accumulate(1))   # 1
+print(accumulate(2))   # 3
+print(accumulate(3))   # 6, looks fine?</code></pre>
+<p>Now write a version that does not have this trap, by making the caller pass in their own history list.</p></li>
+<li>Write a function <code>stats(values)</code> that returns the count, mean, and max of a list, all in one call. Use it like <code>n, m, big = stats([3,5,7])</code>.</li>
+<li>Given the function <code>def apply_twice(f, x): return f(f(x))</code>, what does <code>apply_twice(lambda y: y + 3, 10)</code> return? Predict, then run.</li>
 </ol>
 <h2>What to read next</h2>
-<p>Chapter 5 on dictionaries, which pair beautifully with functions (a function that takes a dict of options is a common pattern). After that, Chapter 6 on classes is the place where functions become methods and the whole vocabulary clicks into place. Lecture 5 builds the `ODE_solver` class that uses every idea in this chapter.</p>
+<p>Chapter 5 on dictionaries, which pair beautifully with functions (a function that takes a dict of options is a common pattern). After that, Chapter 6 on classes is the place where functions become methods and the whole vocabulary clicks into place. Lecture 5 builds the <code>ODE_solver</code> class that uses every idea in this chapter.</p>
 <script>
 document.addEventListener("DOMContentLoaded", function() {
   if (window.renderMathInElement) {

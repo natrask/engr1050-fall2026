@@ -3,7 +3,8 @@
 Functions are how you stop copy-pasting six lines of code into every cell of your notebook. You write the steps once, give the recipe a name, and then call the recipe whenever you need it. Read this chapter when your notebook is starting to feel like a wall of text, or when Lecture 5 introduces functions and you want a second pass.
 
 Prerequisite: Chapter 2 on control flow.
-**How to use this chapter.** Open a Colab notebook, paste each code block into its own cell, and run with Shift-Enter. The companion `chapter.ipynb` already has every example as a cell if you want to skip the typing.
+
+**How to use this chapter.** Open a Colab notebook, paste each code block into its own cell, and run with Shift-Enter. The Open in Colab button at the top of this page loads a companion notebook that already has every example as a cell, if you want to skip the typing. Every example prints its results with `print`, so the same code also runs as a `.py` file in Thonny.
 
 
 ## What you should be able to do after this chapter
@@ -131,7 +132,7 @@ Behind the scenes, Python packed the three values into a tuple. The line `n, mea
 
 ### Example 6: Docstrings
 
-A string literal as the first statement of a function is the **docstring**. Tools like `help`, IDEs, and Jupyter use it to show what the function does.
+A string literal as the first statement of a function is the **docstring**. The built-in `help` function, Colab, and Thonny all use it to show what the function does.
 
 ```python
 def f_to_c(f):

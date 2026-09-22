@@ -3,7 +3,8 @@
 A class is a template for an object. The object has data (attributes) and behavior (methods). Once you can read and write classes, big chunks of the course suddenly make sense: the ODE solver, the helicopter controller, the binary classifier. Read this when Lecture 6 or 7 moved fast and you want to slow down with concrete examples.
 
 Prerequisite: Chapter 4 on functions.
-**How to use this chapter.** Open a Colab notebook, paste each code block into its own cell, and run with Shift-Enter. The companion `chapter.ipynb` already has every example as a cell if you want to skip the typing.
+
+**How to use this chapter.** Open a Colab notebook, paste each code block into its own cell, and run with Shift-Enter. The Open in Colab button at the top of this page loads a companion notebook that already has every example as a cell, if you want to skip the typing. Every example prints its results with `print`, so the same code also runs as a `.py` file in Thonny.
 
 
 ## What you should be able to do after this chapter
@@ -147,11 +148,12 @@ acct.withdraw(500)       # insufficient funds for Ben Franklin
 You probably wrote this in Lecture 4 as loose code:
 
 ```python
-# load data, clean data, plot data
-displacement = [...]
-force = [...]
+# load data, clean data, report the peak
+displacement = [2.0, 2.1, 2.3, 2.5]
+force = [0, 5, 10, 15]
 zeroed = [d - displacement[0] for d in displacement]
-# plot...
+print(zeroed)
+print(max(force) * 0.95)
 ```
 
 The class version groups the data and the operations:
@@ -169,6 +171,11 @@ class StressStrainData:
     def yield_estimate(self, fraction=0.95):
         peak = max(self.force)
         return peak * fraction
+
+s = StressStrainData([2.0, 2.1, 2.3, 2.5], [0, 5, 10, 15])
+s.zero_displacement()
+print(s.displacement)
+print(s.yield_estimate())
 ```
 
 Two helpful things happened. First, the data and the operations are together; a reader sees the whole story in one place. Second, if you need to process three datasets, you build three instances and let each one zero itself out. No copy-paste.

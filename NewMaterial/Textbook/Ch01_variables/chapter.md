@@ -2,7 +2,7 @@
 
 This is the chapter you read if Lecture 1 went past you and you want a quiet place to type some code and see what it does. No microcontrollers, no plots, no math. Just variables, the four basic types, and the arithmetic and string operations that make the rest of the course possible.
 
-**How to use this chapter.** Open a Colab notebook, paste each code block into its own cell, and run with Shift-Enter. The companion `chapter.ipynb` already has every example as a cell if you want to skip the typing.
+**How to use this chapter.** Open a Colab notebook, paste each code block into its own cell, and run with Shift-Enter. The Open in Colab button at the top of this page loads a companion notebook that already has every example as a cell, if you want to skip the typing. Every example prints its results with `print`, so the same code also runs as a `.py` file in Thonny.
 
 ## What you should be able to do after this chapter
 
@@ -22,7 +22,7 @@ name = "Trea"
 ready = True
 ```
 
-The four basic types you will use today are `int` (whole number), `float` (decimal), `str` (text in quotes), and `bool` (`True` or `False`, capital T and F). Python figures out the type from what you wrote, so you do not have to declare anything. If you want to check, call `type(x)` and Python tells you.
+The four basic types you will use today are `int` (whole number), `float` (decimal), `str` (text in quotes), and `bool` (`True` or `False`, capital T and F). Python figures out the type from what you wrote, so you do not have to declare anything. If you want to check, run `print(type(x))`.
 
 The arithmetic operators are `+ - * /` plus three more that surprise people the first time: `//` is integer-style division (drops the fractional part), `%` is the remainder, `**` is exponent. So `7 / 2` is `3.5`, `7 // 2` is `3`, `7 % 2` is `1`, and `2 ** 10` is `1024`. Augmented assignment like `x += 1` is shorthand for `x = x + 1`. Use it.
 

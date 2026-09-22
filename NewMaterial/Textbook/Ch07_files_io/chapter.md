@@ -3,7 +3,8 @@
 A program that cannot read or write files cannot do much science. This chapter is about opening text files, reading CSV data, writing your own output, and catching the errors that always come with talking to the file system. Read this when Lecture 3 throws data at you and you want to remember how to load it without thinking hard.
 
 Prerequisite: Chapter 5 on dicts, Chapter 4 on functions.
-**How to use this chapter.** Open a Colab notebook, paste each code block into its own cell, and run with Shift-Enter. The companion `chapter.ipynb` already has every example as a cell if you want to skip the typing.
+
+**How to use this chapter.** Open a Colab notebook, paste each code block into its own cell, and run with Shift-Enter. The Open in Colab button at the top of this page loads a companion notebook that already has every example as a cell, if you want to skip the typing.
 
 
 ## What you should be able to do after this chapter
@@ -19,6 +20,10 @@ Prerequisite: Chapter 5 on dicts, Chapter 4 on functions.
 The standard way to open a file in Python is the `with` statement. The file is automatically closed at the end of the block, even if an exception happens inside.
 
 ```python
+# make a small file first, so there is something to read
+with open("data.txt", "w") as f:
+    f.write("line one\nline two\n")
+
 with open("data.txt", "r") as f:
     contents = f.read()
 print(contents)
@@ -42,7 +47,7 @@ CSV files are common enough to deserve their own module. `csv.reader` gives you 
 
 ## Worked examples
 
-For the examples below, assume the working directory has a file `players.csv` with this content:
+The CSV examples below use a small file `players.csv` with this content:
 
 ```
 name,position,rbi
@@ -51,7 +56,7 @@ Turner,SS,66
 Harper,1B,64
 ```
 
-Several examples create this file on the fly so you can run them straight through.
+You do not need to upload anything. Example 5 writes this file from a code block, and the examples after it read it back, so run the examples in order. In Colab the files land in the session's temporary storage and disappear when the session ends. In Thonny they land next to your `.py` file.
 
 ### Example 1: Write a file
 
@@ -243,7 +248,7 @@ The other two experiments sit next to it in `NewMaterial/_shared/Data/`. The col
 - Reading a file twice without `seek(0)` or reopening. After you read to the end, the file pointer is at the end. Another read returns an empty string. The `with` block bounds the file to one scope, so this is less of a trap than it used to be.
 - Forgetting that CSV fields are strings. `int("66") + 1` works. `"66" + 1` does not. Convert numbers explicitly.
 - Forgetting `newline=""` when writing CSV on Windows. Blank lines appear between rows.
-- Hard-coding absolute paths. `C:\Users\me\stuff\data.csv` breaks the moment you share the notebook. Use relative paths like `data/players.csv`, or `Path(__file__).parent / "data" / "players.csv"`.
+- Hard-coding absolute paths. `C:\Users\me\stuff\data.csv` breaks the moment you share the notebook. Use relative paths like `data/players.csv`.
 - Closing matplotlib figures only sometimes. In a loop, an open figure per iteration eats memory fast.
 
 ## Practice problems

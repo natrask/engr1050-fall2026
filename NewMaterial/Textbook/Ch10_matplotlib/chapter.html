@@ -18,27 +18,38 @@
  pre { background: #f4f4f4; padding: 12px; border-radius: 6px; overflow-x: auto; }
  blockquote { border-left: 4px solid #82AFD3; padding: 4px 12px; background: #f8f9fa; margin: 12px 0; }
  a { color: #4a90e2; } a:hover { color: #990000; }
- .nav { font-size: 0.9rem; margin-bottom: 1rem; }
+ pre code { background: none; padding: 0; }
+ li { margin-bottom: 6px; }
+ li p { margin: 6px 0; }
+ li pre { margin: 8px 0; }
+ .nav { font-size: 0.9rem; margin-bottom: 1rem; display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; }
+ .nav a.button { background: #6c757d; color: #fff; padding: 0.3rem 0.8rem; border-radius: 4px; text-decoration: none; font-weight: 600; }
+ .nav a.button:hover { background: #990000; color: #fff; }
 </style>
 </head>
 <body>
-<p class="nav"><a href="../../../index.html#extras">&larr; Back to Extras</a></p>
+<p class="nav"><a href="../../../index.html#extras">&larr; Back to Extras</a>
+<a class="button" href="https://colab.research.google.com/github/natrask/engr1050-fall2026/blob/main/NewMaterial/Textbook/Ch10_matplotlib/chapter.ipynb" target="_blank">Open in Colab</a></p>
 <h1>Chapter 10: Plotting with matplotlib</h1>
 <p>Matplotlib is the standard plotting library for Python. After this chapter you can plot data, label your axes, make multi-panel figures, and save your output to a file that looks acceptable in a lab report. Read this when Lecture 4 introduces plots and you want a tidy reference, or any time you find yourself reaching for Excel.</p>
-<p>Prerequisite: Chapter 8 on numpy. **How to use this chapter.** Open a Colab notebook, paste each code block into its own cell, and run with Shift-Enter. The companion `chapter.ipynb` already has every example as a cell if you want to skip the typing.</p>
+<p>Prerequisite: Chapter 8 on numpy.</p>
+<p><strong>How to use this chapter.</strong> Open a Colab notebook, paste each code block into its own cell, and run with Shift-Enter. The Open in Colab button at the top of this page loads a companion notebook that already has every example as a cell, if you want to skip the typing.</p>
 <h2>What you should be able to do after this chapter</h2>
 <ul>
 <li>Make a basic line plot and a scatter plot.</li>
 <li>Label the axes, add a title, add a legend.</li>
-<li>Make multi-panel figures with `plt.subplots`.</li>
+<li>Make multi-panel figures with <code>plt.subplots</code>.</li>
 <li>Use log scales when the data spans many orders of magnitude.</li>
 <li>Save a figure to a file at a sensible resolution.</li>
 </ul>
 <h2>The minimum you need to know</h2>
 <p>Import the pyplot module under the standard alias.</p>
 <pre><code>import matplotlib.pyplot as plt</code></pre>
-<p>There are two common styles. The **state-based** style uses `plt.plot`, `plt.xlabel`, etc, with an implicit current figure. Quick to type. The **object-oriented** style uses `fig, ax = plt.subplots()` and calls methods on `ax`. More verbose, easier to scale to multi-panel figures.</p>
-<pre><code># State-based
+<p>There are two common styles. The <strong>state-based</strong> style uses <code>plt.plot</code>, <code>plt.xlabel</code>, etc, with an implicit current figure. Quick to type. The <strong>object-oriented</strong> style uses <code>fig, ax = plt.subplots()</code> and calls methods on <code>ax</code>. More verbose, easier to scale to multi-panel figures.</p>
+<pre><code>x = [0, 1, 2, 3, 4]
+y = [0, 1, 4, 9, 16]
+
+# State-based
 plt.plot(x, y)
 plt.xlabel(&quot;x&quot;)
 plt.ylabel(&quot;y&quot;)
@@ -51,8 +62,8 @@ ax.set_xlabel(&quot;x&quot;)
 ax.set_ylabel(&quot;y&quot;)
 plt.show()</code></pre>
 <p>For a one-off in a notebook, state-based is fine. For a figure with multiple panels, OO is cleaner.</p>
-<p>`plt.show()` displays the figure. In a Jupyter notebook this is automatic; you can usually omit it. In a script you need it or nothing appears.</p>
-<p>`plt.savefig(filename, dpi=150, bbox_inches=&quot;tight&quot;)` writes the figure to a file. The extension determines the format: `.png`, `.pdf`, `.svg` all work.</p>
+<p><code>plt.show()</code> displays the figure. In a Colab notebook the figure appears automatically at the end of the cell, so you can usually omit it. In a <code>.py</code> file run from Thonny you need it or nothing appears.</p>
+<p><code>plt.savefig(filename, dpi=150, bbox_inches=&quot;tight&quot;)</code> writes the figure to a file. The extension determines the format: <code>.png</code>, <code>.pdf</code>, <code>.svg</code> all work.</p>
 <h2>Worked examples</h2>
 <h3>Example 1: A basic line plot</h3>
 <pre><code>import numpy as np
@@ -68,7 +79,7 @@ plt.ylabel(&quot;sin(x)&quot;)
 plt.title(&quot;Sine over one period&quot;)
 plt.grid(True, alpha=0.3)
 plt.show()</code></pre>
-<p>`figsize` is in inches. `alpha` on the grid makes it faint so the data stands out.</p>
+<p><code>figsize</code> is in inches. <code>alpha</code> on the grid makes it faint so the data stands out.</p>
 <h3>Example 2: Markers and line styles</h3>
 <pre><code>import numpy as np
 import matplotlib.pyplot as plt
@@ -86,7 +97,7 @@ plt.xlabel(&quot;x&quot;)
 plt.ylabel(&quot;y&quot;)
 plt.legend()
 plt.show()</code></pre>
-<p>The format string is `marker + line_style + color` (the color is optional). `&quot;o-&quot;` is circle markers with a solid line. `&quot;s--&quot;` is square markers with dashed. Browse the matplotlib docs for the full menu.</p>
+<p>The format string is <code>marker + line_style + color</code> (the color is optional). <code>&quot;o-&quot;</code> is circle markers with a solid line. <code>&quot;s--&quot;</code> is square markers with dashed. Browse the matplotlib docs for the full menu.</p>
 <h3>Example 3: Scatter plot</h3>
 <pre><code>import numpy as np
 import matplotlib.pyplot as plt
@@ -101,7 +112,7 @@ plt.xlabel(&quot;x&quot;)
 plt.ylabel(&quot;y&quot;)
 plt.title(&quot;Noisy linear relationship&quot;)
 plt.show()</code></pre>
-<p>`s` is the marker size in points squared. `alpha` makes overlapping points darker, which is a quick way to see density.</p>
+<p><code>s</code> is the marker size in points squared. <code>alpha</code> makes overlapping points darker, which is a quick way to see density.</p>
 <h3>Example 4: A histogram</h3>
 <pre><code>import numpy as np
 import matplotlib.pyplot as plt
@@ -115,7 +126,7 @@ plt.xlabel(&quot;value&quot;)
 plt.ylabel(&quot;count&quot;)
 plt.title(&quot;Standard normal samples&quot;)
 plt.show()</code></pre>
-<p>`bins` is the number of bins, or a list of bin edges if you want control. `edgecolor=&quot;black&quot;` outlines the bars so adjacent ones do not blur into each other.</p>
+<p><code>bins</code> is the number of bins, or a list of bin edges if you want control. <code>edgecolor=&quot;black&quot;</code> outlines the bars so adjacent ones do not blur into each other.</p>
 <h3>Example 5: Error bars</h3>
 <pre><code>import numpy as np
 import matplotlib.pyplot as plt
@@ -130,7 +141,7 @@ plt.xlabel(&quot;x&quot;)
 plt.ylabel(&quot;y&quot;)
 plt.title(&quot;Data with measurement uncertainty&quot;)
 plt.show()</code></pre>
-<p>`yerr` is the y-direction uncertainty. `fmt=&quot;o&quot;` says markers only, no connecting line. `capsize` puts horizontal caps at the ends of the error bars.</p>
+<p><code>yerr</code> is the y-direction uncertainty. <code>fmt=&quot;o&quot;</code> says markers only, no connecting line. <code>capsize</code> puts horizontal caps at the ends of the error bars.</p>
 <h3>Example 6: Log-scale axes</h3>
 <p>When data spans many orders of magnitude, a linear scale crowds everything against one edge. Log helps.</p>
 <pre><code>import numpy as np
@@ -146,7 +157,7 @@ plt.ylabel(&quot;error&quot;)
 plt.title(&quot;Monte Carlo convergence (looks like a line on a log-log plot)&quot;)
 plt.grid(True, which=&quot;both&quot;, alpha=0.3)
 plt.show()</code></pre>
-<p>A line on a log-log plot means a power-law relationship: `err = C * n^p`. The slope is `p`. This is the standard way to read off convergence rates.</p>
+<p>A line on a log-log plot means a power-law relationship: <code>err = C * n^p</code>. The slope is <code>p</code>. This is the standard way to read off convergence rates.</p>
 <h3>Example 7: Multiple panels with subplots</h3>
 <pre><code>import numpy as np
 import matplotlib.pyplot as plt
@@ -161,7 +172,7 @@ axes[1, 0].set_ylim(-5, 5)
 axes[1, 1].plot(x, np.sin(x)**2);   axes[1, 1].set_title(&quot;sin squared&quot;)
 fig.tight_layout()
 plt.show()</code></pre>
-<p>`plt.subplots(rows, cols)` returns the figure and a 2D array of axes. Address each panel with `axes[i, j]`. `fig.tight_layout()` keeps the labels from overlapping the next panel.</p>
+<p><code>plt.subplots(rows, cols)</code> returns the figure and a 2D array of axes. Address each panel with <code>axes[i, j]</code>. <code>fig.tight_layout()</code> keeps the labels from overlapping the next panel.</p>
 <h3>Example 8: Two y-axes on one plot</h3>
 <p>When two quantities have different units, use a twin axis.</p>
 <pre><code>import numpy as np
@@ -202,7 +213,7 @@ plt.annotate(&quot;peak&quot;,
              arrowprops=dict(arrowstyle=&quot;-&gt;&quot;))
 plt.xlabel(&quot;x&quot;); plt.ylabel(&quot;sin(x)&quot;)
 plt.show()</code></pre>
-<p>`xy` is the point you are pointing at. `xytext` is where the label goes. `arrowprops` is the arrow style. Useful for the one or two points in a figure that need callouts.</p>
+<p><code>xy</code> is the point you are pointing at. <code>xytext</code> is where the label goes. <code>arrowprops</code> is the arrow style. Useful for the one or two points in a figure that need callouts.</p>
 <h3>Example 10: Reproducing a lab-report figure</h3>
 <p>A lab-quality figure has labels, units, a legend, a title, and a reasonable aspect ratio. This is the format Lecture 3 expects.</p>
 <pre><code>import numpy as np
@@ -223,7 +234,7 @@ plt.grid(True, alpha=0.3)
 plt.tight_layout()
 plt.savefig(&quot;stress_strain.png&quot;, dpi=150, bbox_inches=&quot;tight&quot;)
 plt.show()</code></pre>
-<p>`lw=2` is line width. `loc=&quot;lower right&quot;` puts the legend out of the way of the data. Save to PNG for embedding in markdown, PDF for vector-quality printing.</p>
+<p><code>lw=2</code> is line width. <code>loc=&quot;lower right&quot;</code> puts the legend out of the way of the data. Save to PNG for embedding in markdown, PDF for vector-quality printing.</p>
 <h3>Example 11: Saving a figure (cleanly, in a loop)</h3>
 <pre><code>import numpy as np
 import matplotlib.pyplot as plt
@@ -235,7 +246,7 @@ for k in range(1, 4):
     ax.set_title(f&quot;sin({k} x)&quot;)
     fig.savefig(f&quot;sine_{k}.png&quot;, dpi=120, bbox_inches=&quot;tight&quot;)
     plt.close(fig)</code></pre>
-<p>The `plt.close(fig)` is important. Without it, matplotlib keeps every figure in memory and your kernel slows down.</p>
+<p>The <code>plt.close(fig)</code> is important. Without it, matplotlib keeps every figure in memory and your kernel slows down.</p>
 <h3>Example 12: Plotting a numpy 2D array as an image</h3>
 <pre><code>import numpy as np
 import matplotlib.pyplot as plt
@@ -251,25 +262,30 @@ plt.colorbar(label=&quot;Z&quot;)
 plt.xlabel(&quot;x&quot;); plt.ylabel(&quot;y&quot;)
 plt.title(&quot;sin(x^2 + y^2)&quot;)
 plt.show()</code></pre>
-<p>`meshgrid` builds the X, Y coordinate arrays. `imshow` paints the values as pixels. `origin=&quot;lower&quot;` puts (0, 0) at the bottom left, the convention for math.</p>
+<p><code>meshgrid</code> builds the X, Y coordinate arrays. <code>imshow</code> paints the values as pixels. <code>origin=&quot;lower&quot;</code> puts (0, 0) at the bottom left, the convention for math.</p>
 <h2>Common mistakes</h2>
 <ul>
 <li>Forgetting to label the axes. Half a point off in the lab report and worth fixing.</li>
 <li>Putting your data on a linear axis when log makes it readable. Convergence and exponential growth are both easier to see on log.</li>
 <li>Not closing figures in loops, leaking memory.</li>
-<li>Calling `plt.savefig` after `plt.show()`. On some backends, `show` clears the figure. Save first, then show, or use `fig.savefig` on the figure object.</li>
-<li>Mixing the state-based and object-oriented APIs. Pick one per figure. If you call `plt.title(&quot;X&quot;)` after working with an `ax`, you might be titling a different figure.</li>
-<li>Tiny `figsize`. Default is 6 by 4 inches. If you make it 3 by 2, the labels overlap. If you make it 12 by 12, everything looks shrunken in the notebook.</li>
+<li>Calling <code>plt.savefig</code> after <code>plt.show()</code>. On some backends, <code>show</code> clears the figure. Save first, then show, or use <code>fig.savefig</code> on the figure object.</li>
+<li>Mixing the state-based and object-oriented APIs. Pick one per figure. If you call <code>plt.title(&quot;X&quot;)</code> after working with an <code>ax</code>, you might be titling a different figure.</li>
+<li>Tiny <code>figsize</code>. Default is 6 by 4 inches. If you make it 3 by 2, the labels overlap. If you make it 12 by 12, everything looks shrunken in the notebook.</li>
 <li>Hardcoding colors that fight with each other. The default color cycle is designed to be readable. Use it unless you have a reason not to.</li>
 </ul>
 <h2>Practice problems</h2>
 <ol>
-<li>Plot `y = x^2` for `x` from -3 to 3 with 100 points. Add axis labels and a title.</li>
-<li>Make a 1x2 figure where the left panel shows `y = exp(x)` on a linear y-axis and the right panel shows the same data on a log y-axis. Add titles to each panel.</li>
-<li>The snippet below should overlay three curves with three different line styles. They all look the same. Fix it.</li>
-<p>   ```python    import numpy as np, matplotlib.pyplot as plt    x = np.linspace(0, 5, 100)    plt.plot(x, x)    plt.plot(x, x**2)    plt.plot(x, x**3)    plt.show()    ```</p>
-<li>Plot a histogram of 1000 samples from `np.random.default_rng().standard_normal()`, with 50 bins, axis labels, and a title.</li>
-<li>Generate `x = np.linspace(0, 10, 11)` and `y = 2 * x + 1 + rng.standard_normal(11)`. Plot the noisy points as a scatter and overlay the line `y = 2x + 1`. Add a legend.</li>
+<li>Plot <code>y = x^2</code> for <code>x</code> from -3 to 3 with 100 points. Add axis labels and a title.</li>
+<li>Make a 1x2 figure where the left panel shows <code>y = exp(x)</code> on a linear y-axis and the right panel shows the same data on a log y-axis. Add titles to each panel.</li>
+<li><p>The snippet below should overlay three curves with three different line styles. They all look the same. Fix it.</p>
+<pre><code>import numpy as np, matplotlib.pyplot as plt
+x = np.linspace(0, 5, 100)
+plt.plot(x, x)
+plt.plot(x, x**2)
+plt.plot(x, x**3)
+plt.show()</code></pre></li>
+<li>Plot a histogram of 1000 samples from <code>np.random.default_rng().standard_normal()</code>, with 50 bins, axis labels, and a title.</li>
+<li>Generate <code>x = np.linspace(0, 10, 11)</code> and <code>y = 2 * x + 1 + rng.standard_normal(11)</code>. Plot the noisy points as a scatter and overlay the line <code>y = 2x + 1</code>. Add a legend.</li>
 </ol>
 <h2>What to read next</h2>
 <p>Chapter 11 on ODEs uses matplotlib to visualize trajectories. Chapter 9 on linear algebra and this chapter together cover the typical &quot;load data, do math, plot result&quot; pipeline.</p>

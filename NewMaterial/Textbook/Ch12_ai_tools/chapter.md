@@ -3,7 +3,8 @@
 This chapter is about using a large language model (LLM) to help you write code, with two goals: get useful results fast, and not lose your ability to think. Read this around Lecture 20, when the course AI policy starts to apply and you have to start citing your tool use. This is the shortest chapter in the book on purpose; the skill is mostly practice.
 
 Prerequisite: Chapters 1 through 6. You need enough Python to read generated code and tell whether it is right.
-**How to use this chapter.** Open a Colab notebook, paste each code block into its own cell, and run with Shift-Enter. The companion `chapter.ipynb` already has every example as a cell if you want to skip the typing.
+
+**How to use this chapter.** Open a Colab notebook, paste each code block into its own cell, and run with Shift-Enter. The Open in Colab button at the top of this page loads a companion notebook that already has every example as a cell, if you want to skip the typing.
 
 
 ## What you should be able to do after this chapter
@@ -165,7 +166,7 @@ Run the hostile example again. Should be `[0, 0, 0]`. Then check the easy exampl
 
 Penn academic integrity requires you to disclose what you used. The course AI policy is more specific: name the tool, paraphrase the prompt, describe what the tool produced and what you changed.
 
-In a Jupyter notebook a citation cell at the bottom looks like this:
+In a Colab notebook a citation cell at the bottom looks like this:
 
 ```markdown
 ## AI use
@@ -184,7 +185,9 @@ That is enough to satisfy the policy and gives the grader the context to evaluat
 import pandas as pd
 import matplotlib.pyplot as plt
 
-df = pd.read_csv("U15Al6XXX-T81.csv")
+# pandas reads straight from a URL, so there is nothing to upload to Colab
+url = "https://raw.githubusercontent.com/natrask/engr1050-fall2026/main/NewMaterial/_shared/Data/U15Al6XXX-T81_BatchB13R01T2.6921W12.71.csv"
+df = pd.read_csv(url)
 plt.figure(figsize=(7, 4))
 plt.plot(df["Displacement_(mm)"], df["Force_(kN)"], "k-")
 plt.xlabel("displacement (mm)"); plt.ylabel("force (kN)")

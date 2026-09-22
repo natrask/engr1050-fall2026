@@ -3,7 +3,8 @@
 This is where Python stops being a calculator and starts being a program. You learn how to make decisions with `if`, repeat things with `for` and `while`, and bail out of a loop early when you have the answer. Read this if Lecture 2 felt fast, or if you keep typing code that runs once and then quits before you wanted it to.
 
 Prerequisite: Chapter 1 on variables and types.
-**How to use this chapter.** Open a Colab notebook, paste each code block into its own cell, and run with Shift-Enter. The companion `chapter.ipynb` already has every example as a cell if you want to skip the typing.
+
+**How to use this chapter.** Open a Colab notebook, paste each code block into its own cell, and run with Shift-Enter. The Open in Colab button at the top of this page loads a companion notebook that already has every example as a cell, if you want to skip the typing. Every example prints its results with `print`, so the same code also runs as a `.py` file in Thonny.
 
 
 ## What you should be able to do after this chapter

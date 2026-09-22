@@ -3,7 +3,8 @@
 An ordinary differential equation is the simplest building block of a simulation. The course teaches you to build your own integrator class from scratch. This chapter walks through the workflow with extra hand-holding: how to write the right-hand-side function, how Euler works, when Euler breaks, how to write a convergence study, and how to verify a simulator against a known analytic solution. Read this if Lecture 12 or 13 felt fast, or before starting HW3.
 
 Prerequisite: Chapter 8 on numpy, Chapter 10 on matplotlib, Chapter 6 on classes.
-**How to use this chapter.** Open a Colab notebook, paste each code block into its own cell, and run with Shift-Enter. The companion `chapter.ipynb` already has every example as a cell if you want to skip the typing.
+
+**How to use this chapter.** Open a Colab notebook, paste each code block into its own cell, and run with Shift-Enter. The Open in Colab button at the top of this page loads a companion notebook that already has every example as a cell, if you want to skip the typing.
 
 
 ## What you should be able to do after this chapter

@@ -18,18 +18,26 @@
  pre { background: #f4f4f4; padding: 12px; border-radius: 6px; overflow-x: auto; }
  blockquote { border-left: 4px solid #82AFD3; padding: 4px 12px; background: #f8f9fa; margin: 12px 0; }
  a { color: #4a90e2; } a:hover { color: #990000; }
- .nav { font-size: 0.9rem; margin-bottom: 1rem; }
+ pre code { background: none; padding: 0; }
+ li { margin-bottom: 6px; }
+ li p { margin: 6px 0; }
+ li pre { margin: 8px 0; }
+ .nav { font-size: 0.9rem; margin-bottom: 1rem; display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; }
+ .nav a.button { background: #6c757d; color: #fff; padding: 0.3rem 0.8rem; border-radius: 4px; text-decoration: none; font-weight: 600; }
+ .nav a.button:hover { background: #990000; color: #fff; }
 </style>
 </head>
 <body>
-<p class="nav"><a href="../../../index.html#extras">&larr; Back to Extras</a></p>
+<p class="nav"><a href="../../../index.html#extras">&larr; Back to Extras</a>
+<a class="button" href="https://colab.research.google.com/github/natrask/engr1050-fall2026/blob/main/NewMaterial/Textbook/Ch09_linalg/chapter.ipynb" target="_blank">Open in Colab</a></p>
 <h1>Chapter 9: Linear algebra with numpy</h1>
-<p>Numpy gives you matrix multiplication, linear system solvers, norms, and a few other linear-algebra essentials in a way that is fast and easy to read. After this chapter you can solve `A x = b` without writing your own Gaussian elimination, compute the norm of an error vector, and tell which operator (`*`, `@`, `np.dot`) you actually need. Read this when Lecture 11 introduces numpy and your linear algebra intuition starts to feel useful again.</p>
-<p>Prerequisite: Chapter 8 on numpy. **How to use this chapter.** Open a Colab notebook, paste each code block into its own cell, and run with Shift-Enter. The companion `chapter.ipynb` already has every example as a cell if you want to skip the typing.</p>
+<p>Numpy gives you matrix multiplication, linear system solvers, norms, and a few other linear-algebra essentials in a way that is fast and easy to read. After this chapter you can solve <code>A x = b</code> without writing your own Gaussian elimination, compute the norm of an error vector, and tell which operator (<code>*</code>, <code>@</code>, <code>np.dot</code>) you actually need. Read this when Lecture 11 introduces numpy and your linear algebra intuition starts to feel useful again.</p>
+<p>Prerequisite: Chapter 8 on numpy.</p>
+<p><strong>How to use this chapter.</strong> Open a Colab notebook, paste each code block into its own cell, and run with Shift-Enter. The Open in Colab button at the top of this page loads a companion notebook that already has every example as a cell, if you want to skip the typing.</p>
 <h2>What you should be able to do after this chapter</h2>
 <ul>
-<li>Multiply matrices and vectors using `@` and know when not to use `*`.</li>
-<li>Solve `A x = b` with `np.linalg.solve` and tell why that is better than computing the inverse.</li>
+<li>Multiply matrices and vectors using <code>@</code> and know when not to use <code>*</code>.</li>
+<li>Solve <code>A x = b</code> with <code>np.linalg.solve</code> and tell why that is better than computing the inverse.</li>
 <li>Compute the 2-norm of a vector and the Frobenius norm of a matrix.</li>
 <li>Compute the determinant and check whether a matrix is singular before solving.</li>
 <li>Build common matrices like the identity and the diagonal.</li>
@@ -37,12 +45,12 @@
 <h2>The minimum you need to know</h2>
 <p>There are three ways to multiply with numpy, and they do different things.</p>
 <ul>
-<li>`A * B`: elementwise. Shapes must broadcast. This is rarely matrix multiplication.</li>
-<li>`A @ B`: matrix multiplication. Standard rule, inner dimensions must match.</li>
-<li>`np.dot(A, B)`: same as `@` for matrices and vectors, also works for 1D dot products.</li>
+<li><code>A * B</code>: elementwise. Shapes must broadcast. This is rarely matrix multiplication.</li>
+<li><code>A @ B</code>: matrix multiplication. Standard rule, inner dimensions must match.</li>
+<li><code>np.dot(A, B)</code>: same as <code>@</code> for matrices and vectors, also works for 1D dot products.</li>
 </ul>
-<p>For solving `A x = b`, use `np.linalg.solve(A, b)`. Avoid computing `np.linalg.inv(A) @ b` unless you have a specific reason. The solver is faster, more accurate, and does not silently blow up on nearly-singular matrices.</p>
-<p>Norms are in `np.linalg.norm`. The default is the Euclidean (L2) norm of a vector. For a matrix the default is the Frobenius norm. Specify with `ord=` if you want something else.</p>
+<p>For solving <code>A x = b</code>, use <code>np.linalg.solve(A, b)</code>. Avoid computing <code>np.linalg.inv(A) @ b</code> unless you have a specific reason. The solver is faster, more accurate, and does not silently blow up on nearly-singular matrices.</p>
+<p>Norms are in <code>np.linalg.norm</code>. The default is the Euclidean (L2) norm of a vector. For a matrix the default is the Frobenius norm. Specify with <code>ord=</code> if you want something else.</p>
 <pre><code>import numpy as np
 
 A = np.array([[2.0, 1.0], [5.0, 7.0]])
@@ -61,7 +69,7 @@ x = np.array([10, 20, 30])
 
 print(A @ x)         # [140 320]
 print(A.shape, x.shape, (A @ x).shape)</code></pre>
-<p>The rule: `A @ x` works because `A` is `(2, 3)` and `x` is `(3,)`. The output is shape `(2,)`. If you try `A @ A`, that is `(2, 3) @ (2, 3)`, the inner dimensions do not match, and numpy raises `ValueError`.</p>
+<p>The rule: <code>A @ x</code> works because <code>A</code> is <code>(2, 3)</code> and <code>x</code> is <code>(3,)</code>. The output is shape <code>(2,)</code>. If you try <code>A @ A</code>, that is <code>(2, 3) @ (2, 3)</code>, the inner dimensions do not match, and numpy raises <code>ValueError</code>.</p>
 <h3>Example 2: Matrix-matrix product</h3>
 <pre><code>import numpy as np
 
@@ -70,7 +78,7 @@ B = np.array([[5, 6], [7, 8]])
 
 print(A @ B)
 print(A * B)            # elementwise, completely different result</code></pre>
-<p>`A @ B` gives `[[19 22], [43 50]]`. `A * B` gives `[[5 12], [21 32]]`. Pick the one you actually meant.</p>
+<p><code>A @ B</code> gives <code>[[19 22], [43 50]]</code>. <code>A * B</code> gives <code>[[5 12], [21 32]]</code>. Pick the one you actually meant.</p>
 <h3>Example 3: Dot product of two vectors</h3>
 <pre><code>import numpy as np
 
@@ -95,7 +103,7 @@ b = np.array([6, 3, 11], dtype=float)
 x = np.linalg.solve(A, b)
 print(x)                    # [1. 2. 3.]
 print(A @ x - b)            # near-zero</code></pre>
-<p>`dtype=float` is a small habit that prevents weird integer-division surprises if you later add more code that does division.</p>
+<p><code>dtype=float</code> is a small habit that prevents weird integer-division surprises if you later add more code that does division.</p>
 <h3>Example 5: Inverse vs solve</h3>
 <pre><code>import numpy as np
 
@@ -108,7 +116,7 @@ x_solve   = np.linalg.solve(A, b)
 print(x_inverse)
 print(x_solve)
 print(np.linalg.norm(x_inverse - x_solve))   # tiny but nonzero</code></pre>
-<p>Both give the right answer here. For large matrices the inverse is slower, less numerically stable, and uses more memory. The `solve` version avoids computing the inverse explicitly. Use `solve`.</p>
+<p>Both give the right answer here. For large matrices the inverse is slower, less numerically stable, and uses more memory. The <code>solve</code> version avoids computing the inverse explicitly. Use <code>solve</code>.</p>
 <h3>Example 6: Identity matrix and zero matrix</h3>
 <pre><code>import numpy as np
 
@@ -119,7 +127,7 @@ print(I)
 print(Z)
 print(I @ I)      # identity squared is identity
 print(I + Z)      # identity unchanged</code></pre>
-<p>`np.eye(n)` is the identity matrix of size n. `np.zeros((m, n))` is an m by n zero matrix. Note the double parentheses; the inner one is the shape tuple.</p>
+<p><code>np.eye(n)</code> is the identity matrix of size n. <code>np.zeros((m, n))</code> is an m by n zero matrix. Note the double parentheses; the inner one is the shape tuple.</p>
 <h3>Example 7: Diagonal matrix</h3>
 <pre><code>import numpy as np
 
@@ -129,7 +137,7 @@ D = np.diag(d)
 print(D)
 print(D @ d)         # [4. 9. 25.]
 print(np.diag(D))    # [2. 3. 5.], extracts the diagonal back</code></pre>
-<p>`np.diag` is both a constructor (when given a vector) and an extractor (when given a matrix). One name, two jobs.</p>
+<p><code>np.diag</code> is both a constructor (when given a vector) and an extractor (when given a matrix). One name, two jobs.</p>
 <h3>Example 8: Vector norms</h3>
 <pre><code>import numpy as np
 
@@ -154,7 +162,7 @@ B = np.array([[1.0, 2.0], [2.0, 4.0]])   # rows are parallel
 
 print(np.linalg.det(A))     # -2.0, nonzero, safe to solve
 print(np.linalg.det(B))     # 0.0,  singular</code></pre>
-<p>If `det` is exactly zero, `solve` will raise `LinAlgError: Singular matrix`. If it is very small (relative to the entries), you have a nearly singular matrix and the solution can be way off. The cleaner check is `np.linalg.cond(A)`; large condition number means trouble.</p>
+<p>If <code>det</code> is exactly zero, <code>solve</code> will raise <code>LinAlgError: Singular matrix</code>. If it is very small (relative to the entries), you have a nearly singular matrix and the solution can be way off. The cleaner check is <code>np.linalg.cond(A)</code>; large condition number means trouble.</p>
 <h3>Example 11: Eigenvalues (optional, for the curious)</h3>
 <pre><code>import numpy as np
 
@@ -166,7 +174,7 @@ print(vals)
 print(vecs)</code></pre>
 <p>Eigenvalues come up in stability analysis of dynamical systems. Lecture 18 touches on this. For first-year coursework, you can leave this in your back pocket.</p>
 <h3>Example 12: A linear-regression fit by solving</h3>
-<p>A classic use of `solve`. Fit `y = a x + b` to data by setting up `M @ [a, b] = y`.</p>
+<p>A classic use of <code>solve</code>. Fit <code>y = a x + b</code> to data by setting up <code>M @ [a, b] = y</code>.</p>
 <pre><code>import numpy as np
 
 x = np.array([1.0, 2.0, 3.0, 4.0, 5.0])
@@ -177,25 +185,31 @@ a, b = np.linalg.lstsq(M, y, rcond=None)[0]
 
 print(a, b)                # roughly 2.0 and 0.0
 print(np.linalg.norm(M @ np.array([a, b]) - y))</code></pre>
-<p>`np.linalg.lstsq` returns the best-fit `[a, b]` even when there are more equations than unknowns. It is the right tool for noisy data. For exactly-determined systems, `solve` is the right tool.</p>
+<p><code>np.linalg.lstsq</code> returns the best-fit <code>[a, b]</code> even when there are more equations than unknowns. It is the right tool for noisy data. For exactly-determined systems, <code>solve</code> is the right tool.</p>
 <h2>Common mistakes</h2>
 <ul>
-<li>Using `*` when you meant `@`. The two operators do completely different things and both succeed silently on compatible shapes, so the bug is hard to spot. If your numbers look weird, check which operator you wrote.</li>
-<li>Forgetting that `A @ x` requires the inner dimensions to match. `(m, n) @ (n,)` works; `(m, n) @ (m,)` does not. Read the shapes left to right and check the middle.</li>
-<li>Computing the inverse and then multiplying. `np.linalg.inv(A) @ b` is slower and less accurate than `np.linalg.solve(A, b)`. Use `solve`.</li>
-<li>Mixing 1D vectors and 2D row or column vectors. `a.shape == (3,)` is a 1D vector. `a.reshape(1, 3)` is a row vector with shape `(1, 3)`. `a.reshape(-1, 1)` is a column vector with shape `(3, 1)`. The arithmetic looks the same in some cases and breaks in others. Be explicit when it matters.</li>
-<li>Treating `np.linalg.norm` as always computing the L2 norm. For matrices it computes Frobenius by default, not the 2-norm. Pass `ord=2` if you want the spectral norm.</li>
-<li>Forgetting to seed `np.random.default_rng()` when reproducibility matters. Without a seed, two runs of the same code give different answers, which is sometimes the desired behavior but often is not.</li>
+<li>Using <code>*</code> when you meant <code>@</code>. The two operators do completely different things and both succeed silently on compatible shapes, so the bug is hard to spot. If your numbers look weird, check which operator you wrote.</li>
+<li>Forgetting that <code>A @ x</code> requires the inner dimensions to match. <code>(m, n) @ (n,)</code> works; <code>(m, n) @ (m,)</code> does not. Read the shapes left to right and check the middle.</li>
+<li>Computing the inverse and then multiplying. <code>np.linalg.inv(A) @ b</code> is slower and less accurate than <code>np.linalg.solve(A, b)</code>. Use <code>solve</code>.</li>
+<li>Mixing 1D vectors and 2D row or column vectors. <code>a.shape == (3,)</code> is a 1D vector. <code>a.reshape(1, 3)</code> is a row vector with shape <code>(1, 3)</code>. <code>a.reshape(-1, 1)</code> is a column vector with shape <code>(3, 1)</code>. The arithmetic looks the same in some cases and breaks in others. Be explicit when it matters.</li>
+<li>Treating <code>np.linalg.norm</code> as always computing the L2 norm. For matrices it computes Frobenius by default, not the 2-norm. Pass <code>ord=2</code> if you want the spectral norm.</li>
+<li>Forgetting to seed <code>np.random.default_rng()</code> when reproducibility matters. Without a seed, two runs of the same code give different answers, which is sometimes the desired behavior but often is not.</li>
 </ul>
 <h2>Practice problems</h2>
 <ol>
-<li>Solve the linear system:</li>
-<p>   ```    2x + 3y - z = 5    4x - y + 2z = 6    3x + 2y + z = 7    ```    using `np.linalg.solve`. Verify your answer.</p>
-<li>Given `v = np.array([1.0, -2.0, 2.0])`, compute the L1, L2, and L-infinity norms.</li>
-<li>The snippet below should multiply the matrix `A` by the vector `x` and print the result. It does something else. Fix it.</li>
-<p>   ```python    import numpy as np    A = np.array([[1, 2], [3, 4]])    x = np.array([5, 6])    print(A * x)    ```</p>
-<li>Build a 4x4 diagonal matrix with entries `1, 2, 3, 4`. Verify that the determinant is the product of the diagonal entries.</li>
-<li>Fit a line `y = a x + b` to the data points `x = [0, 1, 2, 3, 4]`, `y = [1.0, 1.9, 3.1, 4.0, 5.05]` using `lstsq`. Print `a` and `b`, then plot the data and the fitted line on the same axes.</li>
+<li><p>Solve the linear system:</p>
+<pre><code>2x + 3y - z = 5
+4x - y + 2z = 6
+3x + 2y + z = 7</code></pre>
+<p>using <code>np.linalg.solve</code>. Verify your answer.</p></li>
+<li>Given <code>v = np.array([1.0, -2.0, 2.0])</code>, compute the L1, L2, and L-infinity norms.</li>
+<li><p>The snippet below should multiply the matrix <code>A</code> by the vector <code>x</code> and print the result. It does something else. Fix it.</p>
+<pre><code>import numpy as np
+A = np.array([[1, 2], [3, 4]])
+x = np.array([5, 6])
+print(A * x)</code></pre></li>
+<li>Build a 4x4 diagonal matrix with entries <code>1, 2, 3, 4</code>. Verify that the determinant is the product of the diagonal entries.</li>
+<li>Fit a line <code>y = a x + b</code> to the data points <code>x = [0, 1, 2, 3, 4]</code>, <code>y = [1.0, 1.9, 3.1, 4.0, 5.05]</code> using <code>lstsq</code>. Print <code>a</code> and <code>b</code>, then plot the data and the fitted line on the same axes.</li>
 </ol>
 <h2>What to read next</h2>
 <p>Chapter 10 on matplotlib, where you take the arrays from this chapter and put them on a plot. Chapter 11 on ODEs uses matrix-vector products heavily once the right-hand side has more than one component.</p>

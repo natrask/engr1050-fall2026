@@ -18,17 +18,25 @@
  pre { background: #f4f4f4; padding: 12px; border-radius: 6px; overflow-x: auto; }
  blockquote { border-left: 4px solid #82AFD3; padding: 4px 12px; background: #f8f9fa; margin: 12px 0; }
  a { color: #4a90e2; } a:hover { color: #990000; }
- .nav { font-size: 0.9rem; margin-bottom: 1rem; }
+ pre code { background: none; padding: 0; }
+ li { margin-bottom: 6px; }
+ li p { margin: 6px 0; }
+ li pre { margin: 8px 0; }
+ .nav { font-size: 0.9rem; margin-bottom: 1rem; display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; }
+ .nav a.button { background: #6c757d; color: #fff; padding: 0.3rem 0.8rem; border-radius: 4px; text-decoration: none; font-weight: 600; }
+ .nav a.button:hover { background: #990000; color: #fff; }
 </style>
 </head>
 <body>
-<p class="nav"><a href="../../../index.html#extras">&larr; Back to Extras</a></p>
+<p class="nav"><a href="../../../index.html#extras">&larr; Back to Extras</a>
+<a class="button" href="https://colab.research.google.com/github/natrask/engr1050-fall2026/blob/main/NewMaterial/Textbook/Ch11_odes/chapter.ipynb" target="_blank">Open in Colab</a></p>
 <h1>Chapter 11: ODE workflow</h1>
 <p>An ordinary differential equation is the simplest building block of a simulation. The course teaches you to build your own integrator class from scratch. This chapter walks through the workflow with extra hand-holding: how to write the right-hand-side function, how Euler works, when Euler breaks, how to write a convergence study, and how to verify a simulator against a known analytic solution. Read this if Lecture 12 or 13 felt fast, or before starting HW3.</p>
-<p>Prerequisite: Chapter 8 on numpy, Chapter 10 on matplotlib, Chapter 6 on classes. **How to use this chapter.** Open a Colab notebook, paste each code block into its own cell, and run with Shift-Enter. The companion `chapter.ipynb` already has every example as a cell if you want to skip the typing.</p>
+<p>Prerequisite: Chapter 8 on numpy, Chapter 10 on matplotlib, Chapter 6 on classes.</p>
+<p><strong>How to use this chapter.</strong> Open a Colab notebook, paste each code block into its own cell, and run with Shift-Enter. The Open in Colab button at the top of this page loads a companion notebook that already has every example as a cell, if you want to skip the typing.</p>
 <h2>What you should be able to do after this chapter</h2>
 <ul>
-<li>Write the right-hand-side function `f(t, y)` for a scalar or vector ODE.</li>
+<li>Write the right-hand-side function <code>f(t, y)</code> for a scalar or vector ODE.</li>
 <li>Take one Euler step by hand.</li>
 <li>Run an Euler simulation in a Python loop and plot the trajectory.</li>
 <li>Compare against an analytic solution and read the error off a plot.</li>
@@ -38,20 +46,20 @@
 <h2>The minimum you need to know</h2>
 <p>An ODE is an equation of the form</p>
 <p>$$ \dot{y} = f(t, y) $$</p>
-<p>where `y` is the state (a scalar or a vector) and `f` is a function that returns the time derivative at the current state. The job of an integrator is to start from `y(t0) = y0` and produce `y(t)` at later times.</p>
-<p>**Explicit Euler** is the simplest scheme. You take small time steps of size `h` and approximate</p>
+<p>where <code>y</code> is the state (a scalar or a vector) and <code>f</code> is a function that returns the time derivative at the current state. The job of an integrator is to start from <code>y(t0) = y0</code> and produce <code>y(t)</code> at later times.</p>
+<p><strong>Explicit Euler</strong> is the simplest scheme. You take small time steps of size <code>h</code> and approximate</p>
 <p>$$ y_{n+1} = y_n + h \cdot f(t_n, y_n). $$</p>
-<p>It is first-order accurate, which means the global error goes like `O(h)`. Halving `h` roughly halves the error, until floating-point noise takes over.</p>
+<p>It is first-order accurate, which means the global error goes like <code>O(h)</code>. Halving <code>h</code> roughly halves the error, until floating-point noise takes over.</p>
 <p>The pipeline for using Euler on a problem:</p>
 <ol>
-<li>Write the right-hand-side function `f(t, y)`.</li>
-<li>Pick `t0`, `tf`, the initial condition `y0`, and the number of steps `N`.</li>
-<li>Loop `N` times, accumulating `t` and `y`.</li>
+<li>Write the right-hand-side function <code>f(t, y)</code>.</li>
+<li>Pick <code>t0</code>, <code>tf</code>, the initial condition <code>y0</code>, and the number of steps <code>N</code>.</li>
+<li>Loop <code>N</code> times, accumulating <code>t</code> and <code>y</code>.</li>
 <li>Plot, compare to analytic if you have one, and check convergence.</li>
 </ol>
 <h2>Worked examples</h2>
 <h3>Example 1: Exponential decay, by hand</h3>
-<p>The simplest ODE: `dy/dt = -2 y`, with `y(0) = 1`. The analytic solution is `y(t) = exp(-2 t)`.</p>
+<p>The simplest ODE: <code>dy/dt = -2 y</code>, with <code>y(0) = 1</code>. The analytic solution is <code>y(t) = exp(-2 t)</code>.</p>
 <pre><code>def f(t, y):
     return -2.0 * y
 
@@ -60,7 +68,7 @@ t0, y0, h = 0.0, 1.0, 0.1
 y1 = y0 + h * f(t0, y0)
 print(y1)            # 0.8
 print(2.71828 ** (-2 * 0.1))   # 0.81873..., the analytic value</code></pre>
-<p>After one step, Euler says `0.8`. The truth is about `0.819`. We are off by about 2%. Smaller `h` would give a smaller error.</p>
+<p>After one step, Euler says <code>0.8</code>. The truth is about <code>0.819</code>. We are off by about 2%. Smaller <code>h</code> would give a smaller error.</p>
 <h3>Example 2: Exponential decay, looped</h3>
 <pre><code>import numpy as np
 import matplotlib.pyplot as plt
@@ -110,7 +118,7 @@ def f(t, y):
 ts, ys = euler(f, 0, 1.0, 2.0, 20)
 print(ys[-1])    # final value</code></pre>
 <h3>Example 4: A class-based integrator (mirrors Lecture 13)</h3>
-<p>The course wants you to put this in a class. The class holds the problem and exposes a `solve` method.</p>
+<p>The course wants you to put this in a class. The class holds the problem and exposes a <code>solve</code> method.</p>
 <pre><code>class ExplicitEuler:
     def __init__(self, f, t0, y0, tf, N):
         self.f = f
@@ -136,7 +144,7 @@ ts, ys = solver.solve()
 print(ys[-1])</code></pre>
 <p>Same algorithm, more structured. Chapter 6 covers the class machinery.</p>
 <h3>Example 5: A vector-valued ODE (harmonic oscillator)</h3>
-<p>A second-order ODE becomes a vector ODE. The harmonic oscillator $$ \ddot{x} + x = 0 $$ becomes, with `y = [x, v]`, $$ \dot{y} = \begin{bmatrix} v \\ -x \end{bmatrix}. $$</p>
+<p>A second-order ODE becomes a vector ODE. The harmonic oscillator $$ \ddot{x} + x = 0 $$ becomes, with <code>y = [x, v]</code>, $$ \dot{y} = \begin{bmatrix} v \\ -x \end{bmatrix}. $$</p>
 <pre><code>import numpy as np
 import matplotlib.pyplot as plt
 
@@ -162,7 +170,7 @@ plt.plot(ts, np.cos(ts), &quot;k--&quot;, label=&quot;analytic cos(t)&quot;)
 plt.xlabel(&quot;t&quot;); plt.ylabel(&quot;x&quot;); plt.legend(); plt.show()</code></pre>
 <p>You will see Euler&#x27;s amplitude grow over time. That is a known defect of explicit Euler for oscillators. Better integrators (RK2, RK4, symplectic schemes) fix this. Out of scope here.</p>
 <h3>Example 6: A convergence study</h3>
-<p>To check that the integrator is first-order, run it at several `N`, compute the error at `t = tf`, and plot on log-log.</p>
+<p>To check that the integrator is first-order, run it at several <code>N</code>, compute the error at <code>t = tf</code>, and plot on log-log.</p>
 <pre><code>import numpy as np
 import matplotlib.pyplot as plt
 
@@ -191,7 +199,7 @@ plt.legend(); plt.grid(True, which=&quot;both&quot;, alpha=0.3)
 plt.show()</code></pre>
 <p>If the data lines up with the slope-1 reference line, your integrator is first-order. Cut h in half, error gets cut roughly in half.</p>
 <h3>Example 7: A stiffness blow-up</h3>
-<p>Explicit Euler blows up when `h` is too large. For `dy/dt = -k y`, instability sets in when `h &gt; 2/k`.</p>
+<p>Explicit Euler blows up when <code>h</code> is too large. For <code>dy/dt = -k y</code>, instability sets in when <code>h &gt; 2/k</code>.</p>
 <pre><code>import numpy as np
 import matplotlib.pyplot as plt
 
@@ -212,9 +220,9 @@ for N in [50, 150, 500]:
 plt.xlabel(&quot;t&quot;); plt.ylabel(&quot;y&quot;)
 plt.title(&quot;Stiff exponential decay, k = 100&quot;)
 plt.legend(); plt.show()</code></pre>
-<p>At `N = 50` you should see wild oscillations growing without bound. The fix is either smaller `h` or a different integrator (implicit Euler, for instance).</p>
+<p>At <code>N = 50</code> you should see wild oscillations growing without bound. The fix is either smaller <code>h</code> or a different integrator (implicit Euler, for instance).</p>
 <h3>Example 8: A skydiver with drag</h3>
-<p>A scalar nonlinear ODE, $$ m \dot{v} = m g - c v^2, $$ with `m = 70 kg`, `g = 9.81`, `c = 0.25`. Terminal velocity is `sqrt(m g / c)`.</p>
+<p>A scalar nonlinear ODE, $$ m \dot{v} = m g - c v^2, $$ with <code>m = 70 kg</code>, <code>g = 9.81</code>, <code>c = 0.25</code>. Terminal velocity is <code>sqrt(m g / c)</code>.</p>
 <pre><code>import numpy as np
 import matplotlib.pyplot as plt
 
@@ -236,7 +244,7 @@ plt.plot(ts, vs)
 plt.axhline(np.sqrt(m * g / c), color=&quot;r&quot;, linestyle=&quot;--&quot;, label=&quot;terminal velocity&quot;)
 plt.xlabel(&quot;t (s)&quot;); plt.ylabel(&quot;v (m/s)&quot;)
 plt.legend(); plt.show()</code></pre>
-<p>The trajectory should rise and level off at `sqrt(70 * 9.81 / 0.25) ≈ 52.4` m/s. Reaching the analytical steady-state is the standard sanity check.</p>
+<p>The trajectory should rise and level off at <code>sqrt(70 * 9.81 / 0.25) ≈ 52.4</code> m/s. Reaching the analytical steady-state is the standard sanity check.</p>
 <h3>Example 9: A controlled pendulum (Lecture 16 callback)</h3>
 <p>Pendulum with damping and proportional control on the torque: $$ \ddot{\theta} = -b \dot{\theta} - K \sin\theta + K_p (\theta_{\text{target}} - \theta) $$</p>
 <pre><code>import numpy as np
@@ -265,7 +273,7 @@ plt.axhline(target * 180/np.pi, color=&quot;r&quot;, linestyle=&quot;--&quot;, l
 plt.xlabel(&quot;t (s)&quot;); plt.ylabel(&quot;angle (deg)&quot;); plt.legend(); plt.show()</code></pre>
 <p>Notice the steady-state angle does not quite reach the target. That offset is the famous &quot;proportional controller has steady-state error&quot; result, and motivates HW4.</p>
 <h3>Example 10: Reading the order of accuracy</h3>
-<p>For Euler, error should drop as `O(h^1)`. For an improved scheme like Heun (RK2), error should drop as `O(h^2)`. On a log-log plot the slope tells you the order.</p>
+<p>For Euler, error should drop as <code>O(h^1)</code>. For an improved scheme like Heun (RK2), error should drop as <code>O(h^2)</code>. On a log-log plot the slope tells you the order.</p>
 <pre><code>import numpy as np
 import matplotlib.pyplot as plt
 
@@ -291,7 +299,7 @@ plt.loglog(hs, errs, &quot;o-&quot;, label=&quot;Heun error&quot;)
 plt.loglog(hs, [h**2 for h in hs], &quot;k--&quot;, label=&quot;slope 2 reference&quot;)
 plt.xlabel(&quot;h&quot;); plt.ylabel(&quot;|error|&quot;); plt.legend()
 plt.grid(True, which=&quot;both&quot;, alpha=0.3); plt.show()</code></pre>
-<p>Heun is second-order. The points should sit on or near the slope-2 reference until floating-point noise dominates at very small `h`.</p>
+<p>Heun is second-order. The points should sit on or near the slope-2 reference until floating-point noise dominates at very small <code>h</code>.</p>
 <h3>Example 11: Putting it all together with the class</h3>
 <pre><code>class ExplicitEuler:
     def __init__(self, f, t0, y0, tf, N):
@@ -354,22 +362,28 @@ plt.show()</code></pre>
 <p>Energy will drift upward. That tells you Euler is artificially injecting energy, which is why the oscillator amplitude grew in Example 5. This is the motivation for symplectic integrators, covered in graduate scientific computing.</p>
 <h2>Common mistakes</h2>
 <ul>
-<li>Writing `f(t, y)` that takes only `y` and then wondering why the integrator complains. The standard signature is `f(t, y)` even when `f` does not actually depend on `t`. Just include the `t` parameter.</li>
-<li>Forgetting to convert lists to numpy arrays for vector ODEs. List arithmetic does not vectorize. Use `np.array(...)` or `np.asarray(...)` in the constructor.</li>
-<li>Using too large a step size on a stiff problem. Symptom: solution explodes after a few iterations. Fix: smaller `h`, or use an implicit method.</li>
+<li>Writing <code>f(t, y)</code> that takes only <code>y</code> and then wondering why the integrator complains. The standard signature is <code>f(t, y)</code> even when <code>f</code> does not actually depend on <code>t</code>. Just include the <code>t</code> parameter.</li>
+<li>Forgetting to convert lists to numpy arrays for vector ODEs. List arithmetic does not vectorize. Use <code>np.array(...)</code> or <code>np.asarray(...)</code> in the constructor.</li>
+<li>Using too large a step size on a stiff problem. Symptom: solution explodes after a few iterations. Fix: smaller <code>h</code>, or use an implicit method.</li>
 <li>Comparing against the wrong analytic solution. Double-check the algebra for the analytic before declaring your simulator buggy.</li>
-<li>Not running a convergence study. A simulator that happens to match one analytic solution at one set of parameters may still be subtly wrong. Vary `h`, plot error vs `h`, look at the slope.</li>
-<li>Conflating `t` and the loop index. They are different things. Track both, and check that `t_final` matches `tf` after the loop.</li>
+<li>Not running a convergence study. A simulator that happens to match one analytic solution at one set of parameters may still be subtly wrong. Vary <code>h</code>, plot error vs <code>h</code>, look at the slope.</li>
+<li>Conflating <code>t</code> and the loop index. They are different things. Track both, and check that <code>t_final</code> matches <code>tf</code> after the loop.</li>
 </ul>
 <h2>Practice problems</h2>
 <ol>
-<li>Solve `dy/dt = -y` with `y(0) = 1` on `[0, 5]` using explicit Euler with `N = 50`. Plot your solution and `exp(-t)` on the same axes.</li>
-<li>Modify the Example 4 class to instead implement the improved Euler / Heun scheme. The update is `y_{n+1} = y_n + (h/2) (k1 + k2)` where `k1 = f(t_n, y_n)` and `k2 = f(t_n + h, y_n + h k1)`.</li>
-<li>The snippet below should solve `dy/dt = y` (exponential growth) on `[0, 1]`. It crashes after a few steps. Find the bug.</li>
-<p>   ```python    def f(y):        return y    t0, tf, N = 0, 1, 10    h = (tf - t0) / N    y = 1.0    for i in range(N):        y = y + h * f(t0 + i*h, y)    print(y)    ```</p>
-<li>Solve the Lotka-Volterra predator-prey system on `[0, 30]`:</li>
-<p>   $$ \dot{x} = \alpha x - \beta x y, \quad \dot{y} = \delta x y - \gamma y, $$    with `alpha=1.0, beta=0.5, gamma=1.0, delta=0.5` and initial condition `(x, y) = (1, 1)`. Plot both populations vs time.</p>
-<li>Run a convergence study on the harmonic oscillator: solve from `t=0` to `t=10` for `N = 100, 200, 400, 800, 1600`. Plot the final-time error against `h` on a log-log plot. Confirm the slope is about 1.</li>
+<li>Solve <code>dy/dt = -y</code> with <code>y(0) = 1</code> on <code>[0, 5]</code> using explicit Euler with <code>N = 50</code>. Plot your solution and <code>exp(-t)</code> on the same axes.</li>
+<li>Modify the Example 4 class to instead implement the improved Euler / Heun scheme. The update is <code>y_{n+1} = y_n + (h/2) (k1 + k2)</code> where <code>k1 = f(t_n, y_n)</code> and <code>k2 = f(t_n + h, y_n + h k1)</code>.</li>
+<li><p>The snippet below should solve <code>dy/dt = y</code> (exponential growth) on <code>[0, 1]</code>. It crashes after a few steps. Find the bug.</p>
+<pre><code>def f(y):
+    return y
+t0, tf, N = 0, 1, 10
+h = (tf - t0) / N
+y = 1.0
+for i in range(N):
+    y = y + h * f(t0 + i*h, y)
+print(y)</code></pre></li>
+<li>Solve the Lotka-Volterra predator-prey system on <code>[0, 30]</code>: $$ \dot{x} = \alpha x - \beta x y, \quad \dot{y} = \delta x y - \gamma y, $$ with <code>alpha=1.0, beta=0.5, gamma=1.0, delta=0.5</code> and initial condition <code>(x, y) = (1, 1)</code>. Plot both populations vs time.</li>
+<li>Run a convergence study on the harmonic oscillator: solve from <code>t=0</code> to <code>t=10</code> for <code>N = 100, 200, 400, 800, 1600</code>. Plot the final-time error against <code>h</code> on a log-log plot. Confirm the slope is about 1.</li>
 </ol>
 <h2>What to read next</h2>
 <p>If you want the AI angle on all of this, Chapter 12 covers using LLMs to extend the integrator (with the caveats). For the lecture sequence, this chapter is the heaviest hitter; once you can do everything here, Lectures 16 and 17 on the helicopter labs follow naturally.</p>

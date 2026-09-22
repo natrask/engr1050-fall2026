@@ -3,7 +3,8 @@
 Numpy is the library that turns Python from a slow scripting language into a fast numerical one. If you find yourself writing a `for` loop to add two lists of numbers, you should be using numpy. After this chapter you can create arrays, do vectorized arithmetic, slice and reshape, and use broadcasting without being scared of the rules. Read this when Lecture 11 hits and the speed difference between lists and arrays starts to matter.
 
 Prerequisite: Chapter 3 on lists.
-**How to use this chapter.** Open a Colab notebook, paste each code block into its own cell, and run with Shift-Enter. The companion `chapter.ipynb` already has every example as a cell if you want to skip the typing.
+
+**How to use this chapter.** Open a Colab notebook, paste each code block into its own cell, and run with Shift-Enter. The Open in Colab button at the top of this page loads a companion notebook that already has every example as a cell, if you want to skip the typing.
 
 
 ## What you should be able to do after this chapter

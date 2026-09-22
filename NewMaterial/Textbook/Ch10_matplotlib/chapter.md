@@ -3,7 +3,8 @@
 Matplotlib is the standard plotting library for Python. After this chapter you can plot data, label your axes, make multi-panel figures, and save your output to a file that looks acceptable in a lab report. Read this when Lecture 4 introduces plots and you want a tidy reference, or any time you find yourself reaching for Excel.
 
 Prerequisite: Chapter 8 on numpy.
-**How to use this chapter.** Open a Colab notebook, paste each code block into its own cell, and run with Shift-Enter. The companion `chapter.ipynb` already has every example as a cell if you want to skip the typing.
+
+**How to use this chapter.** Open a Colab notebook, paste each code block into its own cell, and run with Shift-Enter. The Open in Colab button at the top of this page loads a companion notebook that already has every example as a cell, if you want to skip the typing.
 
 
 ## What you should be able to do after this chapter
@@ -25,6 +26,9 @@ import matplotlib.pyplot as plt
 There are two common styles. The **state-based** style uses `plt.plot`, `plt.xlabel`, etc, with an implicit current figure. Quick to type. The **object-oriented** style uses `fig, ax = plt.subplots()` and calls methods on `ax`. More verbose, easier to scale to multi-panel figures.
 
 ```python
+x = [0, 1, 2, 3, 4]
+y = [0, 1, 4, 9, 16]
+
 # State-based
 plt.plot(x, y)
 plt.xlabel("x")
@@ -41,7 +45,7 @@ plt.show()
 
 For a one-off in a notebook, state-based is fine. For a figure with multiple panels, OO is cleaner.
 
-`plt.show()` displays the figure. In a Jupyter notebook this is automatic; you can usually omit it. In a script you need it or nothing appears.
+`plt.show()` displays the figure. In a Colab notebook the figure appears automatically at the end of the cell, so you can usually omit it. In a `.py` file run from Thonny you need it or nothing appears.
 
 `plt.savefig(filename, dpi=150, bbox_inches="tight")` writes the figure to a file. The extension determines the format: `.png`, `.pdf`, `.svg` all work.
 

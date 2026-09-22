@@ -3,7 +3,8 @@
 Dictionaries are how you look something up by name instead of by position. Sets are how you ask "did I already see this" without scanning a list. Both are core data structures, both are stupidly fast for the operations they were built for, and both come up in almost every notebook you write after Lecture 7.
 
 Prerequisite: Chapter 3 on lists.
-**How to use this chapter.** Open a Colab notebook, paste each code block into its own cell, and run with Shift-Enter. The companion `chapter.ipynb` already has every example as a cell if you want to skip the typing.
+
+**How to use this chapter.** Open a Colab notebook, paste each code block into its own cell, and run with Shift-Enter. The Open in Colab button at the top of this page loads a companion notebook that already has every example as a cell, if you want to skip the typing. Every example prints its results with `print`, so the same code also runs as a `.py` file in Thonny.
 
 
 ## What you should be able to do after this chapter

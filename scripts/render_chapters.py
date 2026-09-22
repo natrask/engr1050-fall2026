@@ -13,6 +13,7 @@ import sys
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
+COURSE_YML = REPO_ROOT / "course.yml"
 TEXTBOOK_DIR = REPO_ROOT / "NewMaterial" / "Textbook"
 
 TEMPLATE = '''<!DOCTYPE html>
@@ -35,11 +36,18 @@ TEMPLATE = '''<!DOCTYPE html>
  pre {{ background: #f4f4f4; padding: 12px; border-radius: 6px; overflow-x: auto; }}
  blockquote {{ border-left: 4px solid #82AFD3; padding: 4px 12px; background: #f8f9fa; margin: 12px 0; }}
  a {{ color: #4a90e2; }} a:hover {{ color: #990000; }}
- .nav {{ font-size: 0.9rem; margin-bottom: 1rem; }}
+ pre code {{ background: none; padding: 0; }}
+ li {{ margin-bottom: 6px; }}
+ li p {{ margin: 6px 0; }}
+ li pre {{ margin: 8px 0; }}
+ .nav {{ font-size: 0.9rem; margin-bottom: 1rem; display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; }}
+ .nav a.button {{ background: #6c757d; color: #fff; padding: 0.3rem 0.8rem; border-radius: 4px; text-decoration: none; font-weight: 600; }}
+ .nav a.button:hover {{ background: #990000; color: #fff; }}
 </style>
 </head>
 <body>
-<p class="nav"><a href="../../../index.html#extras">&larr; Back to Extras</a></p>
+<p class="nav"><a href="../../../index.html#extras">&larr; Back to Extras</a>
+<a class="button" href="{colab}" target="_blank">Open in Colab</a></p>
 {body}
 <script>
 document.addEventListener("DOMContentLoaded", function() {{
@@ -58,83 +66,162 @@ document.addEventListener("DOMContentLoaded", function() {{
 '''
 
 
-def md_to_html(md: str) -> str:
-    """Tiny markdown subset: headings, paragraphs, bullets, fenced code, blockquotes."""
-    lines = md.splitlines()
+_CODE_SPAN = re.compile(r'(`+)(.+?)\1')
+_BOLD = re.compile(r'\*\*(.+?)\*\*')
+_URL = re.compile(r'(https?://[^\s<]+[^\s<.,;:!?)])')
+_LIST_MARKER = re.compile(r'^(\s*)([-*]|\d+\.)\s+')
+
+
+def inline(text: str) -> str:
+    """Escape, then render `code` spans, **bold**, and bare URLs.
+
+    Bold and URLs are only applied outside code spans, so `2 ** 10` and
+    `**` survive as code rather than turning into emphasis.
+    """
+    text = html_mod.escape(text)
     out = []
+    pos = 0
+    for m in _CODE_SPAN.finditer(text):
+        out.append(_inline_plain(text[pos:m.start()]))
+        out.append('<code>' + m.group(2).strip() + '</code>')
+        pos = m.end()
+    out.append(_inline_plain(text[pos:]))
+    return ''.join(out)
+
+
+def _inline_plain(text: str) -> str:
+    text = _BOLD.sub(r'<strong>\1</strong>', text)
+    return _URL.sub(r'<a href="\1">\1</a>', text)
+
+
+def _is_fence(line: str) -> bool:
+    return line.lstrip().startswith('```')
+
+
+def md_to_html(md: str) -> str:
+    """Tiny markdown subset: headings, paragraphs, lists, fenced code, blockquotes.
+
+    List items may carry indented continuation lines, including fenced code
+    blocks. Those render as a real <pre> inside the <li>; a fence is never
+    flattened into paragraph text, where it reads like a shell command.
+    """
+    return '\n'.join(_blocks(md.splitlines()))
+
+
+def _blocks(lines):
+    out = []
+    para = []
     i = 0
-    in_para = []
-    in_list = False  # False, True (ul), or 'ol'
+
+    def flush():
+        if para:
+            out.append('<p>' + inline(' '.join(s.strip() for s in para)) + '</p>')
+            para.clear()
+
     while i < len(lines):
         line = lines[i]
-        if line.startswith('```'):
-            if in_para:
-                out.append('<p>' + ' '.join(in_para) + '</p>'); in_para = []
-            if in_list:
-                out.append('</ul>' if in_list is True else '</ol>'); in_list = False
+
+        if _is_fence(line):
+            flush()
+            indent = len(line) - len(line.lstrip())
             i += 1
             code = []
-            while i < len(lines) and not lines[i].startswith('```'):
-                code.append(html_mod.escape(lines[i]))
+            while i < len(lines) and not _is_fence(lines[i]):
+                raw = lines[i]
+                # drop the fence's own indentation, keep the code's
+                code.append(raw[indent:] if raw[:indent].strip() == '' else raw.lstrip())
                 i += 1
-            out.append('<pre><code>' + '\n'.join(code) + '</code></pre>')
-            i += 1
+            i += 1  # closing fence
+            out.append('<pre><code>' + html_mod.escape('\n'.join(code)) + '</code></pre>')
             continue
+
         m = re.match(r'^(#+)\s+(.*)$', line)
         if m:
-            if in_para:
-                out.append('<p>' + ' '.join(in_para) + '</p>'); in_para = []
-            if in_list:
-                out.append('</ul>' if in_list is True else '</ol>'); in_list = False
+            flush()
             level = min(len(m.group(1)), 6)
-            out.append(f'<h{level}>{html_mod.escape(m.group(2))}</h{level}>')
+            out.append(f'<h{level}>{inline(m.group(2))}</h{level}>')
             i += 1
             continue
+
         if line.startswith('> '):
-            if in_para:
-                out.append('<p>' + ' '.join(in_para) + '</p>'); in_para = []
-            if in_list:
-                out.append('</ul>' if in_list is True else '</ol>'); in_list = False
-            out.append('<blockquote>' + html_mod.escape(line[2:]) + '</blockquote>')
-            i += 1
+            flush()
+            quote = []
+            while i < len(lines) and lines[i].startswith('>'):
+                quote.append(lines[i][1:].strip())
+                i += 1
+            out.append('<blockquote>' + inline(' '.join(quote)) + '</blockquote>')
             continue
-        if re.match(r'^[\-*]\s+', line):
-            if in_para:
-                out.append('<p>' + ' '.join(in_para) + '</p>'); in_para = []
-            if not in_list:
-                out.append('<ul>'); in_list = True
-            item = re.sub(r'^[\-*]\s+', '', line)
-            out.append('<li>' + html_mod.escape(item) + '</li>')
-            i += 1
+
+        lm = _LIST_MARKER.match(line)
+        if lm and lm.group(1) == '':
+            flush()
+            ordered = lm.group(2) not in '-*'
+            tag = 'ol' if ordered else 'ul'
+            out.append(f'<{tag}>')
+            while i < len(lines):
+                lm = _LIST_MARKER.match(lines[i])
+                if not (lm and lm.group(1) == '' and (lm.group(2) not in '-*') == ordered):
+                    break
+                width = lm.end()
+                item = [lines[i][width:]]
+                i += 1
+                in_fence = False
+                while i < len(lines):
+                    nxt = lines[i]
+                    if in_fence:
+                        pass
+                    elif nxt.strip() == '':
+                        # a blank line stays in the item only if indented text follows
+                        j = i
+                        while j < len(lines) and lines[j].strip() == '':
+                            j += 1
+                        if j >= len(lines) or not lines[j].startswith('  '):
+                            break
+                    elif not nxt.startswith('  '):
+                        break
+                    if _is_fence(nxt):
+                        in_fence = not in_fence
+                    strip = min(width, len(nxt) - len(nxt.lstrip()))
+                    item.append(nxt[strip:])
+                    i += 1
+                inner = _blocks(item)
+                if len(inner) == 1 and inner[0].startswith('<p>') and inner[0].endswith('</p>'):
+                    inner = [inner[0][3:-4]]
+                out.append('<li>' + '\n'.join(inner) + '</li>')
+                # skip blank lines between items of the same list
+                j = i
+                while j < len(lines) and lines[j].strip() == '':
+                    j += 1
+                nm = _LIST_MARKER.match(lines[j]) if j < len(lines) else None
+                if nm and nm.group(1) == '' and (nm.group(2) not in '-*') == ordered:
+                    i = j
+            out.append(f'</{tag}>')
             continue
-        if re.match(r'^\d+\.\s+', line):
-            if in_para:
-                out.append('<p>' + ' '.join(in_para) + '</p>'); in_para = []
-            if not in_list:
-                out.append('<ol>'); in_list = 'ol'
-            item = re.sub(r'^\d+\.\s+', '', line)
-            out.append('<li>' + html_mod.escape(item) + '</li>')
-            i += 1
-            continue
+
         if line.strip() == '':
-            if in_para:
-                out.append('<p>' + ' '.join(in_para) + '</p>'); in_para = []
-            if in_list:
-                out.append('</ul>' if in_list is True else '</ol>'); in_list = False
+            flush()
             i += 1
             continue
-        in_para.append(html_mod.escape(line))
+
+        para.append(line)
         i += 1
-    if in_para:
-        out.append('<p>' + ' '.join(in_para) + '</p>')
-    if in_list:
-        out.append('</ul>' if in_list is True else '</ol>')
-    return '\n'.join(out)
+
+    flush()
+    return out
+
+
+def github_repo() -> str:
+    """Repo slug for Colab links; course.yml is the single source of truth."""
+    import yaml
+    course = yaml.safe_load(COURSE_YML.read_text(encoding="utf-8"))
+    return course["semester"]["github_repo"]
 
 
 def main():
     if not TEXTBOOK_DIR.is_dir():
         sys.exit(f"Textbook directory not found: {TEXTBOOK_DIR}")
+    repo = github_repo()
+    colab_base = f"https://colab.research.google.com/github/{repo}/blob/main/NewMaterial/Textbook"
     n = 0
     for sub in sorted(TEXTBOOK_DIR.iterdir()):
         if not sub.is_dir():
@@ -149,7 +236,8 @@ def main():
         title = first.lstrip('# ').strip()
         body = md_to_html(md)
         html_path.write_text(
-            TEMPLATE.format(title=html_mod.escape(title), body=body),
+            TEMPLATE.format(title=html_mod.escape(title), body=body,
+                            colab=f"{colab_base}/{sub.name}/chapter.ipynb"),
             encoding="utf-8",
         )
         size = html_path.stat().st_size

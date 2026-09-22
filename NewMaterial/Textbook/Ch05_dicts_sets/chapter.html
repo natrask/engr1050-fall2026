@@ -18,31 +18,39 @@
  pre { background: #f4f4f4; padding: 12px; border-radius: 6px; overflow-x: auto; }
  blockquote { border-left: 4px solid #82AFD3; padding: 4px 12px; background: #f8f9fa; margin: 12px 0; }
  a { color: #4a90e2; } a:hover { color: #990000; }
- .nav { font-size: 0.9rem; margin-bottom: 1rem; }
+ pre code { background: none; padding: 0; }
+ li { margin-bottom: 6px; }
+ li p { margin: 6px 0; }
+ li pre { margin: 8px 0; }
+ .nav { font-size: 0.9rem; margin-bottom: 1rem; display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; }
+ .nav a.button { background: #6c757d; color: #fff; padding: 0.3rem 0.8rem; border-radius: 4px; text-decoration: none; font-weight: 600; }
+ .nav a.button:hover { background: #990000; color: #fff; }
 </style>
 </head>
 <body>
-<p class="nav"><a href="../../../index.html#extras">&larr; Back to Extras</a></p>
+<p class="nav"><a href="../../../index.html#extras">&larr; Back to Extras</a>
+<a class="button" href="https://colab.research.google.com/github/natrask/engr1050-fall2026/blob/main/NewMaterial/Textbook/Ch05_dicts_sets/chapter.ipynb" target="_blank">Open in Colab</a></p>
 <h1>Chapter 5: Dictionaries and sets</h1>
 <p>Dictionaries are how you look something up by name instead of by position. Sets are how you ask &quot;did I already see this&quot; without scanning a list. Both are core data structures, both are stupidly fast for the operations they were built for, and both come up in almost every notebook you write after Lecture 7.</p>
-<p>Prerequisite: Chapter 3 on lists. **How to use this chapter.** Open a Colab notebook, paste each code block into its own cell, and run with Shift-Enter. The companion `chapter.ipynb` already has every example as a cell if you want to skip the typing.</p>
+<p>Prerequisite: Chapter 3 on lists.</p>
+<p><strong>How to use this chapter.</strong> Open a Colab notebook, paste each code block into its own cell, and run with Shift-Enter. The Open in Colab button at the top of this page loads a companion notebook that already has every example as a cell, if you want to skip the typing. Every example prints its results with <code>print</code>, so the same code also runs as a <code>.py</code> file in Thonny.</p>
 <h2>What you should be able to do after this chapter</h2>
 <ul>
 <li>Build a dict literal, look up a value, add a new key.</li>
 <li>Loop over keys, values, and items.</li>
-<li>Use `get` to avoid `KeyError` when a key might be missing.</li>
+<li>Use <code>get</code> to avoid <code>KeyError</code> when a key might be missing.</li>
 <li>Use a set to dedupe a list and to check membership fast.</li>
 <li>Read code that uses a dict as a record (each key is a field name).</li>
 </ul>
 <h2>The minimum you need to know</h2>
-<p>A **dict** maps keys to values. Curly braces, key-colon-value pairs.</p>
+<p>A <strong>dict</strong> maps keys to values. Curly braces, key-colon-value pairs.</p>
 <pre><code>rbi = {&quot;Schwarber&quot;: 119, &quot;Turner&quot;: 66, &quot;Harper&quot;: 64}
 print(rbi[&quot;Schwarber&quot;])     # 119</code></pre>
 <p>Add a new key by assigning to it. Update a value the same way.</p>
 <pre><code>rbi[&quot;Stott&quot;] = 55
 rbi[&quot;Schwarber&quot;] = 120
 print(rbi)</code></pre>
-<p>Looking up a missing key raises `KeyError`. Use `dict.get(key, default)` if you want a fallback instead.</p>
+<p>Looking up a missing key raises <code>KeyError</code>. Use <code>dict.get(key, default)</code> if you want a fallback instead.</p>
 <pre><code>print(rbi.get(&quot;Bohm&quot;, 0))   # 0, no KeyError
 print(rbi.get(&quot;Bohm&quot;))      # None</code></pre>
 <p>Loop over a dict three ways: keys (the default), values, items.</p>
@@ -57,12 +65,12 @@ for n in rbi.values():
 
 for name, n in rbi.items():
     print(name, n)</code></pre>
-<p>A **set** is a collection of unique items. No order, no duplicates, fast `in`. Curly braces with values, no colons.</p>
+<p>A <strong>set</strong> is a collection of unique items. No order, no duplicates, fast <code>in</code>. Curly braces with values, no colons.</p>
 <pre><code>states = {&quot;PA&quot;, &quot;NJ&quot;, &quot;DE&quot;, &quot;PA&quot;}
 print(states)              # {&#x27;PA&#x27;, &#x27;NJ&#x27;, &#x27;DE&#x27;}
 print(&quot;PA&quot; in states)      # True, fast
 print(len(states))         # 3</code></pre>
-<p>Sets support `union` (`|`), `intersection` (`&amp;`), `difference` (`-`).</p>
+<p>Sets support <code>union</code> (<code>|</code>), <code>intersection</code> (<code>&amp;</code>), <code>difference</code> (<code>-</code>).</p>
 <h2>Worked examples</h2>
 <h3>Example 1: Dict as a lookup table</h3>
 <pre><code>rbi = {&quot;Schwarber&quot;: 119, &quot;Turner&quot;: 66, &quot;Harper&quot;: 64, &quot;Bohm&quot;: 64}
@@ -70,7 +78,7 @@ print(rbi[&quot;Harper&quot;])
 print(rbi[&quot;Bohm&quot;])</code></pre>
 <p>If you tried to do this with two parallel lists, you would loop through one list looking for the name, find the index, then index the other list. The dict does that in one shot, in constant time.</p>
 <h3>Example 2: get with a default</h3>
-<p>`get` returns `None` (or the default you supply) when the key is missing. Use it when missing-is-fine.</p>
+<p><code>get</code> returns <code>None</code> (or the default you supply) when the key is missing. Use it when missing-is-fine.</p>
 <pre><code>print(rbi.get(&quot;Realmuto&quot;))         # None
 print(rbi.get(&quot;Realmuto&quot;, 0))      # 0
 print(rbi.get(&quot;Harper&quot;, 0))        # 64</code></pre>
@@ -79,27 +87,27 @@ print(rbi.get(&quot;Harper&quot;, 0))        # 64</code></pre>
 rbi[&quot;Schwarber&quot;] = 120        # update
 rbi.update({&quot;Castellanos&quot;: 61, &quot;Realmuto&quot;: 47})   # bulk
 print(rbi)</code></pre>
-<p>`update` takes another dict (or a list of pairs) and merges it in. Existing keys get overwritten.</p>
+<p><code>update</code> takes another dict (or a list of pairs) and merges it in. Existing keys get overwritten.</p>
 <h3>Example 4: Removing keys</h3>
 <pre><code>removed = rbi.pop(&quot;Bohm&quot;)
 print(removed)                # 64
 print(rbi.get(&quot;Bohm&quot;))        # None
 
 del rbi[&quot;Realmuto&quot;]</code></pre>
-<p>`pop` returns the value it removed. `del` is a statement, no return value. Pick one based on whether you need the value.</p>
+<p><code>pop</code> returns the value it removed. <code>del</code> is a statement, no return value. Pick one based on whether you need the value.</p>
 <h3>Example 5: Looping over items</h3>
-<p>For most loops you want both the key and the value. `.items()` gives both.</p>
+<p>For most loops you want both the key and the value. <code>.items()</code> gives both.</p>
 <pre><code>for name, n in rbi.items():
     print(f&quot;{name:14s} {n:4d}&quot;)</code></pre>
-<p>The `:14s` and `:4d` are format specifiers for f-strings: 14 characters wide left-aligned string, 4 characters wide integer. Makes the output line up.</p>
+<p>The <code>:14s</code> and <code>:4d</code> are format specifiers for f-strings: 14 characters wide left-aligned string, 4 characters wide integer. Makes the output line up.</p>
 <h3>Example 6: Building a histogram with a dict</h3>
-<p>Count occurrences of each thing. The pattern is `d[k] = d.get(k, 0) + 1`.</p>
+<p>Count occurrences of each thing. The pattern is <code>d[k] = d.get(k, 0) + 1</code>.</p>
 <pre><code>votes = [&quot;pizza&quot;, &quot;hoagies&quot;, &quot;pizza&quot;, &quot;pretzels&quot;, &quot;hoagies&quot;, &quot;hoagies&quot;, &quot;pizza&quot;, &quot;pizza&quot;]
 counts = {}
 for v in votes:
     counts[v] = counts.get(v, 0) + 1
 print(counts)</code></pre>
-<p>Output: `{&#x27;pizza&#x27;: 4, &#x27;hoagies&#x27;: 3, &#x27;pretzels&#x27;: 1}`. Lecture 7 builds the same thing for the Reading Terminal survey.</p>
+<p>Output: <code>{&#x27;pizza&#x27;: 4, &#x27;hoagies&#x27;: 3, &#x27;pretzels&#x27;: 1}</code>. Lecture 7 builds the same thing for the Reading Terminal survey.</p>
 <h3>Example 7: Dict as a record</h3>
 <p>Each key is a field name, the value is what you put there. This is a quick way to bundle related data.</p>
 <pre><code>player = {
@@ -123,7 +131,7 @@ for row in roster:
 <pre><code>top = sorted(rbi.items(), key=lambda kv: kv[1], reverse=True)
 for name, n in top[:3]:
     print(name, n)</code></pre>
-<p>`kv[1]` is the value. `reverse=True` gives you descending order.</p>
+<p><code>kv[1]</code> is the value. <code>reverse=True</code> gives you descending order.</p>
 <h3>Example 9: Set basics</h3>
 <pre><code>states = {&quot;PA&quot;, &quot;NJ&quot;, &quot;DE&quot;, &quot;PA&quot;, &quot;NJ&quot;}
 print(states)
@@ -131,7 +139,7 @@ print(&quot;PA&quot; in states)
 print(len(states))</code></pre>
 <p>The duplicates were silently dropped. Sets are unordered, do not rely on the print order.</p>
 <h3>Example 10: Deduping a list</h3>
-<p>The fast way to remove duplicates is to make a set out of the list. If you need order preserved, use a `dict.fromkeys` trick.</p>
+<p>The fast way to remove duplicates is to make a set out of the list. If you need order preserved, use a <code>dict.fromkeys</code> trick.</p>
 <pre><code>names = [&quot;Trea&quot;, &quot;Bryce&quot;, &quot;Trea&quot;, &quot;Kyle&quot;, &quot;Bryce&quot;]
 unique = list(set(names))                   # order may shuffle
 print(unique)
@@ -139,14 +147,14 @@ print(unique)
 ordered = list(dict.fromkeys(names))        # keeps first-seen order
 print(ordered)</code></pre>
 <h3>Example 11: Set operations</h3>
-<p>When you have two sets, `|`, `&amp;`, `-` are union, intersection, difference. Useful for &quot;students who took both classes&quot;, &quot;names in A but not B&quot;, and so on.</p>
+<p>When you have two sets, <code>|</code>, <code>&amp;</code>, <code>-</code> are union, intersection, difference. Useful for &quot;students who took both classes&quot;, &quot;names in A but not B&quot;, and so on.</p>
 <pre><code>team_a = {&quot;Schwarber&quot;, &quot;Turner&quot;, &quot;Harper&quot;}
 team_b = {&quot;Harper&quot;, &quot;Bohm&quot;, &quot;Realmuto&quot;}
 print(team_a | team_b)
 print(team_a &amp; team_b)
 print(team_a - team_b)</code></pre>
 <h3>Example 12: Dict comprehensions</h3>
-<p>Same idea as list comprehensions, but you write `key: value` in the body.</p>
+<p>Same idea as list comprehensions, but you write <code>key: value</code> in the body.</p>
 <pre><code>squares = {n: n * n for n in range(6)}
 print(squares)
 
@@ -155,23 +163,33 @@ rbi_to_name = {v: k for k, v in rbi.items()}
 print(rbi_to_name)</code></pre>
 <h2>Common mistakes</h2>
 <ul>
-<li>Using `dict[key]` when the key might be missing. Catches you the first time you process unclean data. Use `dict.get(key, default)` or wrap in a `try`.</li>
+<li>Using <code>dict[key]</code> when the key might be missing. Catches you the first time you process unclean data. Use <code>dict.get(key, default)</code> or wrap in a <code>try</code>.</li>
 <li>Mutating a dict while looping over it. Same trap as lists. If you need to delete keys, collect them first, then delete after the loop.</li>
-<li>Using a mutable thing as a key. Keys have to be hashable. Strings, ints, tuples of immutable values: fine. Lists: not hashable, you get `TypeError`.</li>
-<li>Confusing `pop` and `popitem`. `pop` takes a key and removes that entry. `popitem` removes some arbitrary entry (the last inserted, in modern Python). Use `pop` when you have a key.</li>
-<li>Treating a set like a list. Sets do not support indexing. `s[0]` is a `TypeError`. Convert to a list first if you need ordering.</li>
+<li>Using a mutable thing as a key. Keys have to be hashable. Strings, ints, tuples of immutable values: fine. Lists: not hashable, you get <code>TypeError</code>.</li>
+<li>Confusing <code>pop</code> and <code>popitem</code>. <code>pop</code> takes a key and removes that entry. <code>popitem</code> removes some arbitrary entry (the last inserted, in modern Python). Use <code>pop</code> when you have a key.</li>
+<li>Treating a set like a list. Sets do not support indexing. <code>s[0]</code> is a <code>TypeError</code>. Convert to a list first if you need ordering.</li>
 <li>Trusting set order to be stable. It is not. Do not write tests that assume a particular order.</li>
 </ul>
 <h2>Practice problems</h2>
 <ol>
-<li>Given the list `votes = [&quot;yes&quot;, &quot;no&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;abstain&quot;, &quot;no&quot;]`, build a dict that counts how many of each. Use the `d.get(k, 0) + 1` pattern.</li>
-<li>You have two dicts of grades for the same students:</li>
-<p>   ```python    midterm = {&quot;Alice&quot;: 88, &quot;Bob&quot;: 75, &quot;Cara&quot;: 92}    final   = {&quot;Alice&quot;: 91, &quot;Bob&quot;: 80, &quot;Cara&quot;: 95}    ```    Build a third dict `total` mapping each name to the average of their two scores. Use a dict comprehension.</p>
-<li>The snippet below should print names that appear in both teams. It does not, it raises an error. Fix it.</li>
-<p>   ```python    team_a = [&quot;Schwarber&quot;, &quot;Turner&quot;, &quot;Harper&quot;]    team_b = [&quot;Harper&quot;, &quot;Bohm&quot;, &quot;Realmuto&quot;]    shared = team_a &amp; team_b    print(shared)    ```</p>
-<li>Given a string `s = &quot;phillies&quot;`, count how many times each character appears. Use a dict.</li>
-<li>Predict the output, then run.</li>
-<p>   ```python    d = {&quot;a&quot;: 1, &quot;b&quot;: 2, &quot;c&quot;: 3}    for k in list(d):        if d[k] % 2 == 0:            del d[k]    print(d)    ```    Why is the `list(d)` wrapper there?</p>
+<li>Given the list <code>votes = [&quot;yes&quot;, &quot;no&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;abstain&quot;, &quot;no&quot;]</code>, build a dict that counts how many of each. Use the <code>d.get(k, 0) + 1</code> pattern.</li>
+<li><p>You have two dicts of grades for the same students:</p>
+<pre><code>midterm = {&quot;Alice&quot;: 88, &quot;Bob&quot;: 75, &quot;Cara&quot;: 92}
+final   = {&quot;Alice&quot;: 91, &quot;Bob&quot;: 80, &quot;Cara&quot;: 95}</code></pre>
+<p>Build a third dict <code>total</code> mapping each name to the average of their two scores. Use a dict comprehension.</p></li>
+<li><p>The snippet below should print names that appear in both teams. It does not, it raises an error. Fix it.</p>
+<pre><code>team_a = [&quot;Schwarber&quot;, &quot;Turner&quot;, &quot;Harper&quot;]
+team_b = [&quot;Harper&quot;, &quot;Bohm&quot;, &quot;Realmuto&quot;]
+shared = team_a &amp; team_b
+print(shared)</code></pre></li>
+<li>Given a string <code>s = &quot;phillies&quot;</code>, count how many times each character appears. Use a dict.</li>
+<li><p>Predict the output, then run.</p>
+<pre><code>d = {&quot;a&quot;: 1, &quot;b&quot;: 2, &quot;c&quot;: 3}
+for k in list(d):
+    if d[k] % 2 == 0:
+        del d[k]
+print(d)</code></pre>
+<p>Why is the <code>list(d)</code> wrapper there?</p></li>
 </ol>
 <h2>What to read next</h2>
 <p>Chapter 6 on classes. Classes are how you bundle data and the functions that operate on that data, taking the &quot;dict as a record&quot; pattern from Example 7 to the next level. After that, Chapter 7 on files and I/O shows you how to load CSV data straight into dicts.</p>

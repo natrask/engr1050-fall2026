@@ -3,7 +3,8 @@
 Numpy gives you matrix multiplication, linear system solvers, norms, and a few other linear-algebra essentials in a way that is fast and easy to read. After this chapter you can solve `A x = b` without writing your own Gaussian elimination, compute the norm of an error vector, and tell which operator (`*`, `@`, `np.dot`) you actually need. Read this when Lecture 11 introduces numpy and your linear algebra intuition starts to feel useful again.
 
 Prerequisite: Chapter 8 on numpy.
-**How to use this chapter.** Open a Colab notebook, paste each code block into its own cell, and run with Shift-Enter. The companion `chapter.ipynb` already has every example as a cell if you want to skip the typing.
+
+**How to use this chapter.** Open a Colab notebook, paste each code block into its own cell, and run with Shift-Enter. The Open in Colab button at the top of this page loads a companion notebook that already has every example as a cell, if you want to skip the typing.
 
 
 ## What you should be able to do after this chapter

@@ -18,14 +18,22 @@
  pre { background: #f4f4f4; padding: 12px; border-radius: 6px; overflow-x: auto; }
  blockquote { border-left: 4px solid #82AFD3; padding: 4px 12px; background: #f8f9fa; margin: 12px 0; }
  a { color: #4a90e2; } a:hover { color: #990000; }
- .nav { font-size: 0.9rem; margin-bottom: 1rem; }
+ pre code { background: none; padding: 0; }
+ li { margin-bottom: 6px; }
+ li p { margin: 6px 0; }
+ li pre { margin: 8px 0; }
+ .nav { font-size: 0.9rem; margin-bottom: 1rem; display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; }
+ .nav a.button { background: #6c757d; color: #fff; padding: 0.3rem 0.8rem; border-radius: 4px; text-decoration: none; font-weight: 600; }
+ .nav a.button:hover { background: #990000; color: #fff; }
 </style>
 </head>
 <body>
-<p class="nav"><a href="../../../index.html#extras">&larr; Back to Extras</a></p>
+<p class="nav"><a href="../../../index.html#extras">&larr; Back to Extras</a>
+<a class="button" href="https://colab.research.google.com/github/natrask/engr1050-fall2026/blob/main/NewMaterial/Textbook/Ch12_ai_tools/chapter.ipynb" target="_blank">Open in Colab</a></p>
 <h1>Chapter 12: Working with AI tools</h1>
 <p>This chapter is about using a large language model (LLM) to help you write code, with two goals: get useful results fast, and not lose your ability to think. Read this around Lecture 20, when the course AI policy starts to apply and you have to start citing your tool use. This is the shortest chapter in the book on purpose; the skill is mostly practice.</p>
-<p>Prerequisite: Chapters 1 through 6. You need enough Python to read generated code and tell whether it is right. **How to use this chapter.** Open a Colab notebook, paste each code block into its own cell, and run with Shift-Enter. The companion `chapter.ipynb` already has every example as a cell if you want to skip the typing.</p>
+<p>Prerequisite: Chapters 1 through 6. You need enough Python to read generated code and tell whether it is right.</p>
+<p><strong>How to use this chapter.</strong> Open a Colab notebook, paste each code block into its own cell, and run with Shift-Enter. The Open in Colab button at the top of this page loads a companion notebook that already has every example as a cell, if you want to skip the typing.</p>
 <h2>What you should be able to do after this chapter</h2>
 <ul>
 <li>Ask an LLM for code in a way that gets you a usable answer the first time.</li>
@@ -48,7 +56,7 @@
 <h2>Worked examples</h2>
 <h3>Example 1: A clean prompt</h3>
 <p>Bad prompt: &quot;write a function that does stress strain&quot;.</p>
-<p>Better prompt: &quot;Write a Python function `yield_stress(strain, stress)` that takes two numpy arrays representing a tension test and returns the stress at the 0.2% offset yield point. Use linear interpolation. Example: for `strain = np.array([0, 0.001, 0.002, 0.003])` and `stress = np.array([0, 100, 150, 175])`, the answer should be approximately 137.5.&quot;</p>
+<p>Better prompt: &quot;Write a Python function <code>yield_stress(strain, stress)</code> that takes two numpy arrays representing a tension test and returns the stress at the 0.2% offset yield point. Use linear interpolation. Example: for <code>strain = np.array([0, 0.001, 0.002, 0.003])</code> and <code>stress = np.array([0, 100, 150, 175])</code>, the answer should be approximately 137.5.&quot;</p>
 <p>The second one tells the LLM what the function signature looks like, the algorithm to use, and an example input and expected output. The output will be much more useful, and you can immediately check correctness.</p>
 <h3>Example 2: Reading generated code for defects</h3>
 <p>Here is generated code that &quot;looks right&quot;.</p>
@@ -59,17 +67,17 @@
     return stress[idx]</code></pre>
 <p>Quick reading:</p>
 <ul>
-<li>Hardcoded modulus `70000`. Where did that come from? The prompt did not say to assume that.</li>
-<li>`argmax` on a boolean array returns the first True. Fine, but easy to misread.</li>
-<li>The function returns `stress[idx]` instead of an interpolated value at the offset line. Off by an interpolation step.</li>
+<li>Hardcoded modulus <code>70000</code>. Where did that come from? The prompt did not say to assume that.</li>
+<li><code>argmax</code> on a boolean array returns the first True. Fine, but easy to misread.</li>
+<li>The function returns <code>stress[idx]</code> instead of an interpolated value at the offset line. Off by an interpolation step.</li>
 </ul>
-<p>Three defects in three lines. Run it on the example. If it returns `175` instead of `137.5`, you have evidence to point at when asking for a fix.</p>
+<p>Three defects in three lines. Run it on the example. If it returns <code>175</code> instead of <code>137.5</code>, you have evidence to point at when asking for a fix.</p>
 <h3>Example 3: The four common defects</h3>
 <p>LLMs reliably produce these:</p>
 <ol>
-<li>Hardcoded constants that were not in your problem statement. Asking for &quot;fit a line&quot; and getting `slope = 2.5` baked in is the classic.</li>
-<li>Off-by-one in slicing. `arr[1:n]` when you wanted `arr[1:n+1]`, or vice versa.</li>
-<li>Wrong array shape. Generated code does `np.array([x])` when it should do `np.array([x, y])`, or forgets `.reshape(-1, 1)`.</li>
+<li>Hardcoded constants that were not in your problem statement. Asking for &quot;fit a line&quot; and getting <code>slope = 2.5</code> baked in is the classic.</li>
+<li>Off-by-one in slicing. <code>arr[1:n]</code> when you wanted <code>arr[1:n+1]</code>, or vice versa.</li>
+<li>Wrong array shape. Generated code does <code>np.array([x])</code> when it should do <code>np.array([x, y])</code>, or forgets <code>.reshape(-1, 1)</code>.</li>
 <li>Missing units or unit mismatches. F vs C, radians vs degrees, kN vs N. The LLM will not check this for you.</li>
 </ol>
 <p>Check for each every time. It takes ten seconds and saves an hour of debugging.</p>
@@ -80,7 +88,7 @@
 def sum_to(n):
     return sum(range(1, n+1))
 print(sum_to(10))    # 55, matches</code></pre>
-<p>If the LLM had written `range(n)` instead of `range(1, n+1)`, you would get 45. By hand: 55. LLM: 45. You know there is a bug, you know roughly where, and you can ask for a fix with evidence.</p>
+<p>If the LLM had written <code>range(n)</code> instead of <code>range(1, n+1)</code>, you would get 45. By hand: 55. LLM: 45. You know there is a bug, you know roughly where, and you can ask for a fix with evidence.</p>
 <h3>Example 5: Iterating</h3>
 <p>If the first answer was wrong, do not start a new chat from scratch. Paste the wrong output back and say what was wrong.</p>
 <blockquote>&quot;That returned 45 for sum_to(10). The correct answer is 55. The range is off by one.&quot;</blockquote>
@@ -95,7 +103,7 @@ print(sum_to(10))    # 55, matches</code></pre>
 <li>Exam questions, by policy.</li>
 <li>Anything you would not be able to explain to a TA.</li>
 <li>Generating data for an assignment. If the assignment is &quot;collect data on X&quot;, LLM-generated synthetic data is academic dishonesty in addition to being garbage.</li>
-<li>Anything that talks to a network or the file system unless you have read the code carefully. A generated script that calls `os.system(&quot;rm -rf ...&quot;)` will absolutely run.</li>
+<li>Anything that talks to a network or the file system unless you have read the code carefully. A generated script that calls <code>os.system(&quot;rm -rf ...&quot;)</code> will absolutely run.</li>
 </ul>
 <p>Use it for:</p>
 <ul>
@@ -105,8 +113,8 @@ print(sum_to(10))    # 55, matches</code></pre>
 <li>Debugging a specific traceback that you can paste in.</li>
 </ul>
 <h3>Example 8: A worked round-trip on a course-style problem</h3>
-<p>Task: write a function that normalizes an array so its values lie in `[0, 1]`.</p>
-<p>Your prompt: &quot;Python function `normalize(x: np.ndarray) -&gt; np.ndarray` that linearly maps the input so the minimum becomes 0 and the maximum becomes 1. Example: `normalize(np.array([2, 4, 8]))` should be `np.array([0., 0.333, 1.])`.&quot;</p>
+<p>Task: write a function that normalizes an array so its values lie in <code>[0, 1]</code>.</p>
+<p>Your prompt: &quot;Python function <code>normalize(x: np.ndarray) -&gt; np.ndarray</code> that linearly maps the input so the minimum becomes 0 and the maximum becomes 1. Example: <code>normalize(np.array([2, 4, 8]))</code> should be <code>np.array([0., 0.333, 1.])</code>.&quot;</p>
 <p>LLM output:</p>
 <pre><code>import numpy as np
 
@@ -127,10 +135,10 @@ print(normalize(np.array([2.0, 4.0, 8.0])))
     if span == 0:
         return np.zeros_like(x, dtype=float)
     return (x - x.min()) / span</code></pre>
-<p>Run the hostile example again. Should be `[0, 0, 0]`. Then check the easy example still works. Both pass. Good.</p>
+<p>Run the hostile example again. Should be <code>[0, 0, 0]</code>. Then check the easy example still works. Both pass. Good.</p>
 <h3>Example 9: Citing AI use in a homework submission</h3>
 <p>Penn academic integrity requires you to disclose what you used. The course AI policy is more specific: name the tool, paraphrase the prompt, describe what the tool produced and what you changed.</p>
-<p>In a Jupyter notebook a citation cell at the bottom looks like this:</p>
+<p>In a Colab notebook a citation cell at the bottom looks like this:</p>
 <pre><code>## AI use
 
 I used Gemini in Colab. I asked it for the structure of a histogram with matplotlib (Example 7). The code it gave used `plt.hist(data, bins=20)`, which I changed to `bins=30` and added axis labels. I did not use any AI assistance on Problem 3 or Problem 5.</code></pre>
@@ -142,7 +150,9 @@ I used Gemini in Colab. I asked it for the structure of a histogram with matplot
 import pandas as pd
 import matplotlib.pyplot as plt
 
-df = pd.read_csv(&quot;U15Al6XXX-T81.csv&quot;)
+# pandas reads straight from a URL, so there is nothing to upload to Colab
+url = &quot;https://raw.githubusercontent.com/natrask/engr1050-fall2026/main/NewMaterial/_shared/Data/U15Al6XXX-T81_BatchB13R01T2.6921W12.71.csv&quot;
+df = pd.read_csv(url)
 plt.figure(figsize=(7, 4))
 plt.plot(df[&quot;Displacement_(mm)&quot;], df[&quot;Force_(kN)&quot;], &quot;k-&quot;)
 plt.xlabel(&quot;displacement (mm)&quot;); plt.ylabel(&quot;force (kN)&quot;)
@@ -155,21 +165,25 @@ plt.close()</code></pre>
 <li>Trusting the answer because it ran without error. Code that runs is not code that is correct. Always test against an example you know.</li>
 <li>Pasting the entire homework prompt into the LLM. You end up debugging a function that solves the wrong problem. Break the problem into pieces.</li>
 <li>Forgetting to cite. The course policy is explicit. Citation is cheap. Not citing is expensive.</li>
-<li>Treating the LLM as authoritative on math. It is not. If the LLM says a derivative is `cos(x)/x` and you suspect it is wrong, you are probably right.</li>
+<li>Treating the LLM as authoritative on math. It is not. If the LLM says a derivative is <code>cos(x)/x</code> and you suspect it is wrong, you are probably right.</li>
 <li>Using AI for exam prep instead of practice. The exams are designed to detect this. Working through problems by hand is the only way to feel confident on the day of.</li>
 <li>Giving up after one wrong answer instead of iterating. The second prompt is often where the useful answer comes from.</li>
 </ul>
 <h2>Practice problems</h2>
 <ol>
 <li>Pick a function you have written this semester. Ask an LLM to write it from a one-sentence description. Run both versions on the same input and compare. Write a one-paragraph note on what was the same and what differed.</li>
-<li>Ask an LLM to write a function `is_prime(n)`. Test it on `n = 1`, `n = 2`, `n = 4`, `n = 9`, `n = 25`, `n = 0`, and `n = -3`. Which edge cases did it handle, which did it miss?</li>
-<li>The snippet below was generated by an LLM. Find at least one bug without running it.</li>
-<p>   ```python    def average(values):        total = 0        for v in values:            total + v        return total / len(values)    ```</p>
+<li>Ask an LLM to write a function <code>is_prime(n)</code>. Test it on <code>n = 1</code>, <code>n = 2</code>, <code>n = 4</code>, <code>n = 9</code>, <code>n = 25</code>, <code>n = 0</code>, and <code>n = -3</code>. Which edge cases did it handle, which did it miss?</li>
+<li><p>The snippet below was generated by an LLM. Find at least one bug without running it.</p>
+<pre><code>def average(values):
+    total = 0
+    for v in values:
+        total + v
+    return total / len(values)</code></pre></li>
 <li>Write the citation block you would include if your HW5 notebook used an LLM for the data-loading code but not for the plotting.</li>
 <li>Pick a topic from Lectures 21-25 that you find unclear. Ask an LLM to explain it. Write a short paragraph evaluating whether the explanation matches what your lecture notes say.</li>
 </ol>
 <h2>What to read next</h2>
-<p>You have reached the end of the textbook. The lectures from here on out build on these foundations. If you want a single resource for everything Python, the official Python tutorial at https://docs.python.org/3/tutorial/ is a solid second reading. For numpy, the user guide at https://numpy.org/doc/stable/user/ has a deeper dive into broadcasting and indexing.</p>
+<p>You have reached the end of the textbook. The lectures from here on out build on these foundations. If you want a single resource for everything Python, the official Python tutorial at <a href="https://docs.python.org/3/tutorial/">https://docs.python.org/3/tutorial/</a> is a solid second reading. For numpy, the user guide at <a href="https://numpy.org/doc/stable/user/">https://numpy.org/doc/stable/user/</a> has a deeper dive into broadcasting and indexing.</p>
 <script>
 document.addEventListener("DOMContentLoaded", function() {
   if (window.renderMathInElement) {
