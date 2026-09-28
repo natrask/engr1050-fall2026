@@ -191,6 +191,11 @@ schedule:
     folder: Lecture09
     notebook: lec09.ipynb
     kind: lab
+    links:
+      - label: Exam 1 extra prep (Colab)
+        url: https://colab.research.google.com/github/natrask/engr1050-fall2026/blob/main/NewMaterial/Lecture09/exam1_extraPrep.ipynb
+      - label: Exam 1 extra prep solutions (Colab)
+        url: https://colab.research.google.com/github/natrask/engr1050-fall2026/blob/main/NewMaterial/Lecture09/exam1_extraPrep_solutions.ipynb
   - num: 10
     date: 2026-09-30
     section: 1
