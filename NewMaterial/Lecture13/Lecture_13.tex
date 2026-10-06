@@ -68,8 +68,8 @@
 
 
 \title{Lecture 13}
-\author{ENGR1050 Fall 2025}
-\date{\today}
+\author{ENGR1050 Fall 2026}
+\date{October 12, 2026}
 
 \begin{document}
 
@@ -213,7 +213,7 @@ is a \textit{second-order} ODE since the highest derivative is the second deriva
   \begin{frame}{Numerical solution of ODEs}
     Many ODEs cannot be solved analytically, so we use numerical methods to approximate solutions. The simplest is the Explicit Euler method.
   \begin{definition}
-    For the IVP \(y'(t)=f(t,y)\) with \(y(t_0)=y_0\) and step size \(h>0\), the Starting from $t_0,y_0$, Explicit Euler scheme updates via
+    For the IVP \(y'(t)=f(t,y)\) with \(y(t_0)=y_0\) and step size \(h>0\), starting from $t_0,y_0$, the Explicit Euler scheme updates via
     \[
       t_{n+1}=t_n+h, \qquad
       y_{n+1}=y_n + h\,f(t_n,y_n),
@@ -249,7 +249,7 @@ is a \textit{second-order} ODE since the highest derivative is the second deriva
         \item Final time \(t_f\) to solve to and number of steps \(N\)
       \end{itemize}
       \item The class will have two functions:
-      \item \begin{itemize}
+      \begin{itemize}
           \item \texttt{f(t,y)} to define the ODE \(y' = f(t,y)\)
           \item \texttt{solve()} to perform \(N\) steps and return the solution as a numpy array
       \end{itemize}

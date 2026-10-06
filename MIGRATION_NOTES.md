@@ -93,8 +93,8 @@ carried the 2025 number, which was one too high, so the shift made them right:
 
 | File                         | PDF cover says | Status                                         |
 |------------------------------|----------------|------------------------------------------------|
-| `Lecture12/Lecture_12.pdf`   | Lecture 12     | correct                                        |
-| `Lecture13/Lecture_13.pdf`   | Lecture 13 (footer 12) | recompile; `.tex` footer fixed          |
+| `Lecture12/Lecture_12.pdf`   | Lecture 12     | correct (recompiled, dated for 2026)           |
+| `Lecture13/Lecture_13.pdf`   | Lecture 13     | correct (recompiled, dated for 2026)           |
 | `Lecture14/Lecture_14.pdf`   | Lecture 13 (footer 12) | recompile; `.tex` title and footer fixed |
 | `Lecture16/Lecture_16.pdf`   | Lecture 16     | correct                                        |
 | `Lecture18/Lecture_18.pdf`   | Lecture 18     | correct                                        |
@@ -104,7 +104,7 @@ carried the 2025 number, which was one too high, so the shift made them right:
 | `Lecture24/Lecture_24.pdf`   | Lecture 24     | correct                                        |
 | `Lecture25/Lecture_25.pdf`   | Lecture 25     | correct                                        |
 
-All of these covers still carry Fall 2025 dates.
+The covers from Lecture 14 on still carry Fall 2025 dates. Figures for the Beamer decks are not in `OldMaterial/`; copy them from `slides/lectureNN/` in the Fall 2025 repo, and compile with `pdflatex -shell-escape` (the decks use minted).
 
 Prose pointers updated in this pass: the "Lecture 9 lab" reference in the Exam 1
 extra prep notebooks (now Lecture 11), the topic list in `Lecture26/lec26.ipynb`,

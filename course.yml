@@ -230,6 +230,7 @@ schedule:
     folder: Lecture13
     slides: Lecture_13.pdf
     notebook: lec13.ipynb
+    exercise: https://canvas.upenn.edu/courses/1950130/assignments/15166832
   - num: 14
     date: 2026-10-14
     section: 2
