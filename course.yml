@@ -227,6 +227,7 @@ schedule:
     date: 2026-10-12
     section: 2
     topic: Intro to ODEs, finite differences, simulators
+    visible: true
     folder: Lecture13
     slides: Lecture_13.pdf
     notebook: lec13.ipynb
@@ -235,6 +236,7 @@ schedule:
     date: 2026-10-14
     section: 2
     topic: Numerical integration continued
+    visible: true
     folder: Lecture14
     slides: Lecture_14.pdf
     notebook: lec14.ipynb

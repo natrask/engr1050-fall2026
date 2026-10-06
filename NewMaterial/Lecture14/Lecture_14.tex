@@ -68,8 +68,8 @@
 
 
 \title{Lecture 14}
-\author{ENGR1050 Fall 2025}
-\date{\today}
+\author{ENGR1050 Fall 2026}
+\date{October 14, 2026}
 
 \begin{document}
 
@@ -97,15 +97,14 @@
   \begin{itemize}
     \item Last class we built a class for solving ODEs numerically together
     \item Today we'll get some extra practice using it to model a pendulum
-    \item We have lab this Wednesday (\textbf{meet in GM lab}) where we will use \textit{potentiometers} to measure angles of pendulums
+    \item We have lab next Monday (\textbf{meet in GM lab}) where we will use \textit{potentiometers} to measure angles of pendulums
   \end{itemize}
-  \textit{Important note:} Prof. Trask is on travel Tuesday so can't make OH; today's exercise should get you the help you need to finish the homework or you can meet with Ben. HW is pushed back to Thursday.
 \end{frame}
 
   \begin{frame}{Numerical solution of ODEs}
     Many ODEs cannot be solved analytically, so we use numerical methods to approximate solutions. The simplest is the Explicit Euler method.
   \begin{definition}
-    For the IVP \(y'(t)=f(t,y)\) with \(y(t_0)=y_0\) and step size \(h>0\), the Starting from $t_0,y_0$, Explicit Euler scheme updates via
+    For the IVP \(y'(t)=f(t,y)\) with \(y(t_0)=y_0\) and step size \(h>0\), starting from $t_0,y_0$, the Explicit Euler scheme updates via
     \[
       t_{n+1}=t_n+h, \qquad
       y_{n+1}=y_n + h\,f(t_n,y_n),
@@ -163,7 +162,7 @@ class ODE_solver:
     \item \textbf{Convergence study:} Increase $N$ and run again by re-instantiating the class; repeat until solution doesn't change
     \item \textbf{Validation:} Compare to analytical solution or asymptotic behavior
   \end{itemize}
-  The homework consists of solving two different numerical ODEs with this code. We will work through an example today that should help you finish the homework and also prepare you for Wednesday's lab.
+  The homework consists of solving two different numerical ODEs with this code. We will work through an example today that should help you finish the homework and also prepare you for the upcoming lab.
 \end{frame}
 \begin{frame}{Derivation: nonlinear pendulum equation}
 
@@ -242,7 +241,7 @@ class ODE_solver:
   \end{center}
 \end{frame}
 
-\begin{frame}{Wednesday's lab: learn how to use a potentiometer}
+\begin{frame}{Upcoming lab: learn how to use a potentiometer}
   \begin{center}
     \includegraphics[width=0.9\textwidth]{potentiometers.png}
   \end{center}
@@ -304,7 +303,7 @@ with open("potentiometer_values.txt", "w") as file:
   \begin{itemize}
   \item Step through the pendulum code together
   \item Finish homework together
-  \item Get ready for Wednesday's lab
+  \item Get ready for Monday's lab
   \item Questions?
   \end{itemize}
 \end{frame}
