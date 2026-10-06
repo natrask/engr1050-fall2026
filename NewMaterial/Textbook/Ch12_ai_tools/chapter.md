@@ -1,6 +1,6 @@
 # Chapter 12: Working with AI tools
 
-This chapter is about using a large language model (LLM) to help you write code, with two goals: get useful results fast, and not lose your ability to think. Read this around Lecture 20, when the course AI policy starts to apply and you have to start citing your tool use. This is the shortest chapter in the book on purpose; the skill is mostly practice.
+This chapter is about using a large language model (LLM) to help you write code, with two goals: get useful results fast, and not lose your ability to think. Read this around Lecture 21, when the course AI policy starts to apply and you have to start citing your tool use. This is the shortest chapter in the book on purpose; the skill is mostly practice.
 
 Prerequisite: Chapters 1 through 6. You need enough Python to read generated code and tell whether it is right.
 

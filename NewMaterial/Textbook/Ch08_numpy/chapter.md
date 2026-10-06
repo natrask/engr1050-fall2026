@@ -1,6 +1,6 @@
 # Chapter 8: Numpy fundamentals
 
-Numpy is the library that turns Python from a slow scripting language into a fast numerical one. If you find yourself writing a `for` loop to add two lists of numbers, you should be using numpy. After this chapter you can create arrays, do vectorized arithmetic, slice and reshape, and use broadcasting without being scared of the rules. Read this when Lecture 11 hits and the speed difference between lists and arrays starts to matter.
+Numpy is the library that turns Python from a slow scripting language into a fast numerical one. If you find yourself writing a `for` loop to add two lists of numbers, you should be using numpy. After this chapter you can create arrays, do vectorized arithmetic, slice and reshape, and use broadcasting without being scared of the rules. Read this when Lecture 12 hits and the speed difference between lists and arrays starts to matter.
 
 Prerequisite: Chapter 3 on lists.
 
@@ -265,4 +265,4 @@ The `np.diff` gives consecutive differences. `np.concatenate` glues a `True` to 
 
 ## What to read next
 
-Chapter 9 on linear algebra with numpy, which covers `@`, `solve`, and `norm`. Chapter 10 on matplotlib uses numpy arrays as the natural input. Lecture 11 builds on everything in this chapter.
+Chapter 9 on linear algebra with numpy, which covers `@`, `solve`, and `norm`. Chapter 10 on matplotlib uses numpy arrays as the natural input. Lecture 12 builds on everything in this chapter.

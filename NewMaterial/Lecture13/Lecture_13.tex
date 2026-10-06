@@ -54,7 +54,7 @@
       \hspace{1em}\insertshortauthor
     \end{beamercolorbox}%%
     \begin{beamercolorbox}[wd=.34\paperwidth,ht=2.5ex,dp=1ex,center]{title in head/foot}
-      Lecture 12
+      Lecture 13
     \end{beamercolorbox}%%
     \begin{beamercolorbox}[wd=.33\paperwidth,ht=2.5ex,dp=1ex,right]{date in head/foot}
       \insertframenumber{} / \inserttotalframenumber\hspace{1em}
@@ -95,11 +95,119 @@
 
 \begin{frame}{Agenda}
   \begin{itemize}
-    \item Last class we built a class for solving ODEs numerically together
-    \item Today we'll get some extra practice using it to model a pendulum
-    \item We have lab this Wednesday (\textbf{meet in GM lab}) where we will use \textit{potentiometers} to measure angles of pendulums
+    \item 5 minute crash course on differential equations
+    \item Together: build up a class to solve ODEs using Euler's methods
+    \item Independent practice: use your class to solve a few ODEs
   \end{itemize}
-  \textit{Important note:} Prof. Trask is on travel Tuesday so can't make OH; today's exercise should get you the help you need to finish the homework or you can meet with Ben. HW is pushed back to Thursday.
+\end{frame}
+
+
+\begin{frame}{Types of Equations}
+  \begin{itemize}
+    \item \textbf{Nonlinear equations:}
+      \begin{itemize}
+        \item Systems of equations that must be equal.
+        \item $F(x_1,x_2,...) = 0$
+        \item Example: \(x_1^2 + x_2^2 - 1 = 0\) (circle equation).
+      \end{itemize}
+    \item \textbf{Ordinary Differential Equations (ODEs):}
+      \begin{itemize}
+        \item Involve derivatives with respect to a single variable (e.g., time).
+        \item $F(t, y, y', y'', \ldots) = 0$
+        \item Example: \(\frac{dy}{dt} = -ky\) (exponential decay).
+        \item Example: \(m\ddot{x} = F(x)\) (Newton's second law).
+      \end{itemize}
+    \item \textbf{Partial Differential Equations (PDEs):}
+      \begin{itemize}
+        \item Involve derivatives with respect to multiple variables, typically mixing space and time
+        \item Example: \(\frac{\partial u}{\partial t} = D \frac{\partial^2 u}{\partial x^2}\). (heat equation).
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{What is an ODE?}
+  \begin{definition}
+    An n\textsuperscript{th}-order ordinary differential equation involves an unknown function \(y(t)\) and its derivatives up to order \(n\), where \(n\) is the highest derivative present:
+    \[
+      F\!\bigl(t, y, y', \ldots, y^{(n)}\bigr)=0.
+    \]
+    Equivalently, in explicit form:
+    \[
+      y^{(n)} = f\!\bigl(t, y, y', \ldots, y^{(n-1)}\bigr).
+    \]  \end{definition}
+\textbf{Example:} A ball dropped from height \(h\) with air resistance proportional to velocity:
+\[ m\frac{d^2y}{dt^2} = -mg - k\frac{dy}{dt} \quad \Rightarrow \quad \frac{d^2y}{dt^2} = -g - \frac{k}{m}\frac{dy}{dt} \]
+is a \textit{second-order} ODE since the highest derivative is the second derivative of position \(y\) with respect to time \(t\).
+  \end{frame}
+
+  \begin{frame}{Initial value problems}
+      \begin{definition}
+    An initial value problem specifies an ODE together with values of the unknown at an initial time \(t_0\).
+    For an \(n^\text{th}\)-order ODE:
+    \[
+      y^{(n)} = f\!\bigl(t, y, y', \ldots, y^{(n-1)}\bigr).
+    \] with initial conditions
+    \[
+      y(t_0) = y_0, \quad y'(t_0) = y_1, \quad \ldots, \quad y^{(n-1)}(t_0) = y_{n-1}.
+    \]
+  \end{definition}
+  \textbf{Example:} For the falling ball ODE above, to fully specify the trajectory of the ball we must specify the initial height and velocity through the \textit{initial conditions}:
+  \[
+    y(0) = h, \quad y'(0) = 0.
+  \]
+\end{frame}
+
+\begin{frame}{Why do we need initial conditions?}
+  \begin{itemize}
+    \item Lets think about exponential decay:
+      \[
+        \frac{dy}{dt} = -ky \quad \text{\textcolor{PennRed}{(rate proportional to magnitude of population)}}
+      \]
+      \item If we integrate both sides we obtain:
+      \[
+        \int \frac{1}{y} dy = -k \int dt \quad \Rightarrow \quad \ln|y| = -kt + C.
+      \]
+      \item Exponentiating both sides gives:
+      \[
+        |y| = e^{-kt + C} = e^C e^{-kt}.
+      \]
+      \item Letting \(C' = e^C\) (a positive constant), we have:
+      \[
+        |y| = C'e^{-kt}.
+      \]
+      \item Thus, the general solution is:
+      \[
+        y(t) = Ce^{-kt},
+      \]
+      where \(C\) is specified by the initial conditions \(C = y(t_0)\).
+
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{How we'll think about ODEs in ENGR1050}
+  You'll take a full course on differential equations later in your studies, but for this class we will either:
+  \begin{itemize}
+    \item Guess and check solutions to simple ODEs
+    \item Use numerical methods to approximate solutions to more complex ODEs
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Example of how to guess and check}
+  \textbf{Example:} Verify that \(y(t) = e^{-2t}\) is a solution to the ODE:
+  \[
+    \frac{dy}{dt} = -2y.
+  \]
+  \begin{itemize}
+    \item Compute the derivative of \(y(t)\):
+      \[
+        \frac{dy}{dt} = -2e^{-2t}.
+      \]
+    \item Substitute \(y(t)\) into the right side of the ODE:
+      \[
+        -2y = -2e^{-2t}.
+      \]
+    \item Since both sides are equal, \(y(t) = e^{-2t}\) is indeed a solution to the ODE.
+  \end{itemize}
 \end{frame}
 
   \begin{frame}{Numerical solution of ODEs}
@@ -118,194 +226,35 @@
   \end{figure}
 \end{frame}
 
-  \begin{frame}[fragile]{Last lecture's ODE\_solver class}
-    \begin{minted}[fontsize=\tiny,breaklines=true]{python}
-class ODE_solver:
-    def __init__(self, t0, tf, y0, N):
-        self.y0 = y0  # initial condition as numpy array
-        self.t0 = t0  # initial time as float
-        self.tf = tf  # final time as float
-        self.N = N    # number of steps as integer
-        self.h = (tf - t0) / float(N) # timestep size
+  \begin{frame}{How will we check that a solution is reasonable?}
+    In the next homework we will use the code we built today to solve a pile of ODEs. The art of this is to cook up some qualitative feature we know our solution has to have and check that the numerical solution matches it. 
 
-        # We need to check what size y0 is and store that information
-        self.dim = len(y0) #assumes that y0 is a list or array
-
-        # Create a place to store the solution
-        self.t_values = np.array([t0 + i*self.h for i in range(N+1)])  # time values
-        self.solution = np.zeros((N+1, self.dim))  # solution array
-        self.solution[0, :] = y0  # set initial condition
-        
-    def f(self,t,y):
-        # Define the right-hand side of the ODE here, assuming a scalar t and a numpy array y
-        # Example: dy/dt = -2y (for scalar y),
-        # this function should return a numpy array of the same shape as y
-        f = np.zeros_like(y)
-        f[0] = -2 * y[0]  # Example for the first component
-        return f
-    
-    def solve(self):
-        # Implement explicit euler: y_n+1 = y_n + h*f(t_n, y_n)
-        for n in range(self.N):
-            t_n = self.t_values[n]
-            y_n = self.solution[n, :]
-            f_n = self.f(t_n, y_n)
-            self.solution[n+1, :] = y_n + self.h * f_n
-        return self.solution
-    \end{minted}
+    \textbf{Example:} For the falling ball with air resistance, we know that:
+    \begin{itemize}
+      \item The ball should never go below ground level (i.e., \(y(t) \geq 0\) for all \(t\)).
+      \item The velocity should approach a terminal velocity as time goes on.
+    \end{itemize}
+    $$ \ddot{y} = -g - \frac{k}{m}\dot{y} $$
+    At steady state:
+    $$ 0 = -g - \frac{k}{m}v_{term} \implies v_{term} = -\frac{mg}{k} $$
+    In the homework I'll guide you through some of these checks.
 \end{frame}
 
-\begin{frame}{We discussed: best practices for solving an ODE.}
+\begin{frame}{Today's exercise}
   \begin{itemize}
-    \item Implement the RHS of the ODE in the \textit{f} method
-    \item Instantiate the class with initial conditions, final time, and number of steps
-    \item Call the \textit{solve()} method to compute the numerical solution
-    \item \textbf{Convergence study:} Increase $N$ and run again by re-instantiating the class; repeat until solution doesn't change
-    \item \textbf{Validation:} Compare to analytical solution or asymptotic behavior
-  \end{itemize}
-  The homework consists of solving two different numerical ODEs with this code. We will work through an example today that should help you finish the homework and also prepare you for Wednesday's lab.
-\end{frame}
-\begin{frame}{Derivation: nonlinear pendulum equation}
-
-    \begin{columns}
-        \begin{column}{0.3\textwidth}
-  \begin{center}
-
-          \begin{tikzpicture}[scale=1.2]
-        % Pendulum setup
-        \draw[thick] (0,0) -- (0,-0.3);
-        \fill (0,0) circle (2pt);
-        \draw[thick] (0,0) -- (1.5,-2) node[midway,above right] {$L$};
-        \fill (1.5,-2) circle (4pt) node[below] {$m$};
-        
-        % Arc and angle
-        \draw[dashed] (0,0) -- (0,-2.5);
-        \draw (0,-0.5) arc (-90:-90+35:0.5);
-        \node at (0.3,-0.8) {$\theta(t)$};
-        
-        % Length
-        % \draw[<->] (0.2,-0.2) -- (1.3,-1.8) node[midway,above right] {$L$};
-        
-        % Forces
-        \draw[->,red,thick] (1.5,-2) -- (1.5,-2.8) node[below] {$mg$};
-      \end{tikzpicture}
-      \end{center}
-    \end{column}
-    \begin{column}{0.7\textwidth}
-      \small
-      \textbf{Newton: acceleration in tangent direction $a_t$:}
-      \begin{align}
-        ma_t &= -mg\sin\theta \\
-        m L \theta'' &= -mg\sin\theta \\
-        \theta'' &= -\frac{g}{L}\sin\theta
-      \end{align}
-      
-      \vspace{0.5em}
-      Where:
+    \item Together, we will build a Python class to solve ODEs using the Explicit Euler method.
+    \item The class will take as input:
       \begin{itemize}
-        \item $a_t = L\theta''$ (tangential acceleration)
-        \item Restoring force: $-mg\sin\theta$
-        \item Tension $T$ acts radially (canceled out)
+        \item Initial conditions \(t_0\) and \(y_0\)
+        \item Final time \(t_f\) to solve to and number of steps \(N\)
       \end{itemize}
-    \end{column}
-  \end{columns}
-  
-  \vspace{0.5em}
-  \textbf{Result:} $\theta'' + \frac{g}{L}\sin(\theta) = 0$ (nonlinear due to $\sin\theta$)\\
-    % \vspace{0.5em}
-
-  \textbf{Note for small angle $\sin(\theta) \sim \theta$:} $\theta'' + \frac{g}{L} \theta = 0$ and we recover the harmonic oscillator.
-\end{frame}
-\begin{frame}{Example: nonlinear pendulum}
-  \begin{itemize}
-    \item The nonlinear pendulum is governed by the ODE
-    \[
-      \theta''(t) + \frac{g}{L}\sin(\theta(t)) = 0,
-    \]
-    where $\theta(t)$ is the angle of the pendulum from vertical, $g$ is the acceleration due to gravity, and $L$ is the length of the pendulum.
-    \item \textbf{Our code assume first-order ODEs:} We must convert it to a system of first-order ODEs by defining $\omega = \theta'$:
-    \[
-      \begin{cases}
-        \theta' = \omega, \\
-        \omega' = -\frac{g}{L}\sin(\theta).
-      \end{cases}
-    \]
-    \item We can now implement this system in our ODE solver class.
+      \item The class will have two functions:
+      \item \begin{itemize}
+          \item \texttt{f(t,y)} to define the ODE \(y' = f(t,y)\)
+          \item \texttt{solve()} to perform \(N\) steps and return the solution as a numpy array
+      \end{itemize}
+    \item   You will use this class to solve a few example ODEs on your own.
   \end{itemize}
 \end{frame}
 
-\begin{frame}{What's coming}
-\end{frame}
-\begin{frame}{This unit's project: 1D helicopter model}
-  \begin{center}
-    \includegraphics[width=0.9\textwidth]{helicopter.png}
-  \end{center}
-\end{frame}
-
-\begin{frame}{Wednesday's lab: learn how to use a potentiometer}
-  \begin{center}
-    \includegraphics[width=0.9\textwidth]{potentiometers.png}
-  \end{center}
-\end{frame}
-
-\begin{frame}[fragile]{Reading a potentiometer with the picos}
-    \small
-    \textbf{Goal:} Read analog sensor data using the Raspberry Pi Pico's ADC (analog-to-digital converter)
-    
-    \begin{columns}
-        \begin{column}{0.4\textwidth}
-    \begin{minted}[fontsize=\tiny,breaklines=true]{python}
-from machine import ADC, Pin
-import time
-
-# Initialize ADC on pin 26 (for Raspberry Pi Pico)
-potentiometer = ADC(Pin(26))
-      
-while True:
-  # Read the ADC value (0-65535)
-    pot_value = potentiometer.read_u16()  
-    print("Potentiometer value:", pot_value)
-    time.sleep(0.1)
-\end{minted}
-\end{column}
-\begin{column}{0.6\textwidth}
-\includegraphics[width=1.0\textwidth]{thonnyPotRead.png}
-\end{column}
-\end{columns}
-\end{frame}
-
-\begin{frame}[fragile]{Getting data off of the pico and onto your laptop to read}
-  \textbf{Goal:} Save potentiometer readings to a file on the Pico's filesystem so you can transfer it to your laptop later.
-  \vspace{1em}
-
-    \begin{minted}[fontsize=\tiny,breaklines=true]{python}
-from machine import ADC, Pin
-import time
-
-# Initialize ADC on pin 26 (for Raspberry Pi Pico)
-potentiometer = ADC(Pin(26))
-
-# Open the file in write mode
-with open("potentiometer_values.txt", "w") as file:
-    while True:
-        pot_value = potentiometer.read_u16()  # Read the ADC value (0-65535)
-        file.write(f"Potentiometer value: {pot_value}\n")
-        file.flush()  # Ensure the value is written to the file immediately
-        print("Potentiometer value:", pot_value)
-        time.sleep(0.1)
-\end{minted}
-  
-  \vspace{0.5em}
-  \small
-  \textbf{To transfer:} In Thonny, View → Files → Right-click file → Download to computer
-\end{frame}
-
-\begin{frame}{Today}
-  \begin{itemize}
-  \item Step through the pendulum code together
-  \item Finish homework together
-  \item Get ready for Wednesday's lab
-  \item Questions?
-  \end{itemize}
-\end{frame}
 \end{document}

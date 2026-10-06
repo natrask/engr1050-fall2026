@@ -1,6 +1,6 @@
 # Chapter 9: Linear algebra with numpy
 
-Numpy gives you matrix multiplication, linear system solvers, norms, and a few other linear-algebra essentials in a way that is fast and easy to read. After this chapter you can solve `A x = b` without writing your own Gaussian elimination, compute the norm of an error vector, and tell which operator (`*`, `@`, `np.dot`) you actually need. Read this when Lecture 11 introduces numpy and your linear algebra intuition starts to feel useful again.
+Numpy gives you matrix multiplication, linear system solvers, norms, and a few other linear-algebra essentials in a way that is fast and easy to read. After this chapter you can solve `A x = b` without writing your own Gaussian elimination, compute the norm of an error vector, and tell which operator (`*`, `@`, `np.dot`) you actually need. Read this when Lecture 12 introduces numpy and your linear algebra intuition starts to feel useful again.
 
 Prerequisite: Chapter 8 on numpy.
 
@@ -84,7 +84,7 @@ print((a * b).sum())  # 32, the slow but obvious version
 
 ### Example 4: Solving a 3x3 linear system
 
-This is the example from Lecture 11.
+This is the example from Lecture 12.
 
 ```python
 import numpy as np

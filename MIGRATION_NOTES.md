@@ -79,3 +79,37 @@ A safe scrub for the notebook H1 lines is a one-line sed; the prose cross-refere
 - Stale Canvas course ID `1881448` and assignment IDs scattered across notebook markdown and the HW `.tex` files. Will be replaced once Nat sets up Fall 2026 Canvas.
 - Stale Ed Discussion course ID `84852`.
 - `homeworks/HW*/hw*.tex` titles and due dates still reference 2025. The proposed semester reset script (`scripts/render_hw_titles.py`) was scoped but not yet built; for now, edit each `.tex` by hand or wait for Nat's Phase 4 follow-up.
+
+## October 2026 shift: whack-a-mole lab postponed, Lectures 11+ renumbered
+
+The 9/28 lab was not set up and ran on 10/5 instead, as Lecture 11. Every lecture
+from the old Lecture 11 on moved one slot later and one number higher (folders,
+notebook filenames, notebook H1 titles, Colab badges, slide filenames). The 11/30
+"Final projects" workday was dropped to absorb the shift, so Exam 3 (12/2) and the
+presentations (12/7) keep their dates; Exam 2 moved from 10/28 to 11/2.
+
+This supersedes the slide table above for Lectures 11 and later. Most covers
+carried the 2025 number, which was one too high, so the shift made them right:
+
+| File                         | PDF cover says | Status                                         |
+|------------------------------|----------------|------------------------------------------------|
+| `Lecture12/Lecture_12.pdf`   | Lecture 12     | correct                                        |
+| `Lecture13/Lecture_13.pdf`   | Lecture 13 (footer 12) | recompile; `.tex` footer fixed          |
+| `Lecture14/Lecture_14.pdf`   | Lecture 13 (footer 12) | recompile; `.tex` title and footer fixed |
+| `Lecture16/Lecture_16.pdf`   | Lecture 16     | correct                                        |
+| `Lecture18/Lecture_18.pdf`   | Lecture 18     | correct                                        |
+| `Lecture21/Lecture_21.pdf`   | Lecture 20     | re-export from PowerPoint as Lecture 21        |
+| `Lecture22/Lecture_22.pdf`   | Lecture 21     | re-export from PowerPoint as Lecture 22        |
+| `Lecture23/Lecture_23.pdf`   | Lecture 23     | correct                                        |
+| `Lecture24/Lecture_24.pdf`   | Lecture 24     | correct                                        |
+| `Lecture25/Lecture_25.pdf`   | Lecture 25     | correct                                        |
+
+All of these covers still carry Fall 2025 dates.
+
+Prose pointers updated in this pass: the "Lecture 9 lab" reference in the Exam 1
+extra prep notebooks (now Lecture 11), the topic list in `Lecture26/lec26.ipynb`,
+and textbook chapters 2, 6, 8, 9 and 12. Not touched, and worth a read: textbook
+Ch. 6 "mirrors Lecture 13", Ch. 9 "Lecture 18 touches on this", Ch. 11 "controlled
+pendulum (Lecture 16)", and `Lecture24/lec24.ipynb`, whose intro still describes
+the previous lecture as Newton's method. The `_shared/Images/lec19_*` files keep
+their old names; `Lecture20/lec20.ipynb` references them by those names.
