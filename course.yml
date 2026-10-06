@@ -214,12 +214,15 @@ schedule:
   - num: 12
     date: 2026-10-07
     section: 2
-    topic: Exam postmortem, numpy, linear systems
+    topic: Numpy, linear systems
     visible: true
     folder: Lecture12
     slides: Lecture_12.pdf
     notebook: lec12.ipynb
     exercise: https://canvas.upenn.edu/courses/1950130/assignments/15166820
+    links:
+      - label: Homework 3 (due 10/16)
+        url: https://canvas.upenn.edu/courses/1950130/assignments/15166826
   - num: 13
     date: 2026-10-12
     section: 2
@@ -329,7 +332,7 @@ schedule:
 
 homeworks:
   # `visible: true` publishes the PDF link; without it the card shows "(coming)".
-  # HW3-5 PDFs still carry Fall 2025 due dates on their title page.
+  # HW4-5 PDFs still carry Fall 2025 due dates on their title page.
   - num: 1
     visible: true
     due: 2026-09-15
@@ -341,7 +344,8 @@ homeworks:
     title: Gradebook database in Thonny
     pdf: NewMaterial/Homeworks/HW2/hw2.pdf
   - num: 3
-    due: 2026-10-12
+    visible: true
+    due: 2026-10-16
     title: ODE problems with the solver class
     pdf: NewMaterial/Homeworks/HW3/hw3.pdf
   - num: 4
