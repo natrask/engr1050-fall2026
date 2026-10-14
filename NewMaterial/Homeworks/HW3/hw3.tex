@@ -37,12 +37,12 @@ For some problems, you will not be able to find an analytic solution. In these c
 \subsection*{Problem 1: Skydiver (50 points)}
 The motion of a skydiver can be modeled by the following ordinary differential equation (ODE):
 \begin{equation}
-    m \frac{dv}{dt} = mg - kv
+    m \frac{dv}{dt} = mg - kv^2
 \end{equation}
 where $m$ is the mass of the skydiver, $g$ is the acceleration due to gravity, $k$ is a drag coefficient, and $v$ is the velocity of the skydiver.
 
 \begin{enumerate}[label=(\alph*)]
-    \item (5 points) Identify the initial condition for a skydiver with a mass of 80 kg, a drag coefficient of 15 kg/s, and an initial velocity of 0 m/s. Assume $g = 9.81$ m/s$^2$.
+    \item (5 points) Identify the initial condition for a skydiver with a mass of 80 kg, a drag coefficient of 15 kg/m, and an initial velocity of 0 m/s. Assume $g = 9.81$ m/s$^2$.
     \item (10 points) Identify the \textit{terminal velocity} of the skydiver where the acceleration of the skydiver is zero.
     \item (20 points) Use the ODE solver class to solve the ODE numerically for the skydiver over a time period of 0 to 60 seconds. Plot the numerical solution and compare it to the analytic steady state.
     \item (15 points) If one were to double the drag coefficient, how would that affect the terminal velocity? Run a simulation to verify your answer.
