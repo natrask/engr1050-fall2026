@@ -244,6 +244,7 @@ schedule:
     date: 2026-10-19
     section: 2
     topic: Lab - dynamical systems from sensors
+    visible: true
     folder: Lecture15
     notebook: lec15.ipynb
     kind: lab
@@ -251,6 +252,7 @@ schedule:
     date: 2026-10-21
     section: 2
     topic: More ODEs, controlling the helicopter
+    visible: true
     folder: Lecture16
     slides: Lecture_16.pdf
     notebook: lec16.ipynb
