@@ -68,8 +68,8 @@
 
 
 \title{Lecture 16}
-\author{ENGR1050 Fall 2025}
-\date{\today}
+\author{ENGR1050 Fall 2026}
+\date{October 21, 2026}
 
 \begin{document}
 
@@ -96,11 +96,11 @@
 \begin{frame}{Agenda}
   \begin{itemize}
     \item Briefly discuss last survey and final course corrections
-    \item We have lab this Wednesday (\textbf{meet in GM lab}) where we will continue developing our helicopter model.
-    \item To prepare, we will process our potentiometer data from last week and build a numerical ODE solver for the helicopter model.
+    \item In our next lab (\textbf{meet in GM lab}) we will continue developing our helicopter model.
+    \item To prepare, we will process our potentiometer data from the last lab and build a numerical ODE solver for the helicopter model.
     \item Using this data, we will design a controller policy to make the helicopter hover at a desired angle.
   \end{itemize}
-  \textit{Homework 4} is due next Wednesday. You will complete today's exercise in the homework - if you go quickly today you can get a head start.
+  You will complete today's exercise in \textit{Homework 4} - if you go quickly today you can get a head start.
 \end{frame}
 
 \begin{frame}{Survey responses.}
@@ -132,7 +132,7 @@
       \includegraphics[width=\textwidth]{lab_profiles.png}
     \end{column}
   \end{columns}
-  \textbf{Recap:} Last week we collected data from the helicopter model by running it freely and recording the angle over time using a potentiometer. Our goal is to build a model that we can use to design a controller to make the helicopter hover.
+  \textbf{Recap:} In the last lab we collected data from the helicopter model by running it freely and recording the angle over time using a potentiometer. Our goal is to build a model that we can use to design a controller to make the helicopter hover.
 \end{frame}
 
   \begin{frame}{Numerical solution of ODEs}
@@ -377,9 +377,9 @@ solution = pendulum.solve()
 \begin{frame}{Today}
   There were a few new things today, but at the end of the day you have two tasks:
   \begin{itemize}
-  \item Take the model from last week and run it for different choices of parameters until you get numbers that match the experimental data.
+  \item Take the pendulum model and run it for different choices of parameters until you get numbers that match the experimental data.
   \item Add the forcing term and look at how the trajectories change for different $K_p$.
-  \item There will be time in lab on Wednesday to get extra help if you have trouble with this today. We'll be there 15m early to setting up if you have questions.
+  \item There will be time in the next lab to get extra help if you have trouble with this today.
   \item The next homework will gently extend this, showing how to derive a control that will hit the angle that we want smack on. If you follow what we did today, this will be a simple one line modification to your code from today.
   \end{itemize}
 \end{frame}
