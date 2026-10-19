@@ -257,6 +257,7 @@ schedule:
     folder: Lecture16
     slides: Lecture_16.pdf
     notebook: lec16.ipynb
+    exercise: https://canvas.upenn.edu/courses/1950130/assignments/15207866
   - num: 17
     date: 2026-10-26
     section: 2
