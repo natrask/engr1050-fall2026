@@ -97,14 +97,16 @@ carried the 2025 number, which was one too high, so the shift made them right:
 | `Lecture13/Lecture_13.pdf`   | Lecture 13     | correct (recompiled, dated for 2026)           |
 | `Lecture14/Lecture_14.pdf`   | Lecture 14     | correct (recompiled, dated for 2026)           |
 | `Lecture16/Lecture_16.pdf`   | Lecture 16     | correct                                        |
-| `Lecture18/Lecture_18.pdf`   | Lecture 18     | correct                                        |
+| `Lecture19/Lecture_19.pdf`   | Lecture 19     | correct (review deck; recompiled, dated for 2026) |
 | `Lecture21/Lecture_21.pdf`   | Lecture 20     | re-export from PowerPoint as Lecture 21        |
 | `Lecture22/Lecture_22.pdf`   | Lecture 21     | re-export from PowerPoint as Lecture 22        |
 | `Lecture23/Lecture_23.pdf`   | Lecture 23     | correct                                        |
 | `Lecture24/Lecture_24.pdf`   | Lecture 24     | correct                                        |
 | `Lecture25/Lecture_25.pdf`   | Lecture 25     | correct                                        |
 
-The covers from Lecture 16 on still carry Fall 2025 dates. Figures for the Beamer decks are not in `OldMaterial/`; copy them from `slides/lectureNN/` in the Fall 2025 repo, and compile with `pdflatex -shell-escape` (the decks use minted).
+Later in October the final helicopter lab moved ahead of the Exam 2 review: the lab is now Lecture 18 (10/28, was Lecture 20), the review Lecture 19 (11/2, was Lecture 18), and Exam 2 is 11/4.
+
+The covers from Lecture 21 on still carry Fall 2025 dates. Figures for the Beamer decks are not in `OldMaterial/`; copy them from `slides/lectureNN/` in the Fall 2025 repo, and compile with `pdflatex -shell-escape` (the decks use minted).
 
 Prose pointers updated in this pass: the "Lecture 9 lab" reference in the Exam 1
 extra prep notebooks (now Lecture 11), the topic list in `Lecture26/lec26.ipynb`,

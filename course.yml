@@ -262,28 +262,31 @@ schedule:
     date: 2026-10-26
     section: 2
     topic: Lab - helicopter UI and HW help
+    visible: true
     folder: Lecture17
     notebook: lec17.ipynb
     kind: lab
   - num: 18
     date: 2026-10-28
     section: 2
-    topic: Review for exam 2
+    topic: Lab - helicopters
+    visible: true
     folder: Lecture18
-    slides: Lecture_18.pdf
     notebook: lec18.ipynb
+    kind: lab
   - num: 19
     date: 2026-11-02
     section: 2
-    topic: Exam 2
-    kind: exam
+    topic: Review for exam 2
+    visible: true
+    folder: Lecture19
+    slides: Lecture_19.pdf
+    notebook: lec19.ipynb
   - num: 20
     date: 2026-11-04
     section: 2
-    topic: Lab - helicopters
-    folder: Lecture20
-    notebook: lec20.ipynb
-    kind: lab
+    topic: Exam 2
+    kind: exam
   - num: 21
     date: 2026-11-09
     section: 3
@@ -357,7 +360,7 @@ homeworks:
     pdf: NewMaterial/Homeworks/HW3/hw3.pdf
   - num: 4
     visible: true
-    due: 2026-10-28
+    due: 2026-11-02
     title: Helicopter control analysis
     pdf: NewMaterial/Homeworks/HW4/hw4.pdf
   - num: 5

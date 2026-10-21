@@ -206,7 +206,7 @@ print(vals)
 print(vecs)
 ```
 
-Eigenvalues come up in stability analysis of dynamical systems. Lecture 18 touches on this. For first-year coursework, you can leave this in your back pocket.
+Eigenvalues come up in stability analysis of dynamical systems. For first-year coursework, you can leave this in your back pocket.
 
 ### Example 12: A linear-regression fit by solving
 
