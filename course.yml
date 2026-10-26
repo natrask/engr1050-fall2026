@@ -266,6 +266,9 @@ schedule:
     folder: Lecture17
     notebook: lec17.ipynb
     exercise: https://canvas.upenn.edu/courses/1950130/assignments/15220995
+    links:
+      - label: Lab solution
+        url: https://github.com/natrask/engr1050-fall2026/blob/main/NewMaterial/_shared/labcode/lab3_solution.py
     kind: lab
   - num: 18
     date: 2026-10-28
