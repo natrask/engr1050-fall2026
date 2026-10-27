@@ -286,6 +286,9 @@ schedule:
     folder: Lecture19
     slides: Lecture_19.pdf
     notebook: lec19.ipynb
+    links:
+      - label: Exam 2 extra prep (Colab)
+        url: https://colab.research.google.com/github/natrask/engr1050-fall2026/blob/main/NewMaterial/Lecture19/exam2_extraPrep.ipynb
   - num: 20
     date: 2026-11-04
     section: 2
