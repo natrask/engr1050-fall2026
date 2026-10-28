@@ -277,6 +277,7 @@ schedule:
     visible: true
     folder: Lecture18
     notebook: lec18.ipynb
+    exercise: https://canvas.upenn.edu/courses/1950130/assignments/15226397
     kind: lab
   - num: 19
     date: 2026-11-02
