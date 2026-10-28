@@ -93,13 +93,16 @@ def render_homeworks(course):
         due_str = fmt_date(hw["due"]) if hw.get("due") else "TBD"
         # an unpublished homework shows as "(coming)" even when its PDF exists
         link = f'<a href="{pdf}">PDF</a>' if pdf and hw.get("visible") else "(coming)"
+        items = [f'                <li>{link}</li>']
+        if hw.get("canvas") and hw.get("visible"):
+            items.append(f'                <li><a href="{hw["canvas"]}" target="_blank">Canvas submission</a></li>')
         cards.append("\n".join([
             '        <div class="lecture-item">',
             f'          <div class="lecture-date">Due {due_str}</div>',
             '          <div class="lecture-content">',
             f'            <h3>HW {num}: {title}</h3>',
             '            <ul class="resources">',
-            f'                <li>{link}</li>',
+            *items,
             '            </ul>',
             '          </div>',
             '        </div>',

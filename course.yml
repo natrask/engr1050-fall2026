@@ -258,6 +258,9 @@ schedule:
     slides: Lecture_16.pdf
     notebook: lec16.ipynb
     exercise: https://canvas.upenn.edu/courses/1950130/assignments/15207866
+    links:
+      - label: Homework 4 (due 11/2)
+        url: https://canvas.upenn.edu/courses/1950130/assignments/15226407
   - num: 17
     date: 2026-10-26
     section: 2
@@ -350,27 +353,32 @@ schedule:
 
 homeworks:
   # `visible: true` publishes the PDF link; without it the card shows "(coming)".
+  # `canvas:` adds a Canvas submission link to a visible card.
   # HW5 PDF still carries a Fall 2025 due date on its title page.
   - num: 1
     visible: true
     due: 2026-09-15
     title: Print statements, loops, conditionals, plotting
     pdf: NewMaterial/Homeworks/HW1/hw1.pdf
+    canvas: https://canvas.upenn.edu/courses/1950130/assignments/15108159
   - num: 2
     visible: true
     due: 2026-09-30
     title: Gradebook database in Thonny
     pdf: NewMaterial/Homeworks/HW2/hw2.pdf
+    canvas: https://canvas.upenn.edu/courses/1950130/assignments/15139922
   - num: 3
     visible: true
     due: 2026-10-16
     title: ODE problems with the solver class
     pdf: NewMaterial/Homeworks/HW3/hw3.pdf
+    canvas: https://canvas.upenn.edu/courses/1950130/assignments/15166826
   - num: 4
     visible: true
     due: 2026-11-02
     title: Helicopter control analysis
     pdf: NewMaterial/Homeworks/HW4/hw4.pdf
+    canvas: https://canvas.upenn.edu/courses/1950130/assignments/15226407
   - num: 5
     due: 2026-11-16
     title: Data collection via Google API
