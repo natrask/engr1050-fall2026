@@ -45,3 +45,11 @@ metadata before extraction:
 | `U90Al6XXX-T81_BatchB5R03T2.684W12.68.csv` | 15,221,915 B | `e57d964265e0cbfbee95aa4d07bc2914760aa4f6fc8f8624cd48dac12fdde544` |
 
 To regenerate from originals, keep the two named columns and drop the rest.
+
+# Fall 2025 exam scores
+
+`Exam_Grades_Anonymized.csv` holds the Fall 2025 Exam 1 and Exam 2 scores,
+one row per student (70 rows, columns `Exam 1` and `Exam 2`), with no names or
+IDs. `Lecture21/lec21.ipynb` downloads it for the histogram exercise. Copied
+unchanged from `notebooks/Data/` in the Fall 2025 repo: Fall 2026 Exam 2 was
+not yet graded when Lecture 21 ran, pending make-up exams.
