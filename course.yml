@@ -308,6 +308,9 @@ schedule:
     folder: Lecture21
     slides: Lecture_21.pdf
     notebook: lec21.ipynb
+    links:
+      - label: VS Code and AI setup guide (optional)
+        url: NewMaterial/Lecture21/vscode_copilot.html
   - num: 22
     date: 2026-11-11
     section: 3

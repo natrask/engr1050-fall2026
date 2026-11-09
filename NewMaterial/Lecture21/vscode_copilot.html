@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VS Code and AI Assistants - ENGR 1050</title>
+<style>
+ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        line-height: 1.6; color: #333; max-width: 900px; margin: 0 auto; padding: 20px; }
+ h1 { color: #011F5B; border-bottom: 3px solid #990000; padding-bottom: 10px; margin-top: 30px; }
+ h2 { color: #011F5B; margin-top: 30px; border-bottom: 2px solid #e0e0e0; padding-bottom: 5px; }
+ h3 { color: #011F5B; margin-top: 20px; }
+ p { text-align: left; margin-bottom: 15px; }
+ code { background: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-family: ui-monospace, Menlo, Consolas, monospace; }
+ pre { background: #f4f4f4; padding: 12px; border-radius: 6px; overflow-x: auto; }
+ pre code { background: none; padding: 0; }
+ blockquote { border-left: 4px solid #82AFD3; padding: 4px 12px; background: #f8f9fa; margin: 12px 0; }
+ a { color: #4a90e2; } a:hover { color: #990000; }
+ .nav { font-size: 0.9rem; margin-bottom: 1rem; }
+ ol.steps > li { margin-bottom: 14px; }
+ ol.steps ul { margin-top: 6px; }
+ .warn { border-left: 4px solid #990000; background: #fdf2f2; padding: 8px 12px; margin: 12px 0; }
+ .ok { border-left: 4px solid #2e7d32; background: #f1f8f1; padding: 8px 12px; margin: 12px 0; }
+ kbd { border: 1px solid #bbb; border-bottom-width: 2px; border-radius: 4px; padding: 1px 6px; background: #fafafa; font-family: inherit; font-size: 0.9em; }
+ .ui { font-weight: 600; color: #011F5B; }
+ table { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 0.95rem; }
+ th, td { border: 1px solid #ddd; padding: 8px; text-align: left; vertical-align: top; }
+ th { background: #f4f4f4; color: #011F5B; }
+ .wrap { overflow-x: auto; }
+</style>
+</head>
+<body>
+<p class="nav"><a href="../../index.html#schedule">&larr; Back to the schedule</a></p>
+<h1>VS Code and AI Coding Assistants</h1>
+
+<div class="warn"><p>&#9888;&#65039; <strong>For this course, you will never be required to spend any money on AI. The free Gemini in Google Colab is sufficient to do the exercises. The resources provided here are only for those who want some guidance on how to get a modern setup on their own machine. It is likely that this will take some 1-1 guidance to help debug.</strong></p></div>
+
+<p>In lecture we used Gemini inside Colab. Most working engineers write code in a desktop editor instead, and the most common one is Visual Studio Code (VS Code). It is free, it runs Python and Jupyter notebooks on your own laptop, and it has an AI assistant, GitHub Copilot, built in.</p>
+
+<p>This guide has four parts: install VS Code, install the extensions, get the free student version of Copilot, and a list of the AI tools Penn provides or subsidizes. Start Part 3 <strong>today</strong> even if you do nothing else, because GitHub takes a few days to approve student applications.</p>
+
+<h2>Part 1: Install VS Code</h2>
+
+<h3>Windows</h3>
+<ol class="steps">
+<li>Go to <a href="https://code.visualstudio.com/download">code.visualstudio.com/download</a> and click the big <span class="ui">Windows</span> button. A file whose name starts with <code>VSCodeUserSetup</code> and ends in <code>.exe</code> downloads.</li>
+<li>Open the file from your browser's download panel, or from the <span class="ui">Downloads</span> folder in File Explorer.</li>
+<li>Click <span class="ui">I accept the agreement</span>, then <span class="ui">Next</span> on each screen, leaving the default choices alone. On the <span class="ui">Select Additional Tasks</span> screen, make sure <span class="ui">Add to PATH</span> is checked (it is by default).</li>
+<li>Click <span class="ui">Install</span>, then <span class="ui">Finish</span>. VS Code opens.</li>
+</ol>
+
+<h3>Mac</h3>
+<ol class="steps">
+<li>Go to <a href="https://code.visualstudio.com/download">code.visualstudio.com/download</a> and click the big <span class="ui">Mac</span> button. A <code>.zip</code> file downloads.</li>
+<li>Open <span class="ui">Finder</span> and click <span class="ui">Downloads</span>. Double-click the zip file if it was not unzipped automatically. You now have an app called <span class="ui">Visual Studio Code</span>.</li>
+<li>Drag <span class="ui">Visual Studio Code</span> onto <span class="ui">Applications</span> in the Finder sidebar. If you skip this, the app runs out of your Downloads folder and will not update properly.</li>
+<li>Open <span class="ui">Applications</span> and double-click <span class="ui">Visual Studio Code</span>. When macOS warns that it was downloaded from the internet, click <span class="ui">Open</span>.</li>
+</ol>
+
+<h3>Both: set up Python</h3>
+<ol class="steps">
+<li>VS Code is only an editor; it needs Python installed to run anything. If you have never installed Python on this laptop (Thonny brings its own copy, which VS Code does not use), download it from <a href="https://www.python.org/downloads/">python.org/downloads</a> and run the installer.
+  <ul>
+  <li><strong>Windows:</strong> on the first installer screen, check <span class="ui">Add python.exe to PATH</span> before clicking <span class="ui">Install Now</span>.</li>
+  <li><strong>Mac:</strong> click through the installer with the default choices.</li>
+  </ul>
+</li>
+<li>Install the Python and Jupyter extensions (Part 2, steps 1&ndash;3), then come back here.</li>
+<li>Test it: <span class="ui">File &rarr; New File</span>, choose <span class="ui">Python File</span>, type <code>print("Hello from VS Code!")</code>, save it as <code>hello.py</code>, and click the triangle &#9655; in the top right. The output appears in the terminal panel at the bottom. If VS Code asks you to <span class="ui">Select Interpreter</span>, pick the Python you just installed.</li>
+</ol>
+
+<h2>Part 2: Install the extensions</h2>
+
+<p>Extensions are add-ons that teach VS Code new tricks. They all install the same way, from inside VS Code.</p>
+
+<h3>How to install any extension</h3>
+<ol class="steps">
+<li>Click the <span class="ui">Extensions</span> icon on the left edge of the window (four small squares, one of them tilted), or press <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>X</kbd> (Windows) / <kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>X</kbd> (Mac). A search box opens at the top of a side panel.</li>
+<li>Type the extension's name into the search box. Several results appear. <strong>Check the publisher name</strong> printed under each result and pick the one from the publisher listed below; copycat extensions with similar names exist.</li>
+<li>Click the blue <span class="ui">Install</span> button. If VS Code asks whether you <span class="ui">trust the publisher</span>, click <span class="ui">Trust Publisher &amp; Install</span>. When it finishes, the button changes to a gear icon. If an extension says it needs a reload, click <span class="ui">Reload</span> or restart VS Code.</li>
+</ol>
+
+<h3>Everyone: install these three</h3>
+<div class="wrap">
+<table>
+<tr><th>Search for</th><th>Publisher</th><th>What it does</th></tr>
+<tr><td><code>Python</code></td><td>Microsoft</td><td>Runs and checks <code>.py</code> files. Also installs Pylance (code hints) automatically.</td></tr>
+<tr><td><code>Jupyter</code></td><td>Microsoft</td><td>Opens and runs <code>.ipynb</code> notebooks, like the ones from lecture, on your own laptop.</td></tr>
+<tr><td><code>GitHub Copilot Chat</code></td><td>GitHub</td><td>The AI assistant: gray inline suggestions as you type, plus a chat panel. Recent versions of VS Code may already have it; if the button says <span class="ui">Uninstall</span> or shows a gear instead of <span class="ui">Install</span>, you are done. Signing in is covered in Part 3.</td></tr>
+</table>
+</div>
+
+<p>To check what is installed, clear the search box in the Extensions panel; the <span class="ui">Installed</span> list is at the top.</p>
+
+<h3>Only if you have a Penn Claude or ChatGPT Edu license</h3>
+<p>Skip this unless you already have one of the paid licenses in Part 4. Without a license, these extensions install but will not let you sign in.</p>
+<ul>
+<li><strong>Claude Code</strong> (publisher: Anthropic). After installing, click the Claude icon in the top right of an open file, or press <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd> / <kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd> and run <code>Claude Code: Open</code>. When asked to sign in, choose your Claude account, and in the browser log in with your Penn email so you land in Penn's Enterprise workspace, not a personal account.</li>
+<li><strong>Codex</strong> (publisher: OpenAI). After installing, open it from its icon on the left edge and choose <span class="ui">Sign in with ChatGPT</span>. Enter <code>pennkey@upenn.edu</code> (your PennKey, not your full email alias), then complete PennKey login and Two-Step. In ChatGPT, the Penn shield labeled "UPenn" in the lower left confirms you are in the Penn workspace.</li>
+</ul>
+
+<h2>Part 3: Get GitHub Copilot free as a student</h2>
+
+<p>Copilot is not a Penn license. It comes from GitHub, which gives it free to verified students through <strong>GitHub Education</strong>. Your Penn email is how you prove you are a student.</p>
+
+<ol class="steps">
+<li>If you do not have a GitHub account, create one at <a href="https://github.com/signup">github.com/signup</a>. You can use a personal email; you will add your Penn email next.</li>
+<li>Add your Penn email to the account: go to <a href="https://github.com/settings/emails">github.com/settings/emails</a>, add your <code>@upenn.edu</code> (or <code>@seas.upenn.edu</code>) address, and click the verification link GitHub sends to it.</li>
+<li>Go to <a href="https://github.com/settings/education/benefits">github.com/settings/education/benefits</a> and click <span class="ui">Start an application</span>. Choose <span class="ui">Student</span>, select University of Pennsylvania, and follow the prompts. GitHub may ask you to upload a photo of your PennCard and to let the browser share your location; do both, since these are the most common reasons applications are rejected.</li>
+<li>Wait for an approval email. This can take anywhere from minutes to several days.</li>
+<li>Once approved, return to <a href="https://github.com/settings/education/benefits">the benefits page</a>, find Copilot under the free developer resources, and follow the prompts to activate <span class="ui">Copilot Student</span>.</li>
+</ol>
+
+<blockquote><p><strong>Never pay for anything.</strong> If GitHub shows you a trial, a "Free" plan, or a checkout page instead of Copilot Student, your approval has not finished going through. Wait a few days and check <a href="https://github.com/settings/copilot">github.com/settings/copilot</a> again. While you wait, you can use <strong>Copilot Free</strong> (no verification needed, limited to 2,000 completions a month) with the same steps below.</p></blockquote>
+
+<h3>Turn Copilot on in VS Code</h3>
+<ol class="steps">
+<li>Make sure the <span class="ui">GitHub Copilot Chat</span> extension is installed (Part 2). Open the chat panel with <span class="ui">View &rarr; Chat</span>, or click the Copilot icon at the top of the window.</li>
+<li>Click <span class="ui">Sign in</span> and choose GitHub. Your browser opens; log in to the GitHub account you used above and click <span class="ui">Authorize</span>. Switch back to VS Code.</li>
+<li>Open your <code>hello.py</code> and start typing a comment such as <code># plot sin(x) from 0 to 2 pi</code>, then press <kbd>Enter</kbd>. Gray "ghost text" appears suggesting code. Press <kbd>Tab</kbd> to accept it or keep typing to ignore it.</li>
+<li>In the chat panel, you can ask questions about your code in plain English, e.g. "why does this give an IndexError?"</li>
+</ol>
+
+<div class="ok"><p><strong>If gray suggestions appear while you type, Copilot is working.</strong> To turn suggestions off (for example, while practicing for an exam, where you will not have it), click the Copilot icon in the bottom status bar and disable completions. Turn it back on the same way.</p></div>
+
+<p>What the student plan includes: unlimited code completions, plus a monthly allowance of credits for chat and agent features. You cannot pick the model; Copilot chooses one automatically. GitHub re-checks student status every month, so keep your Penn email on your account.</p>
+
+<h2>Part 4: Penn-provided and subsidized ChatGPT and Claude</h2>
+
+<p>Penn also licenses ChatGPT and Claude. The key difference from the free consumer websites is data protection: Penn's agreements keep what you type out of the companies' training data and cover Penn data. Personal accounts on public AI sites are <strong>not</strong> covered. The list of tools changes often; the <a href="https://isc.upenn.edu/ai/tools/penn-generative-ai-tools-resources">ISC AI tools page</a> is the official, current list.</p>
+
+<div class="wrap">
+<table>
+<tr><th>Tool</th><th>Models</th><th>Cost to you</th><th>Works in VS Code?</th><th>How to get it</th></tr>
+<tr>
+ <td><strong>PennChat</strong></td>
+ <td>Claude and ChatGPT</td>
+ <td>Free</td>
+ <td>No, web chat only</td>
+ <td>Log in with your PennKey at <a href="https://pennchat.upenn.edu/login">pennchat.upenn.edu</a>. You must be on campus Wi-Fi (AirPennNet) or connected through Penn's GlobalProtect VPN. You get a daily credit allowance. Approved for most sensitive Penn data.</td>
+</tr>
+<tr>
+ <td><strong>Microsoft Copilot Chat</strong></td>
+ <td>OpenAI (GPT)</td>
+ <td>Free</td>
+ <td>No, web chat only</td>
+ <td>Sign in with your Penn Microsoft account (PennKey). Not the same product as GitHub Copilot. See the <a href="https://isc.upenn.edu/ai/tools/penn-generative-ai-tools-resources">ISC AI tools page</a>.</td>
+</tr>
+<tr>
+ <td><strong>Penn Claude Enterprise</strong> (Claude + Claude Code)</td>
+ <td>Claude</td>
+ <td>Paid license: $16/month standard or $50/month premium, committed for the fiscal year. Each school decides whether it covers student licenses.</td>
+ <td>Yes, through the Claude Code extension (Part 2)</td>
+ <td>Engineering students: ask <a href="https://cets.engineering.upenn.edu/">CETS</a> (cets@engineering.upenn.edu). Wharton students: most already have a license; see <a href="https://support.wharton.upenn.edu/help/anthropic-claude">Wharton's Claude page</a>. A short training session is required before activation. Background: <a href="https://www.thedp.com/article/2026/09/penn-claude-enterprise-service-ai-access">Daily Pennsylvanian, Sept 2026</a>.</td>
+</tr>
+<tr>
+ <td><strong>ChatGPT Edu</strong> (ChatGPT + Codex)</td>
+ <td>ChatGPT</td>
+ <td>Students get access only through a Wharton course or when a course or department pays for it</td>
+ <td>Yes, through the Codex extension (Part 2)</td>
+ <td>Wharton students and students enrolled in a Wharton course: see <a href="https://support.wharton.upenn.edu/help/chatgpt-edu-work-and-codex">Wharton's ChatGPT Edu page</a>. Everyone else: see the <a href="https://isc.upenn.edu/ai/tools/penn-generative-ai-tools-resources">ISC AI tools page</a>.</td>
+</tr>
+</table>
+</div>
+
+<p>For this course, GitHub Copilot is the option that is both free and inside your editor. Use PennChat when you want a longer conversation with Claude or ChatGPT, or when you are working with anything that should not go to a public website.</p>
+
+<h2>Things that go wrong, and what to do</h2>
+<h3>My GitHub Education application was rejected</h3>
+<p>The usual causes are a Penn email that was never verified on the account, a blurry or cropped PennCard photo, or not allowing location sharing. Fix whichever applies and reapply.</p>
+
+<h3>Copilot says I don't have access, or asks me to pay</h3>
+<p>Your student approval has not reached Copilot yet. Do not buy anything. Wait a few days, then check <a href="https://github.com/settings/copilot">github.com/settings/copilot</a>. In VS Code, make sure you are signed in with the same GitHub account you used to apply (click the person icon at the bottom left).</p>
+
+<h3>The triangle run button is missing, or VS Code says no Python interpreter was found</h3>
+<p>Install the Python extension from Part 2, then press <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd> (Windows) / <kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd> (Mac), type <code>Python: Select Interpreter</code>, and choose the Python you installed. If nothing is listed, restart VS Code after installing Python.</p>
+
+<h3>PennChat won't load</h3>
+<p>You are probably off campus without the VPN. Connect to GlobalProtect, or use AirPennNet on campus.</p>
+
+<blockquote><p>If you are stuck on anything not listed here, do not spend an hour on it. Ask the person next to you or bring the laptop to office hours.</p></blockquote>
+
+<p class="nav"><a href="../../index.html#schedule">&larr; Back to the schedule</a></p>
+</body>
+</html>
