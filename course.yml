@@ -308,6 +308,7 @@ schedule:
     folder: Lecture21
     slides: Lecture_21.pdf
     notebook: lec21.ipynb
+    exercise: https://canvas.upenn.edu/courses/1950130/assignments/15243240
     links:
       - label: VS Code and AI setup guide (optional)
         url: NewMaterial/Lecture21/vscode_copilot.html
@@ -317,8 +318,16 @@ schedule:
     topic: Final projects, optimization
     visible: true
     folder: Lecture22
-    slides: Lecture_22.pdf
+    slides:
+      - Lecture_22.pptx
+      - Lecture_22.pdf
     notebook: lec22.ipynb
+    exercise: https://canvas.upenn.edu/courses/1950130/assignments/15248430
+    links:
+      - label: Homework 5 (due 11/16)
+        url: NewMaterial/Homeworks/HW5/hw5.pdf
+      - label: GitHub account and project website setup guide
+        url: NewMaterial/Lecture22/github_setup.html
   - num: 23
     date: 2026-11-16
     section: 3
@@ -361,7 +370,6 @@ schedule:
 homeworks:
   # `visible: true` publishes the PDF link; without it the card shows "(coming)".
   # `canvas:` adds a Canvas submission link to a visible card.
-  # HW5 PDF still carries a Fall 2025 due date on its title page.
   - num: 1
     visible: true
     due: 2026-09-15
@@ -387,9 +395,11 @@ homeworks:
     pdf: NewMaterial/Homeworks/HW4/hw4.pdf
     canvas: https://canvas.upenn.edu/courses/1950130/assignments/15226407
   - num: 5
+    visible: true
     due: 2026-11-16
     title: Data collection via Google API
     pdf: NewMaterial/Homeworks/HW5/hw5.pdf
+    canvas: https://canvas.upenn.edu/courses/1950130/assignments/15248791
 
 external_practice:
   - name: FutureCoder

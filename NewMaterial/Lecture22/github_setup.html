@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GitHub Setup - ENGR 1050</title>
+<style>
+ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        line-height: 1.6; color: #333; max-width: 900px; margin: 0 auto; padding: 20px; }
+ h1 { color: #011F5B; border-bottom: 3px solid #990000; padding-bottom: 10px; margin-top: 30px; }
+ h2 { color: #011F5B; margin-top: 30px; border-bottom: 2px solid #e0e0e0; padding-bottom: 5px; }
+ h3 { color: #011F5B; margin-top: 20px; }
+ p { text-align: left; margin-bottom: 15px; }
+ code { background: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-family: ui-monospace, Menlo, Consolas, monospace; }
+ pre { background: #f4f4f4; padding: 12px; border-radius: 6px; overflow-x: auto; }
+ pre code { background: none; padding: 0; }
+ blockquote { border-left: 4px solid #82AFD3; padding: 4px 12px; background: #f8f9fa; margin: 12px 0; }
+ a { color: #4a90e2; } a:hover { color: #990000; }
+ .nav { font-size: 0.9rem; margin-bottom: 1rem; }
+ ol.steps > li { margin-bottom: 14px; }
+ ol.steps ul { margin-top: 6px; }
+ .warn { border-left: 4px solid #990000; background: #fdf2f2; padding: 8px 12px; margin: 12px 0; }
+ .ok { border-left: 4px solid #2e7d32; background: #f1f8f1; padding: 8px 12px; margin: 12px 0; }
+ kbd { border: 1px solid #bbb; border-bottom-width: 2px; border-radius: 4px; padding: 1px 6px; background: #fafafa; font-family: inherit; font-size: 0.9em; }
+ .ui { font-weight: 600; color: #011F5B; }
+</style>
+</head>
+<body>
+<p class="nav"><a href="../../index.html#schedule">&larr; Back to the schedule</a></p>
+<h1>GitHub Accounts at Penn</h1>
+
+<div class="ok"><p><strong>Everything on this page is free.</strong> You never need to pay GitHub anything for this course. If a page asks for a credit card, stop and go back.</p></div>
+
+<p>Your final project is shown off on a website hosted on GitHub. GitHub is where most engineers keep their code, and a public project page is a good start to a portfolio you can point internship recruiters to.</p>
+
+<p>This guide has four parts: make a GitHub account, join Penn's GitHub organization with your PennKey, claim the free student benefits, and publish your project website. Do Parts 1&ndash;3 <strong>today</strong>, because the student-benefits approval in Part 3 can take a few days.</p>
+
+<h2>Part 1: Make a GitHub account</h2>
+
+<p>If you already have a GitHub account, skip to Part 2 and use that one. One account is all you need, for this course and after.</p>
+
+<ol class="steps">
+<li>Go to <a href="https://github.com/signup">github.com/signup</a>.</li>
+<li><strong>Email:</strong> we suggest a personal email you will still have after graduating, since this account can follow you for your whole career. You will add your Penn email as a second address in Part 3.</li>
+<li><strong>Username:</strong> this appears in your website's address (<code>username.github.io</code>), so pick something you would be happy to put on a resume. Penn suggests your PennKey name; if it is taken, try <code>yourpennkey-upenn</code> (for example <code>bfrankln-upenn</code>).</li>
+<li>Choose a password, solve the puzzle, and enter the code GitHub emails you. If GitHub asks you to pick a plan, choose <span class="ui">Free</span>.</li>
+</ol>
+
+<h3>Turn on two-factor authentication</h3>
+<p>Penn requires two-factor authentication (2FA) on any account that joins its GitHub organization, and GitHub requires it of most accounts anyway.</p>
+<ol class="steps">
+<li>Click your profile picture (top right) &rarr; <span class="ui">Settings</span> &rarr; <span class="ui">Password and authentication</span>, or go straight to <a href="https://github.com/settings/security">github.com/settings/security</a>.</li>
+<li>Click <span class="ui">Enable two-factor authentication</span>. The simplest option is an authenticator app on your phone (Duo Mobile, which you already use for PennKey, works; so do Google Authenticator and Microsoft Authenticator). Scan the QR code with the app and type in the 6-digit code it shows.</li>
+<li><strong>Save your recovery codes</strong> when GitHub shows them: download them and keep them somewhere other than your phone. If you lose your phone without them, you can be locked out of the account for good.</li>
+</ol>
+<p>GitHub's full instructions: <a href="https://docs.github.com/en/authentication/securing-your-account-with-two-factor-authentication-2fa/configuring-two-factor-authentication">Configuring two-factor authentication</a>.</p>
+
+<h2>Part 2: Join Penn's GitHub organization</h2>
+
+<p>Penn is part of the <strong>GitHub Campus Program</strong>, run by Penn's Information Systems &amp; Computing (ISC). Members of the Penn community link their GitHub account to their PennKey and join Penn's <code>upenn</code> organization on GitHub. You keep your own account; joining connects it to Penn.</p>
+
+<ol class="steps">
+<li>Log in to GitHub (with 2FA turned on, from Part 1).</li>
+<li>In the same browser, go to <a href="https://github.com/orgs/upenn/sso/sign_up">github.com/orgs/upenn/sso/sign_up</a>.</li>
+<li>You are sent to the usual Penn WebLogin page. Log in with your PennKey and approve the Duo prompt.</li>
+<li>GitHub brings you back and adds you to the <code>upenn</code> organization. To check, open <a href="https://github.com/settings/organizations">github.com/settings/organizations</a>; <code>upenn</code> should be listed.</li>
+</ol>
+
+<blockquote><p>Your PennKey can be linked to only one GitHub account at a time. If you have more than one GitHub account, link the one you plan to keep.</p></blockquote>
+
+<p>Penn's official page for the program: <a href="https://github.isc.upenn.edu/">github.isc.upenn.edu</a>. You may see GitHub Copilot listed there as a paid Penn service. You do not need it; Part 3 gets you Copilot free.</p>
+
+<h2>Part 3: Claim the free student benefits</h2>
+
+<p>Separately from Penn, GitHub gives verified students <strong>GitHub Education</strong> benefits for free: GitHub Pro, Copilot Student (the AI assistant from the <a href="../Lecture21/vscode_copilot.html">VS Code guide</a>), and the Student Developer Pack of free tools from other companies. Your Penn email is how you prove you are a student.</p>
+
+<ol class="steps">
+<li>Add your Penn email to your account: go to <a href="https://github.com/settings/emails">github.com/settings/emails</a>, add your <code>@upenn.edu</code> (or <code>@seas.upenn.edu</code>) address, and click the verification link GitHub sends to it. Leave your personal email as the primary address.</li>
+<li>Go to <a href="https://github.com/settings/education/benefits">github.com/settings/education/benefits</a> and click <span class="ui">Start an application</span>. Choose <span class="ui">Student</span>, select University of Pennsylvania, and follow the prompts. GitHub may ask for a photo of your PennCard and for permission to see your location; allow both, since missing them is the most common reason applications are rejected.</li>
+<li>Wait for the approval email. It can take anywhere from minutes to several days. You do <strong>not</strong> need to wait for it to do Part 4.</li>
+</ol>
+
+<p>If you already did this for the VS Code guide, you are done with this part.</p>
+
+<h2>Part 4: Publish your final project website</h2>
+
+<p>GitHub Pages turns a repository (a folder of files on GitHub) into a public website, for free. You can do all of this in the browser; nothing to install.</p>
+
+<div class="warn"><p>&#9888;&#65039; <strong>Your website is public.</strong> Anyone on the internet can see it. Do not post passwords, other students' grades or personal information, or anyone's face or name in your video without their OK. Penn's GitHub guidance also says GitHub is not a place for sensitive data such as FERPA-protected records.</p></div>
+
+<h3>Create the site</h3>
+<ol class="steps">
+<li>One person in your group does this part. Go to <a href="https://github.com/new">github.com/new</a>.</li>
+<li><span class="ui">Owner</span>: your own username (not <code>upenn</code>). <span class="ui">Repository name</span>: something short with no spaces, like <code>engr1050-final-project</code>. Set it to <span class="ui">Public</span> and check <span class="ui">Add a README file</span>. Click <span class="ui">Create repository</span>.</li>
+<li>In the new repository, click <span class="ui">Add file</span> &rarr; <span class="ui">Create new file</span>. Name it <code>index.html</code> and paste in the starter page below. Click <span class="ui">Commit changes</span>, then <span class="ui">Commit changes</span> again in the pop-up.</li>
+<li>Click <span class="ui">Settings</span> (the tab along the top of the repository) &rarr; <span class="ui">Pages</span> in the left sidebar. Under <span class="ui">Build and deployment</span>, set <span class="ui">Source</span> to <span class="ui">Deploy from a branch</span>, set <span class="ui">Branch</span> to <code>main</code> and <code>/ (root)</code>, and click <span class="ui">Save</span>.</li>
+<li>Wait a minute or two and refresh the Pages settings. A box appears saying <span class="ui">Your site is live at</span> followed by the address, which looks like <code>https://username.github.io/engr1050-final-project/</code>. Open it to check.</li>
+</ol>
+
+<h3>Starter page</h3>
+<p>Copy this into <code>index.html</code> and replace the capitalized parts. Ask Gemini or another AI tool to help you style it; that is fair game.</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;PROJECT NAME&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;PROJECT NAME&lt;/h1&gt;
+  &lt;p&gt;By TEAM MEMBER NAMES, ENGR 1050 final project&lt;/p&gt;
+
+  &lt;h2&gt;What it does&lt;/h2&gt;
+  &lt;p&gt;ONE PARAGRAPH DESCRIBING YOUR PROJECT.&lt;/p&gt;
+
+  &lt;h2&gt;Demo video&lt;/h2&gt;
+  &lt;video controls width="640" src="demo.mp4"&gt;&lt;/video&gt;
+
+  &lt;h2&gt;Components&lt;/h2&gt;
+  &lt;ul&gt;
+    &lt;li&gt;Raspberry Pi Pico&lt;/li&gt;
+    &lt;li&gt;COMPONENT YOU ORDERED&lt;/li&gt;
+  &lt;/ul&gt;
+
+  &lt;h2&gt;Code&lt;/h2&gt;
+  &lt;p&gt;&lt;a href="main.py"&gt;main.py&lt;/a&gt;&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+<h3>Add your video, code, and photos</h3>
+<ol class="steps">
+<li>In the repository, click <span class="ui">Add file</span> &rarr; <span class="ui">Upload files</span>, drag in your files (for example <code>demo.mp4</code>, <code>main.py</code>, photos), and click <span class="ui">Commit changes</span>. The names must match what <code>index.html</code> points to.</li>
+<li>The site updates a minute or two after each commit. If you don't see your change, refresh with <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>R</kbd> (Windows) / <kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>R</kbd> (Mac).</li>
+</ol>
+
+<blockquote><p><strong>Video too big?</strong> The browser upload accepts files up to 25 MB, which is about a minute of phone video. Either shorten or compress the video (most phones can trim and export at a lower resolution), or upload it to YouTube as <span class="ui">Unlisted</span> and paste YouTube's <span class="ui">Share &rarr; Embed</span> code into <code>index.html</code> in place of the <code>&lt;video&gt;</code> line.</p></blockquote>
+
+<h3>Let your teammates edit</h3>
+<p>In the repository, go to <span class="ui">Settings</span> &rarr; <span class="ui">Collaborators</span> &rarr; <span class="ui">Add people</span> and enter each teammate's GitHub username. They get an email invitation and must accept it before they can edit.</p>
+
+<h2>Things that go wrong, and what to do</h2>
+
+<h3>The Penn sign-up link says I need two-factor authentication</h3>
+<p>Finish the 2FA steps in Part 1, then open <a href="https://github.com/orgs/upenn/sso/sign_up">the sign-up link</a> again.</p>
+
+<h3>The Penn sign-up link linked the wrong GitHub account</h3>
+<p>It uses whichever account is logged in to GitHub in that browser. Log out of GitHub, log in to the account you want, and try again. If it still won't switch, ask in office hours.</p>
+
+<h3>My site shows a 404 page</h3>
+<p>Check that the file is named exactly <code>index.html</code> (all lowercase) and sits at the top level of the repository, not inside a folder; that the repository is Public; and that Pages is set to the <code>main</code> branch. The first deploy can take a few minutes.</p>
+
+<h3>My video or picture doesn't show up</h3>
+<p>File names are case sensitive on the web: <code>Demo.MP4</code> and <code>demo.mp4</code> are different files. Make the name in <code>index.html</code> match the uploaded file exactly. If the video still won't play, re-export it as <code>.mp4</code>; iPhone <code>.mov</code> files often don't play in other browsers.</p>
+
+<h3>My GitHub Education application was rejected</h3>
+<p>The usual causes are a Penn email that was never verified on the account, a blurry or cropped PennCard photo, or not allowing location sharing. Fix whichever applies and reapply. Your website does not depend on this approval.</p>
+
+<blockquote><p>If you are stuck on anything not listed here, do not spend an hour on it. Ask the person next to you or bring the laptop to office hours.</p></blockquote>
+
+<p class="nav"><a href="../../index.html#schedule">&larr; Back to the schedule</a></p>
+</body>
+</html>
