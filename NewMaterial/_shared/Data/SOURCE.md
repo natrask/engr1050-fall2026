@@ -53,3 +53,25 @@ one row per student (70 rows, columns `Exam 1` and `Exam 2`), with no names or
 IDs. `Lecture21/lec21.ipynb` downloads it for the histogram exercise. Copied
 unchanged from `notebooks/Data/` in the Fall 2025 repo: Fall 2026 Exam 2 was
 not yet graded when Lecture 21 ran, pending make-up exams.
+
+# Concrete compressive strength data
+
+`Concrete_Data.xls` is the UCI Machine Learning Repository's Concrete Compressive
+Strength data set, used by `Lecture24/lec24.ipynb`. It is an unmodified copy of
+`https://archive.ics.uci.edu/ml/machine-learning-databases/concrete/compressive/Concrete_Data.xls`,
+downloaded 2026-11-16 (124,928 bytes, SHA-256
+`710076c66b9ca3f8050e7942f3dcbdbe04013534daeb0077ffd3079a52d8e0c4`). One sheet,
+1030 rows: 8 inputs (cement, blast furnace slag, fly ash, water,
+superplasticizer, coarse aggregate, fine aggregate, age) and compressive
+strength in MPa.
+
+Cite as: I-Cheng Yeh, "Modeling of strength of high performance concrete using
+artificial neural networks," *Cement and Concrete Research*, 28(12),
+1797-1808 (1998). The notebook carries the full citation.
+
+## Why a local copy
+
+The notebook used to read straight from UCI, which has been reorganizing its
+site; a moved file would break the exercise mid-class. Reading it needs `xlrd`,
+which Colab has preinstalled (`xlrd==2.0.2` in Google's published Colab package
+list, `googlecolab/backend-info`, `pip-freeze.txt`).
