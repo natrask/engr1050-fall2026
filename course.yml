@@ -332,16 +332,27 @@ schedule:
     date: 2026-11-16
     section: 3
     topic: Automatic differentiation and gradient descent
+    visible: true
     folder: Lecture23
-    slides: Lecture_23.pdf
+    slides:
+      - Lecture_23.pptx
+      - Lecture_23.pdf
     notebook: lec23.ipynb
+    exercise: https://canvas.upenn.edu/courses/1950130/assignments/15255554
+    links:
+      - label: Final project part order form
+        url: https://forms.gle/zWY2E4Rrn4PDYVjF7
   - num: 24
     date: 2026-11-18
     section: 3
     topic: Deep learning and concrete manufacturing
+    visible: true
     folder: Lecture24
-    slides: Lecture_24.pdf
+    slides:
+      - Lecture_24.pptx
+      - Lecture_24.pdf
     notebook: lec24.ipynb
+    exercise: https://canvas.upenn.edu/courses/1950130/assignments/15255566
   - num: 25
     date: 2026-11-23
     section: 3
