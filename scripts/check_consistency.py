@@ -93,7 +93,8 @@ def main():
         d = e["date"]
         if isinstance(d, str):
             d = datetime.date.fromisoformat(d)
-        if d.weekday() not in (0, 2):
+        # deadlines (e.g. close of grades) are not class meetings
+        if d.weekday() not in (0, 2) and e.get("kind") != "deadline":
             fail(f"schedule: {d} is a {d.strftime('%A')}, not a Monday or Wednesday")
         if d in seen:
             fail(f"schedule: two entries share {d}")

@@ -357,26 +357,34 @@ schedule:
     date: 2026-11-23
     section: 3
     topic: Binary classification and predictive maintenance
+    visible: true
     folder: Lecture25
-    slides: Lecture_25.pdf
+    slides:
+      - Lecture_25.pptx
+      - Lecture_25.pdf
     notebook: lec25.ipynb
   - num: 26
     date: 2026-11-30
     section: 3
-    topic: Review for exam 3
-    folder: Lecture26
-    notebook: lec26.ipynb
+    topic: "Open review: feedback on in-class exercises, final projects"
   - num: 27
     date: 2026-12-02
     section: 4
-    topic: Exam 3
-    kind: exam
+    topic: Exam 3 review and final projects
+    folder: Lecture27
+    notebook: lec27.ipynb
   - num: 28
     date: 2026-12-07
     section: 4
-    topic: Final project presentations
-    folder: Lecture28
-    kind: workday
+    topic: Exam 3
+    kind: exam
+  # Final projects are assessed from the students' GitHub project websites, not
+  # in-person presentations. Submissions stay open through the end of finals.
+  # kind: deadline is not a class meeting, so it may fall on any weekday.
+  - date: 2026-12-17
+    section: 4
+    topic: "Close of grades: last day to submit final project Githubs"
+    kind: deadline
 
 homeworks:
   # `visible: true` publishes the PDF link; without it the card shows "(coming)".

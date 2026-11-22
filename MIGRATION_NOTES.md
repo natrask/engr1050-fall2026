@@ -70,7 +70,7 @@ The H1 title at the top of each `notes.md` file was rewritten safely to match th
 - `Lecture22/lec22.ipynb` H1 still says "Lecture 23"
 - `Lecture23/lec23.ipynb` H1 still says "Lecture 24"
 - `Lecture24/lec24.ipynb` H1 still says "Lecture 25"
-- `Lecture25/lec25.ipynb` H1 still says "Lecture 26"; the review-lecture body cross-references Lectures 20, 21, 22, 23, 24 from the 2025 numbering, all of which need a mechanical -1 shift
+- `Lecture25/lec25.ipynb` H1 still says "Lecture 26"; the review-lecture body cross-references Lectures 20, 21, 22, 23, 24 from the 2025 numbering, all of which need a mechanical -1 shift (resolved: H1 fixed, and the review notebook now lives at `Lecture27/lec27.ipynb`; see the November 2026 section below)
 
 A safe scrub for the notebook H1 lines is a one-line sed; the prose cross-references inside the review notebook (Lecture 25) deserve a careful read.
 
@@ -86,7 +86,8 @@ The 9/28 lab was not set up and ran on 10/5 instead, as Lecture 11. Every lectur
 from the old Lecture 11 on moved one slot later and one number higher (folders,
 notebook filenames, notebook H1 titles, Colab badges, slide filenames). The 11/30
 "Final projects" workday was dropped to absorb the shift, so Exam 3 (12/2) and the
-presentations (12/7) keep their dates; Exam 2 moved from 10/28 to 11/2.
+presentations (12/7) keep their dates; Exam 2 moved from 10/28 to 11/2. (Superseded
+by the November 2026 reshuffle below.)
 
 This supersedes the slide table above for Lectures 11 and later. Most covers
 carried the 2025 number, which was one too high, so the shift made them right:
@@ -102,16 +103,60 @@ carried the 2025 number, which was one too high, so the shift made them right:
 | `Lecture22/Lecture_22.pdf`   | Lecture 21     | re-export from PowerPoint as Lecture 22        |
 | `Lecture23/Lecture_23.pdf`   | Lecture 23     | correct                                        |
 | `Lecture24/Lecture_24.pdf`   | Lecture 24     | correct                                        |
-| `Lecture25/Lecture_25.pdf`   | Lecture 25     | correct                                        |
+| `Lecture25/Lecture_25.pdf`   | Lecture 25     | correct (re-exported, dated for 2026; see below) |
 
 Later in October the final helicopter lab moved ahead of the Exam 2 review: the lab is now Lecture 18 (10/28, was Lecture 20), the review Lecture 19 (11/2, was Lecture 18), and Exam 2 is 11/4.
 
 The covers from Lecture 21 on still carry Fall 2025 dates. Figures for the Beamer decks are not in `OldMaterial/`; copy them from `slides/lectureNN/` in the Fall 2025 repo, and compile with `pdflatex -shell-escape` (the decks use minted).
 
 Prose pointers updated in this pass: the "Lecture 9 lab" reference in the Exam 1
-extra prep notebooks (now Lecture 11), the topic list in `Lecture26/lec26.ipynb`,
+extra prep notebooks (now Lecture 11), the topic list in `Lecture26/lec26.ipynb` (now `Lecture27/lec27.ipynb`),
 and textbook chapters 2, 6, 8, 9 and 12. Not touched, and worth a read: textbook
 Ch. 6 "mirrors Lecture 13", Ch. 9 "Lecture 18 touches on this", Ch. 11 "controlled
 pendulum (Lecture 16)", and `Lecture24/lec24.ipynb`, whose intro still describes
 the previous lecture as Newton's method. The `_shared/Images/lec19_*` files keep
 their old names; `Lecture20/lec20.ipynb` references them by those names.
+
+## November 2026 reshuffle: no presentations, Exam 3 moves to 12/7
+
+In-person final project presentations are dropped. Final projects are assessed from
+the students' GitHub project websites, and submissions stay open through the end of
+finals. The end of term now runs:
+
+| Date  | Entry                                                          | Material               |
+|-------|----------------------------------------------------------------|------------------------|
+| 11/23 | Lecture 25: Binary classification and predictive maintenance   | `Lecture25/` (released) |
+| 11/30 | Lecture 26: Open review (feedback on in-class exercises), final projects | none            |
+| 12/2  | Lecture 27: Exam 3 review and final projects                   | `Lecture27/lec27.ipynb` |
+| 12/7  | Exam 3                                                         | none                   |
+| 12/17 | Close of grades: last day to submit final project Githubs      | none                   |
+
+- The Exam 3 review notebook moved from `Lecture26/lec26.ipynb` to
+  `Lecture27/lec27.ipynb` (H1 and Colab badge updated). `Lecture26/` is now empty.
+- Exam 3 takes lecture number 28, so `Lecture28/` (an empty `.gitkeep` placeholder for
+  the dropped presentations) is no longer referenced.
+- The 12/17 entry is `kind: deadline`; `check_consistency.py` exempts that kind from
+  the Monday/Wednesday rule because it is not a class meeting.
+
+Still to do before Lecture 27 is released:
+
+- `lec27.ipynb` is the Fall 2025 Thanksgiving-week review. It opens with a Zoom link
+  and passcode and says the review is virtual because "many folks are traveling";
+  neither applies to an in-person 12/2 class. Typos: "Optimizaton", "the roll of
+  $lpha$".
+
+Lecture 25 release pass (11/22): typos fixed in `lec25.ipynb`, the stale "final
+homework on Monday" line replaced (there is no HW6), "Monday's model" now "last
+lecture's model", and the CWRU source URL and access date refreshed (both `.mat`
+downloads verified live). The deck was copied forward from `slides/Lecture_25.pptx`
+in the Fall 2025 repo (the PDF had been the unedited 2025 export) and re-exported
+after four fixes: cover "Fall 2025" -> "Fall 2026"; the cover QR code, which pointed
+at the Fall 2025 repo `PIMILab/ENGR1050`, swapped for the Fall 2026 site QR used on
+the Lecture 24 cover; slide 18 "The old loss from Monday" -> "from last lecture";
+slide 21 "On Monday we'll use this to step through final HW together" -> "Read
+through the notebook carefully on your own".
+
+The checker cannot see QR codes. Decoding every released cover shows that
+`Lecture06/Lecture_06.pdf` and `Lecture21/Lecture_21.pdf` still point at
+`https://github.com/PIMILab/ENGR1050/tree/main`; Lectures 1 and 22-25 point at the
+Fall 2026 site.
