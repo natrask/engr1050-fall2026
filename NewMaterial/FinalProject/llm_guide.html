@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Using an LLM on Your Project Site - ENGR 1050</title>
+<style>
+ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        line-height: 1.6; color: #333; max-width: 900px; margin: 0 auto; padding: 20px; }
+ h1 { color: #011F5B; border-bottom: 3px solid #990000; padding-bottom: 10px; margin-top: 30px; }
+ h2 { color: #011F5B; margin-top: 36px; border-bottom: 2px solid #e0e0e0; padding-bottom: 5px; }
+ h3 { color: #011F5B; margin-top: 24px; }
+ p { text-align: left; margin-bottom: 15px; }
+ code { background: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-family: ui-monospace, Menlo, Consolas, monospace; }
+ pre { background: #f4f6fa; border: 1px solid #dfe4ec; padding: 12px 14px; border-radius: 6px; overflow-x: auto; white-space: pre-wrap; }
+ pre code { background: none; padding: 0; }
+ pre.prompt { border-left: 4px solid #82AFD3; }
+ blockquote { border-left: 4px solid #82AFD3; padding: 4px 12px; background: #f8f9fa; margin: 12px 0; }
+ a { color: #4a90e2; } a:hover { color: #990000; }
+ .nav { font-size: 0.9rem; margin-bottom: 1rem; }
+ ol.steps > li, ul.steps > li { margin-bottom: 10px; }
+ .warn { border-left: 4px solid #990000; background: #fdf2f2; padding: 8px 12px; margin: 12px 0; }
+ .ok { border-left: 4px solid #2e7d32; background: #f1f8f1; padding: 8px 12px; margin: 12px 0; }
+ .tip { border-left: 4px solid #011F5B; background: #f2f5fb; padding: 8px 14px; margin: 14px 0; }
+ .warn p, .ok p, .tip p { margin: 6px 0; }
+ .label { font-size: 0.8rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: #011F5B; margin: 18px 0 4px; }
+ table { border-collapse: collapse; width: 100%; margin: 12px 0; }
+ th, td { border: 1px solid #ddd; padding: 8px 12px; text-align: left; vertical-align: top; }
+ th { background: #f4f6fa; color: #011F5B; }
+ .ui { font-weight: 600; color: #011F5B; }
+ kbd { border: 1px solid #bbb; border-bottom-width: 2px; border-radius: 4px; padding: 1px 6px; background: #fafafa; font-family: inherit; font-size: 0.9em; }
+</style>
+</head>
+<body>
+<p class="nav"><a href="../../index.html#schedule">&larr; Back to the schedule</a></p>
+<h1>Using an LLM to Adapt Your Project Website</h1>
+
+<p>Your final project website starts from the <a href="https://github.com/natrask/engr1050-project-template">course project template</a>. You can see the finished example, &ldquo;Team Hover&rdquo;, at <a href="https://natrask.github.io/engr1050-project-template/">natrask.github.io/engr1050-project-template</a>. It's built from the helicopter labs and shows the level of polish we're looking for. This page explains how to use a <strong>free</strong> AI model (ChatGPT, Gemini, Copilot, Claude, or similar) to turn that example into your own site, one small change at a time.</p>
+
+<p>If you haven't made your copy of the template yet, start with Part 4 of the <a href="../Lecture22/github_setup.html">GitHub setup guide</a>. Grading is described in the <a href="rubric.html">final project rubric</a>.</p>
+
+<h2>Three things to know first</h2>
+
+<div class="tip">
+<p><strong>This website will be accessible to the entire internet.</strong> If you'd like to remain anonymous, feel free to list only your group name, and be careful not to put anything identifiable on the website. Check photos and videos for faces, name tags, and laptop screens, as well as the file names themselves.</p>
+</div>
+
+<div class="tip">
+<p><strong>If you don't like the template, you can easily use an LLM to change the style of the website.</strong> For ideas, point an LLM to your repository and to a website whose style you like, and ask how to mimic what you like. Be careful not to use others' intellectual property: borrow the general feel (spacing, layout, color mood), not their logos, photos, text, or code. <a href="#restyle">Prompt below.</a></p>
+</div>
+
+<div class="tip">
+<p><strong>In the future, you can extend this website to include other projects</strong> during your time at Penn, and build up a catalog of work you're proud of that you can list on your resume. <a href="#portfolio">How, below.</a></p>
+</div>
+
+<h2>How the template is organized</h2>
+
+<p>Knowing which file holds what lets you paste the right piece into a chat instead of everything at once.</p>
+
+<table>
+<thead><tr><th>File</th><th>What's in it</th><th>Edit it to&hellip;</th></tr></thead>
+<tbody>
+<tr><td><code>index.html</code></td><td>Page 1, overview</td><td>Change your title, pitch, photo, the two summary bullets, specs, and team</td></tr>
+<tr><td><code>components.html</code></td><td>Page 2, one <code>&lt;article class="component"&gt;</code> per component</td><td>Add, remove, or rewrite components</td></tr>
+<tr><td><code>demo.html</code></td><td>Page 3, final demo</td><td>Add your video, description, build steps, results</td></tr>
+<tr><td><code>style.css</code></td><td>Every color, font, and layout rule. The <strong>THEME</strong> block at the top controls the look.</td><td>Restyle the whole site</td></tr>
+<tr><td><code>media/</code>, <code>code/</code></td><td>Your photos, videos, and code files</td><td>Upload yours; delete the examples you don't use</td></tr>
+</tbody>
+</table>
+
+<p>Each page is divided into sections with a comment above each one, such as <code>&lt;!-- ===== Project summary ... ===== --&gt;</code>. Places you must change are marked <code>EDIT</code>, and values still to measure are marked <code>TODO</code>.</p>
+
+<h2>The workflow that works with free models</h2>
+
+<p>Free models have shorter memories and message limits, can't see your repository, and often can't open links. They are good at one focused change to a piece of code you paste in. They are bad at &ldquo;rebuild my whole site.&rdquo; So work in small loops:</p>
+
+<ol class="steps">
+<li><strong>Pick one change.</strong> For example: &ldquo;fill in our goal bullet&rdquo; or &ldquo;add a component for our ultrasonic sensor.&rdquo;</li>
+<li><strong>Copy just that section</strong> from the file, from its <code>&lt;!-- ===== ... --&gt;</code> comment to the closing <code>&lt;/section&gt;</code> or <code>&lt;/article&gt;</code>. Open the file on GitHub, click the pencil icon, and select it.</li>
+<li><strong>Paste it into the chat</strong> with one of the prompts below.</li>
+<li><strong>Paste the answer back</strong> over the old section, and click <span class="ui">Commit changes</span>.</li>
+<li><strong>Check the live site</strong> after a minute or two, refreshing with <code>Ctrl+Shift+R</code> (<code>Cmd+Shift+R</code> on a Mac). If it broke, go back to the previous commit (see <a href="#broke">Something broke</a>) and try again.</li>
+</ol>
+
+<div class="ok"><p><strong>Commit after every change that works.</strong> GitHub keeps every version, so a commit is a free save point. Small commits are what make it safe to experiment.</p></div>
+
+<p>To edit several files at once, press <kbd>.</kbd> on your repository page. That opens a full code editor (github.dev) in the browser, still free, with nothing to install.</p>
+
+<h3>Start every new chat with this</h3>
+<p>The model knows nothing about your project at the start of a chat. Paste this first, then your request:</p>
+<pre class="prompt"><code>I'm a first-year engineering student building a website for my class project.
+The site is plain HTML and CSS (no frameworks, no JavaScript, no build tools),
+hosted on GitHub Pages. It has three pages: index.html (overview),
+components.html (one section per component), and demo.html (final demo),
+plus one stylesheet, style.css. I will paste one section at a time.
+
+When you change something:
+- keep the existing class names and HTML structure so the stylesheet still works
+- give me back the complete section you changed, with no "..." or "rest unchanged"
+- don't add JavaScript, frameworks, or new files unless I ask
+- tell me in one or two sentences what you changed</code></pre>
+
+<h2>Prompts you can copy</h2>
+
+<p>Replace the parts in [square brackets]. Paste your section where it says [paste section].</p>
+
+<h3>Write your overview</h3>
+<pre class="prompt"><code>Here is the project summary section from index.html:
+[paste section]
+
+Rewrite the two bullets for our project. Keep exactly two bullets, one or two
+sentences each. Be honest: if something didn't work, say so plainly.
+Our notes:
+- Goal: [what you set out to build]
+- What worked: [...]
+- What didn't work yet: [...]</code></pre>
+
+<h3>Add or rewrite a component</h3>
+<pre class="prompt"><code>Here is one component from components.html:
+[paste one whole &lt;article class="component"&gt; ... &lt;/article&gt;]
+
+Make a new one with exactly the same structure for this component:
+- Name: [e.g. ultrasonic distance sensor]
+- What it does in our project: [...]
+- Wiring: [e.g. VCC to 3V3, GND to GND, TRIG to GP2, ECHO to GP3]
+- How we tested it: [...]
+- Photos, in order: media/[file].jpg shows [...]; media/[file].jpg shows [...]
+- Video: media/[file].mp4 shows [...]
+- Code file: code/[file].py. Leave the code block empty; I'll paste the code myself.
+Use a new id, number it [05], and also give me the new row for the table at
+the top of the page.</code></pre>
+
+<h3>Put your code on the page</h3>
+<p>Inside <code>&lt;pre&gt;&lt;code&gt;</code>, the characters <code>&lt;</code>, <code>&gt;</code>, and <code>&amp;</code> have to be written as <code>&amp;lt;</code>, <code>&amp;gt;</code>, and <code>&amp;amp;</code>, or the browser treats your code as HTML and parts of it disappear. A model can do this reliably:</p>
+<pre class="prompt"><code>Convert this Python code so it can go inside &lt;pre&gt;&lt;code class="language-python"&gt;
+in an HTML file. Replace &lt; with &amp;lt;, &gt; with &amp;gt;, and &amp; with &amp;amp;.
+Change nothing else: not the spacing, not the comments.
+[paste your code]</code></pre>
+<p>Also upload the same file to <code>code/</code> so the download link works.</p>
+
+<h3>Add a video (no model needed)</h3>
+<p>Each video placeholder has a comment just above it with the line to use. For a file you uploaded to <code>media/</code>, replace the whole <code>&lt;div class="video-slot"&gt;</code> block with:</p>
+<pre><code>&lt;div class="video"&gt;&lt;video controls playsinline preload="metadata" src="media/your-video.mp4"&gt;&lt;/video&gt;&lt;/div&gt;</code></pre>
+<p>For a video on YouTube (set it to <span class="ui">Unlisted</span> if you don't want it in search results), click <span class="ui">Share</span> &rarr; <span class="ui">Embed</span>, copy the <code>&lt;iframe ...&gt;</code>, and put it inside <code>&lt;div class="video"&gt; ... &lt;/div&gt;</code> the same way.</p>
+
+<h3>Change the colors and fonts</h3>
+<p>Everything reads from the THEME block at the top of <code>style.css</code>, so you only need to paste those lines (from <code>/* ---------- THEME (light)</code> to the end of the dark block):</p>
+<pre class="prompt"><code>Here is the THEME section of my style.css. It has a light block and a dark
+block that is used when the visitor's device is in dark mode:
+[paste the two :root blocks]
+
+Change the palette to [e.g. deep green with a warm yellow accent].
+Keep every variable name the same, keep text easy to read against its
+background in both blocks, and return both blocks complete.</code></pre>
+
+<h3 id="restyle">Restyle the site after one you like</h3>
+<pre class="prompt"><code>Our site is live at [your github.io link], and its code is at [your repository link].
+I like the style of [link to a site you like], especially [e.g. the huge headings,
+the full-width photos, the muted colors].
+
+Explain which changes to our style.css would give a similar general feel, then
+give me the CSS. Don't copy anything from that site: no logos, images, text,
+fonts that need a license, or code. Build the look from our own CSS.</code></pre>
+<p>If the model says it can't open links, paste your THEME block instead. Then describe the site in words, or attach a screenshot of it if your model accepts images (many free ones do).</p>
+
+<h3 id="broke">Something broke</h3>
+<pre class="prompt"><code>After I [what you changed], [what went wrong, e.g. the photo doesn't show /
+everything below the table is squashed / the page is blank after the video].
+Here is the section:
+[paste section]
+What's wrong? Show me the corrected section.</code></pre>
+<p>Check these first, since they cause most problems:</p>
+<ul>
+<li><strong>File names are case sensitive.</strong> <code>Demo.MP4</code> and <code>demo.mp4</code> are different files online, even if they work on your laptop.</li>
+<li><strong>A tag was left open.</strong> Every <code>&lt;section&gt;</code>, <code>&lt;div&gt;</code>, or <code>&lt;article&gt;</code> needs its closing tag. A missing one usually breaks everything after it.</li>
+<li><strong>The site hasn't updated yet.</strong> Wait a minute, then hard-refresh.</li>
+<li><strong>To undo a bad change:</strong> open the file on GitHub, click <span class="ui">History</span>, open the last good version, copy its contents, and commit them back over the broken file.</li>
+</ul>
+
+<h3>Understand what you're editing</h3>
+<pre class="prompt"><code>Explain what this part of our web page does, line by line, as if I have never
+written HTML or CSS:
+[paste section]</code></pre>
+
+<h2>Check the model's work</h2>
+<p>The same rules from our AI-assisted coding lecture apply here.</p>
+<ul>
+<li><strong>Every claim on your site is yours.</strong> Models will confidently invent results, part numbers, and explanations. Never let a model write what your project achieved; give it your notes and check every sentence it returns.</li>
+<li><strong>Look at every page</strong> on a phone and a laptop after each change. Click every link and play every video.</li>
+<li><strong>Don't paste anything private into a chat:</strong> passwords, other students' information, or grades.</li>
+<li><strong>Credit what you didn't make.</strong> If you use someone else's photo, diagram, or code, say where it came from, and check that you're allowed to use it.</li>
+</ul>
+
+<h2 id="portfolio">Grow it into a portfolio</h2>
+<p>This site is set up as one project, and you can keep adding to it as you build more.</p>
+<ol class="steps">
+<li><strong>Make a home page for yourself.</strong> A repository named exactly <code>yourusername.github.io</code> becomes your personal site at <code>https://yourusername.github.io/</code>. Copy this template into it and turn <code>index.html</code> into a short &ldquo;about me&rdquo; page with a grid of project cards (the <code>.cards</code> style on the example's overview page works well for this).</li>
+<li><strong>Give each future project its own repository,</strong> made from this template the same way, and link each one from a card on your home page.</li>
+<li><strong>Keep it honest and current.</strong> A project with a clear video and a candid &ldquo;what we'd do next&rdquo; section is more convincing to an internship recruiter than a long list of claims. Put the link on your resume and LinkedIn.</li>
+</ol>
+<p>If you built the ENGR 1050 site as a group, ask your teammates before copying it into a personal portfolio, and say it was a team project.</p>
+
+<h2>Before you submit</h2>
+<ul>
+<li>All three pages exist and the menu links between them work.</li>
+<li>The overview has the two bullets: your goal, and what you achieved.</li>
+<li>Every component has a description, and photos or video showing it working.</li>
+<li>The final demo page says what the demo should do and shows it doing it, or documents how far you got.</li>
+<li>No <code>EDIT</code>, <code>TODO</code>, &ldquo;Team Hover&rdquo;, or example photos are left over.</li>
+<li>Nothing identifies you that you don't want public.</li>
+</ul>
+<p>Then submit your live <code>github.io</code> link as described in the <a href="rubric.html">rubric</a>.</p>
+
+<blockquote><p>Stuck for more than half an hour? Ask the person next to you or bring your laptop to office hours. The model doesn't know our course; we do.</p></blockquote>
+
+<p class="nav"><a href="../../index.html#schedule">&larr; Back to the schedule</a></p>
+</body>
+</html>

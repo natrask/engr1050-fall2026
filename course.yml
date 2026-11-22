@@ -389,6 +389,12 @@ schedule:
     links:
       - label: Final project rubric
         url: NewMaterial/FinalProject/rubric.html
+      - label: Example project website
+        url: https://natrask.github.io/engr1050-project-template/
+      - label: Project website template (GitHub)
+        url: https://github.com/natrask/engr1050-project-template
+      - label: Using an LLM to adapt your website
+        url: NewMaterial/FinalProject/llm_guide.html
       - label: Final project submission (Canvas)
         url: https://canvas.upenn.edu/courses/1950130/assignments/15267066
 

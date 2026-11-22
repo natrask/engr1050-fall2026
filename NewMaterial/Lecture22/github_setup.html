@@ -88,52 +88,27 @@
 
 <div class="warn"><p>&#9888;&#65039; <strong>Your website is public.</strong> Anyone on the internet can see it. Do not post passwords, other students' grades or personal information, or anyone's face or name in your video without their OK. Penn's GitHub guidance also says GitHub is not a place for sensitive data such as FERPA-protected records.</p></div>
 
-<h3>Create the site</h3>
+<h3>Create the site from the course template</h3>
+<p>Every project starts from the same three-page template, laid out to match the <a href="../FinalProject/rubric.html">final project rubric</a>. Look at the finished example first, <a href="https://natrask.github.io/engr1050-project-template/">&ldquo;Team Hover&rdquo;</a>, built from our helicopter labs: that's the bar for how your site should look.</p>
 <ol class="steps">
-<li>One person in your group does this part. Go to <a href="https://github.com/new">github.com/new</a>.</li>
-<li><span class="ui">Owner</span>: your own username (not <code>upenn</code>). <span class="ui">Repository name</span>: something short with no spaces, like <code>engr1050-final-project</code>. Set it to <span class="ui">Public</span> and check <span class="ui">Add a README file</span>. Click <span class="ui">Create repository</span>.</li>
-<li>In the new repository, click <span class="ui">Add file</span> &rarr; <span class="ui">Create new file</span>. Name it <code>index.html</code> and paste in the starter page below. Click <span class="ui">Commit changes</span>, then <span class="ui">Commit changes</span> again in the pop-up.</li>
+<li>One person in your group does this part. Open the template repository, <a href="https://github.com/natrask/engr1050-project-template">github.com/natrask/engr1050-project-template</a>.</li>
+<li>Click the green <span class="ui">Use this template</span> button (top right) &rarr; <span class="ui">Create a new repository</span>.</li>
+<li><span class="ui">Owner</span>: your own username (not <code>upenn</code>). <span class="ui">Repository name</span>: something short with no spaces, like <code>engr1050-final-project</code>. Set it to <span class="ui">Public</span>. Click <span class="ui">Create repository</span>.</li>
 <li>Click <span class="ui">Settings</span> (the tab along the top of the repository) &rarr; <span class="ui">Pages</span> in the left sidebar. Under <span class="ui">Build and deployment</span>, set <span class="ui">Source</span> to <span class="ui">Deploy from a branch</span>, set <span class="ui">Branch</span> to <code>main</code> and <code>/ (root)</code>, and click <span class="ui">Save</span>.</li>
-<li>Wait a minute or two and refresh the Pages settings. A box appears saying <span class="ui">Your site is live at</span> followed by the address, which looks like <code>https://username.github.io/engr1050-final-project/</code>. Open it to check.</li>
+<li>Wait a minute or two and refresh the Pages settings. A box appears saying <span class="ui">Your site is live at</span> followed by the address, which looks like <code>https://username.github.io/engr1050-final-project/</code>. Open it: you should see a copy of the Team Hover example.</li>
 </ol>
 
-<h3>Starter page</h3>
-<p>Copy this into <code>index.html</code> and replace the capitalized parts. Ask Gemini or another AI tool to help you style it; that is fair game.</p>
-<pre><code>&lt;!DOCTYPE html&gt;
-&lt;html lang="en"&gt;
-&lt;head&gt;
-  &lt;meta charset="UTF-8"&gt;
-  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-  &lt;title&gt;PROJECT NAME&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-  &lt;h1&gt;PROJECT NAME&lt;/h1&gt;
-  &lt;p&gt;By TEAM MEMBER NAMES, ENGR 1050 final project&lt;/p&gt;
-
-  &lt;h2&gt;What it does&lt;/h2&gt;
-  &lt;p&gt;ONE PARAGRAPH DESCRIBING YOUR PROJECT.&lt;/p&gt;
-
-  &lt;h2&gt;Demo video&lt;/h2&gt;
-  &lt;video controls width="640" src="demo.mp4"&gt;&lt;/video&gt;
-
-  &lt;h2&gt;Components&lt;/h2&gt;
-  &lt;ul&gt;
-    &lt;li&gt;Raspberry Pi Pico&lt;/li&gt;
-    &lt;li&gt;COMPONENT YOU ORDERED&lt;/li&gt;
-  &lt;/ul&gt;
-
-  &lt;h2&gt;Code&lt;/h2&gt;
-  &lt;p&gt;&lt;a href="main.py"&gt;main.py&lt;/a&gt;&lt;/p&gt;
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
+<h3>Make it yours</h3>
+<p>The template is plain HTML and CSS. Open a file in your repository and click the pencil icon to edit it in the browser, or press <kbd>.</kbd> on the repository page for a full editor. The template's README has a checklist of everything to replace. Every spot you must change is marked <code>EDIT</code> in the files, and every video placeholder has the exact line to paste in right above it.</p>
+<p>Using Gemini or another AI tool to help is fair game. The <a href="../FinalProject/llm_guide.html">LLM guide</a> has copy-paste prompts that work with free models, including how to restyle the site if you don't like the template's look.</p>
 
 <h3>Add your video, code, and photos</h3>
 <ol class="steps">
-<li>In the repository, click <span class="ui">Add file</span> &rarr; <span class="ui">Upload files</span>, drag in your files (for example <code>demo.mp4</code>, <code>main.py</code>, photos), and click <span class="ui">Commit changes</span>. The names must match what <code>index.html</code> points to.</li>
+<li>In your repository, open the <code>media</code> folder, click <span class="ui">Add file</span> &rarr; <span class="ui">Upload files</span>, drag in your photos and videos, and click <span class="ui">Commit changes</span>. Do the same in the <code>code</code> folder for your code. The names must match what your pages point to.</li>
 <li>The site updates a minute or two after each commit. If you don't see your change, refresh with <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>R</kbd> (Windows) / <kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>R</kbd> (Mac).</li>
 </ol>
 
-<blockquote><p><strong>Video too big?</strong> The browser upload accepts files up to 25 MB, which is about a minute of phone video. Either shorten or compress the video (most phones can trim and export at a lower resolution), or upload it to YouTube as <span class="ui">Unlisted</span> and paste YouTube's <span class="ui">Share &rarr; Embed</span> code into <code>index.html</code> in place of the <code>&lt;video&gt;</code> line.</p></blockquote>
+<blockquote><p><strong>Video too big?</strong> The browser upload accepts files up to 25 MB, which is about a minute of phone video. Either shorten or compress the video (most phones can trim and export at a lower resolution), or upload it to YouTube as <span class="ui">Unlisted</span> and paste YouTube's <span class="ui">Share &rarr; Embed</span> code into your page in place of the video placeholder.</p></blockquote>
 
 <h3>Let your teammates edit</h3>
 <p>In the repository, go to <span class="ui">Settings</span> &rarr; <span class="ui">Collaborators</span> &rarr; <span class="ui">Add people</span> and enter each teammate's GitHub username. They get an email invitation and must accept it before they can edit.</p>
@@ -150,7 +125,7 @@
 <p>Check that the file is named exactly <code>index.html</code> (all lowercase) and sits at the top level of the repository, not inside a folder; that the repository is Public; and that Pages is set to the <code>main</code> branch. The first deploy can take a few minutes.</p>
 
 <h3>My video or picture doesn't show up</h3>
-<p>File names are case sensitive on the web: <code>Demo.MP4</code> and <code>demo.mp4</code> are different files. Make the name in <code>index.html</code> match the uploaded file exactly. If the video still won't play, re-export it as <code>.mp4</code>; iPhone <code>.mov</code> files often don't play in other browsers.</p>
+<p>File names are case sensitive on the web: <code>Demo.MP4</code> and <code>demo.mp4</code> are different files. Make the name in your page match the uploaded file exactly. If the video still won't play, re-export it as <code>.mp4</code>; iPhone <code>.mov</code> files often don't play in other browsers.</p>
 
 <h3>My GitHub Education application was rejected</h3>
 <p>The usual causes are a Penn email that was never verified on the account, a blurry or cropped PennCard photo, or not allowing location sharing. Fix whichever applies and reapply. Your website does not depend on this approval.</p>
