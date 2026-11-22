@@ -64,6 +64,12 @@ course.yml                  semester, schedule, homeworks, textbook chapters
 index.html, styles.css      the deployed site
 NewMaterial/LectureNN/      slides, notebook, notes for one lecture
 NewMaterial/Homeworks/HWN/  homework LaTeX source and PDF
+NewMaterial/FinalProject/   final project rubric and the LLM guide for the website template
 NewMaterial/Textbook/       mini-textbook chapters
 scripts/                    local-only helpers, not deployed
 ```
+
+The final project website template, with its "Team Hover" example, is a separate repo:
+`natrask/engr1050-project-template` (local clone at `../engr1050-project-template`),
+served at https://natrask.github.io/engr1050-project-template/. Students copy it
+with "Use this template". The course site links to it but never copies files from it.
