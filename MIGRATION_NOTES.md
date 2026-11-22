@@ -138,12 +138,14 @@ finals. The end of term now runs:
 - The 12/17 entry is `kind: deadline`; `check_consistency.py` exempts that kind from
   the Monday/Wednesday rule because it is not a class meeting.
 
-Still to do before Lecture 27 is released:
-
-- `lec27.ipynb` is the Fall 2025 Thanksgiving-week review. It opens with a Zoom link
-  and passcode and says the review is virtual because "many folks are traveling";
-  neither applies to an in-person 12/2 class. Typos: "Optimizaton", "the roll of
-  $lpha$".
+Lecture 27 prep pass (11/22): `lec27.ipynb` was the Fall 2025 Thanksgiving-week
+review. The Zoom cells are gone and the overview now describes an in-person 12/2
+class split between review and final projects. Also fixed: typos, `torch.ReLU` ->
+`torch.relu`, `_zero()` -> `zero_()`, "yield strength" -> "compressive strength" for
+the concrete dataset, a malformed `\exp` expression, and an invalid `\s` escape in
+the Newton plot whose saved SyntaxWarning output exposed a local temp path. The
+exam topic list (Lectures 21-25) was checked against those notebooks' titles. Still
+hidden; release on 12/2.
 
 Lecture 25 release pass (11/22): typos fixed in `lec25.ipynb`, the stale "final
 homework on Monday" line replaced (there is no HW6), "Monday's model" now "last
@@ -156,7 +158,12 @@ the Lecture 24 cover; slide 18 "The old loss from Monday" -> "from last lecture"
 slide 21 "On Monday we'll use this to step through final HW together" -> "Read
 through the notebook carefully on your own".
 
-The checker cannot see QR codes. Decoding every released cover shows that
-`Lecture06/Lecture_06.pdf` and `Lecture21/Lecture_21.pdf` still point at
-`https://github.com/PIMILab/ENGR1050/tree/main`; Lectures 1 and 22-25 point at the
-Fall 2026 site.
+The checker cannot see QR codes. Decoding every cover found that
+`Lecture06/Lecture_06.pdf` and `Lecture21/Lecture_21.pdf` still pointed at
+`https://github.com/PIMILab/ENGR1050/tree/main`. Neither has a PPTX in this repo,
+so the QR image was replaced directly inside each PDF (the same image as the
+Lecture 24 cover); nothing else in those PDFs changed. Every QR on a cover now
+points at the Fall 2026 site. Their cover text is still wrong and needs the PPTX:
+Lecture 6 reads "Lecture 7 / Fall 2025" (source: `slides/Lecture_07.pptx` in the
+Fall 2025 repo), and Lecture 21 reads "Lecture 20" (the 11/9 re-export; its edited
+PPTX was not found on disk).
