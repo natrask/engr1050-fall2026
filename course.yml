@@ -385,6 +385,12 @@ schedule:
     section: 4
     topic: "Close of grades: last day to submit final project Githubs"
     kind: deadline
+    visible: true
+    links:
+      - label: Final project rubric
+        url: NewMaterial/FinalProject/rubric.html
+      - label: Final project submission (Canvas)
+        url: https://canvas.upenn.edu/courses/1950130/assignments/15267066
 
 homeworks:
   # `visible: true` publishes the PDF link; without it the card shows "(coming)".
