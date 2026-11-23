@@ -65,6 +65,8 @@ index.html, styles.css      the deployed site
 NewMaterial/LectureNN/      slides, notebook, notes for one lecture
 NewMaterial/Homeworks/HWN/  homework LaTeX source and PDF
 NewMaterial/FinalProject/   final project rubric and the LLM guide for the website template
+NewMaterial/LLM_API/        free Gemini API tutorial; index.html is the acknowledgment
+                            page every link must go through, setup.html and the notebook follow
 NewMaterial/Textbook/       mini-textbook chapters
 scripts/                    local-only helpers, not deployed
 ```

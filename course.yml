@@ -367,6 +367,10 @@ schedule:
     date: 2026-11-30
     section: 3
     topic: "Open review: feedback on in-class exercises, final projects"
+    links:
+      # index.html in this folder is the free-resources acknowledgment page
+      - label: Calling an LLM from Python (free API tutorial)
+        url: NewMaterial/LLM_API/index.html
   - num: 27
     date: 2026-12-02
     section: 4

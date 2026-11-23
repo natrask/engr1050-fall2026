@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calling an LLM from Python - ENGR 1050</title>
+<style>
+ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        line-height: 1.6; color: #333; max-width: 900px; margin: 0 auto; padding: 20px; }
+ h1 { color: #011F5B; border-bottom: 3px solid #990000; padding-bottom: 10px; margin-top: 30px; }
+ h2 { color: #011F5B; margin-top: 30px; border-bottom: 2px solid #e0e0e0; padding-bottom: 5px; }
+ h3 { color: #011F5B; margin-top: 20px; }
+ p { text-align: left; margin-bottom: 15px; }
+ code { background: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-family: ui-monospace, Menlo, Consolas, monospace; }
+ pre { background: #f4f4f4; padding: 12px; border-radius: 6px; overflow-x: auto; }
+ pre code { background: none; padding: 0; }
+ blockquote { border-left: 4px solid #82AFD3; padding: 4px 12px; background: #f8f9fa; margin: 12px 0; }
+ a { color: #4a90e2; } a:hover { color: #990000; }
+ .nav { font-size: 0.9rem; margin-bottom: 1rem; }
+ ol.steps > li { margin-bottom: 14px; }
+ ol.steps ul { margin-top: 6px; }
+ .warn { border-left: 4px solid #990000; background: #fdf2f2; padding: 8px 12px; margin: 12px 0; }
+ .warn ul { margin: 6px 0; }
+ .warn li { margin-bottom: 8px; }
+ .ok { border-left: 4px solid #2e7d32; background: #f1f8f1; padding: 8px 12px; margin: 12px 0; }
+ kbd { border: 1px solid #bbb; border-bottom-width: 2px; border-radius: 4px; padding: 1px 6px; background: #fafafa; font-family: inherit; font-size: 0.9em; }
+ .ui { font-weight: 600; color: #011F5B; }
+</style>
+</head>
+<body>
+<p class="nav"><a href="../../index.html#schedule">&larr; Back to the schedule</a></p>
+<h1>Calling an LLM from Python</h1>
+
+<p>In class we have used Gemini through the chat panel built into Colab. A Python program can use the same model directly: it sends your prompt to Google's servers as a string and gets the model's reply back as another string. That takes about five lines of code, and once the reply is a string, your program can print it, save it, or test it in an <code>if</code> statement like any other string.</p>
+
+<p>Programs reach the model through an <strong>API</strong> (application programming interface), which is a set of functions that one program uses to talk to another. To use Google's Gemini API you need an <strong>API key</strong>, a long password-like string that tells Google which account a request comes from. This page shows how to get a free key, store it safely in Colab, and run a notebook that sends the model a question you type in.</p>
+
+<div class="ok"><p><strong>Everything on this page is free.</strong> Google's free tier for the Gemini API does not require a credit card.</p></div>
+
+<div class="warn">
+<p><strong>Before you start</strong></p>
+<ul>
+<li><strong>You must be 18 or older.</strong> Google's terms for the Gemini API require it. If you are under 18, read through the notebook and follow along in class, but do not create a key.</li>
+<li><strong>Never add billing.</strong> If Google AI Studio offers to set up billing, upgrade, or move you to a paid tier, close that page. A key stays on the free tier as long as no billing account is attached to it.</li>
+<li><strong>Assume Google can read what you send.</strong> On the free tier, Google uses your prompts and the model's replies to improve its products, and human reviewers may read them. Do not type passwords, personal information, or anything about other students.</li>
+</ul>
+</div>
+
+<h2>Part 1: Get a free API key</h2>
+
+<p>The key comes from <strong>Google AI Studio</strong>, Google's website for developers who use Gemini from their own code.</p>
+
+<ol class="steps">
+<li>Go to <a href="https://aistudio.google.com/apikey">aistudio.google.com/apikey</a> and sign in with a Google account. A personal Gmail account works. If AI Studio says it is not available for the account you signed in with, sign in with a personal account instead.</li>
+<li>The first time you visit, AI Studio asks you to accept its terms. After you accept, it creates a project and an API key for you. If no key is listed on the page, click <span class="ui">Create API key</span>.</li>
+<li>Click the copy icon next to your key. Keep this tab open; you will paste the key in Part 2.</li>
+</ol>
+
+<blockquote><p><strong>Treat the key like a password.</strong> Anyone who has it can send requests that count against your account. Never paste it into a notebook cell, an email, a chat with an AI model, or your final project website. Whatever you type into a notebook cell is saved inside the <code>.ipynb</code> file and goes wherever the file goes. If you think your key has leaked, delete it in AI Studio and create a new one.</p></blockquote>
+
+<h2>Part 2: Store the key in Colab Secrets</h2>
+
+<p>Colab has a <strong>Secrets</strong> panel for keys like this one. It stores them with your Google account, outside the notebook file, so the notebook can read the key without the key ever appearing in a cell.</p>
+
+<ol class="steps">
+<li>Open the notebook in Colab: <a href="https://colab.research.google.com/github/natrask/engr1050-fall2026/blob/main/NewMaterial/LLM_API/llm_api.ipynb">llm_api.ipynb</a>. Click <span class="ui">File &rarr; Save a copy in Drive</span> so your changes are kept.</li>
+<li>In the left sidebar, click the key icon to open <span class="ui">Secrets</span>.</li>
+<li>Click <span class="ui">Add new secret</span>. Set <span class="ui">Name</span> to <code>GEMINI_API_KEY</code>, spelled exactly like that. Paste your key into <span class="ui">Value</span>, and turn on the <span class="ui">Notebook access</span> switch.</li>
+</ol>
+
+<p>The secret stays saved for your other notebooks. Each new notebook asks you to turn on access before it can read the key.</p>
+
+<h2>Part 3: Run the notebook</h2>
+
+<ol class="steps">
+<li>Run the first code cell. It reads your key and prints a line saying the client is ready. If Colab asks whether to grant the notebook access to your secret, click <span class="ui">Grant access</span>.</li>
+<li>Run the next cell. A text box appears under it with the message <span class="ui">Please enter a prompt for the LLM:</span>. Type a question and press <kbd>Enter</kbd>. The model's reply prints below the cell.</li>
+</ol>
+
+<p>Here is the cell that does the work:</p>
+<pre><code>prompt = input('Please enter a prompt for the LLM:')
+
+response = client.models.generate_content(model=MODEL, contents=prompt)
+
+print(response.text)</code></pre>
+
+<p><code>input</code> pauses the program until you press <kbd>Enter</kbd> and returns what you typed as a string. <code>generate_content</code> sends that string to the model named in <code>MODEL</code> and waits for the reply. <code>response.text</code> is the reply as an ordinary string.</p>
+
+<p>The notebook ends with three short extensions you can try: wrapping the call in a function, holding a conversation in a <code>while</code> loop, and giving the model a job description with a system instruction.</p>
+
+<h3>Free tier limits</h3>
+<p>The free tier limits how often you can send requests. When we checked in September 2026, the model the notebook uses, <code>gemini-3.1-flash-lite</code>, allowed 15 requests per minute. Google changes these limits and sets them per account. AI Studio shows the limits on your key at <a href="https://aistudio.google.com/rate-limit">aistudio.google.com/rate-limit</a>.</p>
+
+<h2>Things that go wrong, and what to do</h2>
+
+<h3>An error says the secret does not exist</h3>
+<p>The name in the Secrets panel must be exactly <code>GEMINI_API_KEY</code>: all capitals, with underscores. Fix the name and run the cell again.</p>
+
+<h3>An error says the notebook does not have access to the secret</h3>
+<p>Open the Secrets panel and turn on the <span class="ui">Notebook access</span> switch next to <code>GEMINI_API_KEY</code>, then run the cell again.</p>
+
+<h3><code>400 INVALID_ARGUMENT</code> &hellip; <code>API key not valid</code></h3>
+<p>The key was probably copied incompletely. Copy it again from AI Studio, paste it over the secret's value, and rerun the first code cell.</p>
+
+<h3><code>429 RESOURCE_EXHAUSTED</code></h3>
+<p>You sent more requests than the free tier allows. Wait a minute and try again. If it keeps happening, you have likely used the day's allowance; try again tomorrow. Do not upgrade to a paid tier to get around it.</p>
+
+<h3><code>404 NOT_FOUND</code>, mentioning the model</h3>
+<p>Google has retired that model. Pick a current Flash-Lite model from <a href="https://aistudio.google.com/docs/models">Google's model list</a> and change the <code>MODEL</code> line in the first code cell to its name.</p>
+
+<h3>AI Studio asks for a credit card</h3>
+<p>Stop and close the page. Nothing in this tutorial needs one.</p>
+
+<blockquote><p>If you are stuck on anything not listed here, do not spend an hour on it. Ask the person next to you or bring the laptop to office hours.</p></blockquote>
+
+<p class="nav"><a href="../../index.html#schedule">&larr; Back to the schedule</a></p>
+</body>
+</html>
