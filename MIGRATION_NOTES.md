@@ -132,9 +132,12 @@ finals. The end of term now runs:
 | 12/17 | Close of grades: last day to submit final project Githubs      | none                   |
 
 - The Exam 3 review notebook moved from `Lecture26/lec26.ipynb` to
-  `Lecture27/lec27.ipynb` (H1 and Colab badge updated). `Lecture26/` is now empty.
-- Exam 3 takes lecture number 28, so `Lecture28/` (an empty `.gitkeep` placeholder for
-  the dropped presentations) is no longer referenced.
+  `Lecture27/lec27.ipynb` (H1 and Colab badge updated). The emptied `Lecture26/`
+  folder was deleted.
+- Exam 3 takes lecture number 28. `Lecture28/` (an empty `.gitkeep` placeholder for
+  the dropped presentations) was deleted.
+- The review notes no longer mention exams or dates: `lec27.ipynb` is titled "Unit 3
+  review", and the exam sentences in `lec24.ipynb` and `lec25.ipynb` were reworded.
 - The 12/17 entry is `kind: deadline`; `check_consistency.py` exempts that kind from
   the Monday/Wednesday rule because it is not a class meeting.
 
